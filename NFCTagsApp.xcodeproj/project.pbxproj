@@ -1,0 +1,668 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C2495C26E340BFB23619C2D4 /* Pods_NFCTagsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C632356F46DC1F9AC71060 /* Pods_NFCTagsApp.framework */; };
+		C715677C227BD97700D1A55A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715677B227BD97700D1A55A /* ViewController.swift */; };
+		C7156781227BD97700D1A55A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7156780227BD97700D1A55A /* Assets.xcassets */; };
+		C7156784227BD97700D1A55A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7156782227BD97700D1A55A /* LaunchScreen.storyboard */; };
+		C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715678E227BDA0900D1A55A /* AuteurTableViewCell.swift */; };
+		C715679B227BDA0900D1A55A /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7156790227BDA0900D1A55A /* FilmTableViewCell.swift */; };
+		C715679C227BDA0900D1A55A /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7156792227BDA0900D1A55A /* Film.swift */; };
+		C715679D227BDA0900D1A55A /* Auteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7156793227BDA0900D1A55A /* Auteur.swift */; };
+		C715679E227BDA0900D1A55A /* auteurs.json in Resources */ = {isa = PBXBuildFile; fileRef = C7156795227BDA0900D1A55A /* auteurs.json */; };
+		C715679F227BDA0900D1A55A /* AuteurDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7156797227BDA0900D1A55A /* AuteurDetailViewController.swift */; };
+		C71B63D8229AFDD200B6910A /* TagDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */; };
+		C73650FA22831BC20025154F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F822831BC10025154F /* Colors.swift */; };
+		C73650FB22831BC20025154F /* UserInfoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F922831BC20025154F /* UserInfoClass.swift */; };
+		C73A297F2293479C00554EF1 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A297E2293479C00554EF1 /* TagModel.swift */; };
+		C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77968D62286264B00CE6B4C /* AuteurListViewController.swift */; };
+		C7995B55228B54AB00C6E246 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B4B228B54AB00C6E246 /* Rubik-Medium.ttf */; };
+		C7995B56228B54AB00C6E246 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B4C228B54AB00C6E246 /* Rubik-Regular.ttf */; };
+		C7995B57228B54AB00C6E246 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B4D228B54AB00C6E246 /* Rubik-MediumItalic.ttf */; };
+		C7995B58228B54AB00C6E246 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B4E228B54AB00C6E246 /* Rubik-Italic.ttf */; };
+		C7995B59228B54AB00C6E246 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B4F228B54AB00C6E246 /* Rubik-LightItalic.ttf */; };
+		C7995B5A228B54AB00C6E246 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B50228B54AB00C6E246 /* Rubik-BoldItalic.ttf */; };
+		C7995B5B228B54AB00C6E246 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B51228B54AB00C6E246 /* Rubik-BlackItalic.ttf */; };
+		C7995B5C228B54AB00C6E246 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B52228B54AB00C6E246 /* Rubik-Black.ttf */; };
+		C7995B5D228B54AB00C6E246 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B53228B54AB00C6E246 /* Rubik-Light.ttf */; };
+		C7995B5E228B54AB00C6E246 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7995B54228B54AB00C6E246 /* Rubik-Bold.ttf */; };
+		C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9400228F227000A53DDA /* FacebookPost.swift */; };
+		C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9401228F227000A53DDA /* FacebookUser.swift */; };
+		C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A940F228F268B00A53DDA /* LoginViewController.swift */; };
+		C7AC6F14228A5DAB00E97DFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7AC6F13228A5DAB00E97DFF /* Main.storyboard */; };
+		C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F16228A623900E97DFF /* Spinner.swift */; };
+		C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */; };
+		C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */; };
+		C7C4844A22871B7F00C6A95B /* DemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4844922871B7F00C6A95B /* DemoModel.swift */; };
+		C7C4844C2287723C00C6A95B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4844B2287723C00C6A95B /* UIColorExtension.swift */; };
+		C7DA87F32291AC8600457112 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F22291AC8600457112 /* RegisterViewController.swift */; };
+		C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F4229259CE00457112 /* AppConstant.swift */; };
+		C7DA87F7229259DC00457112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F6229259DC00457112 /* AppDelegate.swift */; };
+		C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FE48CF2296103C0079447C /* FacebookAPIManager.swift */; };
+		C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FE48D02296103C0079447C /* NetworkingManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		26C632356F46DC1F9AC71060 /* Pods_NFCTagsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NFCTagsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31EA2D2F492D42D3A2CA07D3 /* Pods-NFCTagsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFCTagsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp.debug.xcconfig"; sourceTree = "<group>"; };
+		60CBDED3B607477E45F7A41D /* Pods-NFCTagsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFCTagsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp.release.xcconfig"; sourceTree = "<group>"; };
+		C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NFCTagsApp.entitlements; sourceTree = "<group>"; };
+		C7156776227BD97700D1A55A /* NFCTagsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NFCTagsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C715677B227BD97700D1A55A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C7156780227BD97700D1A55A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C7156783227BD97700D1A55A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C7156785227BD97700D1A55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C715678F227BDA0900D1A55A /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = Base.lproj/AuteurTableViewCell.swift; sourceTree = "<group>"; };
+		C7156790227BDA0900D1A55A /* FilmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmTableViewCell.swift; sourceTree = "<group>"; };
+		C7156792227BDA0900D1A55A /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		C7156793227BDA0900D1A55A /* Auteur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auteur.swift; sourceTree = "<group>"; };
+		C7156795227BDA0900D1A55A /* auteurs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = auteurs.json; sourceTree = "<group>"; };
+		C7156797227BDA0900D1A55A /* AuteurDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuteurDetailViewController.swift; sourceTree = "<group>"; };
+		C71B63CD229AEDD600B6910A /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
+		C71B63CE229AEDD600B6910A /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
+		C71B63CF229AEDD600B6910A /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		C71B63D0229AEDD600B6910A /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
+		C71B63D1229AEDD600B6910A /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
+		C71B63D2229AEDD600B6910A /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
+		C71B63D3229AEDD600B6910A /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
+		C71B63D4229AEDD600B6910A /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C71B63D5229AEDD600B6910A /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		C71B63D6229AEDD600B6910A /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailHeaderView.swift; sourceTree = "<group>"; };
+		C73650F822831BC10025154F /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		C73650F922831BC20025154F /* UserInfoClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoClass.swift; sourceTree = "<group>"; };
+		C73A297E2293479C00554EF1 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		C77968D62286264B00CE6B4C /* AuteurListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuteurListViewController.swift; sourceTree = "<group>"; };
+		C7995B4B228B54AB00C6E246 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		C7995B4C228B54AB00C6E246 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		C7995B4D228B54AB00C6E246 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
+		C7995B4E228B54AB00C6E246 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
+		C7995B4F228B54AB00C6E246 /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
+		C7995B50228B54AB00C6E246 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C7995B51228B54AB00C6E246 /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
+		C7995B52228B54AB00C6E246 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
+		C7995B53228B54AB00C6E246 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
+		C7995B54228B54AB00C6E246 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		C79A9400228F227000A53DDA /* FacebookPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPost.swift; sourceTree = "<group>"; };
+		C79A9401228F227000A53DDA /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
+		C79A940F228F268B00A53DDA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C7AC6F13228A5DAB00E97DFF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C7AC6F16228A623900E97DFF /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
+		C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		C7C4844922871B7F00C6A95B /* DemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoModel.swift; sourceTree = "<group>"; };
+		C7C4844B2287723C00C6A95B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		C7DA87F22291AC8600457112 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		C7DA87F4229259CE00457112 /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
+		C7DA87F6229259DC00457112 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C7FE48CF2296103C0079447C /* FacebookAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAPIManager.swift; sourceTree = "<group>"; };
+		C7FE48D02296103C0079447C /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C7156773227BD97700D1A55A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2495C26E340BFB23619C2D4 /* Pods_NFCTagsApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		16BCB4E41A7ED62A6714F030 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26C632356F46DC1F9AC71060 /* Pods_NFCTagsApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C23BA8AC10610F95A5CF631 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				31EA2D2F492D42D3A2CA07D3 /* Pods-NFCTagsApp.debug.xcconfig */,
+				60CBDED3B607477E45F7A41D /* Pods-NFCTagsApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C715676D227BD97700D1A55A = {
+			isa = PBXGroup;
+			children = (
+				C7156778227BD97700D1A55A /* NFCTagsApp */,
+				C7156777227BD97700D1A55A /* Products */,
+				3C23BA8AC10610F95A5CF631 /* Pods */,
+				16BCB4E41A7ED62A6714F030 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C7156777227BD97700D1A55A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C7156776227BD97700D1A55A /* NFCTagsApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C7156778227BD97700D1A55A /* NFCTagsApp */ = {
+			isa = PBXGroup;
+			children = (
+				C7AC6F13228A5DAB00E97DFF /* Main.storyboard */,
+				C7DA87F4229259CE00457112 /* AppConstant.swift */,
+				C7DA87F6229259DC00457112 /* AppDelegate.swift */,
+				C7156780227BD97700D1A55A /* Assets.xcassets */,
+				C73650F822831BC10025154F /* Colors.swift */,
+				C73650F922831BC20025154F /* UserInfoClass.swift */,
+				C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */,
+				C7156791227BDA0900D1A55A /* Models */,
+				C7156794227BDA0900D1A55A /* Resources */,
+				C7156796227BDA0900D1A55A /* ViewControllers */,
+				C715678B227BDA0900D1A55A /* Views */,
+				C71B63CC229AECAD00B6910A /* Fonts */,
+				C7AC6F15228A623900E97DFF /* Extensions */,
+				C78DD766227E030300F107F6 /* Welcome */,
+				C7156782227BD97700D1A55A /* LaunchScreen.storyboard */,
+				C7156785227BD97700D1A55A /* Info.plist */,
+			);
+			path = NFCTagsApp;
+			sourceTree = "<group>";
+		};
+		C715678B227BDA0900D1A55A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C715677B227BD97700D1A55A /* ViewController.swift */,
+				C715678E227BDA0900D1A55A /* AuteurTableViewCell.swift */,
+				C7156790227BDA0900D1A55A /* FilmTableViewCell.swift */,
+				C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C7156791227BDA0900D1A55A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C7156792227BDA0900D1A55A /* Film.swift */,
+				C7156793227BDA0900D1A55A /* Auteur.swift */,
+				C7C4844922871B7F00C6A95B /* DemoModel.swift */,
+				C73A297E2293479C00554EF1 /* TagModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C7156794227BDA0900D1A55A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C7995B4A228B548200C6E246 /* Fonts */,
+				C7C4844B2287723C00C6A95B /* UIColorExtension.swift */,
+				C7156795227BDA0900D1A55A /* auteurs.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C7156796227BDA0900D1A55A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C77968D62286264B00CE6B4C /* AuteurListViewController.swift */,
+				C7156797227BDA0900D1A55A /* AuteurDetailViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C71B63CC229AECAD00B6910A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C71B63D2229AEDD600B6910A /* Rubik-Black.ttf */,
+				C71B63D0229AEDD600B6910A /* Rubik-BlackItalic.ttf */,
+				C71B63D5229AEDD600B6910A /* Rubik-Bold.ttf */,
+				C71B63D4229AEDD600B6910A /* Rubik-BoldItalic.ttf */,
+				C71B63D1229AEDD600B6910A /* Rubik-Italic.ttf */,
+				C71B63CE229AEDD600B6910A /* Rubik-Light.ttf */,
+				C71B63D3229AEDD600B6910A /* Rubik-LightItalic.ttf */,
+				C71B63CF229AEDD600B6910A /* Rubik-Medium.ttf */,
+				C71B63CD229AEDD600B6910A /* Rubik-MediumItalic.ttf */,
+				C71B63D6229AEDD600B6910A /* Rubik-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C78DD766227E030300F107F6 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				C79A93FF228F227000A53DDA /* Models */,
+				C79A940F228F268B00A53DDA /* LoginViewController.swift */,
+				C7DA87F22291AC8600457112 /* RegisterViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		C7995B4A228B548200C6E246 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C7995B52228B54AB00C6E246 /* Rubik-Black.ttf */,
+				C7995B51228B54AB00C6E246 /* Rubik-BlackItalic.ttf */,
+				C7995B54228B54AB00C6E246 /* Rubik-Bold.ttf */,
+				C7995B50228B54AB00C6E246 /* Rubik-BoldItalic.ttf */,
+				C7995B4E228B54AB00C6E246 /* Rubik-Italic.ttf */,
+				C7995B53228B54AB00C6E246 /* Rubik-Light.ttf */,
+				C7995B4F228B54AB00C6E246 /* Rubik-LightItalic.ttf */,
+				C7995B4B228B54AB00C6E246 /* Rubik-Medium.ttf */,
+				C7995B4D228B54AB00C6E246 /* Rubik-MediumItalic.ttf */,
+				C7995B4C228B54AB00C6E246 /* Rubik-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C79A93FF228F227000A53DDA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C79A9400228F227000A53DDA /* FacebookPost.swift */,
+				C79A9401228F227000A53DDA /* FacebookUser.swift */,
+				C7FE48CF2296103C0079447C /* FacebookAPIManager.swift */,
+				C7FE48D02296103C0079447C /* NetworkingManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C7AC6F15228A623900E97DFF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C7AC6F16228A623900E97DFF /* Spinner.swift */,
+				C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */,
+				C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C7156775227BD97700D1A55A /* NFCTagsApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7156788227BD97700D1A55A /* Build configuration list for PBXNativeTarget "NFCTagsApp" */;
+			buildPhases = (
+				89633132C42949638EBBDDF6 /* [CP] Check Pods Manifest.lock */,
+				C7156772227BD97700D1A55A /* Sources */,
+				C7156773227BD97700D1A55A /* Frameworks */,
+				C7156774227BD97700D1A55A /* Resources */,
+				A0868F6DFEDF0A9B62AFD93F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NFCTagsApp;
+			productName = NFCTagsApp;
+			productReference = C7156776227BD97700D1A55A /* NFCTagsApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C715676E227BD97700D1A55A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Hillside Software";
+				TargetAttributes = {
+					C7156775227BD97700D1A55A = {
+						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.NearFieldCommunicationTagReading = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = C7156771227BD97700D1A55A /* Build configuration list for PBXProject "NFCTagsApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C715676D227BD97700D1A55A;
+			productRefGroup = C7156777227BD97700D1A55A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C7156775227BD97700D1A55A /* NFCTagsApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C7156774227BD97700D1A55A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7AC6F14228A5DAB00E97DFF /* Main.storyboard in Resources */,
+				C7995B5C228B54AB00C6E246 /* Rubik-Black.ttf in Resources */,
+				C7995B5B228B54AB00C6E246 /* Rubik-BlackItalic.ttf in Resources */,
+				C7995B56228B54AB00C6E246 /* Rubik-Regular.ttf in Resources */,
+				C7156784227BD97700D1A55A /* LaunchScreen.storyboard in Resources */,
+				C7995B58228B54AB00C6E246 /* Rubik-Italic.ttf in Resources */,
+				C7156781227BD97700D1A55A /* Assets.xcassets in Resources */,
+				C7995B57228B54AB00C6E246 /* Rubik-MediumItalic.ttf in Resources */,
+				C7995B59228B54AB00C6E246 /* Rubik-LightItalic.ttf in Resources */,
+				C715679E227BDA0900D1A55A /* auteurs.json in Resources */,
+				C7995B5D228B54AB00C6E246 /* Rubik-Light.ttf in Resources */,
+				C7995B5E228B54AB00C6E246 /* Rubik-Bold.ttf in Resources */,
+				C7995B5A228B54AB00C6E246 /* Rubik-BoldItalic.ttf in Resources */,
+				C7995B55228B54AB00C6E246 /* Rubik-Medium.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		89633132C42949638EBBDDF6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NFCTagsApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0868F6DFEDF0A9B62AFD93F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Alertift/Alertift.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+				"${BUILT_PRODUCTS_DIR}/VYNFCKit/VYNFCKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alertift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VYNFCKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C7156772227BD97700D1A55A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7C4844C2287723C00C6A95B /* UIColorExtension.swift in Sources */,
+				C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */,
+				C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */,
+				C715679F227BDA0900D1A55A /* AuteurDetailViewController.swift in Sources */,
+				C715679C227BDA0900D1A55A /* Film.swift in Sources */,
+				C7DA87F7229259DC00457112 /* AppDelegate.swift in Sources */,
+				C715679D227BDA0900D1A55A /* Auteur.swift in Sources */,
+				C7C4844A22871B7F00C6A95B /* DemoModel.swift in Sources */,
+				C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */,
+				C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */,
+				C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */,
+				C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */,
+				C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */,
+				C715677C227BD97700D1A55A /* ViewController.swift in Sources */,
+				C715679B227BDA0900D1A55A /* FilmTableViewCell.swift in Sources */,
+				C71B63D8229AFDD200B6910A /* TagDetailHeaderView.swift in Sources */,
+				C73650FA22831BC20025154F /* Colors.swift in Sources */,
+				C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */,
+				C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */,
+				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
+				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,
+				C73A297F2293479C00554EF1 /* TagModel.swift in Sources */,
+				C7DA87F32291AC8600457112 /* RegisterViewController.swift in Sources */,
+				C73650FB22831BC20025154F /* UserInfoClass.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C7156782227BD97700D1A55A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7156783227BD97700D1A55A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C715678E227BDA0900D1A55A /* AuteurTableViewCell.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C715678F227BDA0900D1A55A /* Base */,
+			);
+			name = AuteurTableViewCell.swift;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C7156786227BD97700D1A55A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C7156787227BD97700D1A55A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C7156789227BD97700D1A55A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31EA2D2F492D42D3A2CA07D3 /* Pods-NFCTagsApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NFCTagsApp/NFCTagsApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = QT5MQ7KPJH;
+				INFOPLIST_FILE = NFCTagsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.besthome4me;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "BestHome4Me Dev";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C715678A227BD97700D1A55A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60CBDED3B607477E45F7A41D /* Pods-NFCTagsApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NFCTagsApp/NFCTagsApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = QT5MQ7KPJH;
+				INFOPLIST_FILE = NFCTagsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.besthome4me;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "BestHome4Me App Store";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C7156771227BD97700D1A55A /* Build configuration list for PBXProject "NFCTagsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7156786227BD97700D1A55A /* Debug */,
+				C7156787227BD97700D1A55A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7156788227BD97700D1A55A /* Build configuration list for PBXNativeTarget "NFCTagsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7156789227BD97700D1A55A /* Debug */,
+				C715678A227BD97700D1A55A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C715676E227BD97700D1A55A /* Project object */;
+}

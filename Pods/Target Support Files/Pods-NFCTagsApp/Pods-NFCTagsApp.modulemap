@@ -1,0 +1,6 @@
+framework module Pods_NFCTagsApp {
+  umbrella header "Pods-NFCTagsApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
