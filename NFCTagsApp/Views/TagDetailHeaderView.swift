@@ -14,8 +14,7 @@ class TagDetailHeaderView: UIView {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var heartImageView: UIImageView!
-    
-    //JOSH IS GREAT!
+
     
 
 }
