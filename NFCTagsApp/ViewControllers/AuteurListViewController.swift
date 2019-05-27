@@ -140,24 +140,9 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     
     @IBAction func tryButtonPressed(_ sender: Any) {
         
-        var tagObjects:[DemoModel] = [
-        DemoModel(userName: "Alex", userEmail: "alex@hillsoft.com", ownerName: "Hillside", ownerEmail: "info@hillsoft.com"),
-        DemoModel(userName: "Jill", userEmail: "jill@hillsoft.com", ownerName: "Hillside", ownerEmail: "info@hillsoft.com"),
-        DemoModel(userName: "Daniel", userEmail: "dan@hillsoft.com", ownerName: "Hillside", ownerEmail: "info@hillsoft.com"),
-        DemoModel(userName: "Josh", userEmail: "josh@hillsoft.com", ownerName: "Hillside", ownerEmail: "info@hillsoft.com")
-        ]
-        let newObjext = DemoModel(userName: "Lacey", userEmail: "lacey@hillsoft.com", ownerName: "Hillside", ownerEmail: "info@hillsoft.com")
-        tagObjects.append(newObjext)
-        
-        //let newObject = TagObject()
-        //JOSH IS GREAT!!!
-        
-        print (tagObjects.count)
-        var ans = tagObjects[4].userName
-        
-        
-        
-        displayMessage(message: ans)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as! LoginViewController
+        self.present(loginViewController, animated: true, completion: nil)
         
         
         
@@ -835,8 +820,9 @@ extension AuteurListViewController: UITableViewDataSource {
         
         //romee
         
-        let detailViewController = TagsDetailViewController()
-        self.navigationController?.pushViewController(detailViewController, animated: true)
+        let detailViewController = RestaurantDetailViewController()
+
+        navigationController?.pushViewController(detailViewController, animated: true)
 
 
         //TODO:      PUT THE FOLLOWING LINES BACK
@@ -883,6 +869,31 @@ extension AuteurListViewController: UITableViewDataSource {
 
 //        guard let url = URL.init(string: "https://en.wikipedia.org/wiki/\(title)")
 //            else { return }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TagDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! TagDetailViewController
+                //destinationController.tags = self.tagObjects[indexPath.row]
+            }
+        }
+    }
+    
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if let destination = segue.destination as? AuteurDetailViewController,
+    //            let indexPath = tableView.indexPathForSelectedRow {
+    //            //TODO: FIX THIS destination.selectedAuteur = auteurs[indexPath.row]
+    //            //            if let indexPath = tableView.indexPathForSelectedRow {
+    //            //                let destinationController = segue.destination as! RestaurantDetailViewController
+    //            //                destinationController.restaurantImageName = restaurantImages[indexPath.row]
+    //            //                destinationController.restaurantName = restaurantNames[indexPath.row]
+    //            //                destinationController.restaurantType = restaurantTypes[indexPath.row]
+    //            //                destinationController.restaurantLocation = restaurantLocations[indexPath.row]
+    //            //            }
+    //        }
+    //    }
     
 /*
  //TODO: ALEX PUT BACK
@@ -1084,30 +1095,7 @@ extension AuteurListViewController: UITableViewDataSource {
         return swipeConfiguration
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TagsDetailViewController" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! TagsDetailViewController
-                destinationController.tags = self.tagObjects[indexPath.row]
-            }
-        }
-    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? AuteurDetailViewController,
-//            let indexPath = tableView.indexPathForSelectedRow {
-//            //TODO: FIX THIS destination.selectedAuteur = auteurs[indexPath.row]
-//            //            if let indexPath = tableView.indexPathForSelectedRow {
-//            //                let destinationController = segue.destination as! RestaurantDetailViewController
-//            //                destinationController.restaurantImageName = restaurantImages[indexPath.row]
-//            //                destinationController.restaurantName = restaurantNames[indexPath.row]
-//            //                destinationController.restaurantType = restaurantTypes[indexPath.row]
-//            //                destinationController.restaurantLocation = restaurantLocations[indexPath.row]
-//            //            }
-//        }
-//    }
+
     
 /*
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -1259,8 +1247,14 @@ extension AuteurListViewController: UITableViewDataSource {
         let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as! LoginViewController
         self.present(loginViewController, animated: true, completion: nil)
         
-//        let loginViewController = LoginViewController()
-//        self.navigationController?.pushViewController(loginViewController, animated: true)
+
+//        let loginViewController =  RegisterViewController()
+//        self.navigationController?.show(loginViewController, sender: self)
+        
+//        let registerViewController = RegisterViewController()
+//        navigationController?.pushViewController(registerViewController, animated: true)
+        //self.navigationController?.pushViewController(loginViewController, animated: true)
+//        self.present(loginViewController, animated: false, completion: nil)
         
         
     }
