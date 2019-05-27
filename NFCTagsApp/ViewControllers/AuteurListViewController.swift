@@ -225,13 +225,13 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
 
     
     // MARK: - MISC ROUTINES
-    func createFileName(withAction useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-        if useID == nil {
-            return nil
-        }
-        let url = String(format: "%@-%@-%ld.jpg", useAction ?? "", useID ?? "", useNumber)
-        return url
-    }
+//    func createFileName(withAction useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
+//        if useID == nil {
+//            return nil
+//        }
+//        let url = String(format: "%@-%@-%ld.jpg", useAction ?? "", useID ?? "", useNumber)
+//        return url
+//    }
     
     func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
         if useID == nil {
@@ -883,6 +883,8 @@ extension AuteurListViewController: UITableViewDataSource {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MyDetailViewController
                 destinationController.myNameLabel = "ALEX"
+                destinationController.tag = self.tagObjects[indexPath.row]
+            
                 
                 //destinationController.tags = self.tagObjects[indexPath.row]
             }
