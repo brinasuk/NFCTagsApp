@@ -882,7 +882,7 @@ extension AuteurListViewController: UITableViewDataSource {
         if segue.identifier == "TagDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MyDetailViewController
-                destinationController.myNameLabel = "ALEX"
+                //destinationController.myNameLabel = "ALEX"
                 destinationController.tag = self.tagObjects[indexPath.row]
             
                 

@@ -754,6 +754,10 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="VaW-2d-StK" id="aat-AT-DeI"/>
+                                    <outlet property="delegate" destination="VaW-2d-StK" id="QnS-c1-zyH"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
