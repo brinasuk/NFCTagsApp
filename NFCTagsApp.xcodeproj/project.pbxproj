@@ -22,6 +22,8 @@
 		C71B63DE229B74F300B6910A /* RestaurantDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */; };
 		C71B63E2229B784800B6910A /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */; };
 		C71B63E4229B798A00B6910A /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E3229B798A00B6910A /* MyDetailViewController.swift */; };
+		C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */; };
+		C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */; };
 		C73650FA22831BC20025154F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F822831BC10025154F /* Colors.swift */; };
 		C73650FB22831BC20025154F /* UserInfoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F922831BC20025154F /* UserInfoClass.swift */; };
 		C73A297F2293479C00554EF1 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A297E2293479C00554EF1 /* TagModel.swift */; };
@@ -83,6 +85,8 @@
 		C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailHeaderView.swift; sourceTree = "<group>"; };
 		C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		C71B63E3229B798A00B6910A /* MyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
+		C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailIconTextCell.swift; sourceTree = "<group>"; };
+		C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTextCell.swift; sourceTree = "<group>"; };
 		C73650F822831BC10025154F /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C73650F922831BC20025154F /* UserInfoClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoClass.swift; sourceTree = "<group>"; };
 		C73A297E2293479C00554EF1 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 				C7156790227BDA0900D1A55A /* FilmTableViewCell.swift */,
 				C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */,
 				C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */,
+				C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */,
+				C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -464,10 +470,12 @@
 				C71B63D8229AFDD200B6910A /* TagDetailHeaderView.swift in Sources */,
 				C73650FA22831BC20025154F /* Colors.swift in Sources */,
 				C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */,
+				C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */,
 				C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */,
 				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
 				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,
 				C73A297F2293479C00554EF1 /* TagModel.swift in Sources */,
+				C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */,
 				C7DA87F32291AC8600457112 /* RegisterViewController.swift in Sources */,
 				C73650FB22831BC20025154F /* UserInfoClass.swift in Sources */,
 			);

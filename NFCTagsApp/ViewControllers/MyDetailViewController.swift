@@ -26,7 +26,7 @@ class MyDetailViewController: UIViewController {
         super.viewDidLoad()
         
         headerView.nameLabel.text = tag.tagTitle
-        headerView.typeLabel.text = "POOCHIE"
+        headerView.typeLabel.text = tag.tagSubTitle
         //headerView.headerImageView.image = UIImage(named: "restaurant")
         
 
