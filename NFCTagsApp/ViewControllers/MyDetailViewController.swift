@@ -23,6 +23,26 @@ var tag = TagModel()
 override func viewDidLoad() {
     super.viewDidLoad()
     
+    navigationItem.largeTitleDisplayMode = .never
+    
+    // Set the table view's delegate and data source
+    tableView.delegate = self
+    tableView.dataSource = self
+    
+    // Configure the table view's style
+    tableView.separatorStyle = .none
+    
+    // Customize the navigation bar
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.tintColor = .red
+    navigationController?.hidesBarsOnSwipe = false
+    
+    tableView.contentInsetAdjustmentBehavior = .never
+    
+    
+    
+    // DISPLAY DATABASE VALUES
     headerView.nameLabel.text = tag.tagTitle
     headerView.typeLabel.text = tag.tagSubTitle
     //headerView.headerImageView.image = UIImage(named: "restaurant")
@@ -55,6 +75,13 @@ override func viewDidLoad() {
     
     // Do any additional setup after loading the view.
 }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 
 func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
     if useID == nil {

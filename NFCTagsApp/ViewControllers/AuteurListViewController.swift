@@ -79,8 +79,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
 
         
         
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-        navigationItem.largeTitleDisplayMode = .always
+
         
 
         
@@ -99,9 +98,30 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         scanButton.layer.cornerRadius = scanButton.frame.height/2
         scanButton.layer.masksToBounds = true
         scanButton.tintColor = .white
-
         
+        // CUSTOMIZE THE NAVIGATION BAR
+        
+        //VIEW BACKGROUND COLOR
+        view.backgroundColor = paleRoseColor
 
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // Customize the navigation bar
+        // The following 2 lines make the Navigation Bar transparant
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        //METHOD 1
+//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+//        navigationItem.largeTitleDisplayMode = .always
+        
+        //METHOD2
+        if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
+            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont ]
+        }
+        
+        navigationController?.hidesBarsOnSwipe = true
     }
 
     
@@ -140,9 +160,13 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     
     @IBAction func tryButtonPressed(_ sender: Any) {
         
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as! LoginViewController
-        self.present(loginViewController, animated: true, completion: nil)
+//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as! LoginViewController
+//        self.present(loginViewController, animated: true, completion: nil)
+//
+//        performSegue(withIdentifier: “unwindToHome”, sender:self)
+//
+        performSegue(withIdentifier: "LoginView", sender: self)
         
         
         

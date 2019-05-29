@@ -159,6 +159,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //    navigationBarAppearace.barTintColor = uicolorFromHex(0x034517)
  */
         
+        let backButtonImage = UIImage(named: "back")
+        UINavigationBar.appearance().backIndicatorImage = backButtonImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        
         return true
     }
     // ADDED FOR FACEBOOK
