@@ -30,7 +30,7 @@ override func viewDidLoad() {
     tableView.dataSource = self
     
     // Configure the table view's style
-    tableView.separatorStyle = .none
+    tableView.separatorStyle = .singleLine
     
     // Customize the navigation bar
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -47,13 +47,14 @@ override func viewDidLoad() {
     headerView.typeLabel.text = tag.tagSubTitle
     //headerView.headerImageView.image = UIImage(named: "restaurant")
     
-    
+    // SHOW PHOTO
     let tagPhotoRef = tag.tagPhotoRef
-    
     let cloudinaryAction = "Tag"
     let usePhotoRef:String? = tagPhotoRef
     let photoNumber = 1
     let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+    
+    //print(propertyPhotoFileUrl)
     
     //        cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
     //        cell.tagImageView.layer.masksToBounds = true
@@ -70,16 +71,13 @@ override func viewDidLoad() {
     headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
     //=================================================
     
-    //romee2
-    
-    
-    // Do any additional setup after loading the view.
 }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.hidesBarsOnSwipe = false
+        //NB: THIS LINE UNHIDES THE NAVIGATION BUTTON
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
@@ -138,10 +136,18 @@ func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
             
             return cell
         case 1:
+            var addr:String
+            addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
+//            let myString = "  \t\t  Let's trim all the whitespace  \n \t  \n  "
+//            let trimmedString = myString.stringByTrimmingCharactersInSet(
+//                NSCharacterSet.whitespaceAndNewlineCharacterSet()
+            
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            //cell.iconImageView.image = UIImage(named: "map")
-            //cell.shortTextLabel.text = restaurant.location
+            cell.iconImageView.image = UIImage(named: "map")
+            cell.shortTextLabel.text = addr
             cell.selectionStyle = .none
+
             
             return cell
         case 2:
@@ -155,6 +161,10 @@ func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
         default:
             fatalError("Failed to instantiate the table view cell for detail view controller")
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
 }
