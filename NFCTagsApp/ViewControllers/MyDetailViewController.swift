@@ -121,7 +121,7 @@ func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
  */
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -158,10 +158,35 @@ func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
             
             return cell
             
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailSeparatorCell.self), for: indexPath) as! RestaurantDetailSeparatorCell
+            cell.titleLabel.text = "HOW TO GET HERE"
+            cell.selectionStyle = .none
+            
+            return cell
+            
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
+            var addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
+            cell.configure(location: addr)
+            cell.selectionStyle = .none
+            
+            return cell
+
+            
         default:
             fatalError("Failed to instantiate the table view cell for detail view controller")
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMap" {
+            let destinationController = segue.destination as! MapViewController
+            destinationController.tag = tag
+        }
+    }
+    
+    // MARK: - Status bar
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
