@@ -6,35 +6,17 @@ import Alamofire
 import AlamofireImage
 import SafariServices
 import Alertift
-//import DTGradientButton
-//WELL DONE ALEX
 
 class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
     
-     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
+    let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     private var tagObjects:[TagModel] = []
     private var dataParse:NSMutableArray = NSMutableArray()
     
-    //TODO: ALEX REMOVE THE FOLLOWING 2 LINES. DEBUGGING ONLY
-    
-    var userName:String? = "alex@hillsoft.com"
-    var password:String? = "alex"
 
-
-    
-//    let PF_USER_FIRSTNAME = "firstName"
-//    let PF_USER_LASTNAME = "lastName"
-//    let PF_USER_FULLNAME = "fullname"
-//    let PF_WWAGENTYN = "workingwithagentyn"
-//    let PF_ISAGENTYN = "isagentyn"
-//    let PF_USER_EMAIL = "email"
-//    let PF_AGENTID = "agentID"
-//    let PF_PASSWORD = "password"
-//    let PF_USER_FULLNAMELOWER = "fullnameLower"
-    
-
-    private var theVige:String? = ""
-    private var appName:String? = ""
+//    private var theVige:String? = ""
+//    private var appName:String? = ""
     
     private var scanResults: String? = ""
 
@@ -46,41 +28,35 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     private var propertyPhotoFilePath:String? = ""
     private var propertyPlaceholderImage: UIImage?
     
-
+    @IBOutlet weak var toolBar: UIToolbar!
+    
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var btnMaintenance: UIBarButtonItem!
     @IBOutlet weak var btnSignIn: UIBarButtonItem!
-    //@IBOutlet weak var scanButton: AXWireButton!
-    //@IBOutlet weak var btnMaintenance: UIBarButtonItem!
-    //@IBOutlet weak var btnSignIn: UIBarButtonItem!
-    
-    @IBOutlet weak var statusView: UIImageView!
+
+    @IBOutlet weak var scanButton: UIButton!
+    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     
+    // MARK: - PROGRAM LIFECYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = kAppDelegate.appName as String?
-        
-        //TODO: REPLACE WITH PROPER LOGIN
-        kAppDelegate.currentUserName = "Test"
-        kAppDelegate.currentUserEmail = "info@kcontemporaryart.com"
 
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = 92.0 // Use 90
-        tableView.backgroundColor = coralColor
+
         
-        statusView.backgroundColor = paleRoseColor
+        // Customize the TABLEVIEW
+        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 92.0 // Use 92.0
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
+        // Customize the COLORS
+        
 //        statusLabel.backgroundColor = [UIColor coralColor];
         statusLabel.backgroundColor = .white
         statusLabel.textColor = royalBlue
-        //statusLabel.font.withSize(16.0)
-
-        
-        
-
-        
+        statusLabel.font.withSize(16.0)
 
         
         //        moveDirtyFlag = false
@@ -91,7 +67,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         //        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didChangePreferredContentSize(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
         
 
-        
         let myColor = royalBlue
         scanButton.backgroundColor = myColor
         scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -99,29 +74,19 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         scanButton.layer.masksToBounds = true
         scanButton.tintColor = .white
         
-        // CUSTOMIZE THE NAVIGATION BAR
         
-        //VIEW BACKGROUND COLOR
+                //tableView.backgroundColor = coralColor
+        
+        let backgroundImage = UIImage(named: "art_launch_image")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        
+        statusView.backgroundColor = coralColor
+        toolBar.barTintColor = coralColor
         view.backgroundColor = paleRoseColor
+        
+        self.tableView.reloadData()
 
-        tableView.cellLayoutMarginsFollowReadableWidth = true
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        // Customize the navigation bar
-        // The following 2 lines make the Navigation Bar transparant
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        //METHOD 1
-//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-//        navigationItem.largeTitleDisplayMode = .always
-        
-        //METHOD2
-        if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont ]
-        }
-        
-        navigationController?.hidesBarsOnSwipe = true
     }
 
     
@@ -129,6 +94,24 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        
+         //Customize the navigation bar
+         //The following 2 lines make the Navigation Bar transparant
+            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                navigationController?.navigationBar.shadowImage = UIImage()
+        
+        //METHOD 1
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+        navigationItem.largeTitleDisplayMode = .always
+        
+        //METHOD2
+        //        if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
+        //        navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont ]
+        //        }
+        //navigationController?.hidesBarsOnSwipe = true
+        
+        
+///
         //FORCE LOGIN IF NOT ALREADY LOGGED IN
         let currentUser = PFUser.current()
         if currentUser == nil {
@@ -138,7 +121,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             
         } else {
             signInorOut()
-            showTagTable() //VALENTINA1
+            loadTagTable() //VALENTINA1
             //TODO: kAppDelegate.loginChanged = false
         }
         
@@ -150,13 +133,34 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         //NSLog(@"CURRENTUSEREMAIL: %@",kAppDelegate.currentUserEmail);
         
         // THIS STATEMENT IS CRITICAL. THIS WILL RELOAD THE PHOTO/DATA AFTER MAINT CHANGES. FEB2018
-        tableView.reloadData()
+        //tableView.reloadData()
         // EACH TIME YOU RETURN HERE (SAY FROM DETAIL VIEW) REFRESH THE TABLE
-        self.tableView.reloadData()
+
         
     }
     
-
+    @IBAction private func btnMaintenancePressed(_ sender: Any) {
+        performSegue(withIdentifier: "MaintTableView", sender: self)
+    }
+    
+    @IBAction private func btnAugRealityPressed(_ sender: Any) {
+        // CHECK FOR ARKit AVAILABILITY
+        // THE FOLLOWING DOES NOT WORK! CODE MOVED TO THE BUTTON PRESS IN XCODE
+        
+        //    if (ARWorldTrackingConfiguration.isSupported) {
+        //
+        //        let alertController = UIAlertController(title: "Hardware not supported", message: "This app requires support for 'World Tracking' that is only available on iOS devices with an A9 processor or newer. " +
+        //                                                "Please quit the application.", preferredStyle: UIAlertController.Style.alert)
+        //        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        //        present(alertController, animated: true, completion: nil)
+        //    }
+        
+//        let navigationController = storyboard.instantiateViewController(withIdentifier: "AugView") as? UINavigationController
+//
+//        if let navigationController = navigationController {
+//            present(navigationController, animated: true)
+        
+        }
     
     @IBAction func tryButtonPressed(_ sender: Any) {
         
@@ -167,9 +171,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
 //        performSegue(withIdentifier: “unwindToHome”, sender:self)
 //
         performSegue(withIdentifier: "LoginView", sender: self)
-        
-        
-        
         
         /*
          
@@ -193,8 +194,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
          print(action, index)
          print ("LOVE THE VIGE")
          }
-         
-         
          
          //            .action(.default("⭐")) { (action, index, _) in
          //                print(action, index)
@@ -226,36 +225,14 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         
     }
     
-    func bounce(_ button: UIButton?) {
-        var theAnimation: CABasicAnimation?
-        theAnimation = CABasicAnimation(keyPath: "transform.translation.y") ///use transform
-        theAnimation?.duration = 0.4
-        theAnimation?.repeatCount = 2
-        theAnimation?.autoreverses = true
-        theAnimation?.fromValue = NSNumber(value: 1.0)
-        theAnimation?.toValue = NSNumber(value: -20)
-        if let theAnimation = theAnimation {
-            button?.layer.add(theAnimation, forKey: "animateTranslation")
-        } //animationkey
-    }
-    
     @IBAction func scanButtonPressed(_ sender: Any) {
-        scanResults = ""
-        let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
-        session.begin()
-        bounce(scanButton)
+                scanResults = ""
+                let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
+                session.begin()
+                bounce(scanButton)
     }
-    
 
-    
     // MARK: - MISC ROUTINES
-//    func createFileName(withAction useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-//        if useID == nil {
-//            return nil
-//        }
-//        let url = String(format: "%@-%@-%ld.jpg", useAction ?? "", useID ?? "", useNumber)
-//        return url
-//    }
     
     func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
         if useID == nil {
@@ -319,7 +296,18 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             .show()
     }
     
-    
+    func bounce(_ button: UIButton?) {
+        var theAnimation: CABasicAnimation?
+        theAnimation = CABasicAnimation(keyPath: "transform.translation.y") ///use transform
+        theAnimation?.duration = 0.4
+        theAnimation?.repeatCount = 2
+        theAnimation?.autoreverses = true
+        theAnimation?.fromValue = NSNumber(value: 1.0)
+        theAnimation?.toValue = NSNumber(value: -20)
+        if let theAnimation = theAnimation {
+            button?.layer.add(theAnimation, forKey: "animateTranslation")
+        } //animationkey
+    }
     
     func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
         let options: [CFString: Any] = [
@@ -568,7 +556,7 @@ func showWebPage(_ urlString: String?) {
                             // The object has been saved.
                             //self.displayMessage(message: "SUCCESS")
                             print ("SAVED IN BACKGROUND:  + \(ownerUrl)")
-                            self.showTagTable()
+                            self.loadTagTable()
                             if let url = URL(string: ownerUrl ) {
                                     let safariVC = SFSafariViewController(url: url)
                                     self.present(safariVC, animated: true, completion: nil)
@@ -594,7 +582,7 @@ func showWebPage(_ urlString: String?) {
 
     }
 
-    func showTagTable()
+    func loadTagTable()
     {
         let query = PFQuery(className:"Tags")
         let appCode = kAppDelegate.appCode as String?
@@ -1058,7 +1046,7 @@ extension AuteurListViewController: UITableViewDataSource {
                     //completionHandler(true)
                     //self.displayMessage(message: "Successfully Deleted")
                     //self.tableView.reloadData()
-                    self.showTagTable() //VALENTINA 0
+                    self.loadTagTable() //VALENTINA 0
                 } else {
                     // The query succeeded but no matching result was found
                     //self.displayMessage(message: "No Record Found")

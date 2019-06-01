@@ -24,6 +24,7 @@
 		C71B63E4229B798A00B6910A /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E3229B798A00B6910A /* MyDetailViewController.swift */; };
 		C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */; };
 		C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */; };
+		C72B43E722A313CE005A2354 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C72B43E622A313CE005A2354 /* Main.storyboard */; };
 		C73650FA22831BC20025154F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F822831BC10025154F /* Colors.swift */; };
 		C73650FB22831BC20025154F /* UserInfoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F922831BC20025154F /* UserInfoClass.swift */; };
 		C73A297F2293479C00554EF1 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A297E2293479C00554EF1 /* TagModel.swift */; };
@@ -45,7 +46,6 @@
 		C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9400228F227000A53DDA /* FacebookPost.swift */; };
 		C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9401228F227000A53DDA /* FacebookUser.swift */; };
 		C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A940F228F268B00A53DDA /* LoginViewController.swift */; };
-		C7AC6F14228A5DAB00E97DFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7AC6F13228A5DAB00E97DFF /* Main.storyboard */; };
 		C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F16228A623900E97DFF /* Spinner.swift */; };
 		C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */; };
 		C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */; };
@@ -91,6 +91,7 @@
 		C71B63E3229B798A00B6910A /* MyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
 		C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailIconTextCell.swift; sourceTree = "<group>"; };
 		C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTextCell.swift; sourceTree = "<group>"; };
+		C72B43E622A313CE005A2354 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C73650F822831BC10025154F /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C73650F922831BC20025154F /* UserInfoClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoClass.swift; sourceTree = "<group>"; };
 		C73A297E2293479C00554EF1 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
@@ -112,7 +113,6 @@
 		C79A9400228F227000A53DDA /* FacebookPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPost.swift; sourceTree = "<group>"; };
 		C79A9401228F227000A53DDA /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		C79A940F228F268B00A53DDA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		C7AC6F13228A5DAB00E97DFF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C7AC6F16228A623900E97DFF /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		C7156778227BD97700D1A55A /* NFCTagsApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7AC6F13228A5DAB00E97DFF /* Main.storyboard */,
+				C72B43E622A313CE005A2354 /* Main.storyboard */,
 				C7DA87F4229259CE00457112 /* AppConstant.swift */,
 				C7DA87F6229259DC00457112 /* AppDelegate.swift */,
 				C73650F822831BC10025154F /* Colors.swift */,
@@ -383,7 +383,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7AC6F14228A5DAB00E97DFF /* Main.storyboard in Resources */,
 				C7995B5C228B54AB00C6E246 /* Rubik-Black.ttf in Resources */,
 				C7995B5B228B54AB00C6E246 /* Rubik-BlackItalic.ttf in Resources */,
 				C7995B56228B54AB00C6E246 /* Rubik-Regular.ttf in Resources */,
@@ -391,6 +390,7 @@
 				C7995B58228B54AB00C6E246 /* Rubik-Italic.ttf in Resources */,
 				C7156781227BD97700D1A55A /* Assets.xcassets in Resources */,
 				C7995B57228B54AB00C6E246 /* Rubik-MediumItalic.ttf in Resources */,
+				C72B43E722A313CE005A2354 /* Main.storyboard in Resources */,
 				C7995B59228B54AB00C6E246 /* Rubik-LightItalic.ttf in Resources */,
 				C715679E227BDA0900D1A55A /* auteurs.json in Resources */,
 				C7995B5D228B54AB00C6E246 /* Rubik-Light.ttf in Resources */,
