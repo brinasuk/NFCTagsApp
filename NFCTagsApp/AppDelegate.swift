@@ -126,42 +126,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //    // CRITICAL: SETUP REALESTATEBEACONS
         //    [ESTConfig setupAppID:@"openhousebeacons" andAppToken:@"95febad595a25c04fd5a80b829b35361"];
+
         
-        /*
-        UIToolbar.appearance().setShadowImage(UIImage(named: "ShadowUp"), forToolbarPosition: UIToolbarPositionBottom)
-        
-        
-        //=============================
-        //     For those interested in using UIAppearance to style their UIBarButtonItem's fonts throughout the app, it can be accomplished using this line of code:
-        let buttonTintColor: UIColor? = MegaTheme.newToolbarTextColor()
-        //UIColor *buttonTintColor = [UIColor paleRoseColor];
-        
-        var barButtonAppearanceDict: [NSAttributedString.Key : UIFont]? = nil
-        if let buttonTintColor = buttonTintColor {
-            barButtonAppearanceDict = [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0),
-                NSAttributedString.Key.foregroundColor: buttonTintColor
-            ]
-        }
-        UIBarButtonItem.appearance().setTitleTextAttributes(barButtonAppearanceDict, for: .normal)
-        
-        
-        var useTintColor = UIColor(red: 140 / 255.0, green: 70 / 255.0, blue: 35 / 255.0, alpha: 1.0)
-        useTintColor = UIColor.green
-        
-        //TODO: NOT WORKING. TAKE OUT?
-        UINavigationBar.appearance().tintColor = useTintColor
-        UITabBar.appearance().barTintColor = useTintColor
-        
-        
-        //    var navigationBarAppearace = UINavigationBar.appearance()
-        //    navigationBarAppearace.tintColor = uicolorFromHex(0xffffff)
-        //    navigationBarAppearace.barTintColor = uicolorFromHex(0x034517)
- */
-        
+        // SET THE BACKBUTTON STYLE
         let backButtonImage = UIImage(named: "back")
         UINavigationBar.appearance().backIndicatorImage = backButtonImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        
+        // SET THE TOOLBAR STYLE
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [
+                NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 14.0),
+                NSAttributedString.Key.foregroundColor : UIColor.darkText,
+            ], for: .normal)
+        
+        //UIFont(name: "Rubik-Medium", size: 34.0
         
         return true
     }

@@ -14,10 +14,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     private var tagObjects:[TagModel] = []
     private var dataParse:NSMutableArray = NSMutableArray()
     
-
-//    private var theVige:String? = ""
-//    private var appName:String? = ""
-    
     private var scanResults: String? = ""
 
     private var objectId:String = ""    //USED BY DELETE
@@ -50,15 +46,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = 92.0 // Use 92.0
         tableView.cellLayoutMarginsFollowReadableWidth = true
-        
-        // Customize the COLORS
-        
-//        statusLabel.backgroundColor = [UIColor coralColor];
-        statusLabel.backgroundColor = .white
-        statusLabel.textColor = royalBlue
-        statusLabel.font.withSize(16.0)
 
-        
         //        moveDirtyFlag = false
         //        buttonLabel = "Edit"
         //        editing = false
@@ -66,7 +54,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         //
         //        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didChangePreferredContentSize(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
         
-
+        //SET THE SCANBUTTON DEFAULTS
         let myColor = royalBlue
         scanButton.backgroundColor = myColor
         scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -74,18 +62,36 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         scanButton.layer.masksToBounds = true
         scanButton.tintColor = .white
         
-        
-                //tableView.backgroundColor = coralColor
+        //MAKE THE STATUSLABEL CORNERS ROUNDED
+        statusLabel.layer.cornerRadius = 5.0
+        statusLabel.layer.masksToBounds = true
+        statusLabel.backgroundColor = .white
+        statusLabel.textColor = royalBlue
+        statusLabel.font.withSize(16.0)
         
         let backgroundImage = UIImage(named: "art_launch_image")
         let imageView = UIImageView(image: backgroundImage)
+        imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.8
         self.tableView.backgroundView = imageView
+        self.tableView.backgroundColor = coralColor
+        
+        // blur it
+        
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+//        let blurView = UIVisualEffectView(effect: blurEffect)
+//        blurView.frame = imageView.bounds
+//        imageView.addSubview(blurView)
         
         statusView.backgroundColor = coralColor
-        toolBar.barTintColor = coralColor
+        toolBar.barTintColor = .white //pinkColor  //paleRoseColor//.white // coralColor
         view.backgroundColor = paleRoseColor
         
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
+        loadTagTable() //LOAD ON STARTUP
+        
+        let currentUser = PFUser.current()
+        print (currentUser)
 
     }
 
@@ -93,7 +99,10 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.hidesBarsOnSwipe = true
         
+        //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
          //Customize the navigation bar
          //The following 2 lines make the Navigation Bar transparant
@@ -101,14 +110,15 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                 navigationController?.navigationBar.shadowImage = UIImage()
         
         //METHOD 1
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-        navigationItem.largeTitleDisplayMode = .always
+//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+//        navigationItem.largeTitleDisplayMode = .always
         
         //METHOD2
-        //        if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
-        //        navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont ]
-        //        }
-        //navigationController?.hidesBarsOnSwipe = true
+                if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                }
+        
+
         
         
 ///
@@ -121,7 +131,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             
         } else {
             signInorOut()
-            loadTagTable() //VALENTINA1
+            loadTagTable() //GET INFO FOR NEW USER
             //TODO: kAppDelegate.loginChanged = false
         }
         
@@ -140,7 +150,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     }
     
     @IBAction private func btnMaintenancePressed(_ sender: Any) {
-        performSegue(withIdentifier: "MaintTableView", sender: self)
+        //TODO: PUT BACK  performSegue(withIdentifier: "MaintTableView", sender: self)
     }
     
     @IBAction private func btnAugRealityPressed(_ sender: Any) {
@@ -233,7 +243,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     }
 
     // MARK: - MISC ROUTINES
-    
     func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
         if useID == nil {
             return nil
@@ -556,7 +565,7 @@ func showWebPage(_ urlString: String?) {
                             // The object has been saved.
                             //self.displayMessage(message: "SUCCESS")
                             print ("SAVED IN BACKGROUND:  + \(ownerUrl)")
-                            self.loadTagTable()
+                            self.loadTagTable()  //DISPLAY NEW DATA
                             if let url = URL(string: ownerUrl ) {
                                     let safariVC = SFSafariViewController(url: url)
                                     self.present(safariVC, animated: true, completion: nil)
@@ -710,7 +719,12 @@ func showWebPage(_ urlString: String?) {
                     
                 }
             }
-            self.tableView.reloadData()
+            
+            //RUN ON MAIN THREAD
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
         }
     }
 }
@@ -828,20 +842,8 @@ extension AuteurListViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let theVige = self.tagObjects[indexPath.row]
         let vige = theVige.tagTitle
-        print("VIGE: \(vige)")
-        
-        //romee
-
-        
-
-
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-//
-//            let detailViewController = MyDetailViewController()
-//            self.navigationController?.pushViewController(detailViewController, animated: true)
-//            
-//        })
-
+        //print("VIGE: \(vige)")
+    
 
         //TODO:      PUT THE FOLLOWING LINES BACK
 //        let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
@@ -859,7 +861,12 @@ extension AuteurListViewController: UITableViewDataSource {
 //        }
         
     }
-        
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //cell.backgroundColor = UIColor.black
+        //cell.backgroundColor = UIColor(white:1, alpha: 0.5)
+    }
+    
         // Override to support conditional editing of the table view.
         func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
             // Return NO if you do not want the specified item to be editable.
@@ -1046,7 +1053,7 @@ extension AuteurListViewController: UITableViewDataSource {
                     //completionHandler(true)
                     //self.displayMessage(message: "Successfully Deleted")
                     //self.tableView.reloadData()
-                    self.loadTagTable() //VALENTINA 0
+                    self.loadTagTable() //DELETE
                 } else {
                     // The query succeeded but no matching result was found
                     //self.displayMessage(message: "No Record Found")
@@ -1285,12 +1292,15 @@ extension AuteurListViewController: UITableViewDataSource {
     func signInorOut() {
         //var isAgent = "NO"
         let currentUser = PFUser.current()
+        print (currentUser)
+        
         //let currentUser = PFUser.isCurrentUser as? PFUser
         if currentUser != nil {
             
 //            statusLabel.text = [NSString stringWithFormat:@"%@ %@",@"Welcome ",currentUser[PF_USER_FULLNAME]];
             var loginName:String? = kAppDelegate.currentUserName
             if loginName == nil {loginName = "Name"}
+            print(loginName)
             loginName = "Welcome " + loginName!
             statusLabel.text = loginName
             
