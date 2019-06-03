@@ -29,6 +29,9 @@
 		C73650FB22831BC20025154F /* UserInfoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F922831BC20025154F /* UserInfoClass.swift */; };
 		C73A297F2293479C00554EF1 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A297E2293479C00554EF1 /* TagModel.swift */; };
 		C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77968D62286264B00CE6B4C /* AuteurListViewController.swift */; };
+		C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AC22A4D5A000C06A45 /* MapController.swift */; };
+		C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AD22A4D5A000C06A45 /* Artwork.swift */; };
+		C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */; };
 		C793547622A0AC0700DD1828 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C793547522A0AC0700DD1828 /* MapKit.framework */; };
 		C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */; };
 		C793547A22A0B75300DD1828 /* RestaurantDetailMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793547922A0B75300DD1828 /* RestaurantDetailMapCell.swift */; };
@@ -96,6 +99,9 @@
 		C73650F922831BC20025154F /* UserInfoClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoClass.swift; sourceTree = "<group>"; };
 		C73A297E2293479C00554EF1 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		C77968D62286264B00CE6B4C /* AuteurListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuteurListViewController.swift; sourceTree = "<group>"; };
+		C77ED9AC22A4D5A000C06A45 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		C77ED9AD22A4D5A000C06A45 /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkViews.swift; sourceTree = "<group>"; };
 		C793547522A0AC0700DD1828 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSeparatorCell.swift; sourceTree = "<group>"; };
 		C793547922A0B75300DD1828 /* RestaurantDetailMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMapCell.swift; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 				C715678B227BDA0900D1A55A /* Cell Views */,
 				C71B63CC229AECAD00B6910A /* Fonts */,
 				C7AC6F15228A623900E97DFF /* Extensions */,
+				C77ED9AB22A4D5A000C06A45 /* SWIFTY */,
 				C78DD766227E030300F107F6 /* Welcome */,
 				C7156782227BD97700D1A55A /* LaunchScreen.storyboard */,
 				C7156785227BD97700D1A55A /* Info.plist */,
@@ -262,6 +269,16 @@
 				C71B63D6229AEDD600B6910A /* Rubik-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C77ED9AB22A4D5A000C06A45 /* SWIFTY */ = {
+			isa = PBXGroup;
+			children = (
+				C77ED9AC22A4D5A000C06A45 /* MapController.swift */,
+				C77ED9AD22A4D5A000C06A45 /* Artwork.swift */,
+				C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */,
+			);
+			path = SWIFTY;
 			sourceTree = "<group>";
 		};
 		C78DD766227E030300F107F6 /* Welcome */ = {
@@ -465,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7C4844C2287723C00C6A95B /* UIColorExtension.swift in Sources */,
+				C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */,
 				C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */,
 				C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */,
 				C715679F227BDA0900D1A55A /* AuteurDetailViewController.swift in Sources */,
@@ -478,6 +496,7 @@
 				C71B63E4229B798A00B6910A /* MyDetailViewController.swift in Sources */,
 				C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */,
 				C71B63DE229B74F300B6910A /* RestaurantDetailHeaderView.swift in Sources */,
+				C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */,
 				C71B63DA229B18C100B6910A /* TagDetailViewController.swift in Sources */,
 				C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */,
 				C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */,
@@ -493,6 +512,7 @@
 				C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */,
 				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
 				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,
+				C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */,
 				C73A297F2293479C00554EF1 /* TagModel.swift in Sources */,
 				C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */,
 				C7DA87F32291AC8600457112 /* RegisterViewController.swift in Sources */,

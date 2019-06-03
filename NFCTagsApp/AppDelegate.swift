@@ -30,8 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var theVige:NSString? = "ALEX"
     var appCode:NSString? = "art"  //OR "art" OR "disp" or "re" or "show"
     var appName:NSString? = ""
+    var placeholderName:NSString? = ""
     var tagOrBeacon:Bool? = false  //NO = NFC TAG, YES = BEACON
     var sendEmailFlag:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
+    var isDatabaseDirty:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
     
     
     // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP /////////////////

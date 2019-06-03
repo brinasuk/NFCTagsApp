@@ -41,8 +41,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         title = "Welcome"
         
-        
-        //TODO: kAppDelegate.loginChanged = true
+        kAppDelegate.loggedInFlag = false
         
         //GET THE VERSION INFO FROM THE BUNDLE
         var applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
@@ -437,13 +436,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Helper methods
+    //TODO: FIX THIS
     func userLogged(in user: PFUser?) {
         if (user?[PF_USER_FULLNAME]) != nil {
             //TODO: SWIFTY ProgressHUD.showSuccess("Welcome \(fullname)!")
         }
         
-        //TODO: SWIFTY PUT BACK
-        kAppDelegate.loggedInFlag = true //TODO: FIX
+        kAppDelegate.loggedInFlag = true //CRITICAL!!
+        kAppDelegate.isDatabaseDirty = true //FORCE RELOAD WITH NEW USER
+        
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String
         kAppDelegate.currentUserName = user?[PF_USER_FULLNAME] as? String
         kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String

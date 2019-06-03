@@ -40,8 +40,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         super.viewDidLoad()
         self.title = kAppDelegate.appName as String?
 
-
-        
         // Customize the TABLEVIEW
         // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = 92.0 // Use 92.0
@@ -63,93 +61,102 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         scanButton.tintColor = .white
         
         //MAKE THE STATUSLABEL CORNERS ROUNDED
+        statusView.backgroundColor = paleRoseColor //or CORAL
+        
         statusLabel.layer.cornerRadius = 5.0
         statusLabel.layer.masksToBounds = true
         statusLabel.backgroundColor = .white
         statusLabel.textColor = royalBlue
         statusLabel.font.withSize(16.0)
         
+        //SET UI CONFIG COLORS
         let backgroundImage = UIImage(named: "art_launch_image")
         let imageView = UIImageView(image: backgroundImage)
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.8
         self.tableView.backgroundView = imageView
         self.tableView.backgroundColor = coralColor
+        toolBar.barTintColor = .white //pinkColor  //paleRoseColor//.white // coralColor
+        view.backgroundColor = paleRoseColor
         
         // blur it
-        
 //        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
 //        let blurView = UIVisualEffectView(effect: blurEffect)
 //        blurView.frame = imageView.bounds
 //        imageView.addSubview(blurView)
         
-        statusView.backgroundColor = coralColor
-        toolBar.barTintColor = .white //pinkColor  //paleRoseColor//.white // coralColor
-        view.backgroundColor = paleRoseColor
-        
-        //self.tableView.reloadData()
-        loadTagTable() //LOAD ON STARTUP
-        
-        let currentUser = PFUser.current()
-        print (currentUser)
-
+        //FORCE A RELOAD OF THE DATA
+        kAppDelegate.isDatabaseDirty = true
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //Customize the navigation bar
+        //The following 2 lines make the Navigation Bar transparant
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.hidesBarsOnSwipe = true
         
         //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-         //Customize the navigation bar
-         //The following 2 lines make the Navigation Bar transparant
-            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-                navigationController?.navigationBar.shadowImage = UIImage()
-        
         //METHOD 1
-//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-//        navigationItem.largeTitleDisplayMode = .always
+        //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+        //        navigationItem.largeTitleDisplayMode = .always
         
         //METHOD2
-                if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-                }
-        
-
-        
-        
-///
-        //FORCE LOGIN IF NOT ALREADY LOGGED IN
-        let currentUser = PFUser.current()
-        if currentUser == nil {
-//            let welcomeViewController = WelcomeView(nibName: "WelcomeView", bundle: nil)
-//            navigationController?.pushViewController(welcomeViewController, animated: true)
-            loadLoginScreen()
-            
-        } else {
-            signInorOut()
-            loadTagTable() //GET INFO FOR NEW USER
-            //TODO: kAppDelegate.loginChanged = false
+        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
         }
         
-        //    if (kAppDelegate.loginChanged == YES) {
-        //        [self logInorOut];
-        //        [self listTags]; //VALENTINA2
-        //    }
         
-        //NSLog(@"CURRENTUSEREMAIL: %@",kAppDelegate.currentUserEmail);
+        // SEE IF YOU HAVE A USER ALREADY LOGGED IN
+        let currentUser = PFUser.current()
+        if currentUser == nil {
+            showLoginScreen()
+        } else {
+            showCurrentUserInfo()   //UPDATE CURRENT USER INFO
+        }
         
-        // THIS STATEMENT IS CRITICAL. THIS WILL RELOAD THE PHOTO/DATA AFTER MAINT CHANGES. FEB2018
-        //tableView.reloadData()
-        // EACH TIME YOU RETURN HERE (SAY FROM DETAIL VIEW) REFRESH THE TABLE
-
+        if (kAppDelegate.isDatabaseDirty == true) {
+            //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
+            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
+            loadTagTable() //GET INFO FOR NEW USER
+        }
+    }
+    
+    // MARK: - ACTION BUTTONS PRESSED
+    @IBAction func scanButtonPressed(_ sender: Any) {
+        scanResults = ""
+        let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
+        session.begin()
+        bounce(scanButton)
+    }
+    
+    @IBAction func signinButtonPressed(_ sender: Any) {
         
+        let currentUser = PFUser.current()
+        if currentUser != nil {
+            Alertift.alert(title: "Sign in or out",message: "Are you sure you wish to Sign Out?")
+                .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+                    print("YES!")
+                    self.actionLogout()
+                }
+                .action(.cancel("No")) { (_, _, _) in
+                    print("No/Cancel Clicked");
+                }
+                .show()
+            
+        } else {
+            showLoginScreen()
+        }
     }
     
     @IBAction private func btnMaintenancePressed(_ sender: Any) {
+        // BUTTON IS HIDDEN FROM EVERYDAY JOE USERS
         //TODO: PUT BACK  performSegue(withIdentifier: "MaintTableView", sender: self)
     }
     
@@ -173,15 +180,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         }
     
     @IBAction func tryButtonPressed(_ sender: Any) {
-        
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as! LoginViewController
-//        self.present(loginViewController, animated: true, completion: nil)
-//
-//        performSegue(withIdentifier: “unwindToHome”, sender:self)
-//
-        performSegue(withIdentifier: "LoginView", sender: self)
-        
         /*
          
          //        Alertift.alert(title: "Sample 1", message: "Simple alert!")
@@ -218,29 +216,22 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         
         
         /*
-        Alertift.alert(title: "Sample 2",message: "Do you like 🍣?")
-            .action(.default("Yes"), isPreferred: true) { (_, _, _) in
-                Alertift.alert(message: "🍣🍣🍣")
-                    .action(.default("Close"))
-                    .show()
-            }
-            .action(.cancel("No")) { (_, _, _) in
-                Alertift.alert(message: "😂😂😂")
-                    .action(.destructive("Close"))
-                    .show()
-            }
-            .show()
- */
-        
-        
+         Alertift.alert(title: "Sample 2",message: "Do you like 🍣?")
+         .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+         Alertift.alert(message: "🍣🍣🍣")
+         .action(.default("Close"))
+         .show()
+         }
+         .action(.cancel("No")) { (_, _, _) in
+         Alertift.alert(message: "😂😂😂")
+         .action(.destructive("Close"))
+         .show()
+         }
+         .show()
+         */
     }
     
-    @IBAction func scanButtonPressed(_ sender: Any) {
-                scanResults = ""
-                let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
-                session.begin()
-                bounce(scanButton)
-    }
+
 
     // MARK: - MISC ROUTINES
     func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
@@ -277,7 +268,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         }
         self.present(alertView, animated: true, completion:nil)
     }
-    
     
     func showSimpleAlert() {
         //    Alertift.alert(title: "Sample 1", message: "Simple alert!")
@@ -338,14 +328,10 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     // MARK: - NFC READER DELEGATES
     
     func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {
-        NSLog("%@", error.localizedDescription)
-        let message = String(format: "%@%@\n", scanResults!, error.localizedDescription)
-        DispatchQueue.main.async {
-            //TODO: THIS ERROR ALWAYS COMES UP, EVEN ON A SUCCESSFUL SCAN. ????
-            //YOU CAN COMMENT IT OUT FOR NOW~!
-            print(message)
+        //THIS ERROR ALWAYS COMES UP, EVEN ON A SUCCESSFUL SCAN. ????
+        //DO NOT SHOW THIS MESSAGE TO THE USER EVER
+        print(error.localizedDescription)
 
-        }
     }
     
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
@@ -427,13 +413,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                         })
                     }
                     
-                    // IF THERE IS A VALID URL HERE THEN SHOW IT!
-                    
-                    if let checkedUrl = NSURL(string: urlString) {
-                        // you can use checkedUrl here
-                    }
-                    
-                    
+                    // IF THERE IS A VALID URL HERE THEN SHOW IT
                     if urlString.count > 0 {
                         // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
                         session.invalidate()
@@ -458,10 +438,10 @@ func showWebPage(_ urlString: String?) {
         let safariVC = SFSafariViewController(url: url)
         present(safariVC, animated: true, completion: nil)
     }
-
 }
     
     // MARK: - PARSE QUERIES
+    
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
     func lookupTagIfo(_ useTagId: String?) {
         //tagId = "info@kcontemporaryart.com:102" //TODO: REMOVE
@@ -477,15 +457,13 @@ func showWebPage(_ urlString: String?) {
         query.whereKey("ownerId", equalTo: useTagId!)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                 if let error = error {
-                    // The query failed
+                    // NO MATCH FOUND
                     print(error.localizedDescription)
                     self.displayErrorMessage(message: error.localizedDescription)
                 } else if let object = object {
                     // The query succeeded with a matching result
-                    print("HERE WE ARE!!")
-                    print(object)
-                    
-
+                    //print("HERE WE ARE!!")
+                    //print(object)
                     
                     let ownerEmail = object["ownerEmail"] as? String ?? ""
                     let ownerName = object["ownerName"] as? String ?? ""
@@ -582,23 +560,16 @@ func showWebPage(_ urlString: String?) {
                         }
                     }
                     print("Successfully added to TAGS table")
-                } else {
-                    // The query succeeded but no matching result was found
-                    self.displayErrorMessage(message: "Record Not Found")
                 }
-            
         }
-
     }
 
     func loadTagTable()
     {
         let query = PFQuery(className:"Tags")
         let appCode = kAppDelegate.appCode as String?
-        var userEmail = kAppDelegate.currentUserEmail as String?
-        ////userEmail = "romee@hillsoft.com"
-        print (appCode as Any)
-        print ("UserEmail: \(userEmail as Any)")
+        let userEmail = kAppDelegate.currentUserEmail as String?
+        //print ("UserEmail: \(userEmail as Any)")
         query.whereKey("appName", equalTo: appCode!)
         query.whereKey("userEmail", equalTo: userEmail!)
         query.order(byDescending: "createdAt")
@@ -736,11 +707,13 @@ extension AuteurListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //let count = self.dataParse.count
         let count = self.tagObjects.count
-        
         if (count > 0) {
-            //TODO: PUT BACK
-            //statusLabel.text = "Swipe row left to delete, right for more options";
+            statusLabel.text = "Swipe left to delete, right for more options"
+        } else {
+            statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
         }
+        //TODO: TAKE OUT AFTER DEBUGGING:
+        statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
         return count;
     }
 
@@ -757,7 +730,7 @@ extension AuteurListViewController: UITableViewDataSource {
         //let auteur = auteurs[indexPath.row]
         let tag = self.tagObjects[indexPath.row] //The Vige
         
-        let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
+        //let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
         //self.objectId = cellDataParse.objectId ?? ""
         //print(self.objectId)
         
@@ -840,8 +813,8 @@ extension AuteurListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        let theVige = self.tagObjects[indexPath.row]
-        let vige = theVige.tagTitle
+        //let theVige = self.tagObjects[indexPath.row]
+        //let vige = theVige.tagTitle
         //print("VIGE: \(vige)")
     
 
@@ -1123,116 +1096,8 @@ extension AuteurListViewController: UITableViewDataSource {
         
         return swipeConfiguration
     }
-    
 
-    
-/*
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let checkInAction = UIContextualAction(style: .normal, title: "Check-in") { (action, sourceView, completionHandler) in
-            
-//            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-//            self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
-//            cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
-//
-            completionHandler(true)
-        }
-        
-//        let checkInIcon = restaurants[indexPath.row].isVisited ? "undo" : "tick"
-        checkInAction.backgroundColor = UIColor(red: 38.0/255.0, green: 162.0/255.0, blue: 78.0/255.0, alpha: 1.0)
-        checkInAction.image = UIImage(named: checkInIcon)
-        
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkInAction])
-     
-        return swipeConfiguration
-    }
-  */
-    
-
-//    func signIn() {
-//        let sv = UIViewController.displaySpinner(onView: self.view)
-//        PFUser.logInWithUsername(inBackground: userName!, password: password!) { (user, error) in
-//            UIViewController.removeSpinner(spinner: sv)
-//            if user != nil {
-//                print("Successfully Logged In")
-//                let userName:String? = user?.username
-//                self.displayMessage(message: "Successfully Logged In \(userName ?? "No Name")")
-//                //self.loadHomeScreen()
-//            }else{
-//                if let descrip = error?.localizedDescription{
-//                    self.displayErrorMessage(message: (descrip))
-//                }
-//            }
-//        }
-//    }
-    
-
-    
-//    func signUp() {
-//        let user = PFUser()
-//
-//        user.username = userName
-//        user.password = password
-//        let sv = UIViewController.displaySpinner(onView: self.view)
-//        user.signUpInBackground { (success, error) in
-//            UIViewController.removeSpinner(spinner: sv)
-//            if success{
-//                //self.loadHomeScreen()
-//                print("Successfully Signed Up")
-//                self.displayMessage(message: "Successfully Signed Up")
-//
-//
-//            }else{
-//                if let descrip = error?.localizedDescription{
-//                    self.displayErrorMessage(message: descrip)
-//                }
-//            }
-//        }
-//    }
- 
-//    func logoutOfApp() {
-//        let sv = UIViewController.displaySpinner(onView: self.view)
-//        PFUser.logOutInBackground { (error: Error?) in
-//            UIViewController.removeSpinner(spinner: sv)
-//            if (error == nil){
-//                //self.loadLoginScreen()
-//                print ("Successfully Logged Out")
-//                self.displayMessage(message: "Successfully Logged Out")
-//            }else{
-//                if let descrip = error?.localizedDescription{
-//                    self.displayMessage(message: descrip)
-//                }else{
-//                    self.displayMessage(message: "error logging out")
-//                }
-//
-//            }
-//        }
-//    }
-
-// MARK: === SignINorOUT ===
-    
-@IBAction func signinButtonPressed(_ sender: Any) {
-
-        let currentUser = PFUser.current()
-        if currentUser != nil {
-     Alertift.alert(title: "Sign in or out",message: "Are you sure you wish to Sign Out?")
-     .action(.default("Yes"), isPreferred: true) { (_, _, _) in
-        print("YES!")
-        //self.actionLogout()
-        self.actionLogout()
-     }
-     .action(.cancel("No")) { (_, _, _) in
-        print("No/Cancel Clicked");
-     }
-     .show()
-
-        } else {
-            loadLoginScreen()
-            //let welcomeViewController = WelcomeView(nibName: "WelcomeView", bundle: nil)
-            //navigationController?.pushViewController(welcomeViewController, animated: true)
-        }
-
-    }
+// MARK: === SIGN IN ROUTINES ===========
     
     func actionLogout() {
         
@@ -1242,7 +1107,6 @@ extension AuteurListViewController: UITableViewDataSource {
             //TODO: FIX ALL PROGRESSHUD
             //ProgressHUD.show("Logging Out ...", interaction: false)
             PFUser.logOut()
-            
             
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
@@ -1264,14 +1128,13 @@ extension AuteurListViewController: UITableViewDataSource {
             //TODO: WHAT EXACTLY IS THIS DOING?
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kREFRESHUSERTABLE), object: nil, userInfo: dict)
             
-            loadLoginScreen()
-            
-            //let welcomeViewController = WelcomeView(nibName: "WelcomeView", bundle: nil)
-            //navigationController?.pushViewController(welcomeViewController, animated: true)
+            showLoginScreen()
         }
     }
     
-    func loadLoginScreen(){
+    func showLoginScreen(){
+        kAppDelegate.isDatabaseDirty = true  //FORCE A DATABASE LOAD AFTER RETURNING FROM LOGIN
+        
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as! LoginViewController
         self.present(loginViewController, animated: true, completion: nil)
@@ -1284,27 +1147,13 @@ extension AuteurListViewController: UITableViewDataSource {
 //        navigationController?.pushViewController(registerViewController, animated: true)
         //self.navigationController?.pushViewController(loginViewController, animated: true)
 //        self.present(loginViewController, animated: false, completion: nil)
-        
-        
     }
 
 
-    func signInorOut() {
-        //var isAgent = "NO"
+    func showCurrentUserInfo() {
         let currentUser = PFUser.current()
-        print (currentUser)
-        
-        //let currentUser = PFUser.isCurrentUser as? PFUser
+        //print (currentUser)
         if currentUser != nil {
-            
-//            statusLabel.text = [NSString stringWithFormat:@"%@ %@",@"Welcome ",currentUser[PF_USER_FULLNAME]];
-            var loginName:String? = kAppDelegate.currentUserName
-            if loginName == nil {loginName = "Name"}
-            print(loginName)
-            loginName = "Welcome " + loginName!
-            statusLabel.text = loginName
-            
-            btnSignIn.title = "Sign Out"
             kAppDelegate.loggedInFlag = true;
             
             kAppDelegate.currentUserEmail = currentUser?.email
@@ -1316,6 +1165,7 @@ extension AuteurListViewController: UITableViewDataSource {
             if kAppDelegate.currentUserName == nil {
                 kAppDelegate.currentUserName = "anonymous"
             }
+            //print (kAppDelegate.currentUserName)
             
             kAppDelegate.currentUserFacebookId = currentUser?.object(forKey: PF_USER_FACEBOOKID) as? String
             if kAppDelegate.currentUserFacebookId == nil {
@@ -1347,19 +1197,21 @@ extension AuteurListViewController: UITableViewDataSource {
                 btnMaintenance.title = ""
                 btnMaintenance.isEnabled = false
             }
+            
+            btnSignIn.title = "Sign Out"
+            statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
+            
         } else {
-            statusLabel.text = "Please Sign In"
-            btnSignIn.title = "Sign In"
             kAppDelegate.loggedInFlag = false
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
             kAppDelegate.currentUserFacebookId = ""
             kAppDelegate.currentUserRole = "User"
             kAppDelegate.currentUserObjectId = ""
-            
             kAppDelegate.currentUserIsAgent = false
+            
+            btnSignIn.title = "Sign In"
+            statusLabel.text = "Please Sign In"
         }
     }
-    
-
 }

@@ -223,8 +223,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             //TODO: SWIFTY ProgressHUD.showSuccess("Welcome \(fullname)!")
         }
 
-         //TODO: SWIFTY PUT BACK
-        kAppDelegate.loggedInFlag = true //TODO: FIX
+        kAppDelegate.loggedInFlag = true //CRITICAL!!
+        kAppDelegate.isDatabaseDirty = true //FORCE RELOAD WITH NEW USER
+        
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String
         kAppDelegate.currentUserName = user?[PF_USER_FULLNAME] as? String
         kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String

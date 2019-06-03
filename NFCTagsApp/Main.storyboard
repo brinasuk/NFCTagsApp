@@ -117,7 +117,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Maintenance" id="lnr-g4-LfB"/>
-                                    <barButtonItem title="TRY2" id="leI-OO-Bmq">
+                                    <barButtonItem title="Try" id="leI-OO-Bmq">
                                         <connections>
                                             <action selector="tryButtonPressed:" destination="kBe-lp-QEI" id="30o-Cu-DoU"/>
                                         </connections>
@@ -152,7 +152,7 @@
                                     <constraint firstAttribute="height" constant="36" id="qdY-Zd-aGx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Tap for Scan"/>
+                                <state key="normal" title="Tap to Scan"/>
                                 <connections>
                                     <action selector="scanButtonPressed:" destination="kBe-lp-QEI" eventType="touchUpInside" id="Gld-HH-6Ql"/>
                                 </connections>
