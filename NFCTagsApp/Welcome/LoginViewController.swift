@@ -40,8 +40,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Welcome"
-        
-        kAppDelegate.loggedInFlag = false
+        //kAppDelegate.loggedInFlag = false
+        kAppDelegate.newAccountFlag = false
         
         //GET THE VERSION INFO FROM THE BUNDLE
         var applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
@@ -65,7 +65,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let displayName = "Please Sign In"
         headerLabel.text = displayName
-        self.headerLabel.textColor = .white
+
         
         //emailLoginButton.layer.cornerRadius = 20 // this value vary as per your desire
         
@@ -102,16 +102,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //        emailLoginButton.layer.masksToBounds = true
 //        emailLoginButton.clipsToBounds = true
         
+        headerLabel.textColor = myColor
+        userWelcomeLabel.textColor = myColor
+        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.isToolbarHidden = true
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.isTranslucent = false
         
-//        let backButton = UIBarButtonItem(image: UIImage(named: "backButton"), style: .plain, target: self, action: #selector(WelcomeView.goBackButtonPressed))
-//        navigationItem.leftBarButtonItem = backButton
         
-        backgroundImage.image = UIImage(named: "art_launch_image") // nd-background
-        
+        let backgroundImageName = "art_launch_image"
+        backgroundImage.image = UIImage(named: backgroundImageName) // nd-background
+        backgroundImage.alpha = 0.4
+        backgroundImage.contentMode = .scaleAspectFill
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard)))
 
@@ -127,7 +130,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //[_textFieldEmail becomeFirstResponder];
+        
+        if kAppDelegate.newAccountFlag == true {
+            kAppDelegate.newAccountFlag = false
+            goBackButtonPressed()
+        }
     }
 
     
@@ -207,6 +214,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func actionRegisterEmail(_ sender: Any) {
                 bounce(emailRegisterButton)
+                
                 let registerViewController = RegisterViewController()
                 navigationController?.pushViewController(registerViewController, animated: true)
     }
@@ -420,15 +428,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         user[PF_USER_PICTURE] = "" //TODO: NEED PICTURE
         user[PF_USER_THUMBNAIL] = "" //TODO: NEED PICTURE
 
-        //let sv = UIViewController.displaySpinner(onView: self.view)
+        let sv = UIViewController.displaySpinner(onView: self.view)
         user.signUpInBackground { (success: Bool, error: Error?) in
+            UIViewController.removeSpinner(spinner: sv)
             if let error = error {
-                //UIViewController.removeSpinner(spinner: sv)
                 print(error.localizedDescription)
                 self.displayErrorMessage(message: error.localizedDescription)
                 self.goBackButtonPressed()
             } else {
-                //UIViewController.removeSpinner(spinner: sv)
                 print("User Registered successfully")
                 self.userLogged(in: user)
             }
@@ -442,7 +449,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //TODO: SWIFTY ProgressHUD.showSuccess("Welcome \(fullname)!")
         }
         
-        kAppDelegate.loggedInFlag = true //CRITICAL!!
+        //kAppDelegate.loggedInFlag = true //CRITICAL!!
         kAppDelegate.isDatabaseDirty = true //FORCE RELOAD WITH NEW USER
         
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String

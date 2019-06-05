@@ -12,17 +12,20 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     private var tagObjects:[TagModel] = []
-    private var dataParse:NSMutableArray = NSMutableArray()
+    //private var dataParse:NSMutableArray = NSMutableArray()
     
     private var scanResults: String? = ""
 
     private var objectId:String = ""    //USED BY DELETE
+    
+    var placeholderImage:UIImage?
+    
 
     //private let apiFetcher = APIRequestFetcher()
-    private var propertyPhotoFileName:String? = ""
-    private var propertyPhotoFileUrl:String? = ""
-    private var propertyPhotoFilePath:String? = ""
-    private var propertyPlaceholderImage: UIImage?
+    //private var propertyPhotoFileName:String? = ""
+    //private var propertyPhotoFileUrl:String? = ""
+    //private var propertyPhotoFilePath:String? = ""
+    //private var propertyPlaceholderImage: UIImage?
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -70,7 +73,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         statusLabel.font.withSize(16.0)
         
         //SET UI CONFIG COLORS
-        let backgroundImage = UIImage(named: "art_launch_image")
+        let backgroundImageName = "art_launch_image"
+        let backgroundImage = UIImage(named: backgroundImageName)
         let imageView = UIImageView(image: backgroundImage)
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.8
@@ -84,6 +88,9 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
 //        let blurView = UIVisualEffectView(effect: blurEffect)
 //        blurView.frame = imageView.bounds
 //        imageView.addSubview(blurView)
+        
+        let placeholderImageName = kAppDelegate.placeholderName
+        placeholderImage = UIImage(named: placeholderImageName! as String)!
         
         //FORCE A RELOAD OF THE DATA
         kAppDelegate.isDatabaseDirty = true
@@ -125,6 +132,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
             //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
             loadTagTable() //GET INFO FOR NEW USER
+            kAppDelegate.isDatabaseDirty = false
         }
     }
     
@@ -423,7 +431,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                                 let safariVC = SFSafariViewController(url: url)
                                 self.present(safariVC, animated: true, completion: nil)
                             }
-                            
+
                         })
                     }
                 })
@@ -431,14 +439,15 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         }
     }
     
-func showWebPage(_ urlString: String?) {
-    // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
-    //session.invalidate()
-    if let url = URL(string: urlString ?? "") {
-        let safariVC = SFSafariViewController(url: url)
-        present(safariVC, animated: true, completion: nil)
-    }
-}
+//func showWebPagez(_ urlString: String?) {
+//    // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
+//    //session.invalidate()
+//
+//    if let url = URL(string: urlString ?? "") {
+//        let safariVC = SFSafariViewController(url: url)
+//        present(safariVC, animated: true, completion: nil)
+//    }
+//}
     
     // MARK: - PARSE QUERIES
     
@@ -453,11 +462,15 @@ func showWebPage(_ urlString: String?) {
         
         //beaconAlert?.dismiss()
         
+        let sv = UIViewController.displaySpinner(onView: self.view)
+        
+        
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerId", equalTo: useTagId!)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                 if let error = error {
                     // NO MATCH FOUND
+                    UIViewController.removeSpinner(spinner: sv)
                     print(error.localizedDescription)
                     self.displayErrorMessage(message: error.localizedDescription)
                 } else if let object = object {
@@ -542,6 +555,7 @@ func showWebPage(_ urlString: String?) {
                         if (success) {
                             // The object has been saved.
                             //self.displayMessage(message: "SUCCESS")
+                            UIViewController.removeSpinner(spinner: sv)
                             print ("SAVED IN BACKGROUND:  + \(ownerUrl)")
                             self.loadTagTable()  //DISPLAY NEW DATA
                             if let url = URL(string: ownerUrl ) {
@@ -556,6 +570,7 @@ func showWebPage(_ urlString: String?) {
 //                            }
                         } else {
                             // There was a problem, check error.description
+                            UIViewController.removeSpinner(spinner: sv)
                             self.displayMessage(message: "FAILED!")
                         }
                     }
@@ -576,26 +591,30 @@ func showWebPage(_ urlString: String?) {
         
         //query.whereKey("tagTitle", equalTo: "Vige")
         query.limit = 500
-        dataParse = []
-        tagObjects = []
+        //dataParse = []
+        tagObjects = []  //or removeAll
+        var rowCount = 0
+        
+        let sv = UIViewController.displaySpinner(onView: self.view)
         
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             
             if let error = error {
+                UIViewController.removeSpinner(spinner: sv)
                 // Log details of the failure
                 print(error.localizedDescription)
             } else if let objects = objects {
                 // The find succeeded.
                 print("Successfully retrieved \(objects.count) objects.")
                 // Do something with the found objects
-                var rowCount = 0
+                
                 for object in objects {
                     
-                    self.dataParse.add(object)
+                    //self.dataParse.add(object)
                     
 //                    let createdAt: Date? = object.createdAt()
 //
-//                    //Romee
+//
 //                    let cellDataParse:PFObject = self.dataParse.object(at: rowCount) as! PFObject
 //                    //let objectTagX = object.objectId
 //
@@ -608,7 +627,7 @@ func showWebPage(_ urlString: String?) {
 //
 //                    print(tagTitle as Any)
                     
-                    let cellDataParse:PFObject = self.dataParse.object(at: rowCount) as! PFObject
+                    let cellDataParse:PFObject = object //self.dataParse.object(at: rowCount) as! PFObject
                     
                     //var createdAt:Date? = (cellDataParse["createdAt"].cre
                     //if createdAt == nil {createdAt = ""}
@@ -676,7 +695,7 @@ func showWebPage(_ urlString: String?) {
                     let newObject = TagModel(createdAt: createdAt, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagObjectId: tagObjectId!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!, triggerDistance: triggerDistance!, sequence: sequence!)
 
                     self.tagObjects.append(newObject)
-                    self.dataParse.add(object)
+                    //self.dataParse.add(object)
                     rowCount = rowCount + 1
                     
                     
@@ -691,10 +710,27 @@ func showWebPage(_ urlString: String?) {
                 }
             }
             
+
+
             //RUN ON MAIN THREAD
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                if rowCount == 0 {
+                    let welcome = "Welcome " + self.kAppDelegate.currentUserName!
+                    let message = "Please tap the button below to \nScan Tags for Information"
+                    let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                    }
+                    alertView.addAction(OKAction)
+                    if let presenter = alertView.popoverPresentationController {
+                        presenter.sourceView = self.view
+                        presenter.sourceRect = self.view.bounds
+                    }
+                    self.present(alertView, animated: true, completion:nil)
+                }
             }
+            //let sv = UIViewController.displaySpinner(onView: self.view)
+            UIViewController.removeSpinner(spinner: sv)
             
         }
     }
@@ -708,12 +744,15 @@ extension AuteurListViewController: UITableViewDataSource {
         //let count = self.dataParse.count
         let count = self.tagObjects.count
         if (count > 0) {
-            statusLabel.text = "Swipe left to delete, right for more options"
+            statusLabel.text = "Swipe left for more options"
         } else {
-            statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
+            var myMessage = "Welcome " + kAppDelegate.currentUserName!
+            statusLabel.text = myMessage
+            //myMessage = myMessage + "\nPlease tap the button below to Scan Tags for Information"
+            //displayMessage(message: myMessage)
         }
         //TODO: TAKE OUT AFTER DEBUGGING:
-        statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
+        //statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
         return count;
     }
 
@@ -772,10 +811,6 @@ extension AuteurListViewController: UITableViewDataSource {
         /*
          https://photos.homecards.com/rebeacons/Tag-082C63FE-9AA8-4967-BC04-8F3D6AAF63DA-1.jpg
          */
-        //var alex:String? = "property_placeholder"
-        //alex = "The Vige"
-        //propertyPlaceholderImage = UIImage(named: alex ?? "")
-        //propertyPlaceholderImage = UIImage(named: "property_placeholder")
         
         //var tagPhotoRef = cellDataParse.object(forKey: "tagPhotoRef") as? String
         let tagPhotoRef = tag.tagPhotoRef
@@ -790,14 +825,17 @@ extension AuteurListViewController: UITableViewDataSource {
         cell.tagImageView.clipsToBounds = true
         
         // METHOD 1: ======================================
-//        let url = URL(string: propertyPhotoFileUrl!)!
-//        cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
-        //=================================================
+//        cell.tagImageView?.image = placeholderImage
+//        if let url = URL(string: propertyPhotoFileUrl! ) {
+//            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
+//        }
+
         
         // METHOD 2: ======================================
-        let url = URL(string: propertyPhotoFileUrl!)!
-        let placeholderImage = UIImage(named: "Photo-Unavailbale-300-Square")!
-        cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        if let url = URL(string: propertyPhotoFileUrl! ) {
+          cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        }
+        
         //=================================================
 
         cell.tagTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
@@ -1007,8 +1045,13 @@ extension AuteurListViewController: UITableViewDataSource {
             print ("REMOVE ROW")
             
             // delete from server
-            let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
-            self.objectId = cellDataParse.objectId ?? ""
+
+//            let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
+//            self.objectId = cellDataParse.objectId ?? ""
+            
+            let tag = self.tagObjects[indexPath.row]
+            self.objectId = tag.tagObjectId
+            
             let query = PFQuery(className: "Tags")
             
             query.getObjectInBackground(withId: self.objectId) { (object: PFObject?, error: Error?) in
@@ -1110,7 +1153,7 @@ extension AuteurListViewController: UITableViewDataSource {
             
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
-            kAppDelegate.loggedInFlag = false
+            //kAppDelegate.loggedInFlag = false
             kAppDelegate.currentUserFacebookId = ""
             kAppDelegate.currentUserRole = "User"
             //kAppDelegate.currentAgentObjectId = ""
@@ -1154,7 +1197,7 @@ extension AuteurListViewController: UITableViewDataSource {
         let currentUser = PFUser.current()
         //print (currentUser)
         if currentUser != nil {
-            kAppDelegate.loggedInFlag = true;
+            //kAppDelegate.loggedInFlag = true;
             
             kAppDelegate.currentUserEmail = currentUser?.email
             if kAppDelegate.currentUserEmail == nil {
@@ -1202,7 +1245,7 @@ extension AuteurListViewController: UITableViewDataSource {
             statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
             
         } else {
-            kAppDelegate.loggedInFlag = false
+            //kAppDelegate.loggedInFlag = false
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
             kAppDelegate.currentUserFacebookId = ""

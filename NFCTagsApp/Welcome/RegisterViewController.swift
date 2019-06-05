@@ -36,28 +36,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         //    NSString *displayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         let displayName = "Please Sign Up"
         headerLabel.text = displayName
-        headerLabel.textColor = UIColor.white
-        
-        
-        //TODO: BACKBUTTONS AND NAVIGATION AND BARBUTTONS SHOULD BE SET IN APPDELEGATE
-        navigationController?.navigationBar.prefersLargeTitles = false
-        
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backButton
-        
-        //    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Terms of Use" style:UIBarButtonItemStylePlain target:self action:@selector(displayTermsAndConditions)];
-        //    self.navigationItem.rightBarButtonItem = rightButton;
         
 
-        navigationController?.isToolbarHidden = true
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.isTranslucent = false
-        
-        
-        backgroundImage.image = UIImage(named: "art_launch_image") // nd-background
-        
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard)))
-        //gestureRecognizer.cancelsTouchesInView = NO;
         
         
         textFieldEmail.autocorrectionType = .no // NO SPELL CHECK
@@ -86,6 +66,21 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         cancelButton.layer.cornerRadius = cancelButton.frame.height/2
         cancelButton.layer.masksToBounds = true
         cancelButton.clipsToBounds = true
+        
+        headerLabel.textColor = myColor
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.isToolbarHidden = true
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isTranslucent = false
+        
+        let backgroundImageName = "art_launch_image"
+        backgroundImage.image = UIImage(named: backgroundImageName) // nd-background
+        backgroundImage.alpha = 0.4
+        backgroundImage.contentMode = .scaleAspectFill
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard)))
+        //gestureRecognizer.cancelsTouchesInView = NO;
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -190,9 +185,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         user[PF_USER_PICTURE] = ""
         user[PF_USER_THUMBNAIL] = ""
 
-        //let sv = UIViewController.displaySpinner(onView: self.view)
+        let sv = UIViewController.displaySpinner(onView: self.view)
         user.signUpInBackground { (success, error) in
-            //UIViewController.removeSpinner(spinner: sv)
+            UIViewController.removeSpinner(spinner: sv)
             if success{
                 self.userLogged(in: user)
             }else{
@@ -223,7 +218,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             //TODO: SWIFTY ProgressHUD.showSuccess("Welcome \(fullname)!")
         }
 
-        kAppDelegate.loggedInFlag = true //CRITICAL!!
+        //kAppDelegate.loggedInFlag = true //CRITICAL!!
         kAppDelegate.isDatabaseDirty = true //FORCE RELOAD WITH NEW USER
         
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String
@@ -248,8 +243,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         //goBackButtonPressed()
 
+        kAppDelegate.newAccountFlag = true
+        goBackButtonPressed() 
         
-        navigationController?.popToRootViewController(animated: true)
+        
+        //DOES NOT WORK navigationController?.popToRootViewController(animated: true)
         
         //    [self dismissViewControllerAnimated:YES completion:^{
         //        PostNotification(NOTIFICATION_USER_LOGGED_IN);

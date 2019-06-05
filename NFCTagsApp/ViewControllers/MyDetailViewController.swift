@@ -12,9 +12,10 @@ import AlamofireImage
 
 class MyDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-var tag = TagModel()
-@IBOutlet var tableView: UITableView!
-@IBOutlet var headerView: RestaurantDetailHeaderView!
+    let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
+    var tag = TagModel()
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var headerView: RestaurantDetailHeaderView!
 
 
 //var restaurant = Restaurant()
@@ -67,7 +68,8 @@ override func viewDidLoad() {
     
     // METHOD 2: ======================================
     let url = URL(string: propertyPhotoFileUrl!)!
-    let placeholderImage = UIImage(named: "Photo-Unavailbale-300-Square")!
+    let placeholderImageName = kAppDelegate.placeholderName
+    let placeholderImage = UIImage(named: placeholderImageName! as String)!
     headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
     //=================================================
     

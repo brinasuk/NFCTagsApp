@@ -40,7 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var currentUserName:String? = ""
     var currentUserEmail:String? = ""
     
-    var loggedInFlag:Bool? = false
+    //var loggedInFlag:Bool? = false
+    var newAccountFlag:Bool? = false
     var currentUserIsAgent:Bool? = false
     
     var currentUserFacebookId:String? = ""
@@ -48,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //TODO: May have mixed up UserObjectId and AgentObjectId. Changed all to User
     //var currentAgentObjectIdvar :String? = ""
     var currentUserObjectId:String? = ""
+
     ///////////////////////////////////////////////////////////////////
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -65,6 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (appCode == "show") {
             appName = "Showrooms";
         }
+        
+
+        
+        //TODO: FIX THIS
+        placeholderName = "Photo-Unavailbale-300-Square"
         
         /*
          // PROGRAMMING Settings.bundle
@@ -89,18 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //================================
  */
         
-        if (appCode == "art") {
-            appName = "ArtWorks4Me"
-        }
-        if (appCode == "re") {
-            appName = "BestHome4Me"
-        }
-        if (appCode == "disp") {
-            appName = "Dispensaries"
-        }
-        if (appCode == "show") {
-            appName = "Showrooms"
-        }
         
         // PARSE CONFIG
         let configuration = ParseClientConfiguration {
