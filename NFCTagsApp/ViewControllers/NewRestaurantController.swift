@@ -133,23 +133,28 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            photoImageView.image = selectedImage
-            photoImageView.contentMode = .scaleAspectFill
+            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//            let resizedImage:UIImage = scaleUIImageToSize(image: image!, size: CGSize(width: 100, height: 200))
+            let resizedImage = scaleImageToWidth(with: image, scaledToWidth: 300.0)
+            
+            //self.dismissViewControllerAnimated(true, completion: nil)
+            photoImageView.image = resizedImage
+            photoImageView.contentMode = .scaleAspectFit
             photoImageView.clipsToBounds = true
-            imageToUpload = selectedImage
+            imageToUpload = resizedImage!
         }
         
-        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
-        leadingConstraint.isActive = true
+//        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
+//        leadingConstraint.isActive = true
+//        
+//        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+//        trailingConstraint.isActive = true
         
-        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
-        trailingConstraint.isActive = true
-        
-        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
-        topConstraint.isActive = true
-        
-        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-        bottomConstraint.isActive = true
+//        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
+//        topConstraint.isActive = true
+//
+//        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+//        bottomConstraint.isActive = true
         
         dismiss(animated: true, completion: nil)
     }
@@ -179,6 +184,8 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         
         //dismiss(animated: true, completion: nil)
     }
+    
+
     
     func uploadImage(){
 //        imageToUpload = UIImage()
@@ -215,6 +222,53 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
             }
         }
         
+    }
+    
+//    func resizeImage(withWidth newWidth: CGFloat) -> UIImage? {
+//
+//        let scale = newWidth / self.size.width
+//        let newHeight = self.size.height * scale
+//        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+//        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return newImage
+//    }
+    
+    /**
+     * Scales an image to fit within a bounds with a size governed by
+     * the passed size. Also keeps the aspect ratio.
+     *
+     * Switch MIN to MAX for aspect fill instead of fit.
+     *
+     * @param newSize the size of the bounds the image must fit within.
+     * @return a new scaled image.
+     */
+//    func scaleUIImageToSize( image: UIImage, size: CGSize) -> UIImage {
+//        let hasAlpha = false
+//        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+//
+//        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+//        image.draw(in: CGRect(origin: CGPoint.zero, size: size))
+//
+//        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()!
+//        UIGraphicsEndImageContext()
+//
+//        return scaledImage
+//    }
+    
+    func scaleImageToWidth(with sourceImage: UIImage?, scaledToWidth i_width: Float) -> UIImage? {
+        let oldWidth = Float(sourceImage?.size.width ?? 0.0)
+        let scaleFactor: Float = i_width / oldWidth
+        let newHeight = Float((sourceImage?.size.height ?? 0.0) * CGFloat(scaleFactor))
+        let newWidth: Float = oldWidth * scaleFactor
+        
+        UIGraphicsBeginImageContext(CGSize(width: CGFloat(newWidth), height: CGFloat(newHeight)))
+        sourceImage?.draw(in: CGRect(x: 0, y: 0, width: CGFloat(newWidth), height: CGFloat(newHeight)))
+        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
     
 }
