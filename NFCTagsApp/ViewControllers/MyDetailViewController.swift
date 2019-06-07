@@ -17,11 +17,6 @@ class MyDetailViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
 
-    @IBOutlet weak var toolbar: UIToolbar!
-    
-//var restaurant = Restaurant()
-//    @IBOutlet weak var headerView: RestaurantDetailHeaderView!
-
 override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -95,22 +90,22 @@ func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useN
     
 }
 
-func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
-    let options: [CFString: Any] = [
-        kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-        kCGImageSourceCreateThumbnailWithTransform: true,
-        kCGImageSourceShouldCacheImmediately: true,
-        kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
-    ]
-    
-    guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
-        let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
-        else {
-            return nil
-    }
-    
-    return UIImage(cgImage: image)
-}
+//func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
+//    let options: [CFString: Any] = [
+//        kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+//        kCGImageSourceCreateThumbnailWithTransform: true,
+//        kCGImageSourceShouldCacheImmediately: true,
+//        kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
+//    ]
+//
+//    guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
+//        let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+//        else {
+//            return nil
+//    }
+//
+//    return UIImage(cgImage: image)
+//}
 
 
 /*

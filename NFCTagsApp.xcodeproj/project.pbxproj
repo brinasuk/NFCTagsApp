@@ -30,6 +30,9 @@
 		C76D3EEA22AA00AD00794637 /* NewRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EE922AA00AD00794637 /* NewRestaurantController.swift */; };
 		C76D3EEC22AA022000794637 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEB22AA022000794637 /* RoundedTextField.swift */; };
 		C76D3EEE22AAC09F00794637 /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EED22AAC09F00794637 /* ResizeImage.swift */; };
+		C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */; };
+		C76D3EF222AB104400794637 /* MaintTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableView.swift */; };
+		C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF322AB1BA300794637 /* OwnerModel.swift */; };
 		C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77968D62286264B00CE6B4C /* AuteurListViewController.swift */; };
 		C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AC22A4D5A000C06A45 /* MapController.swift */; };
 		C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AD22A4D5A000C06A45 /* Artwork.swift */; };
@@ -102,6 +105,9 @@
 		C76D3EE922AA00AD00794637 /* NewRestaurantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantController.swift; sourceTree = "<group>"; };
 		C76D3EEB22AA022000794637 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		C76D3EED22AAC09F00794637 /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
+		C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewCell.swift; sourceTree = "<group>"; };
+		C76D3EF122AB104400794637 /* MaintTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableView.swift; sourceTree = "<group>"; };
+		C76D3EF322AB1BA300794637 /* OwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModel.swift; sourceTree = "<group>"; };
 		C77968D62286264B00CE6B4C /* AuteurListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuteurListViewController.swift; sourceTree = "<group>"; };
 		C77ED9AC22A4D5A000C06A45 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		C77ED9AD22A4D5A000C06A45 /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
@@ -219,6 +225,7 @@
 				C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */,
 				C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */,
 				C793547922A0B75300DD1828 /* RestaurantDetailMapCell.swift */,
+				C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */,
 			);
 			path = "Cell Views";
 			sourceTree = "<group>";
@@ -230,6 +237,7 @@
 				C7156793227BDA0900D1A55A /* Auteur.swift */,
 				C7C4844922871B7F00C6A95B /* DemoModel.swift */,
 				C73A297E2293479C00554EF1 /* TagModel.swift */,
+				C76D3EF322AB1BA300794637 /* OwnerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,6 +263,7 @@
 				C71B63E3229B798A00B6910A /* MyDetailViewController.swift */,
 				C793547B22A0DCC800DD1828 /* MapViewController.swift */,
 				C76D3EE922AA00AD00794637 /* NewRestaurantController.swift */,
+				C76D3EF122AB104400794637 /* MaintTableView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -488,8 +497,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7C4844C2287723C00C6A95B /* UIColorExtension.swift in Sources */,
+				C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */,
 				C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */,
 				C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */,
+				C76D3EF222AB104400794637 /* MaintTableView.swift in Sources */,
 				C76D3EEE22AAC09F00794637 /* ResizeImage.swift in Sources */,
 				C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */,
 				C715679F227BDA0900D1A55A /* AuteurDetailViewController.swift in Sources */,
@@ -498,6 +509,7 @@
 				C76D3EEA22AA00AD00794637 /* NewRestaurantController.swift in Sources */,
 				C715679D227BDA0900D1A55A /* Auteur.swift in Sources */,
 				C71B63E2229B784800B6910A /* RestaurantDetailViewController.swift in Sources */,
+				C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */,
 				C7C4844A22871B7F00C6A95B /* DemoModel.swift in Sources */,
 				C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */,
 				C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */,
