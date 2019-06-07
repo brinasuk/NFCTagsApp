@@ -365,7 +365,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let password = object["accountpassword"] as? String
                 self.existingFacebookUserLogin99(email, withPassword: password)
             } else {
-                self.displayMessage(message: "NEW USER")
+                print("New Facebook User")
                 self.addNewUser88()
             }
         }
@@ -402,13 +402,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let name = fbResultsDict["name"] as? String
         let firstName = fbResultsDict["first_name"] as? String
         let lastName = fbResultsDict["last_name"] as? String
-        //TODO:PUT BACK let email =  fbResultsDict["email"] as? String
+        let email =  fbResultsDict["email"] as? String
         
         let password = "facebook" //ALWAYS USE THE WORD facebook for FB Sign-Ups
         
         let user = PFUser()
-        //TODO: PUT BACK  user.email = email?.lowercased()
-        let email:String? = "hatethis@hillsoft.com"
+        user.email = email?.lowercased()
+        
         user.username = email
         
         user.password = password

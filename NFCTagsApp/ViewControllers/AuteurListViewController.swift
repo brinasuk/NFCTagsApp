@@ -912,13 +912,13 @@ extension AuteurListViewController: UITableViewDataSource {
         if segue.identifier == "TagDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MyDetailViewController
-                //destinationController.myNameLabel = "ALEX"
                 destinationController.tag = self.tagObjects[indexPath.row]
-            
-                
-                //destinationController.tags = self.tagObjects[indexPath.row]
             }
         }
+    }
+    
+    @IBAction func unwindToHome(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
     }
     
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -1257,4 +1257,45 @@ extension AuteurListViewController: UITableViewDataSource {
             statusLabel.text = "Please Sign In"
         }
     }
+    
+    func uploadImage(){
+        var imageToUpload:UIImage = UIImage()
+        
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("Image2.png") //Your image name here
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            imageToUpload = image!
+        }
+        
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageToUpload.jpegData(compressionQuality: 0.75)!, withName: "Prescription", fileName: "Profile_Image.jpeg", mimeType: "image/jpeg")
+        }, to:"you_URL_here")
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                print(result)
+                
+                upload.uploadProgress(closure: { (progress) in
+                    print(progress)
+                })
+                
+                upload.responseJSON { response in
+                    //print response.result
+                    print(response);
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError);
+            }
+        }
+        
+    }
+    
+
 }

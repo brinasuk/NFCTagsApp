@@ -17,7 +17,8 @@ class MyDetailViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
 
-
+    @IBOutlet weak var toolbar: UIToolbar!
+    
 //var restaurant = Restaurant()
 //    @IBOutlet weak var headerView: RestaurantDetailHeaderView!
 
