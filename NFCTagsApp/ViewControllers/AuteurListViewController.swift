@@ -1258,44 +1258,5 @@ extension AuteurListViewController: UITableViewDataSource {
         }
     }
     
-    func uploadImage(){
-        var imageToUpload:UIImage = UIImage()
-        
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        if let dirPath          = paths.first
-        {
-            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("Image2.png") //Your image name here
-            let image    = UIImage(contentsOfFile: imageURL.path)
-            imageToUpload = image!
-        }
-        
-        
-        
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imageToUpload.jpegData(compressionQuality: 0.75)!, withName: "Prescription", fileName: "Profile_Image.jpeg", mimeType: "image/jpeg")
-        }, to:"you_URL_here")
-        { (result) in
-            switch result {
-            case .success(let upload, _, _):
-                print(result)
-                
-                upload.uploadProgress(closure: { (progress) in
-                    print(progress)
-                })
-                
-                upload.responseJSON { response in
-                    //print response.result
-                    print(response);
-                }
-                
-            case .failure(let encodingError):
-                print(encodingError);
-            }
-        }
-        
-    }
     
-
 }
