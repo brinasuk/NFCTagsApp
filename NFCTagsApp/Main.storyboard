@@ -116,11 +116,14 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="sOV-Rc-2en"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Maintenance" id="lnr-g4-LfB"/>
+                                    <barButtonItem title="Maintenance" id="lnr-g4-LfB">
+                                        <connections>
+                                            <segue destination="Wbr-7r-70g" kind="show" id="Pcm-5D-WrO"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Try" id="leI-OO-Bmq">
                                         <connections>
                                             <action selector="tryButtonPressed:" destination="kBe-lp-QEI" id="30o-Cu-DoU"/>
-                                            <segue destination="Wbr-7r-70g" kind="show" id="WPa-JF-UDT"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dOu-OD-kDJ"/>
@@ -769,7 +772,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Tl-kAH">
-                                                    <rect key="frame" x="18" y="5.3333333333333339" width="339" height="26.333333333333329"/>
+                                                    <rect key="frame" x="18" y="5.3333333333333357" width="339" height="26.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subsection Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXH-5i-UvG">
                                                             <rect key="frame" x="0.0" y="0.0" width="339" height="20.333333333333332"/>
@@ -1137,13 +1140,13 @@
         <!--Maint Table View-->
         <scene sceneID="1fE-NG-UuV">
             <objects>
-                <tableViewController id="Wbr-7r-70g" customClass="MaintTableView" sceneMemberID="viewController">
+                <tableViewController id="Wbr-7r-70g" customClass="MaintTableView" customModule="NFCTagsApp" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Y8F-qb-wDZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="MaintTableViewCell" rowHeight="77" id="grR-aX-MxQ" customClass="MaintTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="MaintTableViewCell" rowHeight="77" id="grR-aX-MxQ" customClass="MaintTableViewCell" customModule="NFCTagsApp">
                                 <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="grR-aX-MxQ" id="LCk-M5-LLo">

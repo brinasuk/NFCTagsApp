@@ -16,7 +16,6 @@ class OwnerModel {
     var ownerName: String
     var ownerEmail: String
     
-    var tagObjectId: String
     var ownerNumber: String
     var ownerId: String
     var latitude: String
@@ -47,8 +46,7 @@ class OwnerModel {
           appName:String,
           ownerName:String,
           ownerEmail:String,
-          
-          tagObjectId:String,
+
           ownerNumber:String,
           ownerId:String,
           latitude:String,
@@ -82,7 +80,6 @@ class OwnerModel {
         self.ownerName = ownerName;
         self.ownerEmail = ownerEmail;
         
-        self.tagObjectId = tagObjectId;
         self.ownerNumber = ownerNumber;
         self.ownerId = ownerId;
         self.latitude = latitude;
@@ -116,7 +113,6 @@ class OwnerModel {
                    ownerName: "",
                    ownerEmail: "",
                    
-                   tagObjectId: "",
                    ownerNumber: "",
                    ownerId: "",
                    latitude: "",

@@ -766,34 +766,8 @@ extension AuteurListViewController: UITableViewDataSource {
         
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AuteurTableViewCell
-        //let auteur = auteurs[indexPath.row]
+
         let tag = self.tagObjects[indexPath.row] //The Vige
-        
-        //let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
-        //self.objectId = cellDataParse.objectId ?? ""
-        //print(self.objectId)
-        
-        // ============================================================
-        // TODO: THE FOLLOWING ARE ALL OPTIONAL AND CAN ALL BE NIL !!
-        // ============================================================
-        
-        // NB: Sequence is Numeric!!
-        //var sequence = cellDataParse.object(forKey: "sequence") as? Double
-        //print (sequence as Any)
-        
-//        let vige = tag.tagTitle
-//        print("VIGE: \(vige)")
-//        //Well done Vige!
-//
-//
-//        var tagTitle:String? = cellDataParse.object(forKey: "tagTitle") as? String
-//        var tagSubTitle = cellDataParse.object(forKey: "tagSubTitle") as? String
-//        var tagCompany = cellDataParse.object(forKey: "tagCompany") as? String
-//
-//
-//        if tagTitle == nil {tagTitle = ""}
-//        if tagSubTitle == nil {tagSubTitle = ""}
-//        if tagCompany == nil {tagCompany = ""}
         
         cell.tagTitle.text = tag.tagTitle
         cell.tagSubTitle.text = tag.tagSubTitle
