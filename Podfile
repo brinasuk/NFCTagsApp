@@ -22,7 +22,8 @@ target 'NFCTagsApp' do
   #pod 'AFNetworking'
   #pod 'TwitterKit'
   #pod 'TwitterCore'
-
+  
+  #pod 'PKCCrop'
    pod 'VYNFCKit'
    pod 'Alamofire'
    pod 'AlamofireImage'

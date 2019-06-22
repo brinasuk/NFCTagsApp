@@ -670,9 +670,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.besthome4me;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.artworks4me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "BestHome4Me Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "ArtWorks4Me Dev";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -693,9 +693,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.besthome4me;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.artworks4me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "BestHome4Me App Store";
+				PROVISIONING_PROFILE_SPECIFIER = "ArtWorks4Me App Store";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

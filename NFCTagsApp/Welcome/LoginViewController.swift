@@ -220,10 +220,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func goBackButtonPressed() {
-        //navigationController?.popViewController(animated: true)
-        //navigationController?.popToRootViewController(animated: true)
-        //[self dismissViewControllerAnimated:YES completion:nil];
-        
         dismiss(animated: true, completion: nil)
     }
 
