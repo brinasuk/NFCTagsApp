@@ -13,6 +13,7 @@ import AlamofireImage
 
 class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var owner = OwnerModel()
     var imageToUpload:UIImage = UIImage()
     
     @IBOutlet var photoImageView: UIImageView!
@@ -22,6 +23,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
             nameTextField.tag = 1
             nameTextField.becomeFirstResponder()
             nameTextField.delegate = self
+            
         }
     }
     
@@ -68,6 +70,10 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         
         // Configure table view
         tableView.separatorStyle = .none
+        
+        let alex = owner.ownerTitle
+        print(alex)
+        nameTextField.text = owner.ownerTitle
     }
 
     // MARK: - UITextFieldDelegate methods

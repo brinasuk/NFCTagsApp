@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41719BA5DD69011FCC2BDBE320DE210D"
+               BlueprintIdentifier = "73F83E2CAF52E2DF139DF174A93E872C"
+               BuildableName = "Alertift.framework"
                BlueprintName = "Alertift"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Alertift.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

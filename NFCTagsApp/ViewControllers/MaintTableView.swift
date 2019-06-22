@@ -14,6 +14,7 @@ let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
 
 private var ownerObjects:[OwnerModel] = []
 private var CellIdentifier = "MaintTableViewCell"
+private var ownerTag = TagModel()
 
 class MaintTableView: UITableViewController {
     private var statsArray: [AnyHashable] = []
@@ -98,7 +99,7 @@ class MaintTableView: UITableViewController {
     
     func loadObjects()
     {
-                let query = PFQuery(className: "TagOwnerInfo")
+        let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerEmail", equalTo: kAppDelegate.currentUserEmail!)
         query.whereKey("appName", equalTo: kAppDelegate.appCode!)
                 query.order(byDescending: "ownerNumber")
@@ -121,8 +122,6 @@ class MaintTableView: UITableViewController {
                 // Do something with the found objects
                 
                 for object in objects {
-                    
-//                    let cellDataParse:PFObject = object //self.dataParse.object(at: rowCount) as! PFObject
 
                     let createdAt:Date = object.createdAt!
                     var appName:String? = kAppDelegate.appName as String?
@@ -179,7 +178,18 @@ class MaintTableView: UITableViewController {
                     if ownerCountry == nil {ownerCountry = ""}
                     if ownerPhotoRef == nil {ownerPhotoRef = ""}
                     
-                    let newObject = OwnerModel(createdAt: createdAt, appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerPhotoRef: ownerPhotoRef!)
+                    var ownerAddrFull:String? = object["ownerAddrFull"] as? String
+                    if ownerAddrFull == nil {ownerAddrFull = ""}
+                    var ownerPrice:String? = object["ownerPrice"] as? String
+                    if ownerPrice == nil {ownerPrice = ""}
+                    var ownerBeds:String? = object["ownerBeds"] as? String
+                    if ownerBeds == nil {ownerBeds = ""}
+                    var ownerBaths:String? = object["ownerBaths"] as? String
+                    if ownerBaths == nil {ownerBaths = ""}
+                    var ownerSqFt:String? = object["ownerSqFt"] as? String
+                    if ownerSqFt == nil {ownerSqFt = ""}
+                    
+                    let newObject = OwnerModel(createdAt: createdAt, appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!, ownerPhotoRef: ownerPhotoRef!)
                     
                     ownerObjects.append(newObject)
                     rowCount = rowCount + 1
@@ -244,6 +254,9 @@ print("ALEX")
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //TODO: NEVER USE THE FOLLOWING LINE. IT DESTROYS PASSING ANYTHING IN THE SEGUE!!!
+        //tableView.deselectRow(at: indexPath, animated: true)
 
         //let object = objects[indexPath.row] as? PFObject
         //NSLog(@"Object: %@",object);
@@ -318,6 +331,8 @@ print("ALEX")
 */
         //_ownerModel = self.objects[indexPath.row];
         //NSLog(@"ANSWER0: %@",_ownerModel[@"ownerUrl"]);
+        
+        //let ownerTag = ownerObjects[indexPath.row]
         performSegue(withIdentifier: "MaintDetailView", sender: self)
 
     }
@@ -337,39 +352,15 @@ print("ALEX")
 //
 //    }
 
-    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "MaintDetailView") {
-            let nextViewController = segue.destination as? FullViewController
 
-            nextViewController?.passObjectId = useObjectId
-            nextViewController?.passPhotoRef = usePhotoRef
-            nextViewController?.passTitle = useTitle
-            nextViewController?.passUrl = useUrl
-            nextViewController?.passAddress = useAddress
-            nextViewController?.passInfo = useInfo
-            nextViewController?.passLatitude = useLatitude
-            nextViewController?.passLongitude = useLongitude
-
-            nextViewController?.passSubTitle = useSubTitle
-            nextViewController?.passCompany = useCompany
-
-            nextViewController?.passAddress2 = useAddress2
-            nextViewController?.passCity = useCity
-            nextViewController?.passState = useState
-            nextViewController?.passZip = useZip
-            nextViewController?.passCountry = useCountry
-
-            nextViewController?.passEditMode = "YES"
+        if segue.identifier == "MaintDetailView" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! NewRestaurantController
+                destinationController.owner = ownerObjects[indexPath.row]
+            }
         }
-//        if (segue.identifier == "StatsView") {
-//            let nextViewController = segue.destination as? LMViewController
-//            nextViewController?.passVisits = visits
-//            nextViewController?.passStatsModel = statsArray
-//            nextViewController?.passTagTitle = useTitle
-//        }
     }
- */
 
     
     /*

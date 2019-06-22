@@ -28,6 +28,7 @@ PODS:
   - VYNFCKit (0.3.2)
 
 DEPENDENCIES:
+  - Alamofire
   - AlamofireImage
   - Alertift
   - FacebookCore
@@ -60,6 +61,6 @@ SPEC CHECKSUMS:
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
   VYNFCKit: 86a9b711fd1f34f6f7128a2a883cd58dbd781b9d
 
-PODFILE CHECKSUM: 6472718dda4f7917923c0073a313e88ad1151667
+PODFILE CHECKSUM: e0eeaa244fbf89cb9067995fe8ac1f152dcf5ede
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.1

@@ -41,8 +41,14 @@ class TagModel {
     var tagZip: String
     var tagCountry: String
     
+    var tagAddrFull: String
+    var tagPrice: String
+    var tagBeds: String
+    var tagBaths: String
+    var tagSqFt: String
+    
     var triggerDistance: String
-     var sequence: String
+    var sequence: String
     
 
     init (createdAt:Date,
@@ -74,6 +80,12 @@ class TagModel {
         tagState:String,   //Provence, County
         tagZip:String,
         tagCountry:String,
+        
+        tagAddrFull: String,
+        tagPrice: String,
+        tagBeds: String,
+        tagBaths: String,
+        tagSqFt: String,
         
         triggerDistance:String,
         sequence:String
@@ -109,7 +121,13 @@ class TagModel {
         self.tagState = tagState
         self.tagZip = tagZip;
         self.tagCountry = tagCountry
-
+        
+        self.tagAddrFull=tagAddrFull
+        self.tagPrice=tagPrice
+        self.tagBeds=tagBeds
+        self.tagBaths=tagBaths
+        self.tagSqFt=tagSqFt
+        
         self.triggerDistance = triggerDistance;
         self.sequence = sequence;
     }
@@ -145,53 +163,14 @@ class TagModel {
             tagZip: "",
             tagCountry: "",
             
+            tagAddrFull: "",
+            tagPrice: "",
+            tagBeds: "",
+            tagBaths: "",
+            tagSqFt: "",
+            
             triggerDistance: "",
             sequence: ""
         )
     }
 }
-
-/*
- 
- 
- @interface TagModel : PFObject<PFSubclassing>
- +(NSString *) parseClassName;
- @property (nonatomic, copy) NSDate *createdAt;
- @property (nonatomic, copy) NSString *appName;
- @property (nonatomic, copy) NSString *beaconDymo; // Dymo Label. Used to manually ID the Beacon only
- @property (nonatomic, copy) NSString *beaconColor;
- 
- @property (nonatomic, copy) NSString *userName;
- @property (nonatomic, copy) NSString *userEmail;
- 
- @property (nonatomic, copy) NSString *ownerName;
- @property (nonatomic, copy) NSString *ownerEmail;
- 
- @property (nonatomic, copy) NSString *tagObjectId; //DO NOT REMOVE. USED FOR SWIPE DELETES
- @property (nonatomic, copy) NSString *tagPhotoRef;  //ID FROM OWNER TBLE
- @property (nonatomic, copy) NSNumber *sequence;
- @property (nonatomic, copy) NSNumber *triggerDistance;
- 
- @property (nonatomic, copy) NSString *tagId;
- @property (nonatomic, copy) NSString *tagTitle;
- @property (nonatomic, copy) NSString *tagUrl;
- @property (nonatomic, copy) NSString *tagInfo;
- @property (nonatomic, copy) NSString *tagAddress;
- @property (nonatomic, copy) NSString *latitude;
- @property (nonatomic, copy) NSString *longitude;
- 
- @property (nonatomic, copy) NSString *tagSubTitle;
- @property (nonatomic, copy) NSString *tagCompany;
- 
- @property (nonatomic, copy) NSString *tagAddress2;
- @property (nonatomic, copy) NSString *tagCity;
- @property (nonatomic, copy) NSString *tagState;  //Provence, County
- @property (nonatomic, copy) NSString *tagZip;
- @property (nonatomic, copy) NSString *tagCountry;
- 
- 
- 
- @end
- 
- */
-

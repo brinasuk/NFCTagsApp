@@ -15,30 +15,36 @@ class OwnerModel {
     var appName: String
     var ownerName: String
     var ownerEmail: String
-    
     var ownerNumber: String
     var ownerId: String
+    
     var latitude: String
     var longitude: String
-    var triggerDistance: String
     
+    var triggerDistance: String
     var identifier: String
     var beaconName: String
     var beaconColor: String
     var beaconDymo: String
     
     var ownerTitle: String
+    var ownerSubTitle: String
+    var ownerCompany: String
     var ownerUrl: String
     var ownerInfo: String
+
     var ownerAddress: String
-    var ownerSubTitle: String
-    
-    var ownerCompany: String
     var ownerAddress2: String
     var ownerCity: String
     var ownerState: String
     var ownerZip: String
     var ownerCountry: String
+    
+    var ownerAddrFull: String
+    var ownerPrice: String
+    var ownerBeds: String
+    var ownerBaths: String
+    var ownerSqFt: String
     
     var ownerPhotoRef: String
     
@@ -70,6 +76,12 @@ class OwnerModel {
           ownerState:String,
           ownerZip:String,
           ownerCountry:String,
+          
+    ownerAddrFull: String,
+    ownerPrice: String,
+    ownerBeds: String,
+    ownerBaths: String,
+    ownerSqFt: String,
           
         ownerPhotoRef:String
         )
@@ -104,6 +116,12 @@ class OwnerModel {
         self.ownerZip = ownerZip;
         self.ownerCountry = ownerCountry;
         
+        self.ownerAddrFull=ownerAddrFull
+        self.ownerPrice=ownerPrice
+        self.ownerBeds=ownerBeds
+        self.ownerBaths=ownerBaths
+        self.ownerSqFt=ownerSqFt
+        
         self.ownerPhotoRef = ownerPhotoRef;
     }
     
@@ -136,6 +154,12 @@ class OwnerModel {
                    ownerState: "",
                    ownerZip: "",
                    ownerCountry: "",
+                   
+                   ownerAddrFull: "",
+                   ownerPrice: "",
+                   ownerBeds: "",
+                   ownerBaths: "",
+                   ownerSqFt: "",
                    
                    ownerPhotoRef: ""
         )

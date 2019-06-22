@@ -24,7 +24,7 @@ target 'NFCTagsApp' do
   #pod 'TwitterCore'
 
    pod 'VYNFCKit'
-   # pod 'Alamofire'
+   pod 'Alamofire'
    pod 'AlamofireImage'
    # pod 'DTGradientButton'
    # pod 'AlertViewBuilder'

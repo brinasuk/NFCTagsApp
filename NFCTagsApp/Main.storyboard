@@ -328,7 +328,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night-stars-wallpaper" translatesAutoresizingMaskIntoConstraints="NO" id="hB4-i3-wli">
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="hB4-i3-wli">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="REh-4C-g2w" userLabel="Facebook Login Button">
@@ -486,7 +486,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night-stars-wallpaper-2" translatesAutoresizingMaskIntoConstraints="NO" id="DkM-Fl-qMq">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="DkM-Fl-qMq">
                                 <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08I-j1-Jso" userLabel="Title">
@@ -902,7 +902,7 @@
             </objects>
             <point key="canvasLocation" x="-138112.79999999999" y="-55451.231527093601"/>
         </scene>
-        <!--New Restaurant-->
+        <!--New Restaurant Controller-->
         <scene sceneID="DMA-tl-PkP">
             <objects>
                 <tableViewController id="FGK-12-ONj" customClass="NewRestaurantController" customModule="NFCTagsApp" sceneMemberID="viewController">
@@ -1108,20 +1108,6 @@
                             <outlet property="delegate" destination="FGK-12-ONj" id="X3B-qg-KkV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Restaurant" id="Z3e-yQ-GfL">
-                        <barButtonItem key="leftBarButtonItem" image="close" id="px8-jt-8pw">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="Z2q-ou-NSb" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="OVV-hY-sQu"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="save" id="cZk-0m-kuP">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="saveButtonTappedWithSender:" destination="FGK-12-ONj" id="RKJ-pj-QIz"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="addressTextField" destination="Mch-m3-yyf" id="XTy-pL-3QE"/>
@@ -1133,9 +1119,8 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHf-QJ-04z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Z2q-ou-NSb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-137172" y="-54686.453201970442"/>
+            <point key="canvasLocation" x="-138004" y="-54678"/>
         </scene>
         <!--Maint Table View-->
         <scene sceneID="1fE-NG-UuV">
@@ -1204,6 +1189,7 @@
                     </tableView>
                     <connections>
                         <outlet property="tableView" destination="Y8F-qb-wDZ" id="zDi-Kq-aaR"/>
+                        <segue destination="FGK-12-ONj" kind="show" identifier="MaintDetailView" id="7gK-bP-OvS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JCo-Ou-BeQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1212,13 +1198,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close" width="16" height="16"/>
+        <image name="art_launch_image" width="1125" height="2429"/>
         <image name="heart-tick" width="22" height="21"/>
         <image name="list-item-background" width="375" height="60"/>
-        <image name="night-stars-wallpaper" width="640" height="1136"/>
-        <image name="night-stars-wallpaper-2" width="640" height="1136"/>
         <image name="photo" width="24" height="18"/>
-        <image name="save" width="20" height="20"/>
         <image name="text-input" width="224" height="28"/>
     </resources>
 </document>

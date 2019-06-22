@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
+
+
 class MyDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -30,12 +32,12 @@ override func viewDidLoad() {
     tableView.separatorStyle = .singleLine
     
     // Customize the navigation bar
-    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-    navigationController?.navigationBar.shadowImage = UIImage()
-    navigationController?.navigationBar.tintColor = .red
-    navigationController?.hidesBarsOnSwipe = false
-    
-    tableView.contentInsetAdjustmentBehavior = .never
+//    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//    navigationController?.navigationBar.shadowImage = UIImage()
+//    navigationController?.navigationBar.tintColor = .red
+//    navigationController?.hidesBarsOnSwipe = false
+//
+//    tableView.contentInsetAdjustmentBehavior = .never
     
     
     

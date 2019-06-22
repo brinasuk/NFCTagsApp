@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,7 +29,6 @@
 		C76D3EE822A9FE6B00794637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C76D3EE722A9FE6B00794637 /* Main.storyboard */; };
 		C76D3EEA22AA00AD00794637 /* NewRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EE922AA00AD00794637 /* NewRestaurantController.swift */; };
 		C76D3EEC22AA022000794637 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEB22AA022000794637 /* RoundedTextField.swift */; };
-		C76D3EEE22AAC09F00794637 /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EED22AAC09F00794637 /* ResizeImage.swift */; };
 		C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */; };
 		C76D3EF222AB104400794637 /* MaintTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableView.swift */; };
 		C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF322AB1BA300794637 /* OwnerModel.swift */; };
@@ -104,7 +103,6 @@
 		C76D3EE722A9FE6B00794637 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C76D3EE922AA00AD00794637 /* NewRestaurantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantController.swift; sourceTree = "<group>"; };
 		C76D3EEB22AA022000794637 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
-		C76D3EED22AAC09F00794637 /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewCell.swift; sourceTree = "<group>"; };
 		C76D3EF122AB104400794637 /* MaintTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableView.swift; sourceTree = "<group>"; };
 		C76D3EF322AB1BA300794637 /* OwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModel.swift; sourceTree = "<group>"; };
@@ -199,13 +197,13 @@
 				C73650F822831BC10025154F /* Colors.swift */,
 				C7156780227BD97700D1A55A /* Assets.xcassets */,
 				C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */,
-				C7156791227BDA0900D1A55A /* Models */,
 				C7156794227BDA0900D1A55A /* Resources */,
 				C7156796227BDA0900D1A55A /* ViewControllers */,
 				C715678B227BDA0900D1A55A /* Cell Views */,
 				C71B63CC229AECAD00B6910A /* Fonts */,
 				C7AC6F15228A623900E97DFF /* Extensions */,
 				C77ED9AB22A4D5A000C06A45 /* SWIFTY */,
+				C7156791227BDA0900D1A55A /* Models */,
 				C78DD766227E030300F107F6 /* Welcome */,
 				C7156782227BD97700D1A55A /* LaunchScreen.storyboard */,
 				C7156785227BD97700D1A55A /* Info.plist */,
@@ -262,8 +260,8 @@
 				C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */,
 				C71B63E3229B798A00B6910A /* MyDetailViewController.swift */,
 				C793547B22A0DCC800DD1828 /* MapViewController.swift */,
-				C76D3EE922AA00AD00794637 /* NewRestaurantController.swift */,
 				C76D3EF122AB104400794637 /* MaintTableView.swift */,
+				C76D3EE922AA00AD00794637 /* NewRestaurantController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -339,7 +337,6 @@
 				C7AC6F16228A623900E97DFF /* Spinner.swift */,
 				C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */,
 				C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */,
-				C76D3EED22AAC09F00794637 /* ResizeImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -458,35 +455,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Alertift/Alertift.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
-				"${BUILT_PRODUCTS_DIR}/VYNFCKit/VYNFCKit.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alertift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VYNFCKit.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -501,7 +479,6 @@
 				C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */,
 				C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */,
 				C76D3EF222AB104400794637 /* MaintTableView.swift in Sources */,
-				C76D3EEE22AAC09F00794637 /* ResizeImage.swift in Sources */,
 				C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */,
 				C715679F227BDA0900D1A55A /* AuteurDetailViewController.swift in Sources */,
 				C715679C227BDA0900D1A55A /* Film.swift in Sources */,

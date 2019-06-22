@@ -148,7 +148,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         
         let currentUser = PFUser.current()
         if currentUser != nil {
-            Alertift.alert(title: "Sign in or out",message: "Are you sure you wish to Sign Out?")
+            Alertift.alert(title: "Sign out",message: "Are you sure you wish to Sign Out?")
                 .action(.default("Yes"), isPreferred: true) { (_, _, _) in
                     print("YES!")
                     self.actionLogout()
@@ -497,6 +497,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     let ownerZip = object["ownerZip"] as? String ?? ""
                     let ownerCountry = object["ownerCountry"] as? String ?? ""
                     
+                    let ownerAddrFull = object["ownerAddrFull"] as? String ?? ""
+                    let ownerPrice = object["ownerPrice"] as? String ?? ""
+                    let ownerBeds = object["ownerBeds"] as? String ?? ""
+                    let ownerBaths = object["ownerBaths"] as? String ?? ""
+                    let ownerSqFt = object["ownerSqFt"] as? String ?? ""
+                    
                     let beaconDymo = object["beaconDymo"] as? String ?? ""
                     let beaconColor = object["beaconColor"] as? String ?? ""
                     
@@ -536,6 +542,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     tag["tagState"] = ownerState
                     tag["tagZip"] = ownerZip
                     tag["tagCountry"] = ownerCountry
+                    
+                    tag["ownerAddrFull"] = ownerAddrFull
+                    tag["ownerPrice"] = ownerPrice
+                    tag["ownerBeds"] = ownerBeds
+                    tag["ownerBaths"] = ownerBaths
+                    tag["ownerSqFt"] = ownerSqFt
                     
                     tag["beaconDymo"] = beaconDymo
                     tag["beaconColor"] = beaconColor
@@ -687,17 +699,27 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var tagCountry:String? = cellDataParse["tagCountry"] as? String
                     if (tagCountry == nil) {tagCountry = ""}
                     
+                    var tagAddrFull:String? = cellDataParse["tagAddrFull"] as? String
+                    if (tagAddrFull == nil) {tagAddrFull = ""}
+                    var tagPrice:String? = cellDataParse["tagPrice"] as? String
+                    if (tagPrice == nil) {tagPrice = ""}
+                    var tagBeds:String? = cellDataParse["tagBeds"] as? String
+                    if (tagBeds == nil) {tagBeds = ""}
+                    var tagBaths:String? = cellDataParse["tagBaths"] as? String
+                    if (tagBaths == nil) {tagBaths = ""}
+                    var tagSqFt:String? = cellDataParse["tagSqFt"] as? String
+                    if (tagSqFt == nil) {tagSqFt = ""}
+                    
                     var triggerDistance:String? = cellDataParse["triggerDistance"] as? String
                     if (triggerDistance == nil) {triggerDistance = ""}
                     var sequence:String? = cellDataParse["sequence"] as? String
                     if (sequence == nil) {sequence = ""}
                     
-                    let newObject = TagModel(createdAt: createdAt, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagObjectId: tagObjectId!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!, triggerDistance: triggerDistance!, sequence: sequence!)
-
+                    let newObject = TagModel(createdAt: createdAt, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagObjectId: tagObjectId!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!)
+                    
                     self.tagObjects.append(newObject)
                     //self.dataParse.add(object)
                     rowCount = rowCount + 1
-                    
                     
                     // ============================================================
                     // TODO: THE FOLLOWING ARE ALL OPTIONAL AND CAN ALL BE NIL !!

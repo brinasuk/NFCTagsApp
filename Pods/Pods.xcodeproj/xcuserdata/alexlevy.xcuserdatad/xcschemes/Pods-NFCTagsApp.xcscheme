@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F9F722A716CD994445A2EEA4C3E285AF"
+               BlueprintIdentifier = "0AA1276D8F5CC0DD98B1F77B8B33038F"
                BuildableName = "Pods_NFCTagsApp.framework"
                BlueprintName = "Pods-NFCTagsApp"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F9F722A716CD994445A2EEA4C3E285AF"
+            BlueprintIdentifier = "0AA1276D8F5CC0DD98B1F77B8B33038F"
             BuildableName = "Pods_NFCTagsApp.framework"
             BlueprintName = "Pods-NFCTagsApp"
             ReferencedContainer = "container:Pods.xcodeproj">
