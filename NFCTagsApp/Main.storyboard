@@ -902,7 +902,7 @@
             </objects>
             <point key="canvasLocation" x="-138112.79999999999" y="-55451.231527093601"/>
         </scene>
-        <!--New Restaurant Controller-->
+        <!--New Restaurant-->
         <scene sceneID="DMA-tl-PkP">
             <objects>
                 <tableViewController id="FGK-12-ONj" customClass="NewRestaurantController" customModule="NFCTagsApp" sceneMemberID="viewController">
@@ -1108,6 +1108,20 @@
                             <outlet property="delegate" destination="FGK-12-ONj" id="X3B-qg-KkV"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="New Restaurant" id="fAk-EA-jb8">
+                        <barButtonItem key="leftBarButtonItem" image="close" id="43f-Bc-kgE">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="FGK-12-ONj" id="oQ7-HU-yZh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="save" id="FwL-IX-Vpg">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="FGK-12-ONj" id="udg-6Y-yCs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="addressTextField" destination="Mch-m3-yyf" id="XTy-pL-3QE"/>
@@ -1120,7 +1134,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHf-QJ-04z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138004" y="-54678"/>
+            <point key="canvasLocation" x="-137702" y="-54687"/>
         </scene>
         <!--Maint Table View-->
         <scene sceneID="1fE-NG-UuV">
@@ -1131,11 +1145,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="MaintTableViewCell" rowHeight="77" id="grR-aX-MxQ" customClass="MaintTableViewCell" customModule="NFCTagsApp">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MaintTableViewCell" rowHeight="77" id="grR-aX-MxQ" customClass="MaintTableViewCell" customModule="NFCTagsApp">
                                 <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="grR-aX-MxQ" id="LCk-M5-LLo">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="76.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="76.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfn-bu-2SE">
@@ -1172,7 +1186,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="tagAddress" destination="DB8-4o-x2f" id="9RU-Il-hC9"/>
                                     <outlet property="tagImageView" destination="eBe-BC-Y4A" id="tis-Mb-m8G"/>
@@ -1189,7 +1203,7 @@
                     </tableView>
                     <connections>
                         <outlet property="tableView" destination="Y8F-qb-wDZ" id="zDi-Kq-aaR"/>
-                        <segue destination="FGK-12-ONj" kind="show" identifier="MaintDetailView" id="7gK-bP-OvS"/>
+                        <segue destination="FGK-12-ONj" kind="show" identifier="MaintDetailView" id="N88-O6-hbd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JCo-Ou-BeQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1199,9 +1213,12 @@
     </scenes>
     <resources>
         <image name="art_launch_image" width="1125" height="2429"/>
+        <image name="close" width="16" height="16"/>
         <image name="heart-tick" width="22" height="21"/>
         <image name="list-item-background" width="375" height="60"/>
         <image name="photo" width="24" height="18"/>
+        <image name="save" width="20" height="20"/>
         <image name="text-input" width="224" height="28"/>
     </resources>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

@@ -16,7 +16,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     
     private var scanResults: String? = ""
 
-    private var objectId:String = ""    //USED BY DELETE
+    //private var objectId:String = ""    //USED BY DELETE
     
     var placeholderImage:UIImage?
     
@@ -95,14 +95,11 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         //FORCE A RELOAD OF THE DATA
         kAppDelegate.isDatabaseDirty = true
     }
-
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func configureNavbar() {
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.hidesBarsOnSwipe = true
@@ -119,6 +116,14 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
         }
         
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+
+        configureNavbar()
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
         let currentUser = PFUser.current()
@@ -639,12 +644,11 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
 //
 //                    print(tagTitle as Any)
                     
-                    let cellDataParse:PFObject = object //self.dataParse.object(at: rowCount) as! PFObject
+                    let cellDataParse:PFObject = object
                     
-                    //var createdAt:Date? = (cellDataParse["createdAt"].cre
-                    //if createdAt == nil {createdAt = ""}
                     let createdAt:Date = object.createdAt!
-                    
+                    let tagObjectId:String = object.objectId!
+
 
                     var userName:String? = cellDataParse["userName"] as? String
                     if (userName == nil) {userName = ""}
@@ -662,8 +666,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var beaconColor:String? = cellDataParse["beaconColor"] as? String
                     if (beaconColor == nil) {beaconColor = ""}
                     
-                    var tagObjectId:String? = cellDataParse["tagObjectId"] as? String
-                    if (tagObjectId == nil) {tagObjectId = ""}
                     var tagPhotoRef:String? = cellDataParse["tagPhotoRef"] as? String
                     if (tagPhotoRef == nil) {tagPhotoRef = ""}
                     
@@ -715,7 +717,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var sequence:String? = cellDataParse["sequence"] as? String
                     if (sequence == nil) {sequence = ""}
                     
-                    let newObject = TagModel(createdAt: createdAt, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagObjectId: tagObjectId!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!)
+                    let newObject = TagModel(createdAt: createdAt, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagObjectId: tagObjectId, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!)
                     
                     self.tagObjects.append(newObject)
                     //self.dataParse.add(object)
@@ -917,6 +919,9 @@ extension AuteurListViewController: UITableViewDataSource {
         dismiss(animated: true, completion: nil)
     }
     
+
+    
+    
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //        if let destination = segue.destination as? AuteurDetailViewController,
     //            let indexPath = tableView.indexPathForSelectedRow {
@@ -1041,23 +1046,20 @@ extension AuteurListViewController: UITableViewDataSource {
             print ("REMOVE ROW")
             
             // delete from server
-
-//            let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
-//            self.objectId = cellDataParse.objectId ?? ""
-            
             let tag = self.tagObjects[indexPath.row]
-            self.objectId = tag.tagObjectId
-            
+            let objectId = tag.tagObjectId
             let query = PFQuery(className: "Tags")
             
-            query.getObjectInBackground(withId: self.objectId) { (object: PFObject?, error: Error?) in
+            print("DELETE + \(objectId)")
+            
+            query.getObjectInBackground(withId: objectId) { (object: PFObject?, error: Error?) in
                 if let error = error {
                     // The query failed
                     print(error.localizedDescription)
                     //self.displayMessage(message: error.localizedDescription)
                 } else if let object = object {
                     // The query succeeded with a matching result
-                    print("SUCCESS + \(self.objectId)")
+                    print("SUCCESS")
                     object.deleteInBackground()
                     
                     //self.tableView.deleteRows(at: [indexPath], with: .automatic)

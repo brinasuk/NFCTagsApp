@@ -14,74 +14,69 @@ let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
 
 private var ownerObjects:[OwnerModel] = []
 private var CellIdentifier = "MaintTableViewCell"
-private var ownerTag = TagModel()
+private var placeholderImage:UIImage?
 
 class MaintTableView: UITableViewController {
-    private var statsArray: [AnyHashable] = []
-    private var visits: [AnyHashable] = []
-    private var row: Int = 0
-    private var useObjectId = ""
-    private var usePhotoRef = ""
-    private var useUrl = ""
-    private var useTitle = ""
-    private var useSubTitle = ""
-    private var useCompany = ""
-    private var useAddress = ""
-    private var useInfo = ""
-    private var useLatitude = ""
-    private var useLongitude = ""
-    private var useAddress2 = ""
-    private var useCity = ""
-    private var useState = ""
-    private var useZip = ""
-    private var useCountry = ""
-    private var propertyPhotoFileName = ""
-    private var propertyPhotoFileUrl = ""
-    private var propertyPhotoFilePath = ""
-    private var propertyPlaceholderImage: UIImage?
+//    private var statsArray: [AnyHashable] = []
+//    private var visits: [AnyHashable] = []
+//    private var row: Int = 0
+//    private var useObjectId = ""
+//    private var usePhotoRef = ""
+//    private var useUrl = ""
+//    private var useTitle = ""
+//    private var useSubTitle = ""
+//    private var useCompany = ""
+//    private var useAddress = ""
+//    private var useInfo = ""
+//    private var useLatitude = ""
+//    private var useLongitude = ""
+//    private var useAddress2 = ""
+//    private var useCity = ""
+//    private var useState = ""
+//    private var useZip = ""
+//    private var useCountry = ""
+//    private var propertyPhotoFileName = ""
+//    private var propertyPhotoFileUrl = ""
+//    private var propertyPhotoFilePath = ""
+//    private var propertyPlaceholderImage: UIImage?
     
 //    private var ownerModel: OwnerModel?
 //    private var statsModel: StatsModel?
 
-    @IBOutlet private var _tableView: UITableView!
+    //@IBOutlet private var _tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Edit Info"
-
-        let backButton = UIBarButtonItem(image: UIImage(named: "backButt"), style: .plain, target: self, action: #selector(MaintTableView.goBackButtonPressed))
-        navigationItem.leftBarButtonItem = backButton
-
-        //    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backButton"] style:UIBarButtonItemStylePlain target:self action:@selector(goBackButtonPressed)];
-        //    self.navigationItem.leftBarButtonItem = menuButton;
-
-        //    NSString *useBgColor = [[NSUserDefaults standardUserDefaults] objectForKey:kBACKGROUND];
-        //    UIColor *backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:useBgColor]];
-        //    self.view.backgroundColor = backgroundColor;
-        //    self.navigationController.navigationBar.tintColor = kAppDelegate.fontColor;
-
-
-        //    [[NSNotificationCenter defaultCenter] addObserver:self
-        //                                             selector:@selector(refreshTable:)
-        //                                                 name:@"refreshTable"
-        //                                               object:nil];
-
-        //TODO: FIX ROWHEIGHT
-        //tableView.estimatedRowHeight = 100.0;
-        //self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
-        //self.tableView.rowHeight = 64.0; //UITableViewAutomaticDimension;
-        //self.tableView.rowHeight = 54.0; //UITableViewAutomaticDimension;
+        self.title = "Edit Info"
         
+        // Customize the TABLEVIEW
+        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 92.0 // Use 92.0
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         
-//        tableView.backgroundColor = UIColor.clear
-//        //UIImage *image = [UIImage imageNamed:@"01_background"];
-//        let image = UIImage(named: "background") //art_launch_image
-//        let userInfo: UserInfoClass = UserInfoClass
-//        let backImage: UIImage? = userInfo.image(with: image, scaledToSize: CGSize(width: view.frame.size.width, height: view.frame.size.height))
-//        if let backImage = backImage {
-//            view.backgroundColor = UIColor(patternImage: backImage)
-//        }
+        //        moveDirtyFlag = false
+        //        buttonLabel = "Edit"
+        //        editing = false
+        //        showNavigationButtons()
+        //
+        //        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didChangePreferredContentSize(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
+        
+        //SET UI CONFIG COLORS
+        let backgroundImageName = "art_launch_image"
+        let backgroundImage = UIImage(named: backgroundImageName)
+        let imageView = UIImageView(image: backgroundImage)
+        imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.8
+        self.tableView.backgroundView = imageView
+        self.tableView.backgroundColor = coralColor
+        view.backgroundColor = paleRoseColor
+        
+        let placeholderImageName = kAppDelegate.placeholderName
+        placeholderImage = UIImage(named: placeholderImageName! as String)!
+        
+        //FORCE A RELOAD OF THE DATA
+        kAppDelegate.isDatabaseDirty = true
         
         loadObjects()
 
@@ -92,9 +87,19 @@ class MaintTableView: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
-    @objc func goBackButtonPressed() {
-        navigationController?.popViewController(animated: true)
-        //[self dismissViewControllerAnimated:YES completion:nil];
+//    @objc func goBackButtonPressed() {
+//        navigationController?.popViewController(animated: true)
+//        //[self dismissViewControllerAnimated:YES completion:nil];
+//    }
+    
+    func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
+        if useID == nil {
+            return nil
+        }
+        var url = ""
+        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
+        //NSLog(@"URL: %@",url);
+        return url
     }
     
     func loadObjects()
@@ -227,23 +232,44 @@ class MaintTableView: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MaintTableViewCell", for: indexPath) as! MaintTableViewCell
         
-        let tag = ownerObjects[indexPath.row] //The Vige
+        let owner = ownerObjects[indexPath.row] //The Vige
         
         //let shortAddress = "\(ownerAddress ?? "") \(ownerAddress2 ?? "") \(ownerCity ?? "")"
-print("ALEX")
-        cell.tagNumber.text = tag.ownerNumber
-        cell.tagTitle.text = tag.ownerTitle
-        cell.tagUrl.text = tag.ownerSubTitle
-        cell.tagAddress.text = "FOUR"//shortAddress
+
+        cell.tagNumber.text = owner.ownerNumber
+        cell.tagTitle.text = owner.ownerTitle
+        cell.tagUrl.text = owner.ownerSubTitle
+        cell.tagAddress.text = owner.ownerPhotoRef
 
         //==== IMAGE CODE ============================================================
-//        let cloudinaryAction = "Tag"
-//        let usePhotoRef = photoRef
-//        let userInfo: UserInfoClass = UserInfoClass
-//        propertyPhotoFileName = userInfo.createFileName(withAction: cloudinaryAction, withID: usePhotoRef, withNumber: 1)
-//        propertyPhotoFileUrl = userInfo.createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: 1)
-//        propertyPhotoFilePath = userInfo.documentsFilePath(propertyPhotoFileName)
-//        propertyPlaceholderImage = UIImage(named: "property_placeholder")
+        let tagPhotoRef = owner.ownerPhotoRef
+        
+        let cloudinaryAction = "Tag"
+        let usePhotoRef:String? = tagPhotoRef
+        let photoNumber = 1
+        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        
+        cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
+        cell.tagImageView.layer.masksToBounds = true
+        cell.tagImageView.clipsToBounds = true
+        
+        // METHOD 1: ======================================
+        //        cell.tagImageView?.image = placeholderImage
+        //        if let url = URL(string: propertyPhotoFileUrl! ) {
+        //            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
+        //        }
+        
+        
+        // METHOD 2: ======================================
+        if let url = URL(string: propertyPhotoFileUrl! ) {
+            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        }
+        
+        //=================================================
+        
+        
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
 
 
         cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
@@ -252,6 +278,8 @@ print("ALEX")
 
         return cell
     }
+    
+
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -485,4 +513,25 @@ print("ALEX")
  
  */
     
+    @IBAction func close(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: {
+            //            if let rating = segue.identifier {
+            //                self.restaurant.rating = rating
+            //                self.headerView.ratingImageView.image = UIImage(named: rating)
+            //
+            //                let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
+            //                self.headerView.ratingImageView.transform = scaleTransform
+            //                self.headerView.ratingImageView.alpha = 0
+            //
+            //                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
+            //                    self.headerView.ratingImageView.transform = .identity
+            //                    self.headerView.ratingImageView.alpha = 1
+            //                }, completion: nil)
+            //            }
+        })
+    }
 }

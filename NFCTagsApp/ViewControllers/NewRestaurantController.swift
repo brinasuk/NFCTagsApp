@@ -56,6 +56,25 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         }
     }
     
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        //dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        //dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        //displayMessage(message: "SAVED")
+        uploadImage()
+        //navigationController?.popViewController(animated: true)
+        //navigationController?.popToRootViewController(animated: true)
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        //dismiss(animated: true, completion: nil)
+    }
+    
+    
     // MARK: - View controller life cycle methods
 
     override func viewDidLoad() {
@@ -74,6 +93,42 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         let alex = owner.ownerTitle
         print(alex)
         nameTextField.text = owner.ownerTitle
+        
+        // SHOW PHOTO
+        let tagPhotoRef = owner.ownerPhotoRef
+        let cloudinaryAction = "Tag"
+        let usePhotoRef:String? = tagPhotoRef
+        let photoNumber = 1
+        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        
+        print(propertyPhotoFileUrl ?? "")
+        
+        //        cell.tagImageView.layer.cornerRadius ="" cell.tagImageView.frame.size.width / 4
+        //        cell.tagImageView.layer.masksToBounds = true
+        //        cell.tagImageView.clipsToBounds = true
+        
+        // METHOD 1: ======================================
+        //                let url = URL(string: propertyPhotoFileUrl!)!
+        //                headerView.headerImageView.image = resizedImage(at: url, for: CGSize(width: 375,height: 358))
+        //=================================================
+        
+        // METHOD 2: ======================================
+        let url = URL(string: propertyPhotoFileUrl!)!
+        let placeholderImageName = kAppDelegate.placeholderName
+        let placeholderImage = UIImage(named: placeholderImageName! as String)!
+        photoImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        //=================================================
+    }
+    
+    func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
+        if useID == nil {
+            return nil
+        }
+        var url = ""
+        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
+        //NSLog(@"URL: %@",url);
+        return url
+        
     }
 
     // MARK: - UITextFieldDelegate methods
@@ -116,8 +171,20 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
                 }
             })
             
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+//                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+//                    let imagePicker = UIImagePickerController()
+//                    imagePicker.allowsEditing = false
+//                    imagePicker.sourceType = .photoLibrary
+//                    imagePicker.delegate = self
+//
+//                    self.present(imagePicker, animated: true, completion: nil)
+//                }
+            })
+            
             photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibraryAction)
+            photoSourceRequestController.addAction(cancelAction)
             
             // For iPad
             if let popoverController = photoSourceRequestController.popoverPresentationController {
@@ -169,7 +236,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
-        uploadImage()
+        
         
 //        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
 //            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
@@ -186,8 +253,12 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
 //        print("Phone: \(phoneTextField.text ?? "")")
 //        print("Description: \(descriptionTextView.text ?? "")")
         
+        //uploadImage()
         
-        
+        //dismiss(animated: true, completion: nil)
+        //navigationController?.popViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
+        //[self dismissViewControllerAnimated:YES completion:nil];
         //dismiss(animated: true, completion: nil)
     }
     
@@ -205,9 +276,10 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
 //            let image    = UIImage(contentsOfFile: imageURL.path)
 //            imageToUpload = image!
 //        }
+        
         let serverName = "https://photos.homecards.com/admin/uploads/rebeacons/"
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(self.imageToUpload.jpegData(compressionQuality: 0.75)!, withName: "Prescription", fileName: "alex.jpeg", mimeType: "image/jpeg")
+            multipartFormData.append(self.imageToUpload.jpegData(compressionQuality: 0.75)!, withName: "Prescription", fileName: "alextest.jpeg", mimeType: "image/jpeg")
         }, to:serverName)
         { (result) in
             switch result {
@@ -221,6 +293,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
                 upload.responseJSON { response in
                     //print response.result
                     print(response);
+                    self.navigationController?.popViewController(animated: true)
                 }
                 
             case .failure(let encodingError):
@@ -275,6 +348,30 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+    
+    func displayMessage(message:String) {
+        let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        }
+        alertView.addAction(OKAction)
+        if let presenter = alertView.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = self.view.bounds
+        }
+        self.present(alertView, animated: true, completion:nil)
+    }
+    
+    func displayErrorMessage(message:String) {
+        let alertView = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        }
+        alertView.addAction(OKAction)
+        if let presenter = alertView.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = self.view.bounds
+        }
+        self.present(alertView, animated: true, completion:nil)
     }
     
 }
