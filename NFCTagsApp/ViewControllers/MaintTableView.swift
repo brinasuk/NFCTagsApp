@@ -9,6 +9,7 @@
 
 import Parse
 import UIKit
+import Kingfisher
 
 let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -17,38 +18,12 @@ private var CellIdentifier = "MaintTableViewCell"
 private var placeholderImage:UIImage?
 
 class MaintTableView: UITableViewController {
-//    private var statsArray: [AnyHashable] = []
-//    private var visits: [AnyHashable] = []
-//    private var row: Int = 0
-//    private var useObjectId = ""
-//    private var usePhotoRef = ""
-//    private var useUrl = ""
-//    private var useTitle = ""
-//    private var useSubTitle = ""
-//    private var useCompany = ""
-//    private var useAddress = ""
-//    private var useInfo = ""
-//    private var useLatitude = ""
-//    private var useLongitude = ""
-//    private var useAddress2 = ""
-//    private var useCity = ""
-//    private var useState = ""
-//    private var useZip = ""
-//    private var useCountry = ""
-//    private var propertyPhotoFileName = ""
-//    private var propertyPhotoFileUrl = ""
-//    private var propertyPhotoFilePath = ""
-//    private var propertyPlaceholderImage: UIImage?
-    
-//    private var ownerModel: OwnerModel?
-//    private var statsModel: StatsModel?
-
-    //@IBOutlet private var _tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.title = "Edit Info"
+        setupNavigationBar()
+        //imageView.kf.indicatorType = .activity
         
         // Customize the TABLEVIEW
         // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -84,6 +59,10 @@ class MaintTableView: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+    
+    func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
@@ -129,6 +108,8 @@ class MaintTableView: UITableViewController {
                 for object in objects {
 
                     let createdAt:Date = object.createdAt!
+                    let ownerObjectId:String = object.objectId!
+                    
                     var appName:String? = kAppDelegate.appName as String?
                     if appName == nil {appName = ""}
                     var ownerName:String? = object["ownerName"] as? String
@@ -194,7 +175,7 @@ class MaintTableView: UITableViewController {
                     var ownerSqFt:String? = object["ownerSqFt"] as? String
                     if ownerSqFt == nil {ownerSqFt = ""}
                     
-                    let newObject = OwnerModel(createdAt: createdAt, appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!, ownerPhotoRef: ownerPhotoRef!)
+                    let newObject = OwnerModel(createdAt: createdAt, ownerObjectId: ownerObjectId,  appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!, ownerPhotoRef: ownerPhotoRef!)
                     
                     ownerObjects.append(newObject)
                     rowCount = rowCount + 1
@@ -242,16 +223,18 @@ class MaintTableView: UITableViewController {
         cell.tagAddress.text = owner.ownerPhotoRef
 
         //==== IMAGE CODE ============================================================
-        let tagPhotoRef = owner.ownerPhotoRef
+        //let tagPhotoRef = owner.ownerPhotoRef
         
         let cloudinaryAction = "Tag"
-        let usePhotoRef:String? = tagPhotoRef
+        let usePhotoRef:String? = owner.ownerObjectId
         let photoNumber = 1
         let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
         cell.tagImageView.clipsToBounds = true
+        
+        cell.tagImageView.kf.indicatorType = .activity
         
         // METHOD 1: ======================================
         //        cell.tagImageView?.image = placeholderImage
@@ -262,7 +245,44 @@ class MaintTableView: UITableViewController {
         
         // METHOD 2: ======================================
         if let url = URL(string: propertyPhotoFileUrl! ) {
-            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+//            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+            // Round corner
+            let processor = RoundCornerImageProcessor(cornerRadius: 20)
+            
+            /*
+            // Downsampling
+            let processor = DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))
+            
+            // Cropping
+            let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
+            
+            // Blur
+            let processor = BlurImageProcessor(blurRadius: 5.0)
+            
+            // Overlay with a color & fraction
+            let processor = OverlayImageProcessor(overlay: .red, fraction: 0.7)
+            
+            // Tint with a color
+            let processor = TintImageProcessor(tint: .blue)
+            
+            // Adjust color
+            let processor = ColorControlsProcessor(brightness: 1.0, contrast: 0.7, saturation: 1.1, inputEV: 0.7)
+            
+            // Black & White
+            let processor = BlackWhiteProcessor()
+            
+            // Blend (iOS)
+            let processor = BlendImageProcessor(blendMode: .darken, alpha: 1.0, backgroundColor: .lightGray)
+            
+            // Compositing
+            let processor = CompositingImageProcessor(compositingOperation: .darken, alpha: 1.0, backgroundColor: .lightGray)
+            
+            // Use the process in view extension methods.
+            imageView.kf.setImage(with: url, options: [.processor(processor)])
+ */
+            
+            //cell.tagImageView.kf.setImage(with: url)
+            cell.tagImageView.kf.setImage(with: url, options: [.processor(processor)])
         }
         
         //=================================================

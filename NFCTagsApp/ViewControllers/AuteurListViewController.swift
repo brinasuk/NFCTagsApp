@@ -6,6 +6,7 @@ import Alamofire
 import AlamofireImage
 import SafariServices
 import Alertift
+import Kingfisher
 
 class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
     
@@ -42,6 +43,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = kAppDelegate.appName as String?
+        setupNavigationBar()
+        //imageView.kf.indicatorType = .activity
+        
+        //CRITICAL:  CLEAS CACHE!!
+        KingfisherManager.shared.cache.clearMemoryCache()
+        KingfisherManager.shared.cache.clearDiskCache()
 
         // Customize the TABLEVIEW
         // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -96,7 +103,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         kAppDelegate.isDatabaseDirty = true
     }
     
-    func configureNavbar() {
+    func setupNavigationBar() {
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -123,7 +130,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         super.viewWillAppear(animated)
         
 
-        configureNavbar()
+        setupNavigationBar()
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
         let currentUser = PFUser.current()
@@ -717,7 +724,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var sequence:String? = cellDataParse["sequence"] as? String
                     if (sequence == nil) {sequence = ""}
                     
-                    let newObject = TagModel(createdAt: createdAt, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagObjectId: tagObjectId, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!)
+                    let newObject = TagModel(createdAt: createdAt,tagObjectId: tagObjectId, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!)
                     
                     self.tagObjects.append(newObject)
                     //self.dataParse.add(object)

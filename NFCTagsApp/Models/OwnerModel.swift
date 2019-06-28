@@ -12,6 +12,8 @@ import Parse
 
 class OwnerModel {
     var createdAt: Date
+    var ownerObjectId: String
+    
     var appName: String
     var ownerName: String
     var ownerEmail: String
@@ -49,6 +51,7 @@ class OwnerModel {
     var ownerPhotoRef: String
     
     init (createdAt:Date,
+          ownerObjectId: String,
           appName:String,
           ownerName:String,
           ownerEmail:String,
@@ -88,6 +91,7 @@ class OwnerModel {
         
     {
         self.createdAt = createdAt;
+        self.ownerObjectId = ownerObjectId;
         self.appName = appName;
         self.ownerName = ownerName;
         self.ownerEmail = ownerEmail;
@@ -127,6 +131,7 @@ class OwnerModel {
     
     convenience init() {
         self.init (createdAt: Date(),
+                   ownerObjectId: "",
                    appName: "",
                    ownerName: "",
                    ownerEmail: "",

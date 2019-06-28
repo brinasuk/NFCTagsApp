@@ -12,6 +12,8 @@ import Parse
 
 class TagModel {
     var createdAt: Date
+    var tagObjectId: String
+    
     var userName: String
     var userEmail: String
     var ownerName: String
@@ -21,7 +23,7 @@ class TagModel {
     var beaconDymo: String
     var beaconColor: String
     
-    var tagObjectId: String
+    
     var tagPhotoRef: String
   
     var tagId: String
@@ -52,6 +54,7 @@ class TagModel {
     
 
     init (createdAt:Date,
+          tagObjectId:String,
           userName:String,
           userEmail:String,
           ownerName:String,
@@ -61,7 +64,7 @@ class TagModel {
           beaconDymo:String,
           beaconColor:String,
           
-        tagObjectId:String,
+        
         tagPhotoRef:String,
         
         tagId:String,
@@ -93,6 +96,7 @@ class TagModel {
         )
     {
         self.createdAt = createdAt;
+        self.tagObjectId = tagObjectId;
         self.userName = userName;
         self.userEmail = userEmail;
         self.ownerName = ownerName;
@@ -102,7 +106,7 @@ class TagModel {
         self.beaconDymo = beaconDymo;
         self.beaconColor = beaconColor;
         
-        self.tagObjectId = tagObjectId;
+        
         self.tagPhotoRef = tagPhotoRef;
         
         self.tagId = tagId;
@@ -134,6 +138,7 @@ class TagModel {
 
     convenience init() {
         self.init (createdAt: Date(),
+                   tagObjectId: "",
                    userName: "",
                    userEmail: "",
                    ownerName: "",
@@ -143,7 +148,7 @@ class TagModel {
                    beaconDymo: "",  // Dymo Label.
                    beaconColor: "",
                    
-            tagObjectId: "",
+            
             tagPhotoRef: "",
             
             tagId: "",

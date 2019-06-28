@@ -25,6 +25,7 @@ target 'NFCTagsApp' do
   
   #pod 'PKCCrop'
    pod 'VYNFCKit'
+   pod 'Kingfisher'
    pod 'Alamofire'
    pod 'AlamofireImage'
    # pod 'DTGradientButton'
