@@ -404,7 +404,7 @@ class MaintTableView: UITableViewController {
 
         if segue.identifier == "MaintDetailView" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! NewRestaurantController
+                let destinationController = segue.destination as! NewTagController
                 destinationController.owner = ownerObjects[indexPath.row]
             }
         }

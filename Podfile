@@ -24,6 +24,7 @@ target 'NFCTagsApp' do
   #pod 'TwitterCore'
   
   #pod 'PKCCrop'
+   pod 'CropViewController'
    pod 'VYNFCKit'
    pod 'Kingfisher'
    pod 'Alamofire'

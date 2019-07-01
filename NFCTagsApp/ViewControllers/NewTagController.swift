@@ -11,8 +11,20 @@ import Parse
 import Alamofire
 //import AlamofireImage
 import Kingfisher
+import CropViewController
 
-class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+class NewTagController: UITableViewController, UITextFieldDelegate, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+
+        
+        private let imageView = UIImageView()
+        
+        private var image: UIImage?
+        private var croppingStyle = CropViewCroppingStyle.default
+        
+        private var croppedRect = CGRect.zero
+        private var croppedAngle = 0
     
     let SERVERNAME = "https://photos.homecards.com/admin/uploads/rebeacons/"
     var owner = OwnerModel()
@@ -59,7 +71,124 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     }
     
 
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            guard let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
+            
+            let cropController = CropViewController(croppingStyle: croppingStyle, image: image)
+            cropController.delegate = self
+            
+            // Uncomment this if you wish to provide extra instructions via a title label
+            //cropController.title = "Crop Image"
+            
+            // -- Uncomment these if you want to test out restoring to a previous crop setting --
+            //cropController.angle = 90 // The initial angle in which the image will be rotated
+            //cropController.imageCropFrame = CGRect(x: 0, y: 0, width: 2848, height: 4288) //The initial frame that the crop controller will have visible.
+            
+            // -- Uncomment the following lines of code to test out the aspect ratio features --
+            //cropController.aspectRatioPreset = .presetSquare; //Set the initial aspect ratio as a square
+            //cropController.aspectRatioLockEnabled = true // The crop box is locked to the aspect ratio and can't be resized away from it
+            //cropController.resetAspectRatioEnabled = false // When tapping 'reset', the aspect ratio will NOT be reset back to default
+            //cropController.aspectRatioPickerButtonHidden = true
+            
+            // -- Uncomment this line of code to place the toolbar at the top of the view controller --
+            //cropController.toolbarPosition = .top
+            
+            //cropController.rotateButtonsHidden = true
+            //cropController.rotateClockwiseButtonHidden = true
+            
+            //cropController.doneButtonTitle = "Title"
+            //cropController.cancelButtonTitle = "Title"
+            
+            self.image = image
+            
+            //If profile picture, push onto the same navigation stack
+            if croppingStyle == .circular {
+                if picker.sourceType == .camera {
+                    picker.dismiss(animated: true, completion: {
+                        self.present(cropController, animated: true, completion: nil)
+                    })
+                } else {
+                    picker.pushViewController(cropController, animated: true)
+                }
+            }
+            else { //otherwise dismiss, and then present from the main controller
+                picker.dismiss(animated: true, completion: {
+                    self.present(cropController, animated: true, completion: nil)
+                    //self.navigationController!.pushViewController(cropController, animated: true)
+                })
+            }
+        }
+        
+        public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+            self.croppedRect = cropRect
+            self.croppedAngle = angle
+//            updateImageViewWithImage(image, fromCropViewController: cropViewController)
+        }
+        
+        public func cropViewController(_ cropViewController: CropViewController, didCropToCircularImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+            self.croppedRect = cropRect
+            self.croppedAngle = angle
+//            updateImageViewWithImage(image, fromCropViewController: cropViewController)
+        }
+
+    /*
+        public func updateImageViewWithImage(_ image: UIImage, fromCropViewController cropViewController: CropViewController) {
+            imageView.image = image
+            layoutImageView()
+            
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            
+            if cropViewController.croppingStyle != .circular {
+                imageView.isHidden = true
+                
+                cropViewController.dismissAnimatedFrom(self, withCroppedImage: image,
+                                                       toView: imageView,
+                                                       toFrame: CGRect.zero,
+                                                       setup: { self.layoutImageView() },
+                                                       completion: { self.imageView.isHidden = false })
+            }
+            else {
+                self.imageView.isHidden = false
+                cropViewController.dismiss(animated: true, completion: nil)
+            }
+        }
+ */
     
+
+    @objc public func addButtonTapped(sender: AnyObject) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let defaultAction = UIAlertAction(title: "Crop Image", style: .default) { (action) in
+            //self.croppingStyle = .default
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            imagePicker.delegate = self
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+        let profileAction = UIAlertAction(title: "Make Profile Picture", style: .default) { (action) in
+            //self.croppingStyle = .circular
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.popoverPresentationController?.barButtonItem = (sender as! UIBarButtonItem)
+            imagePicker.preferredContentSize = CGSize(width: 320, height: 568)
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            imagePicker.delegate = self
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+        alertController.addAction(defaultAction)
+        alertController.addAction(profileAction)
+        alertController.modalPresentationStyle = .popover
+        
+        let presentationController = alertController.popoverPresentationController
+        presentationController?.barButtonItem = (sender as! UIBarButtonItem)
+        present(alertController, animated: true, completion: nil)
+    }
     
     // MARK: - View controller life cycle methods
 
@@ -132,12 +261,6 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         //let size = CGSize(width: 200, height: 200)
         let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
         
-//        photoImageView.kf.setImage(with: imageUrl! , placeholder: UIImage(named: "placeholder"), options: [.transition(ImageTransition.fade(1)), .processor(processImage)], progressBlock: nil, completionHandler: nil)
-        
-        
-
-//        let processor = DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))
-//            >> RoundCornerImageProcessor(cornerRadius: 20)
         photoImageView.kf.indicatorType = .activity
         photoImageView.kf.setImage(
             with: url,
@@ -181,7 +304,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
+/*
             let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
             
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (action) in
@@ -206,15 +329,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
                 }
             })
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-//                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//                    let imagePicker = UIImagePickerController()
-//                    imagePicker.allowsEditing = false
-//                    imagePicker.sourceType = .photoLibrary
-//                    imagePicker.delegate = self
-//
-//                    self.present(imagePicker, animated: true, completion: nil)
-//                }
+            let cancelAction = UIAlertAction(title: "Cancel", style:.cancel, handler: { (action) in
             })
             
             photoSourceRequestController.addAction(cameraAction)
@@ -230,14 +345,17 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
             }
             
             present(photoSourceRequestController, animated: true, completion: nil)
-            
+             */
         }
+
+         addButtonTapped(sender: self)
+            
     }
     
     
     
     // MARK: - UIImagePickerControllerDelegate methods
-    
+/*
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -318,6 +436,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         //[self dismissViewControllerAnimated:YES completion:nil];
         //dismiss(animated: true, completion: nil)
     }
+*/
     
     func uploadImage(){
         if self.imageToUpload == nil {return}

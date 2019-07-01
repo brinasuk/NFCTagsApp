@@ -902,10 +902,10 @@
             </objects>
             <point key="canvasLocation" x="-138112.79999999999" y="-55451.231527093601"/>
         </scene>
-        <!--New Restaurant-->
+        <!--Edit Info-->
         <scene sceneID="DMA-tl-PkP">
             <objects>
-                <tableViewController id="FGK-12-ONj" customClass="NewRestaurantController" customModule="NFCTagsApp" sceneMemberID="viewController">
+                <tableViewController id="FGK-12-ONj" customClass="NewTagController" customModule="NFCTagsApp" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dnL-7B-vcx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -913,23 +913,33 @@
                         <sections>
                             <tableViewSection id="1aU-AS-TQR">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="200" id="cEV-oT-xlg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="200" id="MtS-9A-hTA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cEV-oT-xlg" id="sVv-ea-fhD">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MtS-9A-hTA" id="SzE-vR-0Q4">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="o5t-Xj-DZG">
-                                                    <rect key="frame" x="175.66666666666666" y="91" width="24" height="18"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xxl-5z-lMh">
+                                                    <rect key="frame" x="0.0" y="11" width="375" height="200"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHOTO - Tap to change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ9-nU-ZsJ">
+                                                    <rect key="frame" x="0.0" y="12" width="375" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="o5t-Xj-DZG" firstAttribute="centerX" secondItem="sVv-ea-fhD" secondAttribute="centerX" id="0ZU-aZ-AzL"/>
-                                                <constraint firstItem="o5t-Xj-DZG" firstAttribute="centerY" secondItem="sVv-ea-fhD" secondAttribute="centerY" id="wgz-oG-m0M"/>
+                                                <constraint firstItem="iQ9-nU-ZsJ" firstAttribute="top" secondItem="SzE-vR-0Q4" secondAttribute="top" constant="12" id="3dI-Rz-fqt"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="xxl-5z-lMh" secondAttribute="bottom" constant="-22" id="A0O-3b-7ug"/>
+                                                <constraint firstItem="iQ9-nU-ZsJ" firstAttribute="leading" secondItem="SzE-vR-0Q4" secondAttribute="leading" id="DP8-0b-XVg"/>
+                                                <constraint firstItem="xxl-5z-lMh" firstAttribute="leading" secondItem="iQ9-nU-ZsJ" secondAttribute="leading" id="E0w-WV-5Jn"/>
+                                                <constraint firstItem="xxl-5z-lMh" firstAttribute="top" secondItem="SzE-vR-0Q4" secondAttribute="topMargin" id="JDJ-Lj-pIe"/>
+                                                <constraint firstItem="xxl-5z-lMh" firstAttribute="trailing" secondItem="iQ9-nU-ZsJ" secondAttribute="trailing" id="QNH-Fd-GZP"/>
+                                                <constraint firstAttribute="trailing" secondItem="iQ9-nU-ZsJ" secondAttribute="trailing" id="oyV-DW-LTg"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="88" id="kVF-Pr-Yco">
                                         <rect key="frame" x="0.0" y="200" width="375" height="88"/>
@@ -1108,7 +1118,7 @@
                             <outlet property="delegate" destination="FGK-12-ONj" id="X3B-qg-KkV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Restaurant" id="fAk-EA-jb8">
+                    <navigationItem key="navigationItem" title="Edit Info" id="fAk-EA-jb8">
                         <barButtonItem key="leftBarButtonItem" image="close" id="43f-Bc-kgE">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -1128,13 +1138,13 @@
                         <outlet property="descriptionTextView" destination="JhS-aW-8oe" id="3I9-fA-0wt"/>
                         <outlet property="nameTextField" destination="Zxl-zG-tCo" id="c93-uw-onQ"/>
                         <outlet property="phoneTextField" destination="AGt-eo-oQZ" id="Im8-IH-Onc"/>
-                        <outlet property="photoImageView" destination="o5t-Xj-DZG" id="Fsu-FW-9RU"/>
+                        <outlet property="photoImageView" destination="xxl-5z-lMh" id="oLq-1S-uYm"/>
                         <outlet property="typeTextField" destination="3E5-pP-v46" id="nQF-QN-7ss"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHf-QJ-04z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-137702" y="-54687"/>
+            <point key="canvasLocation" x="-137703.20000000001" y="-54687.192118226601"/>
         </scene>
         <!--Maint Table View-->
         <scene sceneID="1fE-NG-UuV">
@@ -1216,7 +1226,6 @@
         <image name="close" width="16" height="16"/>
         <image name="heart-tick" width="22" height="21"/>
         <image name="list-item-background" width="375" height="60"/>
-        <image name="photo" width="24" height="18"/>
         <image name="save" width="20" height="20"/>
         <image name="tall" width="3024" height="4032"/>
         <image name="text-input" width="224" height="28"/>
