@@ -929,6 +929,14 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDE-Wh-hyJ" customClass="CircularProgressBar" customModule="Progress" customModuleProvider="target">
+                                                    <rect key="frame" x="112.66666666666669" y="25" width="150" height="150"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="150" id="0cB-fw-vl3"/>
+                                                        <constraint firstAttribute="width" constant="150" id="wJs-cd-rfg"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iQ9-nU-ZsJ" firstAttribute="top" secondItem="SzE-vR-0Q4" secondAttribute="top" constant="12" id="3dI-Rz-fqt"/>
@@ -937,6 +945,8 @@
                                                 <constraint firstItem="xxl-5z-lMh" firstAttribute="leading" secondItem="iQ9-nU-ZsJ" secondAttribute="leading" id="E0w-WV-5Jn"/>
                                                 <constraint firstItem="xxl-5z-lMh" firstAttribute="top" secondItem="SzE-vR-0Q4" secondAttribute="topMargin" id="JDJ-Lj-pIe"/>
                                                 <constraint firstItem="xxl-5z-lMh" firstAttribute="trailing" secondItem="iQ9-nU-ZsJ" secondAttribute="trailing" id="QNH-Fd-GZP"/>
+                                                <constraint firstItem="LDE-Wh-hyJ" firstAttribute="centerX" secondItem="iQ9-nU-ZsJ" secondAttribute="centerX" id="VaV-c4-wxa"/>
+                                                <constraint firstItem="LDE-Wh-hyJ" firstAttribute="centerY" secondItem="SzE-vR-0Q4" secondAttribute="centerY" id="XOS-uw-xJe"/>
                                                 <constraint firstAttribute="trailing" secondItem="iQ9-nU-ZsJ" secondAttribute="trailing" id="oyV-DW-LTg"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1139,6 +1149,7 @@
                         <outlet property="nameTextField" destination="Zxl-zG-tCo" id="c93-uw-onQ"/>
                         <outlet property="phoneTextField" destination="AGt-eo-oQZ" id="Im8-IH-Onc"/>
                         <outlet property="photoImageView" destination="xxl-5z-lMh" id="oLq-1S-uYm"/>
+                        <outlet property="progressBar" destination="LDE-Wh-hyJ" id="z0G-DB-jA2"/>
                         <outlet property="typeTextField" destination="3E5-pP-v46" id="nQF-QN-7ss"/>
                     </connections>
                 </tableViewController>

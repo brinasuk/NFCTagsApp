@@ -36,6 +36,7 @@
 		C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AD22A4D5A000C06A45 /* Artwork.swift */; };
 		C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */; };
 		C78159DE22CAC54700625046 /* NewTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78159DD22CAC54700625046 /* NewTagController.swift */; };
+		C78159E022CB100600625046 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78159DF22CB100600625046 /* CircularProgressBar.swift */; };
 		C793547622A0AC0700DD1828 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C793547522A0AC0700DD1828 /* MapKit.framework */; };
 		C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */; };
 		C793547A22A0B75300DD1828 /* RestaurantDetailMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793547922A0B75300DD1828 /* RestaurantDetailMapCell.swift */; };
@@ -110,6 +111,7 @@
 		C77ED9AD22A4D5A000C06A45 /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkViews.swift; sourceTree = "<group>"; };
 		C78159DD22CAC54700625046 /* NewTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTagController.swift; sourceTree = "<group>"; };
+		C78159DF22CB100600625046 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		C793547522A0AC0700DD1828 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSeparatorCell.swift; sourceTree = "<group>"; };
 		C793547922A0B75300DD1828 /* RestaurantDetailMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMapCell.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		C7156794227BDA0900D1A55A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C78159DF22CB100600625046 /* CircularProgressBar.swift */,
 				C7995B4A228B548200C6E246 /* Fonts */,
 				C7C4844B2287723C00C6A95B /* UIColorExtension.swift */,
 				C7156795227BDA0900D1A55A /* auteurs.json */,
@@ -495,6 +498,7 @@
 				C71B63DE229B74F300B6910A /* RestaurantDetailHeaderView.swift in Sources */,
 				C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */,
 				C71B63DA229B18C100B6910A /* TagDetailViewController.swift in Sources */,
+				C78159E022CB100600625046 /* CircularProgressBar.swift in Sources */,
 				C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */,
 				C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */,
 				C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */,

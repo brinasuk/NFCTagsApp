@@ -9,15 +9,12 @@
 import UIKit
 import Parse
 import Alamofire
-//import AlamofireImage
 import Kingfisher
 import CropViewController
 
 
 class NewTagController: UITableViewController, UITextFieldDelegate, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-
-        
         private let imageView = UIImageView()
         
         private var image: UIImage?
@@ -26,11 +23,14 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         private var croppedRect = CGRect.zero
         private var croppedAngle = 0
     
+    
+    
     let SERVERNAME = "https://photos.homecards.com/admin/uploads/rebeacons/"
     var owner = OwnerModel()
     var imageToUpload:UIImage? = UIImage()
     
     @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet weak var progressBar: CircularProgressBar!
     
     @IBOutlet var nameTextField: RoundedTextField! {
         didSet {
@@ -101,7 +101,12 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             //cropController.cancelButtonTitle = "Title"
             
             self.image = image
+            picker.dismiss(animated: true, completion: {
+                self.present(cropController, animated: true, completion: nil)
+                //self.navigationController!.pushViewController(cropController, animated: true)
+            })
             
+            /*
             //If profile picture, push onto the same navigation stack
             if croppingStyle == .circular {
                 if picker.sourceType == .camera {
@@ -118,25 +123,29 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                     //self.navigationController!.pushViewController(cropController, animated: true)
                 })
             }
+ */
+            
         }
         
         public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
             self.croppedRect = cropRect
             self.croppedAngle = angle
-//            updateImageViewWithImage(image, fromCropViewController: cropViewController)
+            updateImageViewWithImage(image, fromCropViewController: cropViewController)
         }
         
-        public func cropViewController(_ cropViewController: CropViewController, didCropToCircularImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-            self.croppedRect = cropRect
-            self.croppedAngle = angle
+//        public func cropViewController(_ cropViewController: CropViewController, didCropToCircularImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+//            self.croppedRect = cropRect
+//            self.croppedAngle = angle
 //            updateImageViewWithImage(image, fromCropViewController: cropViewController)
-        }
+//        }
 
-    /*
+
         public func updateImageViewWithImage(_ image: UIImage, fromCropViewController cropViewController: CropViewController) {
             imageView.image = image
-            layoutImageView()
+            imageToUpload = image
+            //layoutImageView()
             
+            /*
             self.navigationItem.rightBarButtonItem?.isEnabled = true
             
             if cropViewController.croppingStyle != .circular {
@@ -151,51 +160,28 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             else {
                 self.imageView.isHidden = false
                 cropViewController.dismiss(animated: true, completion: nil)
+             
             }
-        }
+             
  */
+            photoImageView.image = image
+            cropViewController.dismiss(animated: true, completion: nil)
+        }
+ 
     
 
-    @objc public func addButtonTapped(sender: AnyObject) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let defaultAction = UIAlertAction(title: "Crop Image", style: .default) { (action) in
-            //self.croppingStyle = .default
-            
-            let imagePicker = UIImagePickerController()
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
-            imagePicker.delegate = self
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        
-        let profileAction = UIAlertAction(title: "Make Profile Picture", style: .default) { (action) in
-            //self.croppingStyle = .circular
-            
-            let imagePicker = UIImagePickerController()
-            imagePicker.modalPresentationStyle = .popover
-            imagePicker.popoverPresentationController?.barButtonItem = (sender as! UIBarButtonItem)
-            imagePicker.preferredContentSize = CGSize(width: 320, height: 568)
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
-            imagePicker.delegate = self
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        
-        alertController.addAction(defaultAction)
-        alertController.addAction(profileAction)
-        alertController.modalPresentationStyle = .popover
-        
-        let presentationController = alertController.popoverPresentationController
-        presentationController?.barButtonItem = (sender as! UIBarButtonItem)
-        present(alertController, animated: true, completion: nil)
-    }
     
     // MARK: - View controller life cycle methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        let progress : Double = 0
+        progressBar.isHidden = true
+        
+        progressBar.labelSize = 30
+        progressBar.safePercent = 100
+        progressBar.setProgress(to: progress, withAnimation: true)
         
         // Configure navigation bar appearance
         navigationController?.navigationBar.tintColor = .green
@@ -210,7 +196,32 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
 
         
         showInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        //HIDE THE KEYBOARD
+//        self.view.endEditing(true)
+//
+//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        
+        handleTap()
+        
+        //nameTextField.resignFirstResponder()
+        //or
+        //self.view.endEditing(true)
+        
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        
+        // handling code
+        nameTextField.resignFirstResponder()
     }
         
 
@@ -304,27 +315,45 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-/*
+            
+ 
+
             let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
             
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    let imagePicker = UIImagePickerController()
-                    imagePicker.allowsEditing = true
-                    imagePicker.sourceType = .camera
-                    imagePicker.delegate = self
+//                    let imagePicker = UIImagePickerController()
+//                    imagePicker.allowsEditing = false
+//                    imagePicker.sourceType = .camera
+//                    imagePicker.delegate = self
+//                    self.present(imagePicker, animated: true, completion: nil)
                     
+                    /////////////////////////////////////////
+                    //self.croppingStyle = .default
+                    
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.sourceType = .camera
+                    imagePicker.allowsEditing = false
+                    imagePicker.delegate = self
                     self.present(imagePicker, animated: true, completion: nil)
                 }
             })
             
             let photoLibraryAction = UIAlertAction(title: "Photo library", style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                    let imagePicker = UIImagePickerController()
-                    imagePicker.allowsEditing = false
-                    imagePicker.sourceType = .photoLibrary
-                    imagePicker.delegate = self
+//                    let imagePicker = UIImagePickerController()
+//                    imagePicker.allowsEditing = false
+//                    imagePicker.sourceType = .photoLibrary
+//                    imagePicker.delegate = self
+//                    self.present(imagePicker, animated: true, completion: nil)
                     
+                    /////////////////////////////////////////
+                    //self.croppingStyle = .default
+                    
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.sourceType = .photoLibrary
+                    imagePicker.allowsEditing = false
+                    imagePicker.delegate = self
                     self.present(imagePicker, animated: true, completion: nil)
                 }
             })
@@ -345,14 +374,49 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             }
             
             present(photoSourceRequestController, animated: true, completion: nil)
-             */
+
         }
 
-         addButtonTapped(sender: self)
+         //addButtonTapped(sender: self)
             
     }
     
-    
+    /*
+    @objc public func addButtonTapped(sender: AnyObject) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let defaultAction = UIAlertAction(title: "Crop Image", style: .default) { (action) in
+            //self.croppingStyle = .default
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            imagePicker.delegate = self
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+        let profileAction = UIAlertAction(title: "Make Profile Picture", style: .default) { (action) in
+            //self.croppingStyle = .circular
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.popoverPresentationController?.barButtonItem = (sender as! UIBarButtonItem)
+            imagePicker.preferredContentSize = CGSize(width: 320, height: 568)
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            imagePicker.delegate = self
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+        alertController.addAction(defaultAction)
+        alertController.addAction(profileAction)
+        alertController.modalPresentationStyle = .popover
+        
+        let presentationController = alertController.popoverPresentationController
+        presentationController?.barButtonItem = (sender as! UIBarButtonItem)
+        present(alertController, animated: true, completion: nil)
+    }
+ */
+
     
     // MARK: - UIImagePickerControllerDelegate methods
 /*
@@ -387,36 +451,10 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         dismiss(animated: true, completion: nil)
     }
+ */
     
-    // MARK: - Action method (Exercise #2)
+
     
-    @IBAction func saveButtonTapped(sender: AnyObject) {
-        
-        
-        
-//        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
-//            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
-//            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//            alertController.addAction(alertAction)
-//            present(alertController, animated: true, completion: nil)
-//
-//            return
-//        }
-//
-//        print("Name: \(nameTextField.text ?? "")")
-//        print("Type: \(typeTextField.text ?? "")")
-//        print("Location: \(addressTextField.text ?? "")")
-//        print("Phone: \(phoneTextField.text ?? "")")
-//        print("Description: \(descriptionTextView.text ?? "")")
-        
-        //uploadImage()
-        
-        //dismiss(animated: true, completion: nil)
-        //navigationController?.popViewController(animated: true)
-        navigationController?.popToRootViewController(animated: true)
-        //[self dismissViewControllerAnimated:YES completion:nil];
-        //dismiss(animated: true, completion: nil)
-    }
     
     // MARK: - ACTION BUTTONS
     
@@ -427,19 +465,27 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        //dismiss(animated: true, completion: nil)
-        //dismiss(animated: true, completion: nil)
-        //displayMessage(message: "SAVED")
+        //        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
+        //            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
+        //            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        //            alertController.addAction(alertAction)
+        //            present(alertController, animated: true, completion: nil)
+        //
+        //            return
+        //        }
+        //
+        //        print("Name: \(nameTextField.text ?? "")")
+        //        print("Type: \(typeTextField.text ?? "")")
+        //        print("Location: \(addressTextField.text ?? "")")
+        //        print("Phone: \(phoneTextField.text ?? "")")
+        //        print("Description: \(descriptionTextView.text ?? "")")
         uploadImage()
-        //navigationController?.popViewController(animated: true)
-        //navigationController?.popToRootViewController(animated: true)
-        //[self dismissViewControllerAnimated:YES completion:nil];
         //dismiss(animated: true, completion: nil)
     }
-*/
+
     
     func uploadImage(){
-        if self.imageToUpload == nil {return}
+        //TODO: FIX if self.imageToUpload == nil {return}
         
         //CRITICAL:  CLEAS CACHE!!
         KingfisherManager.shared.cache.clearMemoryCache()
@@ -461,19 +507,33 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         //UPLOADS FILE EXAMPLE: https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg
         
 
+        progressBar.isHidden = false
+        
         let photoName:String? = createPhotoName("Tag", withID: owner.ownerObjectId, withNumber: 1) ?? ""
         print (photoName!)
+
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append((self.imageToUpload?.jpegData(compressionQuality: 0.75)!)!, withName: "Photo", fileName: photoName!, mimeType: "image/jpeg")
         }, to:SERVERNAME)
         { (result) in
+
             switch result {
+            
             case .success(let upload, _, _):
                 print(result)
                 
                 upload.uploadProgress(closure: { (progress) in
                     print(progress)
+                    //self.progressBar.setProgress(to: self.progress, withAnimation: true)
+                    
                 })
+                
+                upload.uploadProgress { progress in
+                    self.photoImageView.alpha = CGFloat((1.0 - progress.fractionCompleted))
+                    print(progress.fractionCompleted)
+                    self.progressBar.setProgress(to: progress.fractionCompleted, withAnimation: true)
+                }
+                
                 
                 upload.responseJSON { response in
                     //print response.result
