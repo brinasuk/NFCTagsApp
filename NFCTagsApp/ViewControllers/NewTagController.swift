@@ -15,38 +15,57 @@ import CropViewController
 
 class NewTagController: UITableViewController, UITextFieldDelegate, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-        private let imageView = UIImageView()
-        
-        private var image: UIImage?
-        private var croppingStyle = CropViewCroppingStyle.default
-        
-        private var croppedRect = CGRect.zero
-        private var croppedAngle = 0
+    private let imageView = UIImageView()
     
+    private var image: UIImage?
+    private var imageToUpload:UIImage? = UIImage()
+    private var croppingStyle = CropViewCroppingStyle.default
     
+    private var croppedRect = CGRect.zero
+    private var croppedAngle = 0
+    
+    var photoIsDirty:Bool? = false
+    var textIsDirty:Bool? = false
     
     let SERVERNAME = "https://photos.homecards.com/admin/uploads/rebeacons/"
     var owner = OwnerModel()
-    var imageToUpload:UIImage? = UIImage()
-    
+
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet weak var progressBar: CircularProgressBar!
     
-    @IBOutlet var nameTextField: RoundedTextField! {
+    @IBOutlet var titleTextField: RoundedTextField! {
         didSet {
-            nameTextField.tag = 1
-            nameTextField.becomeFirstResponder()
-            nameTextField.delegate = self
+            titleTextField.tag = 1
+            titleTextField.becomeFirstResponder()
+            titleTextField.delegate = self
             
         }
     }
     
-    @IBOutlet var typeTextField: RoundedTextField! {
+    @IBOutlet var subTitleTextField: RoundedTextField! {
         didSet {
-            typeTextField.tag = 2
-            typeTextField.delegate = self
+            subTitleTextField.tag = 2
+            subTitleTextField.delegate = self
         }
     }
+    
+    @IBOutlet var priceTextField: RoundedTextField! {
+        didSet {
+            priceTextField.tag = 3
+            priceTextField.delegate = self
+        }
+    }
+    
+    @IBOutlet var companyTextField: RoundedTextField! {
+        didSet {
+            companyTextField.tag = 4
+            companyTextField.delegate = self
+        }
+    }
+    
+  /*
+ ADD HERE CONTACT/PHONE/EMAIL
+ */
     
     @IBOutlet var addressTextField: RoundedTextField! {
         didSet {
@@ -55,10 +74,10 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         }
     }
     
-    @IBOutlet var phoneTextField: RoundedTextField! {
+    @IBOutlet var websiteTextField: RoundedTextField! {
         didSet {
-            phoneTextField.tag = 4
-            phoneTextField.delegate = self
+            websiteTextField.tag = 4
+            websiteTextField.delegate = self
         }
     }
     
@@ -70,109 +89,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         }
     }
     
-
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            guard let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
-            
-            let cropController = CropViewController(croppingStyle: croppingStyle, image: image)
-            cropController.delegate = self
-            
-            // Uncomment this if you wish to provide extra instructions via a title label
-            //cropController.title = "Crop Image"
-            
-            // -- Uncomment these if you want to test out restoring to a previous crop setting --
-            //cropController.angle = 90 // The initial angle in which the image will be rotated
-            //cropController.imageCropFrame = CGRect(x: 0, y: 0, width: 2848, height: 4288) //The initial frame that the crop controller will have visible.
-            
-            // -- Uncomment the following lines of code to test out the aspect ratio features --
-            //cropController.aspectRatioPreset = .presetSquare; //Set the initial aspect ratio as a square
-            //cropController.aspectRatioLockEnabled = true // The crop box is locked to the aspect ratio and can't be resized away from it
-            //cropController.resetAspectRatioEnabled = false // When tapping 'reset', the aspect ratio will NOT be reset back to default
-            //cropController.aspectRatioPickerButtonHidden = true
-            
-            // -- Uncomment this line of code to place the toolbar at the top of the view controller --
-            //cropController.toolbarPosition = .top
-            
-            //cropController.rotateButtonsHidden = true
-            //cropController.rotateClockwiseButtonHidden = true
-            
-            //cropController.doneButtonTitle = "Title"
-            //cropController.cancelButtonTitle = "Title"
-            
-            self.image = image
-            picker.dismiss(animated: true, completion: {
-                self.present(cropController, animated: true, completion: nil)
-                //self.navigationController!.pushViewController(cropController, animated: true)
-            })
-            
-            /*
-            //If profile picture, push onto the same navigation stack
-            if croppingStyle == .circular {
-                if picker.sourceType == .camera {
-                    picker.dismiss(animated: true, completion: {
-                        self.present(cropController, animated: true, completion: nil)
-                    })
-                } else {
-                    picker.pushViewController(cropController, animated: true)
-                }
-            }
-            else { //otherwise dismiss, and then present from the main controller
-                picker.dismiss(animated: true, completion: {
-                    self.present(cropController, animated: true, completion: nil)
-                    //self.navigationController!.pushViewController(cropController, animated: true)
-                })
-            }
- */
-            
-        }
-        
-        public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-            self.croppedRect = cropRect
-            self.croppedAngle = angle
-            updateImageViewWithImage(image, fromCropViewController: cropViewController)
-        }
-        
-//        public func cropViewController(_ cropViewController: CropViewController, didCropToCircularImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-//            self.croppedRect = cropRect
-//            self.croppedAngle = angle
-//            updateImageViewWithImage(image, fromCropViewController: cropViewController)
-//        }
-
-
-        public func updateImageViewWithImage(_ image: UIImage, fromCropViewController cropViewController: CropViewController) {
-            imageView.image = image
-            imageToUpload = image
-            //layoutImageView()
-            
-            /*
-            self.navigationItem.rightBarButtonItem?.isEnabled = true
-            
-            if cropViewController.croppingStyle != .circular {
-                imageView.isHidden = true
-                
-                cropViewController.dismissAnimatedFrom(self, withCroppedImage: image,
-                                                       toView: imageView,
-                                                       toFrame: CGRect.zero,
-                                                       setup: { self.layoutImageView() },
-                                                       completion: { self.imageView.isHidden = false })
-            }
-            else {
-                self.imageView.isHidden = false
-                cropViewController.dismiss(animated: true, completion: nil)
-             
-            }
-             
- */
-            photoImageView.image = image
-            cropViewController.dismiss(animated: true, completion: nil)
-        }
- 
-    
-
-    
     // MARK: - View controller life cycle methods
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -192,47 +109,185 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         // Configure table view
         tableView.separatorStyle = .none
-        
-
-        
         showInfo()
+        titleTextField.resignFirstResponder()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //HIDE THE KEYBOARD
-//        self.view.endEditing(true)
-//
-//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
-        
+        //HIDE THE KEYBOARD WHEN VIEW FIRST APPEARS OR WHEN USER TAPS ON TABLE
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
-        
         handleTap()
-        
-        //nameTextField.resignFirstResponder()
-        //or
-        //self.view.endEditing(true)
         
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    // MARK: - Crop Controller Delegate Methods
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
         
+        let cropController = CropViewController(croppingStyle: croppingStyle, image: image)
+        cropController.delegate = self
+        
+        // Uncomment this if you wish to provide extra instructions via a title label
+        cropController.title = "Crop Image"
+        
+        // -- Uncomment these if you want to test out restoring to a previous crop setting --
+        //cropController.angle = 90 // The initial angle in which the image will be rotated
+        //cropController.imageCropFrame = CGRect(x: 0, y: 0, width: 2848, height: 4288) //The initial frame that the crop controller will have visible.
+        
+        // -- Uncomment the following lines of code to test out the aspect ratio features --
+        //cropController.aspectRatioPreset = .presetSquare; //Set the initial aspect ratio as a square
+        //cropController.aspectRatioLockEnabled = true // The crop box is locked to the aspect ratio and can't be resized away from it
+        //cropController.resetAspectRatioEnabled = false // When tapping 'reset', the aspect ratio will NOT be reset back to default
+        cropController.aspectRatioPickerButtonHidden = true
+        
+        // -- Uncomment this line of code to place the toolbar at the top of the view controller --
+        //cropController.toolbarPosition = .top
+        
+        //cropController.rotateButtonsHidden = true
+        //cropController.rotateClockwiseButtonHidden = true
+        
+        //cropController.doneButtonTitle = "Title"
+        //cropController.cancelButtonTitle = "Title"
+        
+        
+        // MARK: - SET PHOTO CONSTRAINTS
+        
+        //        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
+        //        leadingConstraint.isActive = true
+        //
+        //        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+        //        trailingConstraint.isActive = true
+        //
+        //        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
+        //        topConstraint.isActive = true
+        //
+        //        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+        //        bottomConstraint.isActive = true
+        
+        /*
+         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+         
+         //            let resizedImage:UIImage = scaleUIImageToSize(image: image!, size: CGSize(width: 100, height: 200))
+         let resizedImage = image //scaleImageToWidth(with: image, scaledToWidth: 300.0)
+         
+         //self.dismissViewControllerAnimated(true, completion: nil)
+         photoImageView.image = resizedImage
+         
+         imageToUpload = resizedImage!
+ */
+        
+        self.image = image
+        picker.dismiss(animated: true, completion: {
+            self.present(cropController, animated: true, completion: nil)
+            //self.navigationController!.pushViewController(cropController, animated: true)
+        })
+        
+            /*
+            //If profile picture, push onto the same navigation stack
+            if croppingStyle == .circular {
+                if picker.sourceType == .camera {
+                    picker.dismiss(animated: true, completion: {
+                        self.present(cropController, animated: true, completion: nil)
+                    })
+                } else {
+                    picker.pushViewController(cropController, animated: true)
+                }
+            }
+            else { //otherwise dismiss, and then present from the main controller
+                picker.dismiss(animated: true, completion: {
+                    self.present(cropController, animated: true, completion: nil)
+                    //self.navigationController!.pushViewController(cropController, animated: true)
+                })
+            }
+            */
+        }
+        
+        public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+            self.croppedRect = cropRect
+            self.croppedAngle = angle
+            updateImageViewWithImage(image, fromCropViewController: cropViewController)
+        }
+
+        public func updateImageViewWithImage(_ image: UIImage, fromCropViewController cropViewController: CropViewController) {
+            imageView.image = image
+            imageToUpload = image
+            //layoutImageView()
+            
+
+//            self.navigationItem.rightBarButtonItem?.isEnabled = true
+//
+//            if cropViewController.croppingStyle != .circular {
+//                imageView.isHidden = true
+//
+//                cropViewController.dismissAnimatedFrom(self, withCroppedImage: image,
+//                                                       toView: imageView,
+//                                                       toFrame: CGRect.zero,
+//                                                       setup: { self.layoutImageView() },
+//                                                       completion: { self.imageView.isHidden = false })
+//            }
+//            else {
+//                self.imageView.isHidden = false
+//                cropViewController.dismiss(animated: true, completion: nil)
+//
+//            }
+            
+
+            photoImageView.image = image
+            cropViewController.dismiss(animated: true, completion: nil)
+        }
+ 
+    
+    /*
+     // MARK: - UIImagePickerControllerDelegate methods
+     
+     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    
+     }
+
+     dismiss(animated: true, completion: nil)
+     }
+     */
+    
+    // MARK: - Misc Routines
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
-        nameTextField.resignFirstResponder()
+        titleTextField.resignFirstResponder()
     }
         
 
       func showInfo() {
-        let alex = owner.ownerObjectId
-        print(alex)
-        nameTextField.text = owner.ownerObjectId
+
+        titleTextField.text = owner.ownerTitle
+        subTitleTextField.text = owner.ownerSubTitle
+        /*
+         PRICE
+         
+         COMPANY  //CANNOT CHANGE
+         CONTACT
+         PHONE
+         EMAIL  //CANNOT CHANGE
+         
+         ADDRFULL
+         URL
+         
+         INFO
+ */
         
         // SHOW PHOTO
         //photoImageView.contentMode = .scaleAspectFit
         //photoImageView.clipsToBounds = true
+        
+        if isDirtyText() == true {
+            print("YES - IS DIRTY")}
+        else {
+            print("NO - NOT DIRTY")
+        }
         
         
         //let tagPhotoRef = owner.ownerObjectId
@@ -269,7 +324,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         let url = URL(string: propertyPhotoFileUrl!)
         //Size refer to the size which you want to resize your original image
-        //let size = CGSize(width: 200, height: 200)
+
         let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
         
         photoImageView.kf.indicatorType = .activity
@@ -291,15 +346,11 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                 print("Job failed: \(error.localizedDescription)")
             }
         }
-
-        
         //=================================================
         
         imageToUpload = (photoImageView.image ?? UIImage())! //or UIImage(
     }
     
-
-
     // MARK: - UITextFieldDelegate methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -307,7 +358,11 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             textField.resignFirstResponder()
             nextTextField.becomeFirstResponder()
         }
-        
+        return true
+    }
+    
+    func isDirtyText() -> Bool {
+ 
         return true
     }
 
@@ -315,9 +370,6 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
- 
-
             let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
             
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (action) in
@@ -416,52 +468,12 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         present(alertController, animated: true, completion: nil)
     }
  */
-
-    
-    // MARK: - UIImagePickerControllerDelegate methods
-/*
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-            
-//            let resizedImage:UIImage = scaleUIImageToSize(image: image!, size: CGSize(width: 100, height: 200))
-            let resizedImage = image //scaleImageToWidth(with: image, scaledToWidth: 300.0)
-            
-            //self.dismissViewControllerAnimated(true, completion: nil)
-            photoImageView.image = resizedImage
-
-            imageToUpload = resizedImage!
-        }
-        
-        // MARK: - SET PHOTO CONSTRAINTS
-        
-//        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
-//        leadingConstraint.isActive = true
-//
-//        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
-//        trailingConstraint.isActive = true
-//
-//        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
-//        topConstraint.isActive = true
-//
-//        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-//        bottomConstraint.isActive = true
-
-        
-        dismiss(animated: true, completion: nil)
-    }
- */
-    
-
-    
     
     // MARK: - ACTION BUTTONS
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         //dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
-        
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -645,6 +657,5 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         }
         self.present(alertView, animated: true, completion:nil)
     }
-    
 }
 

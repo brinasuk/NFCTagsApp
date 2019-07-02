@@ -116,6 +116,13 @@ class MaintTableView: UITableViewController {
                     if ownerName == nil {ownerName = ""}
                     var ownerEmail:String? = object["ownerEmail"] as? String
                     if ownerEmail == nil {ownerEmail = ""}
+                    
+                    let alex = object["ownerPhone"] as? String ?? ""
+                    var ownerPhone:String? = object["ownerPhone"] as? String
+                    print(alex)
+                    print(ownerPhone)
+                    if ownerPhone == nil {ownerPhone = ""}
+                    
                     var ownerInfo:String? = object["ownerInfo"] as? String
                     if ownerInfo == nil {ownerInfo = ""}
                     
@@ -175,7 +182,7 @@ class MaintTableView: UITableViewController {
                     var ownerSqFt:String? = object["ownerSqFt"] as? String
                     if ownerSqFt == nil {ownerSqFt = ""}
                     
-                    let newObject = OwnerModel(createdAt: createdAt, ownerObjectId: ownerObjectId,  appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!, ownerPhotoRef: ownerPhotoRef!)
+                    let newObject = OwnerModel(createdAt: createdAt, ownerObjectId: ownerObjectId,  appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerPhone: ownerPhone!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!, ownerPhotoRef: ownerPhotoRef!)
                     
                     ownerObjects.append(newObject)
                     rowCount = rowCount + 1

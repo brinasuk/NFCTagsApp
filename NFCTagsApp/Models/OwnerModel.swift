@@ -17,6 +17,7 @@ class OwnerModel {
     var appName: String
     var ownerName: String
     var ownerEmail: String
+    var ownerPhone: String
     var ownerNumber: String
     var ownerId: String
     
@@ -55,6 +56,7 @@ class OwnerModel {
           appName:String,
           ownerName:String,
           ownerEmail:String,
+          ownerPhone:String,
 
           ownerNumber:String,
           ownerId:String,
@@ -95,6 +97,7 @@ class OwnerModel {
         self.appName = appName;
         self.ownerName = ownerName;
         self.ownerEmail = ownerEmail;
+        self.ownerPhone = ownerPhone;
         
         self.ownerNumber = ownerNumber;
         self.ownerId = ownerId;
@@ -135,6 +138,7 @@ class OwnerModel {
                    appName: "",
                    ownerName: "",
                    ownerEmail: "",
+                   ownerPhone: "",
                    
                    ownerNumber: "",
                    ownerId: "",

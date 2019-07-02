@@ -18,6 +18,7 @@ class TagModel {
     var userEmail: String
     var ownerName: String
     var ownerEmail: String
+    var ownerPhone: String
     
     var appName: String
     var beaconDymo: String
@@ -59,6 +60,7 @@ class TagModel {
           userEmail:String,
           ownerName:String,
           ownerEmail:String,
+          ownerPhone:String,
           
           appName:String,
           beaconDymo:String,
@@ -101,6 +103,7 @@ class TagModel {
         self.userEmail = userEmail;
         self.ownerName = ownerName;
         self.ownerEmail = ownerEmail;
+        self.ownerPhone = ownerPhone;
         
         self.appName = appName;
         self.beaconDymo = beaconDymo;
@@ -143,6 +146,7 @@ class TagModel {
                    userEmail: "",
                    ownerName: "",
                    ownerEmail: "",
+                   ownerPhone: "",
                    
                    appName: "",
                    beaconDymo: "",  // Dymo Label.

@@ -492,6 +492,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     
                     let ownerEmail = object["ownerEmail"] as? String ?? ""
                     let ownerName = object["ownerName"] as? String ?? ""
+                    let ownerPhone = object["ownerPhone"] as? String ?? ""
+                    print(ownerPhone)
                     let ownerPhotoRef = object["ownerPhotoRef"] as? String ?? ""
                     // object.objectId;
                     let ownerId = object["ownerId"] as? String ?? ""
@@ -533,6 +535,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     
                     tag["ownerName"] = ownerName
                     tag["ownerEmail"] = ownerEmail
+                    tag["ownerPhone"] = ownerPhone
 
                     tag["userName"] = self.kAppDelegate.currentUserName
                     tag["userEmail"] = self.kAppDelegate.currentUserEmail //info@kcontemporaryart.com
@@ -555,11 +558,11 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     tag["tagZip"] = ownerZip
                     tag["tagCountry"] = ownerCountry
                     
-                    tag["ownerAddrFull"] = ownerAddrFull
-                    tag["ownerPrice"] = ownerPrice
-                    tag["ownerBeds"] = ownerBeds
-                    tag["ownerBaths"] = ownerBaths
-                    tag["ownerSqFt"] = ownerSqFt
+                    tag["tagAddrFull"] = ownerAddrFull
+                    tag["tagPrice"] = ownerPrice
+                    tag["tagBeds"] = ownerBeds
+                    tag["tagBaths"] = ownerBaths
+                    tag["tagSqFt"] = ownerSqFt
                     
                     tag["beaconDymo"] = beaconDymo
                     tag["beaconColor"] = beaconColor
@@ -666,6 +669,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var ownerEmail:String? = cellDataParse["ownerEmail"] as? String
                     if (ownerEmail == nil) {ownerEmail = ""}
                     
+                    let alex = object["ownerPhone"] as? String ?? ""
+                    var ownerPhone:String? = cellDataParse["ownerPhone"] as? String
+                    print(alex)
+                    print(ownerPhone)
+                    if (ownerPhone == nil) {ownerPhone = ""}
+                    
                     var appName:String? = cellDataParse["appName"] as? String
                     if (appName == nil) {appName = ""}
                     var beaconDymo:String? = cellDataParse["beaconDymo"] as? String
@@ -724,7 +733,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var sequence:String? = cellDataParse["sequence"] as? String
                     if (sequence == nil) {sequence = ""}
                     
-                    let newObject = TagModel(createdAt: createdAt,tagObjectId: tagObjectId, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!)
+                    let newObject = TagModel(createdAt: createdAt,tagObjectId: tagObjectId, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, ownerPhone:ownerPhone!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!)
                     
                     self.tagObjects.append(newObject)
                     //self.dataParse.add(object)

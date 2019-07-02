@@ -40,36 +40,7 @@ override func viewDidLoad() {
 //    tableView.contentInsetAdjustmentBehavior = .never
     
     
-    
-    // DISPLAY DATABASE VALUES
-    headerView.nameLabel.text = tag.tagTitle
-    headerView.typeLabel.text = tag.tagSubTitle
-    //headerView.headerImageView.image = UIImage(named: "restaurant")
-    
-    // SHOW PHOTO
-    let tagPhotoRef = tag.tagPhotoRef
-    let cloudinaryAction = "Tag"
-    let usePhotoRef:String? = tagPhotoRef
-    let photoNumber = 1
-    let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
-    
-    //print(propertyPhotoFileUrl)
-    
-    //        cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
-    //        cell.tagImageView.layer.masksToBounds = true
-    //        cell.tagImageView.clipsToBounds = true
-    
-    // METHOD 1: ======================================
-    //                let url = URL(string: propertyPhotoFileUrl!)!
-    //                headerView.headerImageView.image = resizedImage(at: url, for: CGSize(width: 375,height: 358))
-    //=================================================
-    
-    // METHOD 2: ======================================
-    let url = URL(string: propertyPhotoFileUrl!)!
-    let placeholderImageName = kAppDelegate.placeholderName
-    let placeholderImage = UIImage(named: placeholderImageName! as String)!
-    headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
-    //=================================================
+    showInfo()
     
 }
     
@@ -80,6 +51,56 @@ override func viewDidLoad() {
         //NB: THIS LINE UNHIDES THE NAVIGATION BUTTON
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
+    func showInfo() {
+        
+
+        /*
+         PRICE
+         
+         COMPANY  //CANNOT CHANGE
+         CONTACT
+         PHONE
+         EMAIL  //CANNOT CHANGE
+         
+         ADDRFULL
+         URL
+         
+         INFO
+         */
+        
+        
+        // DISPLAY DATABASE VALUES
+        headerView.nameLabel.text = tag.tagTitle
+        headerView.typeLabel.text = tag.tagSubTitle
+        //headerView.headerImageView.image = UIImage(named: "restaurant")
+        
+        // SHOW PHOTO
+        let tagPhotoRef = tag.tagPhotoRef
+        let cloudinaryAction = "Tag"
+        let usePhotoRef:String? = tagPhotoRef
+        let photoNumber = 1
+        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        
+        //print(propertyPhotoFileUrl)
+        
+        //        cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
+        //        cell.tagImageView.layer.masksToBounds = true
+        //        cell.tagImageView.clipsToBounds = true
+        
+        // METHOD 1: ======================================
+        //                let url = URL(string: propertyPhotoFileUrl!)!
+        //                headerView.headerImageView.image = resizedImage(at: url, for: CGSize(width: 375,height: 358))
+        //=================================================
+        
+        // METHOD 2: ======================================
+        let url = URL(string: propertyPhotoFileUrl!)!
+        let placeholderImageName = kAppDelegate.placeholderName
+        let placeholderImage = UIImage(named: placeholderImageName! as String)!
+        headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        //=================================================
+    }
+    
 
 func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
     if useID == nil {
