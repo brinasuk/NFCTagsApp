@@ -476,6 +476,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         
         let sv = UIViewController.displaySpinner(onView: self.view)
         
+
         
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerId", equalTo: useTagId!)

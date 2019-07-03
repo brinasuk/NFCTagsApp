@@ -24,14 +24,50 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     private var croppedRect = CGRect.zero
     private var croppedAngle = 0
     
-    var photoIsDirty:Bool? = false
-    var textIsDirty:Bool? = false
+    var isDirtyPhoto:Bool? = false
     
     let SERVERNAME = "https://photos.homecards.com/admin/uploads/rebeacons/"
     var owner = OwnerModel()
 
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet weak var progressBar: CircularProgressBar!
+    
+    /*
+     TITLE
+     SUBTITLE
+     PRICE
+     
+     COMPANY  //CANNOT CHANGE
+     CONTACT
+     PHONE
+     EMAIL  //CANNOT CHANGE
+     
+     ADDRFULL
+     URL
+     
+     INFO
+     */
+    //        titleTextField.text = owner.ownerTitle
+    //        subTitleTextField.text = owner.ownerSubTitle
+    //        priceTextField.text = owner.ownerPrice
+    //
+    //        contactTextField.text = owner.ownerName
+    //        phoneTextField.text = owner.ownerPhone
+    
+    //        addressTextField.text = owner.ownerAddrFull
+    //        websiteTextField.text = owner.ownerUrl
+    //        descriptionTextView.text = owner.ownerInfo
+    
+    var ownerTitleKeep:String? = ""
+    var ownersubTitleKeep:String? = ""
+    var ownerPriceKeep:String? = ""
+    
+    var ownerNameKeep:String? = ""
+    var ownerPhoneKeep:String? = ""
+    
+    var ownerAddrFullKeep:String? = ""
+    var ownerUrlKeep:String? = ""
+    var ownerInfoKeep:String? = ""
     
     @IBOutlet var titleTextField: RoundedTextField! {
         didSet {
@@ -63,9 +99,24 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         }
     }
     
-  /*
- ADD HERE CONTACT/PHONE/EMAIL
- */
+    @IBOutlet var contactTextField: RoundedTextField! {
+        didSet {
+            contactTextField.tag = 4
+            contactTextField.delegate = self
+        }
+    }
+    @IBOutlet var phoneTextField: RoundedTextField! {
+        didSet {
+            phoneTextField.tag = 4
+            phoneTextField.delegate = self
+        }
+    }
+    @IBOutlet var emailTextField: RoundedTextField! {
+        didSet {
+            emailTextField.tag = 4
+            emailTextField.delegate = self
+        }
+    }
     
     @IBOutlet var addressTextField: RoundedTextField! {
         didSet {
@@ -122,6 +173,124 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         self.view.addGestureRecognizer(tap)
         handleTap()
         
+    }
+    
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        titleTextField.resignFirstResponder()
+    }
+    
+    
+    func showInfo() {
+        
+        /*
+         TITLE
+         SUBTITLE
+         PRICE
+         
+         COMPANY  //CANNOT CHANGE
+         CONTACT
+         PHONE
+         EMAIL  //CANNOT CHANGE
+         
+         ADDRFULL
+         URL
+         
+         INFO
+         */
+        
+
+        
+        
+        titleTextField.text = owner.ownerTitle
+        subTitleTextField.text = owner.ownerSubTitle
+        priceTextField.text = owner.ownerPrice
+        
+        // DO NOT SHOW companyTextField.text = owner.ownerCompany
+        contactTextField.text = owner.ownerName
+        phoneTextField.text = owner.ownerPhone
+        // DO NOT SHOW emailTextField.text = owner.ownerEmail
+        
+        addressTextField.text = owner.ownerAddrFull
+        websiteTextField.text = owner.ownerUrl
+        descriptionTextView.text = owner.ownerInfo
+        
+        //KEEP THE ORIGINAL VALUES SO YOU CAN SEE LATER IF ANYTHING CHANGED
+        ownerTitleKeep = owner.ownerTitle
+        ownersubTitleKeep = owner.ownerSubTitle
+        ownerPriceKeep = owner.ownerPrice
+        
+        ownerNameKeep = owner.ownerName
+        ownerPhoneKeep = owner.ownerPhone
+        
+        ownerAddrFullKeep = owner.ownerAddrFull
+        ownerUrlKeep = owner.ownerUrl
+        ownerInfoKeep = owner.ownerInfo
+        
+        // SHOW PHOTO
+        //photoImageView.contentMode = .scaleAspectFit
+        //photoImageView.clipsToBounds = true
+
+        //let tagPhotoRef = owner.ownerObjectId
+        let cloudinaryAction = "Tag"
+        let usePhotoRef:String? = owner.ownerObjectId
+        let photoNumber = 1
+        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        
+        print(propertyPhotoFileUrl ?? "")
+        
+        //        cell.tagImageView.layer.cornerRadius ="" cell.tagImageView.frame.size.width / 4
+        //        cell.tagImageView.layer.masksToBounds = true
+        //        cell.tagImageView.clipsToBounds = true
+        
+        // METHOD 1: ======================================
+        //=================================================
+        //=================================================
+        
+        // METHOD 2: ======================================
+        //                let url = URL(string: propertyPhotoFileUrl!)!
+        //                let placeholderImageName = kAppDelegate.placeholderName
+        //                let placeholderImage = UIImage(named: placeholderImageName! as String)!
+        //                photoImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        
+        //=================================================
+        
+        // METHOD 3: KINGFISHER ============================
+        //                let propertyPhotoFileUrl = "https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg"
+        
+        //print(propertyPhotoFileUrl)
+        //        let url = URL(string: propertyPhotoFileUrl!)!
+        //        photoImageView.kf.setImage(with: url)
+        //                photoImageView.kf.setImage(with: url, options: [.transition(.fade(2.0))])
+        
+        let url = URL(string: propertyPhotoFileUrl!)
+        //Size refer to the size which you want to resize your original image
+        
+        let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
+        
+        photoImageView.kf.indicatorType = .activity
+        photoImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "placeholderImage"),
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1.0)),
+                .cacheOriginalImage
+            ])
+        {
+            result in
+            switch result {
+            case .success(let value):
+                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+            case .failure(let error):
+                print("Job failed: \(error.localizedDescription)")
+            }
+        }
+        //=================================================
+        
+        imageToUpload = (photoImageView.image ?? UIImage())! //or UIImage(
     }
     
     // MARK: - Crop Controller Delegate Methods
@@ -254,102 +423,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
      */
     
     // MARK: - Misc Routines
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        // handling code
-        titleTextField.resignFirstResponder()
-    }
-        
 
-      func showInfo() {
-
-        titleTextField.text = owner.ownerTitle
-        subTitleTextField.text = owner.ownerSubTitle
-        /*
-         PRICE
-         
-         COMPANY  //CANNOT CHANGE
-         CONTACT
-         PHONE
-         EMAIL  //CANNOT CHANGE
-         
-         ADDRFULL
-         URL
-         
-         INFO
- */
-        
-        // SHOW PHOTO
-        //photoImageView.contentMode = .scaleAspectFit
-        //photoImageView.clipsToBounds = true
-        
-        if isDirtyText() == true {
-            print("YES - IS DIRTY")}
-        else {
-            print("NO - NOT DIRTY")
-        }
-        
-        
-        //let tagPhotoRef = owner.ownerObjectId
-        let cloudinaryAction = "Tag"
-        let usePhotoRef:String? = owner.ownerObjectId
-        let photoNumber = 1
-        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
-        
-        print(propertyPhotoFileUrl ?? "")
-        
-        //        cell.tagImageView.layer.cornerRadius ="" cell.tagImageView.frame.size.width / 4
-        //        cell.tagImageView.layer.masksToBounds = true
-        //        cell.tagImageView.clipsToBounds = true
-        
-        // METHOD 1: ======================================
-        //=================================================
-        //=================================================
-        
-        // METHOD 2: ======================================
-//                let url = URL(string: propertyPhotoFileUrl!)!
-//                let placeholderImageName = kAppDelegate.placeholderName
-//                let placeholderImage = UIImage(named: placeholderImageName! as String)!
-//                photoImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
-
-        //=================================================
-        
-        // METHOD 3: KINGFISHER ============================
-//                let propertyPhotoFileUrl = "https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg"
-        
-        //print(propertyPhotoFileUrl)
-//        let url = URL(string: propertyPhotoFileUrl!)!
-//        photoImageView.kf.setImage(with: url)
-//                photoImageView.kf.setImage(with: url, options: [.transition(.fade(2.0))])
-        
-        let url = URL(string: propertyPhotoFileUrl!)
-        //Size refer to the size which you want to resize your original image
-
-        let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
-        
-        photoImageView.kf.indicatorType = .activity
-        photoImageView.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "placeholderImage"),
-            options: [
-                .processor(processor),
-                .scaleFactor(UIScreen.main.scale),
-                .transition(.fade(1.0)),
-                .cacheOriginalImage
-            ])
-        {
-            result in
-            switch result {
-            case .success(let value):
-                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-            case .failure(let error):
-                print("Job failed: \(error.localizedDescription)")
-            }
-        }
-        //=================================================
-        
-        imageToUpload = (photoImageView.image ?? UIImage())! //or UIImage(
-    }
     
     // MARK: - UITextFieldDelegate methods
     
@@ -361,10 +435,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         return true
     }
     
-    func isDirtyText() -> Bool {
- 
-        return true
-    }
+
 
     // MARK: - UITableViewDelegate methods
     
@@ -491,10 +562,96 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         //        print("Location: \(addressTextField.text ?? "")")
         //        print("Phone: \(phoneTextField.text ?? "")")
         //        print("Description: \(descriptionTextView.text ?? "")")
-        uploadImage()
-        //dismiss(animated: true, completion: nil)
+        
+        if isDirtyText() == true {
+            print("YES - TEXT IS DIRTY")
+            saveText()
+        }
+        else {
+            print("NO - TEXT NOT DIRTY")
+        }
+        
+        if isDirtyPhoto == true {
+            print("YES - PHOTO IS DIRTY")
+            uploadImage()
+        }
+        else {
+            print("NO - PHOTO NOT DIRTY")
+        }
+        //
+        dismiss(animated: true, completion: nil)
     }
 
+    func saveText () {
+        let sv = UIViewController.displaySpinner(onView: self.view)
+        
+        let query = PFQuery(className: "TagOwnerInfo")
+        query.whereKey("objectId", equalTo: owner.ownerObjectId)
+        print(owner.ownerObjectId)
+        query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
+            if let error = error {
+                // NO MATCH FOUND
+                UIViewController.removeSpinner(spinner: sv)
+                print(error.localizedDescription)
+                self.displayErrorMessage(message: error.localizedDescription)
+            } else if let object = object {
+                
+                /*
+                 TITLE
+                 SUBTITLE
+                 PRICE
+                 
+                 COMPANY  //CANNOT CHANGE
+                 CONTACT
+                 PHONE
+                 EMAIL  //CANNOT CHANGE
+                 
+                 ADDRFULL
+                 URL
+                 
+                 INFO
+                 */
+                
+                object["ownerTitle"] = self.titleTextField.text
+                object["ownerSubTitle"] = self.subTitleTextField.text
+                object["ownerPrice"] = self.priceTextField.text
+                
+                //DO NOT ALLOW USER TO CHANGE object["ownerCompany"] = self.companyTextField.text
+                object["ownerName"] = self.contactTextField.text
+                object["ownerPhone"] = self.phoneTextField.text
+                //DO NOT ALLOW USER TO CHANGE object["ownerEmail"] = self.emailTextField.text
+                
+                object["ownerAddrFull"] = self.addressTextField.text
+                object["ownerUrl"] = self.websiteTextField.text
+                object["ownerInfo"] = self.descriptionTextView.text
+                
+                
+                object.saveInBackground {
+                    (success: Bool, error: Error?) in
+                    if (success) {
+                        print("The object has been saved.")
+                        UIViewController.removeSpinner(spinner: sv)
+                    } else {
+                        print ("There was a problem, check error.description")
+                        UIViewController.removeSpinner(spinner: sv)
+                    }
+                }
+                
+                print("Successfully UPDATED")
+            }
+        }
+        
+        //        titleTextField.text = owner.ownerTitle
+        //        subTitleTextField.text = owner.ownerSubTitle
+        //        priceTextField.text = owner.ownerPrice
+        //
+        //        contactTextField.text = owner.ownerName
+        //        phoneTextField.text = owner.ownerPhone
+        
+        //        addressTextField.text = owner.ownerAddrFull
+        //        websiteTextField.text = owner.ownerUrl
+        //        descriptionTextView.text = owner.ownerInfo
+    }
     
     func uploadImage(){
         //TODO: FIX if self.imageToUpload == nil {return}
@@ -656,6 +813,23 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             presenter.sourceRect = self.view.bounds
         }
         self.present(alertView, animated: true, completion:nil)
+    }
+    
+    func isDirtyText() -> Bool {
+        var isDirty = false
+        
+        if ownerTitleKeep != titleTextField.text {isDirty = true}
+        if ownerTitleKeep != subTitleTextField.text {isDirty = true}
+        if ownerPriceKeep != priceTextField.text  {isDirty = true}
+        
+        if ownerNameKeep != contactTextField.text  {isDirty = true}
+        if ownerPhoneKeep != phoneTextField.text  {isDirty = true}
+        
+        if ownerAddrFullKeep != addressTextField.text  {isDirty = true}
+        if ownerUrlKeep != websiteTextField.text  {isDirty = true}
+        if ownerInfoKeep != descriptionTextView.text  {isDirty = true}
+        
+        return isDirty
     }
 }
 

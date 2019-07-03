@@ -56,6 +56,8 @@ override func viewDidLoad() {
         
 
         /*
+         TITLE
+         SUBTITLE
          PRICE
          
          COMPANY  //CANNOT CHANGE
