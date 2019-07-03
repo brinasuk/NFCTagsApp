@@ -47,16 +47,6 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
      
      INFO
      */
-    //        titleTextField.text = owner.ownerTitle
-    //        subTitleTextField.text = owner.ownerSubTitle
-    //        priceTextField.text = owner.ownerPrice
-    //
-    //        contactTextField.text = owner.ownerName
-    //        phoneTextField.text = owner.ownerPhone
-    
-    //        addressTextField.text = owner.ownerAddrFull
-    //        websiteTextField.text = owner.ownerUrl
-    //        descriptionTextView.text = owner.ownerInfo
     
     var ownerTitleKeep:String? = ""
     var ownersubTitleKeep:String? = ""
@@ -101,40 +91,40 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     @IBOutlet var contactTextField: RoundedTextField! {
         didSet {
-            contactTextField.tag = 4
+            contactTextField.tag = 5
             contactTextField.delegate = self
         }
     }
     @IBOutlet var phoneTextField: RoundedTextField! {
         didSet {
-            phoneTextField.tag = 4
+            phoneTextField.tag = 6
             phoneTextField.delegate = self
         }
     }
     @IBOutlet var emailTextField: RoundedTextField! {
         didSet {
-            emailTextField.tag = 4
+            emailTextField.tag = 7
             emailTextField.delegate = self
         }
     }
     
     @IBOutlet var addressTextField: RoundedTextField! {
         didSet {
-            addressTextField.tag = 3
+            addressTextField.tag = 8
             addressTextField.delegate = self
         }
     }
     
     @IBOutlet var websiteTextField: RoundedTextField! {
         didSet {
-            websiteTextField.tag = 4
+            websiteTextField.tag = 9
             websiteTextField.delegate = self
         }
     }
     
     @IBOutlet var descriptionTextView: UITextView! {
         didSet {
-            descriptionTextView.tag = 5
+            descriptionTextView.tag = 10
             descriptionTextView.layer.cornerRadius = 5.0
             descriptionTextView.layer.masksToBounds = true
         }
@@ -146,7 +136,6 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         let progress : Double = 0
         progressBar.isHidden = true
-        
         progressBar.labelSize = 30
         progressBar.safePercent = 100
         progressBar.setProgress(to: progress, withAnimation: true)
@@ -154,6 +143,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         // Configure navigation bar appearance
         navigationController?.navigationBar.tintColor = .green
         navigationController?.navigationBar.shadowImage = UIImage()
+        
         if let customFont = UIFont(name: "Rubik-Medium", size: 35.0) {
             navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont ]
         }
@@ -167,7 +157,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //HIDE THE KEYBOARD WHEN VIEW FIRST APPEARS OR WHEN USER TAPS ON TABLE
+        //HIDE THE KEYBOARD WHEN VIEW FIRST APPEARS and WHEN USER TAPS ON TABLE
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
@@ -175,12 +165,10 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
     }
     
-    
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
         titleTextField.resignFirstResponder()
     }
-    
     
     func showInfo() {
         
@@ -199,9 +187,6 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
          
          INFO
          */
-        
-
-        
         
         titleTextField.text = owner.ownerTitle
         subTitleTextField.text = owner.ownerSubTitle
@@ -283,17 +268,21 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             result in
             switch result {
             case .success(let value):
+                self.imageToUpload = (self.photoImageView.image ?? UIImage())! //or UIImage(
                 print("Task done for: \(value.source.url?.absoluteString ?? "")")
             case .failure(let error):
+                self.imageToUpload = nil
                 print("Job failed: \(error.localizedDescription)")
             }
         }
         //=================================================
         
-        imageToUpload = (photoImageView.image ?? UIImage())! //or UIImage(
+        
     }
     
     // MARK: - Crop Controller Delegate Methods
+    
+    //SHOW CROPVIEWCONTROLLER
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
         
@@ -323,107 +312,30 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         //cropController.cancelButtonTitle = "Title"
         
         
-        // MARK: - SET PHOTO CONSTRAINTS
+        //setPhotoConstraints()
         
-        //        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
-        //        leadingConstraint.isActive = true
-        //
-        //        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
-        //        trailingConstraint.isActive = true
-        //
-        //        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
-        //        topConstraint.isActive = true
-        //
-        //        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-        //        bottomConstraint.isActive = true
+
         
-        /*
-         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-         
-         //            let resizedImage:UIImage = scaleUIImageToSize(image: image!, size: CGSize(width: 100, height: 200))
-         let resizedImage = image //scaleImageToWidth(with: image, scaledToWidth: 300.0)
-         
-         //self.dismissViewControllerAnimated(true, completion: nil)
-         photoImageView.image = resizedImage
-         
-         imageToUpload = resizedImage!
- */
-        
+        //DISMISS THE PHOTO PICKER AND PRESENT THE CROPVIEW
         self.image = image
         picker.dismiss(animated: true, completion: {
             self.present(cropController, animated: true, completion: nil)
             //self.navigationController!.pushViewController(cropController, animated: true)
         })
-        
-            /*
-            //If profile picture, push onto the same navigation stack
-            if croppingStyle == .circular {
-                if picker.sourceType == .camera {
-                    picker.dismiss(animated: true, completion: {
-                        self.present(cropController, animated: true, completion: nil)
-                    })
-                } else {
-                    picker.pushViewController(cropController, animated: true)
-                }
-            }
-            else { //otherwise dismiss, and then present from the main controller
-                picker.dismiss(animated: true, completion: {
-                    self.present(cropController, animated: true, completion: nil)
-                    //self.navigationController!.pushViewController(cropController, animated: true)
-                })
-            }
-            */
-        }
-        
+    }
+    
+    //RETURN FROM CROPVIEWCONTROLLER
         public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+            
+            isDirtyPhoto = true
+            
             self.croppedRect = cropRect
             self.croppedAngle = angle
-            updateImageViewWithImage(image, fromCropViewController: cropViewController)
-        }
-
-        public func updateImageViewWithImage(_ image: UIImage, fromCropViewController cropViewController: CropViewController) {
             imageView.image = image
             imageToUpload = image
-            //layoutImageView()
-            
-
-//            self.navigationItem.rightBarButtonItem?.isEnabled = true
-//
-//            if cropViewController.croppingStyle != .circular {
-//                imageView.isHidden = true
-//
-//                cropViewController.dismissAnimatedFrom(self, withCroppedImage: image,
-//                                                       toView: imageView,
-//                                                       toFrame: CGRect.zero,
-//                                                       setup: { self.layoutImageView() },
-//                                                       completion: { self.imageView.isHidden = false })
-//            }
-//            else {
-//                self.imageView.isHidden = false
-//                cropViewController.dismiss(animated: true, completion: nil)
-//
-//            }
-            
-
             photoImageView.image = image
             cropViewController.dismiss(animated: true, completion: nil)
         }
- 
-    
-    /*
-     // MARK: - UIImagePickerControllerDelegate methods
-     
-     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    
-     }
-
-     dismiss(animated: true, completion: nil)
-     }
-     */
-    
-    // MARK: - Misc Routines
-
     
     // MARK: - UITextFieldDelegate methods
     
@@ -445,39 +357,27 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
-//                    let imagePicker = UIImagePickerController()
-//                    imagePicker.allowsEditing = false
-//                    imagePicker.sourceType = .camera
-//                    imagePicker.delegate = self
-//                    self.present(imagePicker, animated: true, completion: nil)
-                    
-                    /////////////////////////////////////////
                     //self.croppingStyle = .default
-                    
                     let imagePicker = UIImagePickerController()
                     imagePicker.sourceType = .camera
                     imagePicker.allowsEditing = false
                     imagePicker.delegate = self
                     self.present(imagePicker, animated: true, completion: nil)
+                } else {
+                    self.displayMessage(message: "Camera Unavailable")
                 }
             })
             
             let photoLibraryAction = UIAlertAction(title: "Photo library", style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//                    let imagePicker = UIImagePickerController()
-//                    imagePicker.allowsEditing = false
-//                    imagePicker.sourceType = .photoLibrary
-//                    imagePicker.delegate = self
-//                    self.present(imagePicker, animated: true, completion: nil)
-                    
-                    /////////////////////////////////////////
                     //self.croppingStyle = .default
-                    
                     let imagePicker = UIImagePickerController()
                     imagePicker.sourceType = .photoLibrary
                     imagePicker.allowsEditing = false
                     imagePicker.delegate = self
                     self.present(imagePicker, animated: true, completion: nil)
+                } else {
+                    self.displayMessage(message: "Photo Library Unavailable")
                 }
             })
             
@@ -497,72 +397,17 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
             }
             
             present(photoSourceRequestController, animated: true, completion: nil)
-
         }
-
-         //addButtonTapped(sender: self)
-            
     }
-    
-    /*
-    @objc public func addButtonTapped(sender: AnyObject) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let defaultAction = UIAlertAction(title: "Crop Image", style: .default) { (action) in
-            //self.croppingStyle = .default
-            
-            let imagePicker = UIImagePickerController()
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
-            imagePicker.delegate = self
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        
-        let profileAction = UIAlertAction(title: "Make Profile Picture", style: .default) { (action) in
-            //self.croppingStyle = .circular
-            
-            let imagePicker = UIImagePickerController()
-            imagePicker.modalPresentationStyle = .popover
-            imagePicker.popoverPresentationController?.barButtonItem = (sender as! UIBarButtonItem)
-            imagePicker.preferredContentSize = CGSize(width: 320, height: 568)
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
-            imagePicker.delegate = self
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        
-        alertController.addAction(defaultAction)
-        alertController.addAction(profileAction)
-        alertController.modalPresentationStyle = .popover
-        
-        let presentationController = alertController.popoverPresentationController
-        presentationController?.barButtonItem = (sender as! UIBarButtonItem)
-        present(alertController, animated: true, completion: nil)
-    }
- */
     
     // MARK: - ACTION BUTTONS
-    
-    @IBAction func cancelButtonPressed(_ sender: Any) {
+    @IBAction func gobackButtonPressed(_ sender: Any) {
         //dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        //        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
-        //            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
-        //            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        //            alertController.addAction(alertAction)
-        //            present(alertController, animated: true, completion: nil)
-        //
-        //            return
-        //        }
-        //
-        //        print("Name: \(nameTextField.text ?? "")")
-        //        print("Type: \(typeTextField.text ?? "")")
-        //        print("Location: \(addressTextField.text ?? "")")
-        //        print("Phone: \(phoneTextField.text ?? "")")
-        //        print("Description: \(descriptionTextView.text ?? "")")
-        
+
         if isDirtyText() == true {
             print("YES - TEXT IS DIRTY")
             saveText()
@@ -640,21 +485,23 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                 print("Successfully UPDATED")
             }
         }
-        
-        //        titleTextField.text = owner.ownerTitle
-        //        subTitleTextField.text = owner.ownerSubTitle
-        //        priceTextField.text = owner.ownerPrice
-        //
-        //        contactTextField.text = owner.ownerName
-        //        phoneTextField.text = owner.ownerPhone
-        
-        //        addressTextField.text = owner.ownerAddrFull
-        //        websiteTextField.text = owner.ownerUrl
-        //        descriptionTextView.text = owner.ownerInfo
     }
     
     func uploadImage(){
         //TODO: FIX if self.imageToUpload == nil {return}
+        //TODO: RESIZE PHOTO
+        
+        //        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        //            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        //
+        //            //            let resizedImage:UIImage = scaleUIImageToSize(image: image!, size: CGSize(width: 100, height: 200))
+        //            let resizedImage = image //scaleImageToWidth(with: image, scaledToWidth: 300.0)
+        //
+        //            //self.dismissViewControllerAnimated(true, completion: nil)
+        //            photoImageView.image = resizedImage
+        //
+        //            imageToUpload = resizedImage!
+        //        }
         
         //CRITICAL:  CLEAS CACHE!!
         KingfisherManager.shared.cache.clearMemoryCache()
@@ -675,8 +522,8 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         //UPLOADS FILE EXAMPLE: https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg
         
-
         progressBar.isHidden = false
+        let sv = UIViewController.displaySpinner(onView: self.view)
         
         let photoName:String? = createPhotoName("Tag", withID: owner.ownerObjectId, withNumber: 1) ?? ""
         print (photoName!)
@@ -704,41 +551,27 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                 }
                 
                 
+                
+                
                 upload.responseJSON { response in
                     //print response.result
+                    UIViewController.removeSpinner(spinner: sv)
+                    self.isDirtyPhoto = false;
                     print(response);
                     self.navigationController?.popToRootViewController(animated: true)
                     
                 }
                 
             case .failure(let encodingError):
+                UIViewController.removeSpinner(spinner: sv)
+                self.isDirtyPhoto = false;
                 print(encodingError);
             }
         }
         
     }
     
-    // MARK: - MISC ROUTINES
-    
-    func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-        if useID == nil {
-            return nil
-        }
-        let url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
-        return url
-    }
-    
-    func createPhotoName(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-        if useID == nil {
-            return nil
-        }
 
-        //       var photoName = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
-        var photoName = String(format: "%@-%@-%ld.jpg",useAction ?? "", useID ?? "", useNumber)
-        
-        //NSLog(@"PHOTONAME: %@",photoName);
-        return photoName
-    }
     
     // MARK: - RESIZE ROUTINES
     
@@ -789,7 +622,27 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         return newImage
     }
     
-
+    // MARK: - MISC ROUTINES
+    
+    func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
+        if useID == nil {
+            return nil
+        }
+        let url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
+        return url
+    }
+    
+    func createPhotoName(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
+        if useID == nil {
+            return nil
+        }
+        
+        //       var photoName = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
+        var photoName = String(format: "%@-%@-%ld.jpg",useAction ?? "", useID ?? "", useNumber)
+        
+        //NSLog(@"PHOTONAME: %@",photoName);
+        return photoName
+    }
     
     func displayMessage(message:String) {
         let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
@@ -819,7 +672,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         var isDirty = false
         
         if ownerTitleKeep != titleTextField.text {isDirty = true}
-        if ownerTitleKeep != subTitleTextField.text {isDirty = true}
+        if ownersubTitleKeep != subTitleTextField.text {isDirty = true}
         if ownerPriceKeep != priceTextField.text  {isDirty = true}
         
         if ownerNameKeep != contactTextField.text  {isDirty = true}
@@ -830,6 +683,23 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         if ownerInfoKeep != descriptionTextView.text  {isDirty = true}
         
         return isDirty
+    }
+    
+    // MARK: - SET PHOTO CONSTRAINTS
+    
+    func setPhotoConstraints() {
+        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
+        leadingConstraint.isActive = true
+
+        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+        trailingConstraint.isActive = true
+
+        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
+        topConstraint.isActive = true
+
+        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+        bottomConstraint.isActive = true
+
     }
 }
 
