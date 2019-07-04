@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import Alamofire
 import Kingfisher
+import Alertift
 import CropViewController
 
 
@@ -28,7 +29,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     let SERVERNAME = "https://photos.homecards.com/admin/uploads/rebeacons/"
     var owner = OwnerModel()
-
+    
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet weak var progressBar: CircularProgressBar!
     
@@ -216,7 +217,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         // SHOW PHOTO
         //photoImageView.contentMode = .scaleAspectFit
         //photoImageView.clipsToBounds = true
-
+        
         //let tagPhotoRef = owner.ownerObjectId
         let cloudinaryAction = "Tag"
         let usePhotoRef:String? = owner.ownerObjectId
@@ -314,7 +315,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         //setPhotoConstraints()
         
-
+        
         
         //DISMISS THE PHOTO PICKER AND PRESENT THE CROPVIEW
         self.image = image
@@ -325,17 +326,17 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     }
     
     //RETURN FROM CROPVIEWCONTROLLER
-        public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-            
-            isDirtyPhoto = true
-            
-            self.croppedRect = cropRect
-            self.croppedAngle = angle
-            imageView.image = image
-            imageToUpload = image
-            photoImageView.image = image
-            cropViewController.dismiss(animated: true, completion: nil)
-        }
+    public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        
+        isDirtyPhoto = true
+        
+        self.croppedRect = cropRect
+        self.croppedAngle = angle
+        imageView.image = image
+        imageToUpload = image
+        photoImageView.image = image
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - UITextFieldDelegate methods
     
@@ -347,8 +348,8 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         return true
     }
     
-
-
+    
+    
     // MARK: - UITableViewDelegate methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -402,12 +403,64 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     // MARK: - ACTION BUTTONS
     @IBAction func gobackButtonPressed(_ sender: Any) {
-        //dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
+        // IF THERE ARE NO CHANGES TO BOTH THE TEXT & PHOTO THEN YOU CAN BAIL OUT
+        if (isDirtyPhoto == false && isDirtyText() == false) {
+            //BAIL OUT 1
+            //navigationController?.popViewController(animated: true)
+            performSegue(withIdentifier: "closeWithSegue", sender: self)
+        }
+        
+        //ONE (OR BOTH) FLAGS ARE DIRTY
+        let photoSourceRequestController = UIAlertController(title: "Unsaved Changes", message: "Save your work", preferredStyle: .actionSheet)
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            print ("YES PRESSED")
+            self.saveChanges()
+        })
+        
+        let noAction = UIAlertAction(title: "No", style: .default, handler: { (action) in
+            print ("NO PRESSED")
+            //BAIL OUT 2
+            //self.navigationController?.popViewController(animated: true)
+            self.performSegue(withIdentifier: "closeWithSegue", sender: self)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style:.cancel, handler: { (action) in
+            print ("CANCEL PRESSED")
+        })
+        
+        photoSourceRequestController.addAction(yesAction)
+        photoSourceRequestController.addAction(noAction)
+        photoSourceRequestController.addAction(cancelAction)
+        
+        //        // For iPad
+        //        if let popoverController = photoSourceRequestController.popoverPresentationController {
+        //            if let cell = tableView.cellForRow(at: indexPath) {
+        //                popoverController.sourceView = cell
+        //                popoverController.sourceRect = cell.bounds
+        //            }
+        //        }
+        
+        present(photoSourceRequestController, animated: true, completion: nil)
     }
     
+    
+    
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
-
+        // IF THERE ARE NO CHANGES TO BOTH THE TEXT & PHOTO THEN YOU CAN BAIL OUT
+        if (isDirtyPhoto == false && isDirtyText() == false) {
+            //Bail Out 3
+            //navigationController?.popViewController(animated: true)
+            performSegue(withIdentifier: "closeWithSegue", sender: self)
+        } else {
+            self.saveChanges()
+        }
+        
+    }
+    
+    func saveChanges () {
+        print ("SAVE CHANGES")
         if isDirtyText() == true {
             print("YES - TEXT IS DIRTY")
             saveText()
@@ -423,10 +476,10 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         else {
             print("NO - PHOTO NOT DIRTY")
         }
-        //
-        dismiss(animated: true, completion: nil)
+        
+        //dismiss(animated: true, completion: nil)
     }
-
+    
     func saveText () {
         let sv = UIViewController.displaySpinner(onView: self.view)
         
@@ -475,10 +528,31 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                     (success: Bool, error: Error?) in
                     if (success) {
                         print("The object has been saved.")
+                        self.ownerTitleKeep = self.titleTextField.text
+                        self.ownersubTitleKeep = self.subTitleTextField.text
+                        self.ownerPriceKeep = self.priceTextField.text
+                        
+                        //DO NOT ALLOW USER TO CHANGE object["ownerCompany"] = self.companyTextField.text
+                        self.ownerNameKeep = self.contactTextField.text
+                        self.ownerPhoneKeep = self.phoneTextField.text
+                        //DO NOT ALLOW USER TO CHANGE object["ownerEmail"] = self.emailTextField.text
+                        
+                        self.ownerAddrFullKeep = self.addressTextField.text
+                        self.ownerUrlKeep = self.websiteTextField.text
+                        self.ownerInfoKeep = self.descriptionTextView.text
                         UIViewController.removeSpinner(spinner: sv)
                     } else {
                         print ("There was a problem, check error.description")
+                        self.displayErrorMessage(message: "Cannot save Info")
                         UIViewController.removeSpinner(spinner: sv)
+                    }
+                    //BAIL OUT IF NOTHING MORE TO DO
+                    if self.isDirtyPhoto == false {
+                        //NEED TO UPDATE TEXT
+                        //self.navigationController?.popViewController(animated: true)
+                        self.performSegue(withIdentifier: "unwindToRefreshWithSegue", sender: self)
+                    } else {
+                        self.uploadImage()
                     }
                 }
                 
@@ -508,17 +582,17 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         KingfisherManager.shared.cache.clearDiskCache()
         
         
- //       imageToUpload = UIImage()
-//
-//        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-//        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-//        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-//        if let dirPath          = paths.first
-//        {
-//            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("Image2.png") //Your image name here
-//            let image    = UIImage(contentsOfFile: imageURL.path)
-//            imageToUpload = image!
-//        }
+        //       imageToUpload = UIImage()
+        //
+        //        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        //        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        //        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        //        if let dirPath          = paths.first
+        //        {
+        //            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("Image2.png") //Your image name here
+        //            let image    = UIImage(contentsOfFile: imageURL.path)
+        //            imageToUpload = image!
+        //        }
         
         //UPLOADS FILE EXAMPLE: https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg
         
@@ -527,14 +601,14 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         let photoName:String? = createPhotoName("Tag", withID: owner.ownerObjectId, withNumber: 1) ?? ""
         print (photoName!)
-
+        
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append((self.imageToUpload?.jpegData(compressionQuality: 0.75)!)!, withName: "Photo", fileName: photoName!, mimeType: "image/jpeg")
         }, to:SERVERNAME)
         { (result) in
-
-            switch result {
             
+            switch result {
+                
             case .success(let upload, _, _):
                 print(result)
                 
@@ -550,42 +624,54 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                     self.progressBar.setProgress(to: progress.fractionCompleted, withAnimation: true)
                 }
                 
-                
-                
-                
                 upload.responseJSON { response in
-                    //print response.result
+                    print("Succesfully uploaded")
+                    if let err = response.error{
+                        self.displayErrorMessage(message: err as! String)
+                        return
+                    }
                     UIViewController.removeSpinner(spinner: sv)
-                    self.isDirtyPhoto = false;
-                    print(response);
-                    self.navigationController?.popToRootViewController(animated: true)
-                    
+                    self.onCompletion()
                 }
+                
+                //                upload.responseJSON { response in
+                //                    //print response.result
+                //                    UIViewController.removeSpinner(spinner: sv)
+                //                    self.isDirtyPhoto = false;
+                //                    print(response);
+                //                    self.navigationController?.popToRootViewController(animated: true)
+                //
+                //                }
                 
             case .failure(let encodingError):
                 UIViewController.removeSpinner(spinner: sv)
-                self.isDirtyPhoto = false;
+                
                 print(encodingError);
             }
         }
         
     }
     
-
+    func onCompletion () {
+        self.progressBar.setProgress(to: 100.0, withAnimation: true)
+        
+    //NOTE THE USE OF popToROOTViewController. 
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     // MARK: - RESIZE ROUTINES
     
-//    func resizeImage(withWidth newWidth: CGFloat) -> UIImage? {
-//
-//        let scale = newWidth / self.size.width
-//        let newHeight = self.size.height * scale
-//        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-//        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//
-//        return newImage
-//    }
+    //    func resizeImage(withWidth newWidth: CGFloat) -> UIImage? {
+    //
+    //        let scale = newWidth / self.size.width
+    //        let newHeight = self.size.height * scale
+    //        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+    //        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+    //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    //        UIGraphicsEndImageContext()
+    //
+    //        return newImage
+    //    }
     
     /**
      * Scales an image to fit within a bounds with a size governed by
@@ -596,18 +682,18 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
      * @param newSize the size of the bounds the image must fit within.
      * @return a new scaled image.
      */
-//    func scaleUIImageToSize( image: UIImage, size: CGSize) -> UIImage {
-//        let hasAlpha = false
-//        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
-//
-//        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
-//        image.draw(in: CGRect(origin: CGPoint.zero, size: size))
-//
-//        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()!
-//        UIGraphicsEndImageContext()
-//
-//        return scaledImage
-//    }
+    //    func scaleUIImageToSize( image: UIImage, size: CGSize) -> UIImage {
+    //        let hasAlpha = false
+    //        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+    //
+    //        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+    //        image.draw(in: CGRect(origin: CGPoint.zero, size: size))
+    //
+    //        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()!
+    //        UIGraphicsEndImageContext()
+    //
+    //        return scaledImage
+    //    }
     
     func scaleImageToWidth(with sourceImage: UIImage?, scaledToWidth i_width: Float) -> UIImage? {
         let oldWidth = Float(sourceImage?.size.width ?? 0.0)
@@ -690,16 +776,16 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     func setPhotoConstraints() {
         let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
         leadingConstraint.isActive = true
-
+        
         let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
         trailingConstraint.isActive = true
-
+        
         let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
         topConstraint.isActive = true
-
+        
         let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
         bottomConstraint.isActive = true
-
+        
     }
 }
 

@@ -932,9 +932,7 @@ extension AuteurListViewController: UITableViewDataSource {
         }
     }
     
-    @IBAction func unwindToHome(segue: UIStoryboardSegue) {
-        dismiss(animated: true, completion: nil)
-    }
+
     
 
     
@@ -1273,5 +1271,8 @@ extension AuteurListViewController: UITableViewDataSource {
         }
     }
     
+    @IBAction func unwindToHome(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
     
 }

@@ -116,7 +116,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="sOV-Rc-2en"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Maintenance" id="lnr-g4-LfB">
+                                    <barButtonItem title="Manage" id="lnr-g4-LfB">
                                         <connections>
                                             <segue destination="Wbr-7r-70g" kind="show" id="Pcm-5D-WrO"/>
                                         </connections>
@@ -1257,9 +1257,12 @@
                         <outlet property="subTitleTextField" destination="3E5-pP-v46" id="VEH-JH-wtW"/>
                         <outlet property="titleTextField" destination="Zxl-zG-tCo" id="ZDI-tQ-sI2"/>
                         <outlet property="websiteTextField" destination="5UH-o4-y68" id="y0w-AJ-KqZ"/>
+                        <segue destination="aIE-33-C5x" kind="unwind" identifier="closeWithSegue" unwindAction="closeWithSegue:" id="yiT-p3-5Vi"/>
+                        <segue destination="aIE-33-C5x" kind="unwind" identifier="unwindToRefreshWithSegue" unwindAction="unwindToRefreshWithSegue:" id="kOc-g7-029"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHf-QJ-04z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aIE-33-C5x" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-137703.20000000001" y="-54687.192118226601"/>
         </scene>
