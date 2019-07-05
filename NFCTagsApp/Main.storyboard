@@ -628,10 +628,10 @@
             </objects>
             <point key="canvasLocation" x="-140688.79999999999" y="-55410.591133004928"/>
         </scene>
-        <!--My Detail View Controller-->
+        <!--Tag Detail View Controller-->
         <scene sceneID="2lW-ff-SRb">
             <objects>
-                <viewController id="VaW-2d-StK" customClass="MyDetailViewController" customModule="NFCTagsApp" sceneMemberID="viewController">
+                <viewController id="VaW-2d-StK" customClass="TagDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nYF-QD-CJ3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -667,13 +667,6 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart-tick" translatesAutoresizingMaskIntoConstraints="NO" id="T9A-ft-HXf" userLabel="Heart Image">
-                                            <rect key="frame" x="122" y="316" width="15" height="15"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="15" id="YC1-gs-kel"/>
-                                                <constraint firstAttribute="height" constant="15" id="vQd-PZ-aM9"/>
-                                            </constraints>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -681,21 +674,18 @@
                                         <constraint firstItem="ak1-cW-eK8" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" constant="14" id="5nd-Ju-boC"/>
                                         <constraint firstItem="fwg-Vf-QlN" firstAttribute="leading" secondItem="ak1-cW-eK8" secondAttribute="leading" id="BJC-8l-tLA"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwg-Vf-QlN" secondAttribute="trailing" constant="50" id="KHs-FU-4gi"/>
-                                        <constraint firstItem="T9A-ft-HXf" firstAttribute="leading" secondItem="ak1-cW-eK8" secondAttribute="trailing" constant="8" id="Ooc-tv-7fC"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" id="UX5-Wd-vgc"/>
                                         <constraint firstAttribute="trailing" secondItem="Dhi-zA-SYj" secondAttribute="trailing" id="VKH-Ls-BTa"/>
                                         <constraint firstAttribute="bottom" secondItem="Dhi-zA-SYj" secondAttribute="bottom" id="WmN-mQ-LDI"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" id="ZDR-Qe-AEv"/>
                                         <constraint firstAttribute="bottom" secondItem="JXR-10-BEy" secondAttribute="bottom" id="bqF-FG-jTq"/>
                                         <constraint firstAttribute="bottom" secondItem="ak1-cW-eK8" secondAttribute="bottom" constant="14" id="em6-R1-E72"/>
-                                        <constraint firstItem="ak1-cW-eK8" firstAttribute="top" secondItem="T9A-ft-HXf" secondAttribute="bottom" constant="-15" id="g0V-gh-moc"/>
                                         <constraint firstItem="ak1-cW-eK8" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="3" id="mM2-QN-zEM"/>
                                         <constraint firstItem="JXR-10-BEy" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" id="p9y-bw-aW5"/>
                                         <constraint firstAttribute="trailing" secondItem="JXR-10-BEy" secondAttribute="trailing" id="vTp-FJ-H4n"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="headerImageView" destination="Dhi-zA-SYj" id="sWN-nD-Sto"/>
-                                        <outlet property="heartImageView" destination="T9A-ft-HXf" id="MYe-Kx-vRe"/>
                                         <outlet property="nameLabel" destination="fwg-Vf-QlN" id="z1i-AV-srl"/>
                                         <outlet property="typeLabel" destination="ak1-cW-eK8" id="4AQ-xE-kBr"/>
                                     </connections>
@@ -1344,7 +1334,6 @@
     <resources>
         <image name="art_launch_image" width="1125" height="2429"/>
         <image name="close" width="16" height="16"/>
-        <image name="heart-tick" width="22" height="21"/>
         <image name="list-item-background" width="375" height="60"/>
         <image name="save" width="20" height="20"/>
         <image name="tall" width="3024" height="4032"/>

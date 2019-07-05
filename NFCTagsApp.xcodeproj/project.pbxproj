@@ -18,14 +18,15 @@
 		C715679E227BDA0900D1A55A /* auteurs.json in Resources */ = {isa = PBXBuildFile; fileRef = C7156795227BDA0900D1A55A /* auteurs.json */; };
 		C715679F227BDA0900D1A55A /* AuteurDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7156797227BDA0900D1A55A /* AuteurDetailViewController.swift */; };
 		C71B63D8229AFDD200B6910A /* TagDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */; };
-		C71B63DA229B18C100B6910A /* TagDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63D9229B18C100B6910A /* TagDetailViewController.swift */; };
 		C71B63DE229B74F300B6910A /* RestaurantDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */; };
 		C71B63E2229B784800B6910A /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */; };
-		C71B63E4229B798A00B6910A /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E3229B798A00B6910A /* MyDetailViewController.swift */; };
+		C71B63E4229B798A00B6910A /* TagDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E3229B798A00B6910A /* TagDetailViewController.swift */; };
 		C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */; };
 		C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */; };
 		C73650FA22831BC20025154F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F822831BC10025154F /* Colors.swift */; };
 		C73A297F2293479C00554EF1 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A297E2293479C00554EF1 /* TagModel.swift */; };
+		C74C541322CFCACF0071F3F1 /* MiscRoutines.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C541222CFCACF0071F3F1 /* MiscRoutines.swift */; };
+		C74C541522D0049E0071F3F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74C541422D0049D0071F3F1 /* Main.storyboard */; };
 		C76D3EEC22AA022000794637 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEB22AA022000794637 /* RoundedTextField.swift */; };
 		C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */; };
 		C76D3EF222AB104400794637 /* MaintTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableView.swift */; };
@@ -36,7 +37,6 @@
 		C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */; };
 		C78159DE22CAC54700625046 /* NewTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78159DD22CAC54700625046 /* NewTagController.swift */; };
 		C78159E022CB100600625046 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78159DF22CB100600625046 /* CircularProgressBar.swift */; };
-		C78159E222CBDFD000625046 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78159E122CBDFCF00625046 /* Main.storyboard */; };
 		C793547622A0AC0700DD1828 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C793547522A0AC0700DD1828 /* MapKit.framework */; };
 		C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */; };
 		C793547A22A0B75300DD1828 /* RestaurantDetailMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793547922A0B75300DD1828 /* RestaurantDetailMapCell.swift */; };
@@ -93,14 +93,15 @@
 		C71B63D5229AEDD600B6910A /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		C71B63D6229AEDD600B6910A /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailHeaderView.swift; sourceTree = "<group>"; };
-		C71B63D9229B18C100B6910A /* TagDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailViewController.swift; sourceTree = "<group>"; };
 		C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailHeaderView.swift; sourceTree = "<group>"; };
 		C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
-		C71B63E3229B798A00B6910A /* MyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
+		C71B63E3229B798A00B6910A /* TagDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailViewController.swift; sourceTree = "<group>"; };
 		C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailIconTextCell.swift; sourceTree = "<group>"; };
 		C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTextCell.swift; sourceTree = "<group>"; };
 		C73650F822831BC10025154F /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C73A297E2293479C00554EF1 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		C74C541222CFCACF0071F3F1 /* MiscRoutines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscRoutines.swift; sourceTree = "<group>"; };
+		C74C541422D0049D0071F3F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C76D3EEB22AA022000794637 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewCell.swift; sourceTree = "<group>"; };
 		C76D3EF122AB104400794637 /* MaintTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableView.swift; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkViews.swift; sourceTree = "<group>"; };
 		C78159DD22CAC54700625046 /* NewTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTagController.swift; sourceTree = "<group>"; };
 		C78159DF22CB100600625046 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
-		C78159E122CBDFCF00625046 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C793547522A0AC0700DD1828 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSeparatorCell.swift; sourceTree = "<group>"; };
 		C793547922A0B75300DD1828 /* RestaurantDetailMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMapCell.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 		C7156778227BD97700D1A55A /* NFCTagsApp */ = {
 			isa = PBXGroup;
 			children = (
-				C78159E122CBDFCF00625046 /* Main.storyboard */,
+				C74C541422D0049D0071F3F1 /* Main.storyboard */,
 				C7DA87F4229259CE00457112 /* AppConstant.swift */,
 				C7DA87F6229259DC00457112 /* AppDelegate.swift */,
 				C73650F822831BC10025154F /* Colors.swift */,
@@ -259,9 +259,8 @@
 				C76D3EEB22AA022000794637 /* RoundedTextField.swift */,
 				C77968D62286264B00CE6B4C /* AuteurListViewController.swift */,
 				C7156797227BDA0900D1A55A /* AuteurDetailViewController.swift */,
-				C71B63D9229B18C100B6910A /* TagDetailViewController.swift */,
 				C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */,
-				C71B63E3229B798A00B6910A /* MyDetailViewController.swift */,
+				C71B63E3229B798A00B6910A /* TagDetailViewController.swift */,
 				C793547B22A0DCC800DD1828 /* MapViewController.swift */,
 				C76D3EF122AB104400794637 /* MaintTableView.swift */,
 				C78159DD22CAC54700625046 /* NewTagController.swift */,
@@ -340,6 +339,7 @@
 				C7AC6F16228A623900E97DFF /* Spinner.swift */,
 				C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */,
 				C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */,
+				C74C541222CFCACF0071F3F1 /* MiscRoutines.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -422,7 +422,7 @@
 				C7995B58228B54AB00C6E246 /* Rubik-Italic.ttf in Resources */,
 				C7156781227BD97700D1A55A /* Assets.xcassets in Resources */,
 				C7995B57228B54AB00C6E246 /* Rubik-MediumItalic.ttf in Resources */,
-				C78159E222CBDFD000625046 /* Main.storyboard in Resources */,
+				C74C541522D0049E0071F3F1 /* Main.storyboard in Resources */,
 				C7995B59228B54AB00C6E246 /* Rubik-LightItalic.ttf in Resources */,
 				C715679E227BDA0900D1A55A /* auteurs.json in Resources */,
 				C7995B5D228B54AB00C6E246 /* Rubik-Light.ttf in Resources */,
@@ -493,11 +493,10 @@
 				C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */,
 				C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */,
 				C78159DE22CAC54700625046 /* NewTagController.swift in Sources */,
-				C71B63E4229B798A00B6910A /* MyDetailViewController.swift in Sources */,
+				C71B63E4229B798A00B6910A /* TagDetailViewController.swift in Sources */,
 				C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */,
 				C71B63DE229B74F300B6910A /* RestaurantDetailHeaderView.swift in Sources */,
 				C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */,
-				C71B63DA229B18C100B6910A /* TagDetailViewController.swift in Sources */,
 				C78159E022CB100600625046 /* CircularProgressBar.swift in Sources */,
 				C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */,
 				C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */,
@@ -507,6 +506,7 @@
 				C715679B227BDA0900D1A55A /* FilmTableViewCell.swift in Sources */,
 				C76D3EEC22AA022000794637 /* RoundedTextField.swift in Sources */,
 				C71B63D8229AFDD200B6910A /* TagDetailHeaderView.swift in Sources */,
+				C74C541322CFCACF0071F3F1 /* MiscRoutines.swift in Sources */,
 				C793547C22A0DCC800DD1828 /* MapViewController.swift in Sources */,
 				C73650FA22831BC20025154F /* Colors.swift in Sources */,
 				C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */,

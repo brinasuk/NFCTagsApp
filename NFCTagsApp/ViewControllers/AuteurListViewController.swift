@@ -253,97 +253,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     
 
 
-    // MARK: - MISC ROUTINES
-    func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-        if useID == nil {
-            return nil
-        }
-        var url = ""
-        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
-        //NSLog(@"URL: %@",url);
-        return url
-        
-    }
-    
-    func displayMessage(message:String) {
-        let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-        }
-        alertView.addAction(OKAction)
-        if let presenter = alertView.popoverPresentationController {
-            presenter.sourceView = self.view
-            presenter.sourceRect = self.view.bounds
-        }
-        self.present(alertView, animated: true, completion:nil)
-    }
-    
-    func displayErrorMessage(message:String) {
-        let alertView = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-        }
-        alertView.addAction(OKAction)
-        if let presenter = alertView.popoverPresentationController {
-            presenter.sourceView = self.view
-            presenter.sourceRect = self.view.bounds
-        }
-        self.present(alertView, animated: true, completion:nil)
-    }
-    
-    func showSimpleAlert() {
-        //    Alertift.alert(title: "Sample 1", message: "Simple alert!")
-        //        .image: #imageLiteral(resourceName: <#T##String#>)
-        //        .action(.default("OK"))
-        //        .show()
-        
-        Alertift.alert(message: "Can use image in alert action")
-            .action(.default("info"), image: UIImage(named: "confirm"))
-            .show()
-    }
-    
-    func showYesOrNoAlert() {
-        Alertift.alert(title: "Sample 2",message: "Do you like 🍣?")
-            .action(.default("Yes"), isPreferred: true) { (_, _, _) in
-                Alertift.alert(message: "🍣🍣🍣")
-                    .action(.default("Close"))
-                    .show()
-            }
-            .action(.cancel("No")) { (_, _, _) in
-                Alertift.alert(message: "😂😂😂")
-                    .action(.destructive("Close"))
-                    .show()
-            }
-            .show()
-    }
-    
-    func bounce(_ button: UIButton?) {
-        var theAnimation: CABasicAnimation?
-        theAnimation = CABasicAnimation(keyPath: "transform.translation.y") ///use transform
-        theAnimation?.duration = 0.4
-        theAnimation?.repeatCount = 2
-        theAnimation?.autoreverses = true
-        theAnimation?.fromValue = NSNumber(value: 1.0)
-        theAnimation?.toValue = NSNumber(value: -20)
-        if let theAnimation = theAnimation {
-            button?.layer.add(theAnimation, forKey: "animateTranslation")
-        } //animationkey
-    }
-    
-    func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
-        let options: [CFString: Any] = [
-            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-            kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceShouldCacheImmediately: true,
-            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
-        ]
-        
-        guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
-            let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
-            else {
-                return nil
-        }
-        
-        return UIImage(cgImage: image)
-    }
     
     // MARK: - NFC READER DELEGATES
     
@@ -827,13 +736,12 @@ extension AuteurListViewController: UITableViewDataSource {
          https://photos.homecards.com/rebeacons/Tag-082C63FE-9AA8-4967-BC04-8F3D6AAF63DA-1.jpg
          */
         
-        //var tagPhotoRef = cellDataParse.object(forKey: "tagPhotoRef") as? String
         let tagPhotoRef = tag.tagPhotoRef
 
         let cloudinaryAction = "Tag"
         let usePhotoRef:String? = tagPhotoRef
         let photoNumber = 1
-        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
@@ -926,7 +834,7 @@ extension AuteurListViewController: UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "TagDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! MyDetailViewController
+                let destinationController = segue.destination as! TagDetailViewController
                 destinationController.tag = self.tagObjects[indexPath.row]
             }
         }
@@ -1273,6 +1181,99 @@ extension AuteurListViewController: UITableViewDataSource {
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - MISC ROUTINES
+//    func createPhotoURL2(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
+//        if useID == nil {
+//            return nil
+//        }
+//        var url = ""
+//        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
+//        //NSLog(@"URL: %@",url);
+//        return url
+//
+//    }
+    
+    func displayMessage(message:String) {
+        let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        }
+        alertView.addAction(OKAction)
+        if let presenter = alertView.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = self.view.bounds
+        }
+        self.present(alertView, animated: true, completion:nil)
+    }
+    
+    func displayErrorMessage(message:String) {
+        let alertView = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        }
+        alertView.addAction(OKAction)
+        if let presenter = alertView.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = self.view.bounds
+        }
+        self.present(alertView, animated: true, completion:nil)
+    }
+
+    
+    func showSimpleAlert() {
+        //    Alertift.alert(title: "Sample 1", message: "Simple alert!")
+        //        .image: #imageLiteral(resourceName: <#T##String#>)
+        //        .action(.default("OK"))
+        //        .show()
+        
+        Alertift.alert(message: "Can use image in alert action")
+            .action(.default("info"), image: UIImage(named: "confirm"))
+            .show()
+    }
+    
+    func showYesOrNoAlert() {
+        Alertift.alert(title: "Sample 2",message: "Do you like 🍣?")
+            .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+                Alertift.alert(message: "🍣🍣🍣")
+                    .action(.default("Close"))
+                    .show()
+            }
+            .action(.cancel("No")) { (_, _, _) in
+                Alertift.alert(message: "😂😂😂")
+                    .action(.destructive("Close"))
+                    .show()
+            }
+            .show()
+    }
+    
+    func bounce(_ button: UIButton?) {
+        var theAnimation: CABasicAnimation?
+        theAnimation = CABasicAnimation(keyPath: "transform.translation.y") ///use transform
+        theAnimation?.duration = 0.4
+        theAnimation?.repeatCount = 2
+        theAnimation?.autoreverses = true
+        theAnimation?.fromValue = NSNumber(value: 1.0)
+        theAnimation?.toValue = NSNumber(value: -20)
+        if let theAnimation = theAnimation {
+            button?.layer.add(theAnimation, forKey: "animateTranslation")
+        } //animationkey
+    }
+    
+    func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceShouldCacheImmediately: true,
+            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
+        ]
+        
+        guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
+            let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+            else {
+                return nil
+        }
+        
+        return UIImage(cgImage: image)
     }
     
 }
