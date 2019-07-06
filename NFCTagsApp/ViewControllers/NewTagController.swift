@@ -83,49 +83,51 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         }
     }
     
-    @IBOutlet var companyTextField: RoundedTextField! {
-        didSet {
-            companyTextField.tag = 4
-            companyTextField.delegate = self
-        }
-    }
+//    @IBOutlet var companyTextField: RoundedTextField! {
+//        didSet {
+//            companyTextField.tag = 4
+//            companyTextField.delegate = self
+//        }
+//    }
     
     @IBOutlet var contactTextField: RoundedTextField! {
         didSet {
-            contactTextField.tag = 5
+            contactTextField.tag = 4
             contactTextField.delegate = self
-        }
-    }
-    @IBOutlet var phoneTextField: RoundedTextField! {
-        didSet {
-            phoneTextField.tag = 6
-            phoneTextField.delegate = self
-        }
-    }
-    @IBOutlet var emailTextField: RoundedTextField! {
-        didSet {
-            emailTextField.tag = 7
-            emailTextField.delegate = self
         }
     }
     
     @IBOutlet var addressTextField: RoundedTextField! {
         didSet {
-            addressTextField.tag = 8
+            addressTextField.tag = 6
             addressTextField.delegate = self
+        }
+    }
+
+//    @IBOutlet var emailTextField: RoundedTextField! {
+//        didSet {
+//            emailTextField.tag = 7
+//            emailTextField.delegate = self
+//        }
+//    }
+    
+    @IBOutlet var phoneTextField: RoundedTextField! {
+        didSet {
+            phoneTextField.tag = 5
+            phoneTextField.delegate = self
         }
     }
     
     @IBOutlet var websiteTextField: RoundedTextField! {
         didSet {
-            websiteTextField.tag = 9
+            websiteTextField.tag = 7
             websiteTextField.delegate = self
         }
     }
     
     @IBOutlet var descriptionTextView: UITextView! {
         didSet {
-            descriptionTextView.tag = 10
+            descriptionTextView.tag = 8
             descriptionTextView.layer.cornerRadius = 5.0
             descriptionTextView.layer.masksToBounds = true
         }

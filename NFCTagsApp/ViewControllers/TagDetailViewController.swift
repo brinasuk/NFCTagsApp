@@ -20,6 +20,8 @@ class TagDetailViewController: UIViewController, UITableViewDataSource, UITableV
 override func viewDidLoad() {
     super.viewDidLoad()
     
+    //        headerView.headerImageView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.2f];
+
     navigationItem.largeTitleDisplayMode = .never
     
     // Set the table view's delegate and data source
@@ -73,26 +75,13 @@ override func viewDidLoad() {
     }
     
     func showInfo() {
-        /*
-         TITLE
-         SUBTITLE
-         PRICE
-         
-         COMPANY  //CANNOT CHANGE
-         CONTACT
-         PHONE
-         EMAIL  //CANNOT CHANGE
-         
-         ADDRFULL
-         URL
-         
-         INFO
-         */
+
         
         
         // DISPLAY DATABASE VALUES
-        headerView.nameLabel.text = tag.tagTitle
-        headerView.typeLabel.text = tag.tagPrice
+        headerView.titleLabel.text = tag.tagTitle
+        headerView.subTitleLabel.text = tag.tagSubTitle
+        headerView.priceLabel.text = tag.tagPrice
 
         
         // SHOW PHOTO
@@ -117,6 +106,7 @@ override func viewDidLoad() {
         let placeholderImageName = kAppDelegate.placeholderName
         let placeholderImage = UIImage(named: placeholderImageName! as String)!
         headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+
         //=================================================
     }
     
@@ -127,7 +117,7 @@ override func viewDidLoad() {
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 8
         /*
          TITLE
          SUBTITLE
@@ -138,29 +128,44 @@ override func viewDidLoad() {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
             
-            //COMPANY  //CANNOT CHANGE
-            //CONTACT (OWNERNAME)
-            //PHONE      (OWNERPHONE)
-            //EMAIL  //CANNOT CHANGE
-            //ADDRFULL
-            //INFO
+            //0 COMPANY  //CANNOT CHANGE
+            //1 CONTACT (OWNERNAME)
+            //2 PHONE      (OWNERPHONE)
+            //3 EMAIL  //CANNOT CHANGE
+            //4 ADDRFULL
+            //5 INFO
             //NOT USED HERE: URL
             
-        case 0: //PHONE
+        case 0: //COMPANY
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
+            cell.iconImageView.image = UIImage(named: "company")
+            cell.shortTextLabel.text = tag.tagCompany
+            cell.selectionStyle = .none
+            return cell
+            
+        case 1: //CONTACT
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
+            cell.iconImageView.image = UIImage(named: "contact")
+            cell.shortTextLabel.text = tag.ownerName
+            cell.selectionStyle = .none
+            return cell
+            
+        case 2: //PHONE
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
             cell.iconImageView.image = UIImage(named: "phone")
             cell.shortTextLabel.text = tag.ownerPhone
             cell.selectionStyle = .none
             return cell
             
-//        case 1: //EMAIL
-//            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-//            cell.iconImageView.image = UIImage(named: "phone")
-//            cell.shortTextLabel.text = tag.ownerEmail
-//            cell.selectionStyle = .none
-//            return cell
+        case 3: //EMAIL
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
+            cell.iconImageView.image = UIImage(named: "email")
+            cell.shortTextLabel.text = tag.ownerEmail
+            cell.selectionStyle = .none
+            return cell
             
-        case 1:  //ADDRESS
+    ////////////////////////////////////////
+        case 4:  //ADDRESS
             var addr:String
             addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
             
@@ -175,7 +180,7 @@ override func viewDidLoad() {
             cell.selectionStyle = .none
             return cell
             
-        case 2:  //INFO
+        case 5:  //INFO
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
             //cell.descriptionLabel.text = restaurant.description
             cell.descriptionLabel.text = tag.tagInfo
@@ -183,14 +188,14 @@ override func viewDidLoad() {
             
             return cell
             
-        case 3:  //MAP TITLE
+        case 6:  //MAP TITLE
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailSeparatorCell.self), for: indexPath) as! RestaurantDetailSeparatorCell
-            cell.titleLabel.text = "HOW TO GET HERE"
+            cell.titleLabel.text = "MAP"  //HOW TO GET HERE
             cell.selectionStyle = .none
             
             return cell
             
-        case 4:  //SHOW MAP
+        case 7:  //SHOW MAP
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
             var addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
             cell.configure(location: addr)  //NOTE: THIS IS DEFINED IN THE CELL
