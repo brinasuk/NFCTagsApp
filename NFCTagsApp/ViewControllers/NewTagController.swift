@@ -99,7 +99,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     @IBOutlet var addressTextField: RoundedTextField! {
         didSet {
-            addressTextField.tag = 6
+            addressTextField.tag = 5
             addressTextField.delegate = self
         }
     }
@@ -113,7 +113,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     @IBOutlet var phoneTextField: RoundedTextField! {
         didSet {
-            phoneTextField.tag = 5
+            phoneTextField.tag = 6
             phoneTextField.delegate = self
         }
     }
@@ -255,12 +255,14 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         let url = URL(string: propertyPhotoFileUrl!)
         //Size refer to the size which you want to resize your original image
         
+        let placeholderImageName = kAppDelegate.placeholderName
+        //TODO: Fix Width and Height. Plug in correct values
         let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
         
         photoImageView.kf.indicatorType = .activity
         photoImageView.kf.setImage(
             with: url,
-            placeholder: UIImage(named: "placeholderImage"),
+            placeholder: UIImage(named: placeholderImageName! as String)!,
             options: [
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
@@ -487,7 +489,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("objectId", equalTo: owner.ownerObjectId)
-        print(owner.ownerObjectId)
+        //print(owner.ownerObjectId)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if let error = error {
                 // NO MATCH FOUND
@@ -564,13 +566,22 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     }
     
     func uploadImage(){
-        //TODO: FIX if self.imageToUpload == nil {return}
+        if self.imageToUpload == nil {return}
+        
+        let resizedImage = resizeImage(image: imageToUpload!, withSize: CGSize(width:375, height:360)
+        )
+        //let resizedImage:UIImage? = imageToUpload
+        photoImageView.image = resizedImage
+
+        
         //TODO: RESIZE PHOTO
         
         //        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
         //            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         //
+        
         //            //            let resizedImage:UIImage = scaleUIImageToSize(image: image!, size: CGSize(width: 100, height: 200))
+        
         //            let resizedImage = image //scaleImageToWidth(with: image, scaledToWidth: 300.0)
         //
         //            //self.dismissViewControllerAnimated(true, completion: nil)
@@ -605,17 +616,17 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         print (photoName!)
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append((self.imageToUpload?.jpegData(compressionQuality: 0.75)!)!, withName: "Photo", fileName: photoName!, mimeType: "image/jpeg")
+            multipartFormData.append((resizedImage.jpegData(compressionQuality: 1.0)!), withName: "Photo", fileName: photoName!, mimeType: "image/jpeg")
         }, to:SERVERNAME)
         { (result) in
             
             switch result {
                 
             case .success(let upload, _, _):
-                print(result)
+                //print(result)
                 
                 upload.uploadProgress(closure: { (progress) in
-                    print(progress)
+                    //print(progress)
                     //self.progressBar.setProgress(to: self.progress, withAnimation: true)
                     
                 })
@@ -623,11 +634,13 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                 upload.uploadProgress { progress in
                     self.photoImageView.alpha = CGFloat((1.0 - progress.fractionCompleted))
                     print(progress.fractionCompleted)
+
                     self.progressBar.setProgress(to: progress.fractionCompleted, withAnimation: true)
                 }
                 
                 upload.responseJSON { response in
                     print("Succesfully uploaded")
+                    print(response)
                     if let err = response.error{
                         self.displayErrorMessage(message: err as! String)
                         return
@@ -697,6 +710,8 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     //        return scaledImage
     //    }
     
+    //let resizedImage = scaleImageToWidth(with: image, scaledToWidth: 300.0)
+    
     func scaleImageToWidth(with sourceImage: UIImage?, scaledToWidth i_width: Float) -> UIImage? {
         let oldWidth = Float(sourceImage?.size.width ?? 0.0)
         let scaleFactor: Float = i_width / oldWidth
@@ -708,6 +723,59 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+    
+    /*
+     import AVFoundation
+     
+     let imageSizeSameAspectRatio = CGSize(width: 50, height: 100)
+     let imageSizeDiffAspectRatio = CGSize(width: 70, height: 70)
+     
+     let containerViewRect = CGRect(x: 0, y: 0, width: 100, height: 200)
+     
+     AVMakeRectWithAspectRatioInsideRect(imageSizeSameAspectRatio, containerViewRect) // Returns {x 0 y 0 w 100 h 200}
+     AVMakeRectWithAspectRatioInsideRect(imageSizeDiffAspectRatio, containerViewRect) // Returns {x 0 y 50 w 100 h 100}
+ */
+    
+    func resizeImage(image: UIImage, withSize: CGSize) -> UIImage {
+        //resizeImage(image: UIImage(named: "ImageName"), withSize: CGSize(width: 300, height: 300))
+        
+        var actualHeight: CGFloat = image.size.height
+        var actualWidth: CGFloat = image.size.width
+        let maxHeight: CGFloat = withSize.width
+        let maxWidth: CGFloat = withSize.height
+        var imgRatio: CGFloat = actualWidth/actualHeight
+        let maxRatio: CGFloat = maxWidth/maxHeight
+        let compressionQuality:CGFloat = 0.75
+        
+        if (actualHeight > maxHeight || actualWidth > maxWidth) {
+            if(imgRatio < maxRatio) {
+                //adjust width according to maxHeight
+                imgRatio = maxHeight / actualHeight
+                actualWidth = imgRatio * actualWidth
+                actualHeight = maxHeight
+            } else if(imgRatio > maxRatio) {
+                //adjust height according to maxWidth
+                imgRatio = maxWidth / actualWidth
+                actualHeight = imgRatio * actualHeight
+                actualWidth = maxWidth
+            } else {
+                actualHeight = maxHeight
+                actualWidth = maxWidth
+            }
+        }
+        
+        let rect: CGRect = CGRect(x: 0.0, y: 0.0, width: actualWidth, height: actualHeight)
+        UIGraphicsBeginImageContext(rect.size)
+        image.draw(in: rect)
+        let image: UIImage  = UIGraphicsGetImageFromCurrentImageContext()!
+        //let imageData = UIImageJPEGRepresentation(image, CGFloat(compressionQuality))
+        let imageData = image.jpegData(compressionQuality: compressionQuality)
+        
+        UIGraphicsEndImageContext()
+        let resizedImage = UIImage(data: imageData!)
+        return resizedImage!
+        
     }
     
     // MARK: - MISC ROUTINES

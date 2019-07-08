@@ -42,7 +42,13 @@ class MaintTableView: UITableViewController {
         let backgroundImage = UIImage(named: backgroundImageName)
         let imageView = UIImageView(image: backgroundImage)
         imageView.contentMode = .scaleAspectFill
-        imageView.alpha = 0.8
+        imageView.alpha = 0.4
+        
+//        let backgroundImageName = "art_launch_image"
+//        backgroundImage.image = UIImage(named: backgroundImageName) // nd-background
+//        backgroundImage.alpha = 0.4
+//        backgroundImage.contentMode = .scaleAspectFill
+        
         self.tableView.backgroundView = imageView
         self.tableView.backgroundColor = coralColor
         view.backgroundColor = paleRoseColor
@@ -116,10 +122,12 @@ class MaintTableView: UITableViewController {
                     var ownerEmail:String? = object["ownerEmail"] as? String
                     if ownerEmail == nil {ownerEmail = ""}
                     
-                    let alex = object["ownerPhone"] as? String ?? ""
+                    //TODO: SEE HERE HOW IT IS DONE
+                    //let alex = object["ownerPhone"] as? String ?? ""
+                    //print(alex)
+                    
                     var ownerPhone:String? = object["ownerPhone"] as? String
-                    print(alex)
-                    print(ownerPhone)
+                    //print(ownerPhone)
                     if ownerPhone == nil {ownerPhone = ""}
                     
                     var ownerInfo:String? = object["ownerInfo"] as? String

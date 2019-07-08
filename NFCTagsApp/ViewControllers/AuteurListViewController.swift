@@ -403,7 +403,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     let ownerEmail = object["ownerEmail"] as? String ?? ""
                     let ownerName = object["ownerName"] as? String ?? ""
                     let ownerPhone = object["ownerPhone"] as? String ?? ""
-                    print(ownerPhone)
+                    //print(ownerPhone)
                     let ownerPhotoRef = object["ownerPhotoRef"] as? String ?? ""
                     // object.objectId;
                     let ownerId = object["ownerId"] as? String ?? ""
@@ -579,10 +579,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var ownerEmail:String? = cellDataParse["ownerEmail"] as? String
                     if (ownerEmail == nil) {ownerEmail = ""}
                     
+                    //TODO: SEE HOW IT IS DONE
                     let alex = object["ownerPhone"] as? String ?? ""
-                    var ownerPhone:String? = cellDataParse["ownerPhone"] as? String
                     print(alex)
-                    print(ownerPhone)
+                    
+                    var ownerPhone:String? = cellDataParse["ownerPhone"] as? String
+                    //print(ownerPhone)
                     if (ownerPhone == nil) {ownerPhone = ""}
                     
                     var appName:String? = cellDataParse["appName"] as? String
