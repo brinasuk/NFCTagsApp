@@ -13,6 +13,9 @@
         <array key="Rubik-Light.ttf">
             <string>Rubik-Light</string>
         </array>
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Auteur Detail View Controller-->
@@ -622,10 +625,10 @@
             </objects>
             <point key="canvasLocation" x="-140688.79999999999" y="-55410.591133004928"/>
         </scene>
-        <!--Tag Detail View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="2lW-ff-SRb">
             <objects>
-                <viewController id="VaW-2d-StK" customClass="TagDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VaW-2d-StK" customClass="DetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nYF-QD-CJ3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -844,9 +847,17 @@
                                     <constraint firstAttribute="width" constant="375" id="LAW-qj-3YQ"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" id="niR-4j-hBe"/>
+                                    <barButtonItem title="Rate This" id="niR-4j-hBe">
+                                        <connections>
+                                            <segue destination="Aa3-XZ-WUI" kind="presentation" identifier="showReview" id="aKx-pt-45z"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dKh-jm-fzC"/>
-                                    <barButtonItem title="Item" id="leo-su-qoA"/>
+                                    <barButtonItem title="Contact Us" id="leo-su-qoA">
+                                        <connections>
+                                            <action selector="contactUsButtonPressed:" destination="VaW-2d-StK" id="BjR-rW-zP3"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -1341,11 +1352,109 @@
             </objects>
             <point key="canvasLocation" x="-138996" y="-54718"/>
         </scene>
+        <!--Review View Controller-->
+        <scene sceneID="kMn-fH-49J">
+            <objects>
+                <viewController id="Aa3-XZ-WUI" customClass="ReviewViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MlC-2M-OM5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i5G-bb-cQg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktp-px-ZKT" userLabel="Close">
+                                <rect key="frame" x="343" y="44" width="16" height="22"/>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <segue destination="8OW-GW-fhj" kind="unwind" unwindAction="closeWithSegue:" id="tjO-mu-8Vc"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aon-qK-IZv">
+                                <rect key="frame" x="105.66666666666669" y="238.66666666666663" width="164" height="335"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pj8-l8-MYB">
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="59"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Love" image="love"/>
+                                        <connections>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="love" unwindAction="rateRestaurantWithSegue:" id="WSN-aC-6lZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnm-Ug-nFv">
+                                        <rect key="frame" x="0.0" y="69.000000000000028" width="121" height="59"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Cool" image="cool"/>
+                                        <connections>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="cool" unwindAction="rateRestaurantWithSegue:" id="Lem-84-3ig"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxK-xm-k3Y">
+                                        <rect key="frame" x="0.0" y="138.00000000000003" width="164" height="59"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Happy" image="happy"/>
+                                        <connections>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="happy" unwindAction="rateRestaurantWithSegue:" id="u3p-Gq-Jhr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JF-Ow-3aP">
+                                        <rect key="frame" x="0.0" y="207.00000000000003" width="105" height="58.999999999999972"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Sad" image="sad"/>
+                                        <connections>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="sad" unwindAction="rateRestaurantWithSegue:" id="51t-qd-GTs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-rj-tjo">
+                                        <rect key="frame" x="0.0" y="276" width="147" height="59"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Angry" image="angry"/>
+                                        <connections>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="angry" unwindAction="rateRestaurantWithSegue:" id="CMD-HO-Npr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aon-qK-IZv" firstAttribute="centerY" secondItem="MlC-2M-OM5" secondAttribute="centerY" id="1Ov-gL-DJS"/>
+                            <constraint firstItem="i5G-bb-cQg" firstAttribute="top" secondItem="MlC-2M-OM5" secondAttribute="top" id="3hc-3r-PyE"/>
+                            <constraint firstItem="kdV-Am-wYf" firstAttribute="trailing" secondItem="ktp-px-ZKT" secondAttribute="trailing" constant="16" id="Rhc-6B-2s0"/>
+                            <constraint firstItem="aon-qK-IZv" firstAttribute="centerX" secondItem="MlC-2M-OM5" secondAttribute="centerX" id="Sll-RJ-D2X"/>
+                            <constraint firstItem="i5G-bb-cQg" firstAttribute="trailing" secondItem="kdV-Am-wYf" secondAttribute="trailing" id="Z7l-Ct-SXV"/>
+                            <constraint firstItem="ktp-px-ZKT" firstAttribute="top" secondItem="kdV-Am-wYf" secondAttribute="top" id="Zow-GY-CEl"/>
+                            <constraint firstItem="i5G-bb-cQg" firstAttribute="bottom" secondItem="kdV-Am-wYf" secondAttribute="bottom" id="cKa-xR-Sah"/>
+                            <constraint firstItem="i5G-bb-cQg" firstAttribute="leading" secondItem="kdV-Am-wYf" secondAttribute="leading" id="yYS-XJ-5aY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kdV-Am-wYf"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="i5G-bb-cQg" id="T02-Mh-lt6"/>
+                        <outlet property="closeButton" destination="ktp-px-ZKT" id="aW7-7L-vhX"/>
+                        <outletCollection property="rateButtons" destination="Pj8-l8-MYB" collectionClass="NSMutableArray" id="dJY-WI-TLr"/>
+                        <outletCollection property="rateButtons" destination="Vnm-Ug-nFv" collectionClass="NSMutableArray" id="o9X-tp-Q7Z"/>
+                        <outletCollection property="rateButtons" destination="qxK-xm-k3Y" collectionClass="NSMutableArray" id="yra-H2-2ci"/>
+                        <outletCollection property="rateButtons" destination="0JF-Ow-3aP" collectionClass="NSMutableArray" id="z2X-RR-nx6"/>
+                        <outletCollection property="rateButtons" destination="wsf-rj-tjo" collectionClass="NSMutableArray" id="t3W-bH-uFv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qef-V6-25U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8OW-GW-fhj" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-136959" y="-55456"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="angry" width="78" height="103"/>
         <image name="art_launch_image" width="1125" height="2429"/>
         <image name="close" width="16" height="16"/>
+        <image name="cool" width="78" height="83"/>
+        <image name="cross" width="33" height="32"/>
+        <image name="happy" width="78" height="86"/>
         <image name="list-item-background" width="375" height="60"/>
+        <image name="love" width="78" height="82"/>
+        <image name="sad" width="78" height="87"/>
         <image name="save" width="20" height="20"/>
         <image name="tall" width="3024" height="4032"/>
         <image name="text-input" width="224" height="28"/>

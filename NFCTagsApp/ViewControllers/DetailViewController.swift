@@ -1,5 +1,5 @@
 //
-//  TagDetailViewController.swift
+//  DetailViewController.swift
 //
 //  Created by Alex Levy on 5/26/19.
 //  Copyright © 2019 Hillside Software. All rights reserved.
@@ -8,8 +8,9 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import MessageUI
 
-class TagDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     var tag = TagModel()
@@ -17,7 +18,9 @@ class TagDetailViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
 
-override func viewDidLoad() {
+
+    
+    override func viewDidLoad() {
     super.viewDidLoad()
     
     //        headerView.headerImageView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.2f];
@@ -169,10 +172,10 @@ override func viewDidLoad() {
             var addr:String
             addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
             
-            // Ex Showing how to remove TRAILING WHITESPACE
-            let myString = "  \t\t  Let's trim all the whitespace  \n \t  \n  "
-            let newString = myString.trimmingCharacters(in: CharacterSet.whitespaces)
-            print(newString)
+//            // Ex Showing how to remove TRAILING WHITESPACE
+//            let myString = "  \t\t  Let's trim all the whitespace  \n \t  \n  "
+//            let newString = myString.trimmingCharacters(in: CharacterSet.whitespaces)
+//            print(newString)
             
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
             cell.iconImageView.image = UIImage(named: "map")
@@ -209,12 +212,45 @@ override func viewDidLoad() {
         }
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ShowMap" {
+//            let destinationController = segue.destination as! MapViewController
+//            destinationController.tag = tag
+//        }
+//    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowMap" {
+        if segue.identifier == "showMap" {
             let destinationController = segue.destination as! MapViewController
+            destinationController.tag = tag
+            
+        } else if segue.identifier == "showReview" {
+            let destinationController = segue.destination as! ReviewViewController
             destinationController.tag = tag
         }
     }
+    
+    @IBAction func close(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+//    @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
+//        dismiss(animated: true, completion: {
+//            if let rating = segue.identifier {
+//                self.restaurant.rating = rating
+//                self.headerView.ratingImageView.image = UIImage(named: rating)
+//
+//                let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
+//                self.headerView.ratingImageView.transform = scaleTransform
+//                self.headerView.ratingImageView.alpha = 0
+//
+//                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
+//                    self.headerView.ratingImageView.transform = .identity
+//                    self.headerView.ratingImageView.alpha = 1
+//                }, completion: nil)
+//            }
+//        })
+//    }
     
     // MARK: - Status bar
     
@@ -263,5 +299,227 @@ override func viewDidLoad() {
     //
     //    return UIImage(cgImage: image)
     //}
+    
+    
+    
+    /*
+     //https://www.hackingwithswift.com/example-code/uikit/how-to-send-an-email
+     Make sure you add import MessageUI to any Swift file that uses this code, and you’ll also need to conform to the MFMailComposeViewControllerDelegate protocol.
+     
+     Note that not all users have their device configure to send emails, which is why we need to check the result of canSendMail() before trying to send. Note also that you need to catch the didFinishWith callback in order to dismiss the mail window.
+     
+     Warning: this code frequently fails in the iOS Simulator. If you want to test it, try on a real device.
+     */
+    
+    @IBAction func contactUsButtonPressed(_ sender: UIBarButtonItem) {
+        print("CONTACTUSPRESSED")
+        var appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([tag.ownerEmail])
+            let subject = tag.tagTitle
+            mail.setSubject(subject)
+            var message = "I found this on the " + appName + " website. Please send me more information.<br><br>"
+            message = message + "\(tag.tagTitle ) <br> \(tag.tagSubTitle )<br>\(tag.tagCompany)"
+            mail.setMessageBody(message, isHTML: true)
+            //NSLog(@"MESSAGE: %@",message);
+            
+            present(mail, animated: true, completion: nil)
+            //present(mail, animated: true)
+        } else {
+            // show failure alert
+            displayMessage(message: "Cannot send Email")
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func rateThisButtonPressed(_ sender: UIBarButtonItem) {
+        print("RATEBUTTONPRESSED")
+    }
+
+    
+
+
+    
+
+
+    
+    //BEACON TAPPED MADISON22
+    // WHENEVER THE USER TAPS A BEACON, SEND THE LEAD TO THE OWNER
+    /*
+    func sendGrid(_ useTitle: String?, usingSubTitle useSubTitle: String?, usingCompany useCompany: String?, usingAddress useAddress: String?, usingOwnerEmail useOwnerEmail: String?) {
+        
+        let sendgrid = SendGrid.apiUser("hillside_ios", apiKey: "46inh2@sa&12")
+        let email = SendGridEmail()
+        
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "EEE, MMM d, h:mm a"
+        //[dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];  //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+        
+        let dateSubmitted = "\(dateFormat.string(from: Date()))"
+        
+        var sendTo: String
+        //SEND LEAD TO OWNER
+        sendTo = useOwnerEmail ?? ""
+        sendTo = "alex@hillsoft.com" //TODO: ALEX TEMP FIX FOR TESTING. REMOVE FROM FINAL RELEASE !
+        
+        let message = "The following Beacon was tapped: <br><br>"
+        
+        var body = "<h1><b>Beacon Tapped</b></h1>"
+        
+        body = body + ("<h3>")
+        
+        body = body + ("<p><b>Date: </b>")
+        body = body + (dateSubmitted)
+        body = body + ("</p>")
+        
+        body = body + ("</b><p><b>From: </b>")
+        body = body + (kAppDelegate.currentUserName)
+        body = body + ("</p>")
+        body = body + ("</b><p><b>Email: </b>")
+        body = body + (kAppDelegate.currentUserEmail)
+        body = body + ("</p>")
+        
+        body = body + ("</b><p><b>Message: </b>")
+        body = body + (message)
+        
+        
+        
+        body = body + ("<p><b>Title: </b>")
+        body = body + (useTitle ?? "")
+        body = body + ("</p>")
+        
+        body = body + ("<p><b>SubTitle: </b>")
+        body = body + (useSubTitle ?? "")
+        body = body + ("</p>")
+        
+        body = body + ("<p><b>Company: </b>")
+        body = body + (useCompany ?? "")
+        body = body + ("</p>")
+        
+        body = body + ("<p><b>Address: </b>")
+        body = body + (useAddress ?? "")
+        body = body + ("</p>")
+        
+        
+        
+        body = body + ("</h3>")
+        
+        
+        body = body + ("</p>") //NSString *photoLink = [NSString stringWithFormat:@"<br><p>Click for Photo Link <a href=\"%@\">here</a></p><br>",_finderPhotoFileUrl];
+        */
+        
+        /*
+         NSString *usePhotoLink = @"";
+         
+         //TODO: ADD SUPPORT FOR PHOTO
+         if ([_photoId length]==0) {
+         usePhotoLink = @"https://photos.homecards.com/rebeacons/property_placeholder.jpg";
+         } else {
+         usePhotoLink = _finderPhotoFileUrl;
+         }
+         NSString *imageLink = [NSString stringWithFormat:@"<br><p><img src=\"%@\" alt=\"Check that you allow images in your email or no image was provided\" scale=\"0\"></p><br>",usePhotoLink];
+         body = [body stringByAppendingString:imageLink];
+         */
+        
+        /*
+        body = body + ("<br>")
+        
+        email.subject = "Beacon Tapped"
+        email.from = kAppDelegate.currentUserEmail
+        //NSLog(@"NAME: %@  EMAIL: %@",kAppDelegate.currentUserName,kAppDelegate.currentUserEmail);
+        email.to = sendTo
+        email.html = body
+        sendgrid.send(withWeb: email)
+ */
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - TABLECELL ACTIONS
+    //SEND TEXT MADISON22
+//    func showSMS() {
+/*
+        if !MFMessageComposeViewController.canSendText() {
+            let warningAlert = UIAlertView(title: "Error", message: "Your device doesn't support SMS!", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+            warningAlert.show()
+            return
+        }
+        
+        
+        
+        //NSLog(@"index path : %ld", row);
+        let object = listingsArray[row] as? TagModel
+        
+        
+        var currentOwnerEmail = object?["ownerEmail"] as? String
+        if currentOwnerEmail == nil {
+            currentOwnerEmail = ""
+        }
+        
+        var useTitle = object?["tagTitle"] as? String
+        var useAddress = object?["tagAddress"] as? String
+        var useSubTitle = object?["tagSubTitle"] as? String
+        var useCompany = object?["tagCompany"] as? String
+        var currentPropertyAddress = object?["tagAddress"] as? String
+        
+        if currentPropertyAddress == nil {
+            currentPropertyAddress = ""
+        }
+        if useTitle == nil {
+            useTitle = ""
+        }
+        if useSubTitle == nil {
+            useSubTitle = ""
+        }
+        if useCompany == nil {
+            useCompany = ""
+        }
+        if useAddress == nil {
+            useAddress = ""
+        }
+        
+        let message = "\(useTitle ?? "") \(useSubTitle ?? "") \(useCompany ?? "")"
+        //NSLog(@"MESSAGE: %@",message);
+        
+        let recipents = [currentOwnerEmail]
+        //NSString *message = currentPropertyAddress;
+        
+        
+        let messageController = MFMessageComposeViewController()
+        messageController.messageComposeDelegate = self
+        messageController.recipients = recipents
+        messageController.body = message
+        
+        // Present message view controller on screen
+        present(messageController, animated: true)
+ */
+
+
+/*
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        switch result {
+        case .cancelled:
+            break
+        case .failed:
+            let warningAlert = UIAlertView(title: "Error", message: "Failed to send SMS!", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+            warningAlert.show()
+        case .sent:
+            break
+        default:
+            break
+        }
+        dismiss(animated: true)
+    }
+*/
 
 }

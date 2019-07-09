@@ -12,6 +12,7 @@ import Alamofire
 import Kingfisher
 import Alertift
 import CropViewController
+import MapKit
 
 
 class NewTagController: UITableViewController, UITextFieldDelegate, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -24,6 +25,10 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     private var croppedRect = CGRect.zero
     private var croppedAngle = 0
+    
+    private var latitude:Double? = 0.0
+    private var longitude:Double? = 0.0
+    
     
     var isDirtyPhoto:Bool? = false
     
@@ -485,8 +490,59 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     }
     
     func saveText () {
-        let sv = UIViewController.displaySpinner(onView: self.view)
         
+        
+        // Convert address to coordinate and annotate it on map
+        let geoCoder = CLGeocoder()
+        //ownerAddrFull
+        var address:String? = addressTextField.text
+        //address = "S Arm Road, V & A Waterfront, Cape Town Western Cape 8002 South Africa"
+        
+        geoCoder.geocodeAddressString(address ?? "", completionHandler: { placemarks, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            if let placemarks = placemarks {
+                // Get the first placemark
+                let placemark = placemarks[0]
+                
+                // Add annotation
+                //let annotation = MKPointAnnotation()
+                //annotation.title = self.restaurant.name
+                //annotation.subtitle = self.restaurant.type
+                
+                if let location = placemark.location {
+                    //annotation.coordinate = location.coordinate
+                    
+                    //let placemark = placemarks?.first
+                    self.latitude = placemark.location?.coordinate.latitude
+                    self.longitude = placemark.location?.coordinate.longitude
+                    print("Lat: \(String(describing: self.latitude)), Lon: \(String(describing: self.longitude))")
+                    if self.latitude == 0.0 && self.longitude == 0.0 {
+                        //UIViewController.removeSpinner(spinner: sv)
+                        self.displayMessage(message: "Invalid Address")
+                    } else {
+                        self.saveRecord()
+                    }
+
+                } else {
+                    print("Message1")
+                }
+                
+            } else {
+                print("Message2")
+            }
+            
+        })
+
+
+        
+    }
+    
+    func saveRecord(){
+        let sv = UIViewController.displaySpinner(onView: self.view)
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("objectId", equalTo: owner.ownerObjectId)
         //print(owner.ownerObjectId)
@@ -527,6 +583,15 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                 object["ownerUrl"] = self.websiteTextField.text
                 object["ownerInfo"] = self.descriptionTextView.text
                 
+                object["latitude"] = self.latitude.map { String($0) } ?? "0.0"
+                object["longitude"] = self.longitude.map { String($0) } ?? "0.0"
+                
+                //object latitudeD = self.latitude
+                //object longitudeD = self.longitude
+                
+                let point = PFGeoPoint(latitude: self.latitude!, longitude: self.longitude!)
+                object["location"] = point
+                
                 
                 object.saveInBackground {
                     (success: Bool, error: Error?) in
@@ -563,6 +628,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                 print("Successfully UPDATED")
             }
         }
+
     }
     
     func uploadImage(){

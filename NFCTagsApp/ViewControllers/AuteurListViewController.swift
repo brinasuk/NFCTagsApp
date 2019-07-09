@@ -8,7 +8,11 @@ import SafariServices
 import Alertift
 import Kingfisher
 
+
+
 class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
+    
+
     
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -452,7 +456,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     tag["appName"] = self.kAppDelegate.appCode
                     tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
                     
-                    tag["tagPhotoRef"] = ownerPhotoRef
+                    //TODO: ALEX FIX OWNERID???
+                    tag["tagPhotoRef"] = ownerId  // ownerPhotoRef
                     tag["tagId"] = ownerId
                     tag["tagTitle"] = ownerTitle
                     tag["tagSubTitle"] = ownerSubTitle
@@ -836,7 +841,7 @@ extension AuteurListViewController: UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "TagDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! TagDetailViewController
+                let destinationController = segue.destination as! DetailViewController
                 destinationController.tag = self.tagObjects[indexPath.row]
             }
         }
