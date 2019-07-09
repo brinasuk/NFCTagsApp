@@ -222,6 +222,10 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         ownerUrlKeep = owner.ownerUrl
         ownerInfoKeep = owner.ownerInfo
         
+        self.latitude = Double(owner.latitude)
+        self.longitude = Double(owner.longitude)
+        
+        
         // SHOW PHOTO
         //photoImageView.contentMode = .scaleAspectFit
         //photoImageView.clipsToBounds = true
@@ -491,17 +495,30 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     }
     
     func saveText () {
+        //Special Code when Address has changed. Need to GEOCODE Lat/Lon
+//        print(ownerAddrFullKeep)
+//        print(addressTextField.text)
         
+        if ownerAddrFullKeep != addressTextField.text  {
+            geocodeRecord()  //GECOGE AND SAVE RECORD
+        } else {
+        //SOMETHING OTHER THAN THE ADDRESS CHANGED.
+            saveRecord()  //JUST SAVE THE RECORD
+        }
+    }
         
+    func geocodeRecord(){
         // Convert address to coordinate and annotate it on map
         let geoCoder = CLGeocoder()
-        //ownerAddrFull
-        var address:String? = addressTextField.text
-        //address = "S Arm Road, V & A Waterfront, Cape Town Western Cape 8002 South Africa"
-        
-        geoCoder.geocodeAddressString(address ?? "", completionHandler: { placemarks, error in
+        let address:String? = addressTextField.text
+        //let address = "S Arm Road, V & A Waterfront, Cape Town Western Cape 8002 South Africa"
+        //let address = "1 Aldwych, Westminster Borough, London, WC2B 4BZ, United Kingdom"
+        //let address = "1 Aldwych London WC2B 4BZ"
+    
+        geoCoder.geocodeAddressString(address! , completionHandler: { placemarks, error in
             if let error = error {
                 print(error)
+                self.displayMessage(message: "The Address you entered is Invalid. Please try again")
                 return
             }
             
@@ -509,42 +526,24 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
                 // Get the first placemark
                 let placemark = placemarks[0]
                 
-                // Add annotation
-                //let annotation = MKPointAnnotation()
-                //annotation.title = self.restaurant.name
-                //annotation.subtitle = self.restaurant.type
+                self.latitude = placemark.location?.coordinate.latitude
+                self.longitude = placemark.location?.coordinate.longitude
+                print("Lat: \(String(describing: self.latitude)), Lon: \(String(describing: self.longitude))")
                 
-                if let location = placemark.location {
-                    //annotation.coordinate = location.coordinate
-                    
-                    //let placemark = placemarks?.first
-                    self.latitude = placemark.location?.coordinate.latitude
-                    self.longitude = placemark.location?.coordinate.longitude
-                    print("Lat: \(String(describing: self.latitude)), Lon: \(String(describing: self.longitude))")
-                    if self.latitude == 0.0 && self.longitude == 0.0 {
-                        //UIViewController.removeSpinner(spinner: sv)
-                        self.displayMessage(message: "Invalid Address")
-                    } else {
-                        self.saveRecord()
-                    }
-
+                if self.latitude == 0.0 && self.longitude == 0.0 {
+                    //UIViewController.removeSpinner(spinner: sv)
+                    self.displayMessage(message: "The Address you entered is Invalid. Please try again")
                 } else {
-                    print("Message1")
+                    self.saveRecord()
                 }
-                
-            } else {
-                print("Message2")
             }
-            
-        })
-
-
-        
-    }
+        }
+    )}
     
     func saveRecord(){
         let sv = UIViewController.displaySpinner(onView: self.view)
         let query = PFQuery(className: "TagOwnerInfo")
+        print (owner.ownerObjectId)
         query.whereKey("objectId", equalTo: owner.ownerObjectId)
         //print(owner.ownerObjectId)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
@@ -737,7 +736,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     func onCompletion () {
         self.progressBar.setProgress(to: 100.0, withAnimation: true)
         
-    //NOTE THE USE OF popToROOTViewController. 
+        //NOTE THE USE OF popToROOTViewController. THIS IS CRITICAL !!!!!
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -779,18 +778,18 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     //let resizedImage = scaleImageToWidth(with: image, scaledToWidth: 300.0)
     
-    func scaleImageToWidth(with sourceImage: UIImage?, scaledToWidth i_width: Float) -> UIImage? {
-        let oldWidth = Float(sourceImage?.size.width ?? 0.0)
-        let scaleFactor: Float = i_width / oldWidth
-        let newHeight = Float((sourceImage?.size.height ?? 0.0) * CGFloat(scaleFactor))
-        let newWidth: Float = oldWidth * scaleFactor
-        
-        UIGraphicsBeginImageContext(CGSize(width: CGFloat(newWidth), height: CGFloat(newHeight)))
-        sourceImage?.draw(in: CGRect(x: 0, y: 0, width: CGFloat(newWidth), height: CGFloat(newHeight)))
-        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
+//    func scaleImageToWidth(with sourceImage: UIImage?, scaledToWidth i_width: Float) -> UIImage? {
+//        let oldWidth = Float(sourceImage?.size.width ?? 0.0)
+//        let scaleFactor: Float = i_width / oldWidth
+//        let newHeight = Float((sourceImage?.size.height ?? 0.0) * CGFloat(scaleFactor))
+//        let newWidth: Float = oldWidth * scaleFactor
+//
+//        UIGraphicsBeginImageContext(CGSize(width: CGFloat(newWidth), height: CGFloat(newHeight)))
+//        sourceImage?.draw(in: CGRect(x: 0, y: 0, width: CGFloat(newWidth), height: CGFloat(newHeight)))
+//        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return newImage
+//    }
     
     /*
      import AVFoundation
@@ -859,11 +858,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         if useID == nil {
             return nil
         }
-        
-        //       var photoName = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
-        var photoName = String(format: "%@-%@-%ld.jpg",useAction ?? "", useID ?? "", useNumber)
-        
-        //NSLog(@"PHOTONAME: %@",photoName);
+        let photoName = String(format: "%@-%@-%ld.jpg",useAction ?? "", useID ?? "", useNumber)
         return photoName
     }
     
@@ -900,8 +895,9 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         
         if ownerNameKeep != contactTextField.text  {isDirty = true}
         if ownerPhoneKeep != phoneTextField.text  {isDirty = true}
-        
+
         if ownerAddrFullKeep != addressTextField.text  {isDirty = true}
+        
         if ownerUrlKeep != websiteTextField.text  {isDirty = true}
         if ownerInfoKeep != descriptionTextView.text  {isDirty = true}
         
@@ -910,19 +906,20 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     
     // MARK: - SET PHOTO CONSTRAINTS
     
-    func setPhotoConstraints() {
-        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
-        leadingConstraint.isActive = true
-        
-        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
-        trailingConstraint.isActive = true
-        
-        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
-        topConstraint.isActive = true
-        
-        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-        bottomConstraint.isActive = true
-        
-    }
+//    func setPhotoConstraints() {
+//        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
+//        leadingConstraint.isActive = true
+//
+//        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+//        trailingConstraint.isActive = true
+//
+//        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
+//        topConstraint.isActive = true
+//
+//        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+//        bottomConstraint.isActive = true
+//
+//    }
+    
 }
 
