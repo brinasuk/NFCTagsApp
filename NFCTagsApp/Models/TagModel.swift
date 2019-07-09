@@ -52,6 +52,7 @@ class TagModel {
     
     var triggerDistance: String
     var sequence: String
+    var rating: String
     
 
     init (createdAt:Date,
@@ -93,7 +94,8 @@ class TagModel {
         tagSqFt: String,
         
         triggerDistance:String,
-        sequence:String
+        sequence:String,
+        rating:String
         
         )
     {
@@ -137,6 +139,7 @@ class TagModel {
         
         self.triggerDistance = triggerDistance;
         self.sequence = sequence;
+        self.rating = rating
     }
 
     convenience init() {
@@ -179,7 +182,8 @@ class TagModel {
             tagSqFt: "",
             
             triggerDistance: "",
-            sequence: ""
+            sequence: "",
+            rating: ""
         )
     }
 }

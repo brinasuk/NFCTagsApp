@@ -11,10 +11,27 @@ import UIKit
 class TagDetailHeaderView: UIView {
 
     @IBOutlet var headerImageView: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var subTitleLabel: UILabel!
-    @IBOutlet var priceLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel! {
+        didSet {
+            titleLabel.numberOfLines = 0
+        }
+    }
+    @IBOutlet var subTitleLabel: UILabel! {
+        didSet {
+            subTitleLabel.numberOfLines = 0
+        }
+    }
+    @IBOutlet var priceLabel: UILabel! {
+        didSet {
+            priceLabel.layer.cornerRadius = 5.0
+            priceLabel.layer.masksToBounds = true
+        }
+    }
+    
     //@IBOutlet var heartImageView: UIImageView!
+
+    
+    @IBOutlet var ratingImageView: UIImageView!
 
     
 

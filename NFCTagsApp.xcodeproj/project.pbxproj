@@ -19,8 +19,6 @@
 		C715679E227BDA0900D1A55A /* auteurs.json in Resources */ = {isa = PBXBuildFile; fileRef = C7156795227BDA0900D1A55A /* auteurs.json */; };
 		C715679F227BDA0900D1A55A /* AuteurDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7156797227BDA0900D1A55A /* AuteurDetailViewController.swift */; };
 		C71B63D8229AFDD200B6910A /* TagDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */; };
-		C71B63DE229B74F300B6910A /* RestaurantDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */; };
-		C71B63E2229B784800B6910A /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */; };
 		C71B63E4229B798A00B6910A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E3229B798A00B6910A /* DetailViewController.swift */; };
 		C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */; };
 		C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */; };
@@ -95,8 +93,6 @@
 		C71B63D5229AEDD600B6910A /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		C71B63D6229AEDD600B6910A /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailHeaderView.swift; sourceTree = "<group>"; };
-		C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailHeaderView.swift; sourceTree = "<group>"; };
-		C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		C71B63E3229B798A00B6910A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailIconTextCell.swift; sourceTree = "<group>"; };
 		C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTextCell.swift; sourceTree = "<group>"; };
@@ -222,7 +218,6 @@
 				C715678E227BDA0900D1A55A /* AuteurTableViewCell.swift */,
 				C7156790227BDA0900D1A55A /* FilmTableViewCell.swift */,
 				C71B63D7229AFDD200B6910A /* TagDetailHeaderView.swift */,
-				C71B63DD229B74F300B6910A /* RestaurantDetailHeaderView.swift */,
 				C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */,
 				C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */,
 				C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */,
@@ -261,7 +256,6 @@
 				C76D3EEB22AA022000794637 /* RoundedTextField.swift */,
 				C77968D62286264B00CE6B4C /* AuteurListViewController.swift */,
 				C7156797227BDA0900D1A55A /* AuteurDetailViewController.swift */,
-				C71B63E1229B784800B6910A /* RestaurantDetailViewController.swift */,
 				C71B63E3229B798A00B6910A /* DetailViewController.swift */,
 				C793547B22A0DCC800DD1828 /* MapViewController.swift */,
 				C76D3EF122AB104400794637 /* MaintTableView.swift */,
@@ -491,7 +485,6 @@
 				C715679C227BDA0900D1A55A /* Film.swift in Sources */,
 				C7DA87F7229259DC00457112 /* AppDelegate.swift in Sources */,
 				C715679D227BDA0900D1A55A /* Auteur.swift in Sources */,
-				C71B63E2229B784800B6910A /* RestaurantDetailViewController.swift in Sources */,
 				C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */,
 				C7C4844A22871B7F00C6A95B /* DemoModel.swift in Sources */,
 				C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */,
@@ -499,7 +492,6 @@
 				C78159DE22CAC54700625046 /* NewTagController.swift in Sources */,
 				C71B63E4229B798A00B6910A /* DetailViewController.swift in Sources */,
 				C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */,
-				C71B63DE229B74F300B6910A /* RestaurantDetailHeaderView.swift in Sources */,
 				C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */,
 				C78159E022CB100600625046 /* CircularProgressBar.swift in Sources */,
 				C77968D72286264B00CE6B4C /* AuteurListViewController.swift in Sources */,

@@ -17,9 +17,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     var tag = TagModel()
     
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var headerView: RestaurantDetailHeaderView!
+    @IBOutlet var headerView: TagDetailHeaderView!
 
-
+    
     
     override func viewDidLoad() {
     super.viewDidLoad()
@@ -201,7 +201,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         case 7:  //SHOW MAP
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
-            var addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
+            //var addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
+            let addr = tag.tagAddrFull
             cell.configure(location: addr)  //NOTE: THIS IS DEFINED IN THE CELL
             cell.selectionStyle = .none
             
@@ -235,23 +236,24 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         dismiss(animated: true, completion: nil)
     }
     
-//    @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
-//        dismiss(animated: true, completion: {
-//            if let rating = segue.identifier {
-//                self.restaurant.rating = rating
-//                self.headerView.ratingImageView.image = UIImage(named: rating)
-//
-//                let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
-//                self.headerView.ratingImageView.transform = scaleTransform
-//                self.headerView.ratingImageView.alpha = 0
-//
-//                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
-//                    self.headerView.ratingImageView.transform = .identity
-//                    self.headerView.ratingImageView.alpha = 1
-//                }, completion: nil)
-//            }
-//        })
-//    }
+    @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: {
+            if let rating = segue.identifier {
+                self.tag.rating = rating
+                
+                self.headerView.ratingImageView.image = UIImage(named: rating)
+
+                let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
+                self.headerView.ratingImageView.transform = scaleTransform
+                self.headerView.ratingImageView.alpha = 0
+
+                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
+                    self.headerView.ratingImageView.transform = .identity
+                    self.headerView.ratingImageView.alpha = 1
+                }, completion: nil)
+            }
+        })
+    }
     
     // MARK: - Status bar
     

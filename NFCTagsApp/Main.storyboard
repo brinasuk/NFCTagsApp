@@ -644,8 +644,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </imageView>
-                                        <view alpha="0.20000000298023224" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JXR-10-BEy" userLabel="Dim View">
-                                            <rect key="frame" x="146" y="139" width="229" height="211"/>
+                                        <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXR-10-BEy" userLabel="Dim View">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwg-Vf-QlN" userLabel="Title">
                                                     <rect key="frame" x="8" y="241" width="94" height="20"/>
@@ -662,6 +662,14 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRx-82-h06" userLabel="ratingImageView">
+                                                    <rect key="frame" x="292" y="97" width="64" height="64"/>
+                                                    <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="64" id="DkM-NE-Avc"/>
+                                                        <constraint firstAttribute="width" constant="64" id="LQJ-JB-eWm"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak1-cW-eK8" userLabel="Price">
                                                     <rect key="frame" x="267" y="285" width="100" height="20"/>
                                                     <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -676,10 +684,12 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="GRx-82-h06" secondAttribute="trailing" constant="19" id="79Q-WM-5XO"/>
                                                 <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="24" id="KBw-cT-6Jh"/>
                                                 <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="fwg-Vf-QlN" secondAttribute="leading" id="Oqd-0p-Jbv"/>
                                                 <constraint firstItem="ak1-cW-eK8" firstAttribute="firstBaseline" secondItem="uCM-4H-tnq" secondAttribute="baseline" id="S6R-Bt-UHI"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwg-Vf-QlN" secondAttribute="trailing" constant="50" id="SYf-SD-iAi"/>
+                                                <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="GRx-82-h06" secondAttribute="bottom" constant="124" id="WhW-iM-cqC"/>
                                                 <constraint firstAttribute="bottom" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="89" id="faV-o5-gaf"/>
                                                 <constraint firstItem="ak1-cW-eK8" firstAttribute="leading" secondItem="uCM-4H-tnq" secondAttribute="trailing" constant="8" symbolic="YES" id="gpG-fc-lGa"/>
                                                 <constraint firstItem="fwg-Vf-QlN" firstAttribute="leading" secondItem="JXR-10-BEy" secondAttribute="leadingMargin" id="j9h-YQ-e2Y"/>
@@ -700,6 +710,7 @@
                                     <connections>
                                         <outlet property="headerImageView" destination="Dhi-zA-SYj" id="1KC-5D-8UK"/>
                                         <outlet property="priceLabel" destination="ak1-cW-eK8" id="mi9-N6-3Nv"/>
+                                        <outlet property="ratingImageView" destination="GRx-82-h06" id="zUc-Zx-zpu"/>
                                         <outlet property="subTitleLabel" destination="uCM-4H-tnq" id="StR-I1-o2a"/>
                                         <outlet property="titleLabel" destination="fwg-Vf-QlN" id="Ki8-X5-5vE"/>
                                     </connections>
