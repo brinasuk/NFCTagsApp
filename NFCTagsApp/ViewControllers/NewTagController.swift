@@ -106,6 +106,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         didSet {
             addressTextField.tag = 5
             addressTextField.delegate = self
+            
         }
     }
 

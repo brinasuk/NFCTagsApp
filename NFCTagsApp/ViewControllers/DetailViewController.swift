@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import MessageUI
+import SafariServices
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 
@@ -339,8 +340,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
-    @IBAction func rateThisButtonPressed(_ sender: UIBarButtonItem) {
-        print("RATEBUTTONPRESSED")
+    @IBAction func websiteButtonPressed(_ sender: UIBarButtonItem) {
+        print("WEBSITEBUTTONPRESSED")
+        let urlString = tag.tagUrl
+        if let url = URL(string: urlString ) {
+            let safariVC = SFSafariViewController(url: url)
+            self.present(safariVC, animated: true, completion: nil)
+        }
     }
 
     
