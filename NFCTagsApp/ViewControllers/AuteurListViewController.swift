@@ -374,6 +374,14 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         //tagId = "info@kcontemporaryart.com:102" //TODO: REMOVE
         print("USETAGID: \(useTagId ?? "")")
         
+        ///let str = "Andrew, Ben, John, Paul, Peter, Laura"
+        ///let array = str.components(separatedBy: ", ")
+        
+//        let sayHello = "Hello Swift 4 2017";
+//        let result = sayHello.split(separator: " ")
+//        print(result) result.count
+        
+        
         //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         //or: AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         //AudioServicesPlaySystemSound(1103) // SMSReceived (see SystemSoundID below)
@@ -381,8 +389,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         //beaconAlert?.dismiss()
         
         let sv = UIViewController.displaySpinner(onView: self.view)
-        
-
         
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerId", equalTo: useTagId!)
@@ -1281,5 +1287,11 @@ extension AuteurListViewController: UITableViewDataSource {
         
         return UIImage(cgImage: image)
     }
+    
+//    @IBAction func unwindToMainController(segue: UIStoryboardSegue) {
+//        print ("Return here after adding a new account")
+//    }
+    
+
     
 }

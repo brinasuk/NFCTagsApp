@@ -242,9 +242,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         */
         
         //goBackButtonPressed()
+        
+        //DOES NOT WORK. Use newAccountFlag Instead
+        //self.performSegue(withIdentifier: "unwindToMainController", sender: self)
 
         kAppDelegate.newAccountFlag = true
-        goBackButtonPressed() 
+        goBackButtonPressed()
         
         
         //DOES NOT WORK navigationController?.popToRootViewController(animated: true)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TagDetailHeaderView: UIView {
+class DetailHeaderView: UIView {
 
     @IBOutlet var headerImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel! {

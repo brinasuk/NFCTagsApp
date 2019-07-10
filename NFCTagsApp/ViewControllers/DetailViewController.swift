@@ -17,7 +17,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     var tag = TagModel()
     
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var headerView: TagDetailHeaderView!
+    @IBOutlet var headerView: DetailHeaderView!
 
     
     

@@ -472,7 +472,7 @@ class MaintTableView: UITableViewController {
     }
     
     @IBAction func unwindToRefresh(segue: UIStoryboardSegue) {
-        loadObjects()
+        loadObjects()  //RELOAD THE DATA. IT HAS CHANGED
         print ("unwindToRefresh")
     }
 }
