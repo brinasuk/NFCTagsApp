@@ -49,7 +49,7 @@ class OwnerModel {
     var ownerBaths: String
     var ownerSqFt: String
     
-    var ownerPhotoRef: String
+    ///var ownerPhotoRef: String  REMOVED JULY 2019
     
     init (createdAt:Date,
           ownerObjectId: String,
@@ -86,9 +86,9 @@ class OwnerModel {
     ownerPrice: String,
     ownerBeds: String,
     ownerBaths: String,
-    ownerSqFt: String,
+    ownerSqFt: String
           
-        ownerPhotoRef:String
+        ///ownerPhotoRef:String  REMOVED JULY 2019
         )
         
     {
@@ -129,7 +129,7 @@ class OwnerModel {
         self.ownerBaths=ownerBaths
         self.ownerSqFt=ownerSqFt
         
-        self.ownerPhotoRef = ownerPhotoRef;
+        ///self.ownerPhotoRef = ownerPhotoRef; REMOVED JULY 2019
     }
     
     convenience init() {
@@ -168,9 +168,9 @@ class OwnerModel {
                    ownerPrice: "",
                    ownerBeds: "",
                    ownerBaths: "",
-                   ownerSqFt: "",
+                   ownerSqFt: ""
                    
-                   ownerPhotoRef: ""
+                   ///ownerPhotoRef: ""  REMOVED JULY 2019
         )
     }
 }

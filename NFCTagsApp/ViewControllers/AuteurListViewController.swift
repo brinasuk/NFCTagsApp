@@ -396,12 +396,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     // The query succeeded with a matching result
                     //print("HERE WE ARE!!")
                     //print(object)
-                    
+                    let ownerObjectId = object.objectId
                     let ownerEmail = object["ownerEmail"] as? String ?? ""
                     let ownerName = object["ownerName"] as? String ?? ""
                     let ownerPhone = object["ownerPhone"] as? String ?? ""
                     //print(ownerPhone)
-                    let ownerPhotoRef = object["ownerPhotoRef"] as? String ?? ""
+                    ///let ownerPhotoRef = object["ownerPhotoRef"] as? String ?? ""
                     // object.objectId;
                     let ownerId = object["ownerId"] as? String ?? ""
                     let ownerUrl = object["ownerUrl"] as? String ?? ""
@@ -449,8 +449,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     tag["appName"] = self.kAppDelegate.appCode
                     tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
                     
-                    //TODO: ALEX FIX OWNERID???
-                    tag["tagPhotoRef"] = ownerId  // ownerPhotoRef
+                    tag["tagPhotoRef"] = ownerObjectId  /// ownerPhotoRef is NO LONGER USED!
                     tag["tagId"] = ownerId
                     tag["tagTitle"] = ownerTitle
                     tag["tagSubTitle"] = ownerSubTitle
@@ -491,7 +490,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                             // The object has been saved.
                             //self.displayMessage(message: "SUCCESS")
                             UIViewController.removeSpinner(spinner: sv)
-                            print ("SAVED IN BACKGROUND:  + \(ownerUrl)")
+                            print ("SAVED TAG WITH URL: \(ownerUrl)")
                             self.loadTagTable()  //DISPLAY NEW DATA
                             if let url = URL(string: ownerUrl ) {
                                     let safariVC = SFSafariViewController(url: url)
@@ -540,7 +539,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                 print(error.localizedDescription)
             } else if let objects = objects {
                 // The find succeeded.
-                print("Successfully retrieved \(objects.count) objects.")
+                print("Successfully retrieved \(objects.count) TAG objects.")
                 // Do something with the found objects
                 
                 for object in objects {
@@ -741,12 +740,14 @@ extension AuteurListViewController: UITableViewDataSource {
          https://photos.homecards.com/rebeacons/Tag-082C63FE-9AA8-4967-BC04-8F3D6AAF63DA-1.jpg
          */
         
-        let tagPhotoRef = tag.tagPhotoRef
-
-        let cloudinaryAction = "Tag"
-        let usePhotoRef:String? = tagPhotoRef
-        let photoNumber = 1
-        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+//        let tagPhotoRef = tag.tagPhotoRef
+//
+//        let cloudinaryAction = "Tag"
+//        let usePhotoRef:String? = tagPhotoRef
+//        let photoNumber = 1
+//        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        
+        let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true

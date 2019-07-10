@@ -230,12 +230,12 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         //photoImageView.clipsToBounds = true
         
 
-        let cloudinaryAction = "Tag"
-        let usePhotoRef:String? = owner.ownerObjectId  //This is the Owner Photo Name
-        let photoNumber = 1
-        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+//        let cloudinaryAction = "Tag"
+//        let usePhotoRef:String? = owner.ownerObjectId  //This is the Owner Photo Name
+//        let photoNumber = 1
+//        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
-        print(propertyPhotoFileUrl ?? "")
+        let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", owner.ownerObjectId, 1)
         
         //        cell.tagImageView.layer.cornerRadius ="" cell.tagImageView.frame.size.width / 4
         //        cell.tagImageView.layer.masksToBounds = true

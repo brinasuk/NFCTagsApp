@@ -89,12 +89,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 
         
         // SHOW PHOTO
-        //headerView.headerImageView.image = UIImage(named: "restaurant")
-        let tagPhotoRef = tag.tagPhotoRef
-        let cloudinaryAction = "Tag"
-        let usePhotoRef:String? = tagPhotoRef
-        let photoNumber = 1
-        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+//        let tagPhotoRef = tag.tagPhotoRef
+//        let cloudinaryAction = "Tag"
+//        let usePhotoRef:String? = tagPhotoRef
+//        let photoNumber = 1
+//        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        
+        let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
         
         //        cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         //        cell.tagImageView.layer.masksToBounds = true

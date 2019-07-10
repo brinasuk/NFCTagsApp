@@ -24,14 +24,4 @@ extension UIViewController {
     //        self.present(alertView, animated: true, completion:nil)
     //    }
     
-    class func createNewPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-        if useID == nil {
-            return nil
-        }
-        var url = ""
-        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
-        //NSLog(@"URL: %@",url);
-        return url
-        
-    }
 }

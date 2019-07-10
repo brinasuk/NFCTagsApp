@@ -76,15 +76,7 @@ class MaintTableView: UITableViewController {
 //        //[self dismissViewControllerAnimated:YES completion:nil];
 //    }
     
-    func createPhotoURL(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-        if useID == nil {
-            return nil
-        }
-        var url = ""
-        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
-        //NSLog(@"URL: %@",url);
-        return url
-    }
+
     
     func loadObjects()
     {
@@ -162,7 +154,8 @@ class MaintTableView: UITableViewController {
                     var ownerState:String? = object["ownerState"] as? String
                     var ownerZip:String? = object["ownerZip"] as? String
                     var ownerCountry:String? = object["ownerCountry"] as? String
-                    var ownerPhotoRef:String? = object["ownerPhotoRef"] as? String
+                    ///var ownerPhotoRef:String? = object["ownerPhotoRef"] as? String
+                    ///if ownerPhotoRef == nil {ownerPhotoRef = ""}
 
 
                     if ownerNumber == nil {ownerNumber = ""}
@@ -176,7 +169,7 @@ class MaintTableView: UITableViewController {
                     if ownerState == nil {ownerState = ""}
                     if ownerZip == nil {ownerZip = ""}
                     if ownerCountry == nil {ownerCountry = ""}
-                    if ownerPhotoRef == nil {ownerPhotoRef = ""}
+                    
                     
                     var ownerAddrFull:String? = object["ownerAddrFull"] as? String
                     if ownerAddrFull == nil {ownerAddrFull = ""}
@@ -189,7 +182,7 @@ class MaintTableView: UITableViewController {
                     var ownerSqFt:String? = object["ownerSqFt"] as? String
                     if ownerSqFt == nil {ownerSqFt = ""}
                     
-                    let newObject = OwnerModel(createdAt: createdAt, ownerObjectId: ownerObjectId,  appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerPhone: ownerPhone!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!, ownerPhotoRef: ownerPhotoRef!)
+                    let newObject = OwnerModel(createdAt: createdAt, ownerObjectId: ownerObjectId,  appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerPhone: ownerPhone!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!)
                     
                     ownerObjects.append(newObject)
                     rowCount = rowCount + 1
@@ -234,15 +227,15 @@ class MaintTableView: UITableViewController {
         cell.tagNumber.text = owner.ownerNumber
         cell.tagTitle.text = owner.ownerTitle
         cell.tagUrl.text = owner.ownerSubTitle
-        cell.tagAddress.text = owner.ownerPhotoRef
+        cell.tagAddress.text = "" ///TODO: NO LONGER USED owner.ownerPhotoRef
 
         //==== IMAGE CODE ============================================================
-        //let tagPhotoRef = owner.ownerPhotoRef
+//        let cloudinaryAction = "Tag"
+//        let usePhotoRef:String? = owner.ownerObjectId
+//        let photoNumber = 1
+//        let propertyPhotoFileUrl:String? = createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
-        let cloudinaryAction = "Tag"
-        let usePhotoRef:String? = owner.ownerObjectId
-        let photoNumber = 1
-        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", owner.ownerObjectId, 1)
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
