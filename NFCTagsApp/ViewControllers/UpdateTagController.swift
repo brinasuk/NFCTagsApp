@@ -1,5 +1,5 @@
 //
-//  NewRestaurantController.swift
+//  UpdateTagController.swift
 //  NFCTagsApp
 //
 //  Created by Alex Levy on 6/6/19.
@@ -15,7 +15,10 @@ import CropViewController
 import MapKit
 
 
-class NewTagController: UITableViewController, UITextFieldDelegate, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    let SERVERNAME = "https://photos.homecards.com/admin/uploads/rebeacons/"
+    var owner = OwnerModel()
     
     private let imageView = UIImageView()
     
@@ -29,11 +32,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     private var latitude:Double? = 0.0
     private var longitude:Double? = 0.0
     
-    
     var isDirtyPhoto:Bool? = false
-    
-    let SERVERNAME = "https://photos.homecards.com/admin/uploads/rebeacons/"
-    var owner = OwnerModel()
     
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet weak var progressBar: CircularProgressBar!
@@ -230,9 +229,9 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
         //photoImageView.contentMode = .scaleAspectFit
         //photoImageView.clipsToBounds = true
         
-        //let tagPhotoRef = owner.ownerObjectId
+
         let cloudinaryAction = "Tag"
-        let usePhotoRef:String? = owner.ownerObjectId
+        let usePhotoRef:String? = owner.ownerObjectId  //This is the Owner Photo Name
         let photoNumber = 1
         let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
@@ -543,7 +542,7 @@ class NewTagController: UITableViewController, UITextFieldDelegate, CropViewCont
     func saveRecord(){
         let sv = UIViewController.displaySpinner(onView: self.view)
         let query = PFQuery(className: "TagOwnerInfo")
-        print (owner.ownerObjectId)
+
         query.whereKey("objectId", equalTo: owner.ownerObjectId)
         //print(owner.ownerObjectId)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in

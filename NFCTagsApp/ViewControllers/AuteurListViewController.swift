@@ -25,13 +25,6 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     
     var placeholderImage:UIImage?
     
-
-    //private let apiFetcher = APIRequestFetcher()
-    //private var propertyPhotoFileName:String? = ""
-    //private var propertyPhotoFileUrl:String? = ""
-    //private var propertyPhotoFilePath:String? = ""
-    //private var propertyPlaceholderImage: UIImage?
-    
     @IBOutlet weak var toolBar: UIToolbar!
     
     @IBOutlet weak var tableView: UITableView!

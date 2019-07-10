@@ -113,7 +113,7 @@ class MaintTableView: UITableViewController {
                 for object in objects {
 
                     let createdAt:Date = object.createdAt!
-                    let ownerObjectId:String = object.objectId!
+                    let ownerObjectId:String = object.objectId! //Used for Photo Name
                     
                     var appName:String? = kAppDelegate.appName as String?
                     if appName == nil {appName = ""}
@@ -343,7 +343,7 @@ class MaintTableView: UITableViewController {
 
         if segue.identifier == "MaintDetailView" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! NewTagController
+                let destinationController = segue.destination as! UpdateTagController
                 destinationController.owner = ownerObjects[indexPath.row]
             }
         }

@@ -34,7 +34,7 @@
 		C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AC22A4D5A000C06A45 /* MapController.swift */; };
 		C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AD22A4D5A000C06A45 /* Artwork.swift */; };
 		C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */; };
-		C78159DE22CAC54700625046 /* NewTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78159DD22CAC54700625046 /* NewTagController.swift */; };
+		C78159DE22CAC54700625046 /* UpdateTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78159DD22CAC54700625046 /* UpdateTagController.swift */; };
 		C78159E022CB100600625046 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78159DF22CB100600625046 /* CircularProgressBar.swift */; };
 		C793547622A0AC0700DD1828 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C793547522A0AC0700DD1828 /* MapKit.framework */; };
 		C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */; };
@@ -108,7 +108,7 @@
 		C77ED9AC22A4D5A000C06A45 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		C77ED9AD22A4D5A000C06A45 /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkViews.swift; sourceTree = "<group>"; };
-		C78159DD22CAC54700625046 /* NewTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTagController.swift; sourceTree = "<group>"; };
+		C78159DD22CAC54700625046 /* UpdateTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTagController.swift; sourceTree = "<group>"; };
 		C78159DF22CB100600625046 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		C793547522A0AC0700DD1828 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C793547722A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSeparatorCell.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 				C71B63E3229B798A00B6910A /* DetailViewController.swift */,
 				C793547B22A0DCC800DD1828 /* MapViewController.swift */,
 				C76D3EF122AB104400794637 /* MaintTableView.swift */,
-				C78159DD22CAC54700625046 /* NewTagController.swift */,
+				C78159DD22CAC54700625046 /* UpdateTagController.swift */,
 				C705A7AC22D4107300F513A9 /* ReviewViewController.swift */,
 			);
 			path = ViewControllers;
@@ -489,7 +489,7 @@
 				C7C4844A22871B7F00C6A95B /* DemoModel.swift in Sources */,
 				C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */,
 				C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */,
-				C78159DE22CAC54700625046 /* NewTagController.swift in Sources */,
+				C78159DE22CAC54700625046 /* UpdateTagController.swift in Sources */,
 				C71B63E4229B798A00B6910A /* DetailViewController.swift in Sources */,
 				C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */,
 				C77ED9AF22A4D5A000C06A45 /* MapController.swift in Sources */,

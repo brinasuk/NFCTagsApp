@@ -30,47 +30,6 @@ class ViewController: UIViewController {
     private var listingsArray: [AnyHashable] = []
     private var dataParse:NSMutableArray = NSMutableArray()
     
-    private var imageView: UIImageView?
-    private var moveDirtyFlag = false
-    private var buttonLabel = ""
-    private var scanResults = ""
-    private var messageLabel = ""
-    private var message = ""
-    private var latitude = ""
-    private var longitude = ""
-    private var address = ""
-    private var ans = ""
-    private var row: Int = 0
-    private var sortBy: Int = 0 //Used by aRangeTable
-    private var useObjectId = ""
-    private var usePhotoRef = ""
-    private var useUrl = ""
-    private var useTitle = ""
-    private var useSubTitle = ""
-    private var useCompany = ""
-    private var useAddress = ""
-    private var useInfo = ""
-    private var useLatitude = ""
-    private var useLongitude = ""
-    private var useAddress2 = ""
-    private var useCity = ""
-    private var useState = ""
-    private var useZip = ""
-    private var useCountry = ""
-    private var propertyPhotoFileName = ""
-    private var propertyPhotoFileUrl = ""
-    private var propertyPhotoFilePath = ""
-    private var propertyPlaceholderImage: UIImage?
-    // THE FOLLOWING USED FOR SEND SMS
-    private var currentUserEmail = ""
-    private var currentPropertyAddress = ""
-    private var currentOwnerEmail = ""
-    
-    
-    //TODO: PUT BACK private var ownerModel: OwnerModel?
-    //NSMutableArray *_proximityArray;
-    //private var zone: EPXProximityZone?
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var statusView: UIImageView!
@@ -79,17 +38,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var btnMaintenance: UIBarButtonItem!
     @IBOutlet weak var btnSignIn: UIBarButtonItem!
-    
-
-
-    
-    
-    //@property (strong, nonatomic) EPXProximityObserver *proximityObserver;
-    //@property (strong, nonatomic) NSArray<Content *> *nearbyContent;
-    //@property (nonatomic) EPXCloudCredentials *estimoteCloudCredentials;
-    
-    
-    //private var beaconAlert: FCAlertView?
     
     @IBAction private func btnMaintenancePressed(_ sender: Any) {
         performSegue(withIdentifier: "MaintTableView", sender: self)
