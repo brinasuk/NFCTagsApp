@@ -469,7 +469,7 @@ class MaintTableView: UITableViewController {
     
     @IBAction func close(segue: UIStoryboardSegue) {
         //dismiss(animated: true, completion: nil)
-        print ("closeWithSegue")
+        //print ("closeWithSegue")
         
     }
     

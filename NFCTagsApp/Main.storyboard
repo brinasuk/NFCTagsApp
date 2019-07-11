@@ -661,19 +661,19 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRx-82-h06" userLabel="ratingImageView">
+                                        <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRx-82-h06" userLabel="ratingImageView">
                                             <rect key="frame" x="364" y="288" width="42" height="42"/>
-                                            <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="42" id="bNk-Vw-a7u"/>
                                                 <constraint firstAttribute="width" constant="42" id="mad-0l-iDn"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak1-cW-eK8" userLabel="Price">
-                                            <rect key="frame" x="353.5" y="33" width="52.5" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak1-cW-eK8" userLabel="Price">
+                                            <rect key="frame" x="223" y="57" width="183" height="60"/>
                                             <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="2sG-7A-g1o"/>
+                                                <constraint firstAttribute="height" constant="60" id="2sG-7A-g1o"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="21"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -691,7 +691,7 @@
                                         <constraint firstAttribute="bottom" secondItem="Dhi-zA-SYj" secondAttribute="bottom" id="WmN-mQ-LDI"/>
                                         <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="8" id="XTj-UP-4dN"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" id="ZDR-Qe-AEv"/>
-                                        <constraint firstItem="ak1-cW-eK8" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" constant="33" id="ZHi-lw-pNC"/>
+                                        <constraint firstItem="ak1-cW-eK8" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" constant="57" id="ZHi-lw-pNC"/>
                                         <constraint firstAttribute="bottom" secondItem="uCM-4H-tnq" secondAttribute="bottom" constant="23" id="eVl-D4-01u"/>
                                         <constraint firstAttribute="trailing" secondItem="ak1-cW-eK8" secondAttribute="trailing" constant="8" id="wvg-8v-MFo"/>
                                     </constraints>
@@ -846,6 +846,11 @@
                                     <constraint firstAttribute="width" constant="375" id="LAW-qj-3YQ"/>
                                 </constraints>
                                 <items>
+                                    <barButtonItem title="Rate It" id="niR-4j-hBe">
+                                        <connections>
+                                            <segue destination="Aa3-XZ-WUI" kind="presentation" identifier="ShowReview" id="aKx-pt-45z"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Contact Us" id="leo-su-qoA">
                                         <connections>
                                             <action selector="contactUsButtonPressed:" destination="VaW-2d-StK" id="BjR-rW-zP3"/>
@@ -855,11 +860,6 @@
                                     <barButtonItem title="Website" id="exn-kd-ait">
                                         <connections>
                                             <action selector="websiteButtonPressed:" destination="VaW-2d-StK" id="Eih-qQ-smw"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Rate This" id="niR-4j-hBe">
-                                        <connections>
-                                            <segue destination="Aa3-XZ-WUI" kind="presentation" identifier="ShowReview" id="aKx-pt-45z"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -983,7 +983,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Title" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-zG-tCo" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Title" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-zG-tCo" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1017,7 +1017,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Subtitle" placeholder="Subtitle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3E5-pP-v46" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Subtitle" placeholder="Subtitle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3E5-pP-v46" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1051,7 +1051,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Price" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-m3-yyf" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Price" placeholder="Price" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-m3-yyf" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1085,7 +1085,7 @@
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Contact" placeholder="Contact Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-rn-fDe" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Contact" placeholder="Contact Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-rn-fDe" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1119,7 +1119,7 @@
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Phone" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssc-U7-jQs" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Phone" placeholder="Phone" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ssc-U7-jQs" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1368,53 +1368,53 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktp-px-ZKT" userLabel="Close">
-                                <rect key="frame" x="382" y="44" width="16" height="22"/>
+                                <rect key="frame" x="365" y="44" width="33" height="32"/>
                                 <state key="normal" image="cross"/>
                                 <connections>
                                     <segue destination="8OW-GW-fhj" kind="unwind" unwindAction="closeWithSegue:" id="tjO-mu-8Vc"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aon-qK-IZv">
-                                <rect key="frame" x="125" y="280.5" width="164" height="335"/>
+                                <rect key="frame" x="84" y="218" width="246" height="460"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pj8-l8-MYB">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="232" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="Love" image="love"/>
+                                        <state key="normal" title="Love it" image="love"/>
                                         <connections>
                                             <segue destination="8OW-GW-fhj" kind="unwind" identifier="love" unwindAction="rateRestaurantWithSegue:" id="WSN-aC-6lZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnm-Ug-nFv">
-                                        <rect key="frame" x="0.0" y="69" width="121" height="59"/>
+                                        <rect key="frame" x="0.0" y="92" width="181" height="83"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Cool" image="cool"/>
                                         <connections>
                                             <segue destination="8OW-GW-fhj" kind="unwind" identifier="cool" unwindAction="rateRestaurantWithSegue:" id="Lem-84-3ig"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxK-xm-k3Y">
-                                        <rect key="frame" x="0.0" y="138" width="164" height="59"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxK-xm-k3Y" userLabel="Smile">
+                                        <rect key="frame" x="0.0" y="185" width="206" height="86"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="Happy" image="happy"/>
+                                        <state key="normal" title="Smile" image="happy"/>
                                         <connections>
-                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="happy" unwindAction="rateRestaurantWithSegue:" id="u3p-Gq-Jhr"/>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="smile" unwindAction="rateRestaurantWithSegue:" id="u3p-Gq-Jhr"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JF-Ow-3aP">
-                                        <rect key="frame" x="0.0" y="207" width="105" height="59"/>
+                                        <rect key="frame" x="0.0" y="281" width="246" height="87"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="Sad" image="sad"/>
+                                        <state key="normal" title="No Way" image="sad"/>
                                         <connections>
                                             <segue destination="8OW-GW-fhj" kind="unwind" identifier="sad" unwindAction="rateRestaurantWithSegue:" id="51t-qd-GTs"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-rj-tjo">
-                                        <rect key="frame" x="0.0" y="276" width="147" height="59"/>
+                                        <rect key="frame" x="0.0" y="378" width="204" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="Angry" image="angry"/>
+                                        <state key="normal" title="None" image="norating1"/>
                                         <connections>
-                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="angry" unwindAction="rateRestaurantWithSegue:" id="CMD-HO-Npr"/>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="none" unwindAction="rateRestaurantWithSegue:" id="CMD-HO-Npr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1450,7 +1450,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="angry" width="78" height="103"/>
         <image name="art_launch_image" width="1125" height="2429"/>
         <image name="close" width="16" height="16"/>
         <image name="cool" width="78" height="83"/>
@@ -1458,6 +1457,7 @@
         <image name="happy" width="78" height="86"/>
         <image name="list-item-background" width="375" height="60"/>
         <image name="love" width="78" height="82"/>
+        <image name="norating1" width="82" height="82"/>
         <image name="sad" width="78" height="87"/>
         <image name="save" width="20" height="20"/>
         <image name="text-input" width="298" height="36.5"/>

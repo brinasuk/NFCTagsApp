@@ -10,6 +10,7 @@ import Alamofire
 import AlamofireImage
 import MessageUI
 import SafariServices
+import Parse
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 
@@ -19,10 +20,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: DetailHeaderView!
 
-    
+    var ratingKeep = ""
     
     override func viewDidLoad() {
     super.viewDidLoad()
+
+        headerView.ratingImageView.isUserInteractionEnabled = true
+        headerView.ratingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
+
     
     //        headerView.headerImageView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.2f];
 
@@ -35,6 +40,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     // Configure the table view's style
     tableView.separatorStyle = .singleLine
     tableView.contentInsetAdjustmentBehavior = .never
+        
+        ratingKeep = tag.rating
+
     
 
 //    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -86,6 +94,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         headerView.titleLabel.text = tag.tagTitle
         headerView.subTitleLabel.text = tag.tagSubTitle
         headerView.priceLabel.text = tag.tagPrice
+        headerView.ratingImageView.image = UIImage(named: tag.rating)
 
         
         // SHOW PHOTO
@@ -116,10 +125,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
 
-
-
-
-
+//    @IBAction func imageTapped(sender: AnyObject) {
+//        print("Image Tapped.")
+//    }
+    
+    @objc private func imageTapped(_ recognizer: UITapGestureRecognizer) {
+        print("image tapped")
+        performSegue(withIdentifier: "ShowReview", sender: self)
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
@@ -241,11 +254,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: {
-            if let rating = segue.identifier {
-                self.tag.rating = rating
+            if var rating = segue.identifier {
                 
-                self.headerView.ratingImageView.image = UIImage(named: rating)
-
+                print(rating)
+                if rating == "none" {rating = ""}
+                
+                if rating != self.tag.rating {
+                    self.tag.rating = rating
+                    self.ratingKeep = rating
+                    self.updateRating(passRating: rating)
+                    self.headerView.ratingImageView.image = UIImage(named: rating)
+                }
+                
                 let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
                 self.headerView.ratingImageView.transform = scaleTransform
                 self.headerView.ratingImageView.alpha = 0
@@ -257,6 +277,37 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             }
         })
     }
+    
+    func updateRating(passRating:String) {
+        let sv = UIViewController.displaySpinner(onView: self.view)
+        let query = PFQuery(className: "Tags")
+        
+        query.whereKey("objectId", equalTo: tag.tagObjectId)
+        //print(owner.ownerObjectId)
+        query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
+            if let error = error {
+                // NO MATCH FOUND
+                UIViewController.removeSpinner(spinner: sv)
+                print(error.localizedDescription)
+                self.displayErrorMessage(message: error.localizedDescription)
+            } else if let object = object {
+                object["rating"] = passRating
+                
+                object.saveInBackground {
+                    (success: Bool, error: Error?) in
+                    if (success) {
+                        UIViewController.removeSpinner(spinner: sv)
+                        print("The object has been saved.")
+                    } else {
+                        UIViewController.removeSpinner(spinner: sv)
+                        print ("There was a problem, check error.description")
+                        self.displayErrorMessage(message: "Cannot save Info")
+                    }
+                }
+            }
+        }
+    }
+
     
     // MARK: - Status bar
     
