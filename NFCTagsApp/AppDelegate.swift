@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var theVige:NSString? = "ALEX"
     var appCode:NSString? = "art"  //OR "art" OR "disp" or "re" or "show"
-    var appName:NSString? = ""
+    //var appName:NSString? = ""
     var placeholderName:NSString? = ""
     var tagOrBeacon:Bool? = false  //NO = NFC TAG, YES = BEACON
     var sendEmailFlag:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
@@ -56,16 +56,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         
         if (appCode == "art") {
-            appName = "ArtWorks4Me";
+            //appName = "ArtWorks4Me";
         }
         if (appCode == "re") {
-            appName = "BestHome4Me";
+            //appName = "BestHome4Me";
         }
         if (appCode == "disp") {
-            appName = "Dispensaries";
+            //appName = "Dispensaries";
         }
         if (appCode == "show") {
-            appName = "Showrooms";
+            //appName = "Showrooms";
+        }
+        if (appCode == "shop") {
+            //appName = "Shopping Cart";
         }
         
 

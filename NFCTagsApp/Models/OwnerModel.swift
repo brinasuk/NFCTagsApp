@@ -14,7 +14,7 @@ class OwnerModel {
     var createdAt: Date
     var ownerObjectId: String
     
-    var appName: String
+    var ownerAppCode: String
     var ownerName: String
     var ownerEmail: String
     var ownerPhone: String
@@ -53,7 +53,7 @@ class OwnerModel {
     
     init (createdAt:Date,
           ownerObjectId: String,
-          appName:String,
+          ownerAppCode:String,
           ownerName:String,
           ownerEmail:String,
           ownerPhone:String,
@@ -94,7 +94,7 @@ class OwnerModel {
     {
         self.createdAt = createdAt;
         self.ownerObjectId = ownerObjectId;
-        self.appName = appName;
+        self.ownerAppCode = ownerAppCode;
         self.ownerName = ownerName;
         self.ownerEmail = ownerEmail;
         self.ownerPhone = ownerPhone;
@@ -135,7 +135,7 @@ class OwnerModel {
     convenience init() {
         self.init (createdAt: Date(),
                    ownerObjectId: "",
-                   appName: "",
+                   ownerAppCode: "",
                    ownerName: "",
                    ownerEmail: "",
                    ownerPhone: "",

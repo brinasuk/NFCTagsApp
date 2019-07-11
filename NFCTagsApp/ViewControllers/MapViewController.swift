@@ -27,7 +27,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Convert address to coordinate and annotate it on map
         let geoCoder = CLGeocoder()
-        var addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
+        //var addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
+        let addr = tag.tagAddrFull
         geoCoder.geocodeAddressString(addr, completionHandler: { placemarks, error in
             if let error = error {
                 print(error)

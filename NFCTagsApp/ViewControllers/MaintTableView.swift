@@ -82,7 +82,7 @@ class MaintTableView: UITableViewController {
     {
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerEmail", equalTo: kAppDelegate.currentUserEmail!)
-        query.whereKey("appName", equalTo: kAppDelegate.appCode!)
+        //query.whereKey("appCode", equalTo: kAppDelegate.appCode!)
                 query.order(byDescending: "ownerNumber")
         
         query.limit = 500
@@ -107,8 +107,9 @@ class MaintTableView: UITableViewController {
                     let createdAt:Date = object.createdAt!
                     let ownerObjectId:String = object.objectId! //Used for Photo Name
                     
-                    var appName:String? = kAppDelegate.appName as String?
-                    if appName == nil {appName = ""}
+                    //var appName:String? = kAppDelegate.appName as String?
+                    var ownerAppCode:String? = object["ownerAppCode"] as? String
+                    if ownerAppCode == nil {ownerAppCode = ""}
                     var ownerName:String? = object["ownerName"] as? String
                     if ownerName == nil {ownerName = ""}
                     var ownerEmail:String? = object["ownerEmail"] as? String
@@ -182,7 +183,7 @@ class MaintTableView: UITableViewController {
                     var ownerSqFt:String? = object["ownerSqFt"] as? String
                     if ownerSqFt == nil {ownerSqFt = ""}
                     
-                    let newObject = OwnerModel(createdAt: createdAt, ownerObjectId: ownerObjectId,  appName: appName!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerPhone: ownerPhone!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!)
+                    let newObject = OwnerModel(createdAt: createdAt, ownerObjectId: ownerObjectId,  ownerAppCode: ownerAppCode!, ownerName: ownerName!, ownerEmail: ownerEmail!, ownerPhone: ownerPhone!, ownerNumber: ownerNumber!, ownerId: ownerId!, latitude: latitude!, longitude: longitude!, triggerDistance: triggerDistance!, identifier: identifier!, beaconName: beaconName!, beaconColor: beaconColor!, beaconDymo: beaconDymo!, ownerTitle: ownerTitle!, ownerUrl: ownerUrl!, ownerInfo: ownerInfo!,ownerAddress: ownerAddress!, ownerSubTitle: ownerSubTitle!, ownerCompany: ownerCompany!, ownerAddress2: ownerAddress2!, ownerCity: ownerCity!, ownerState: ownerState!, ownerZip: ownerZip!, ownerCountry: ownerCountry!, ownerAddrFull: ownerAddrFull!, ownerPrice: ownerPrice!, ownerBeds: ownerBeds!, ownerBaths: ownerBaths!, ownerSqFt: ownerSqFt!)
                     
                     ownerObjects.append(newObject)
                     rowCount = rowCount + 1
@@ -254,7 +255,7 @@ class MaintTableView: UITableViewController {
         if let url = URL(string: propertyPhotoFileUrl! ) {
 //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
             // Round corner
-            let processor = RoundCornerImageProcessor(cornerRadius: 20)
+            //let processor = RoundCornerImageProcessor(cornerRadius: 20)
             
             /*
             // Downsampling
@@ -289,6 +290,7 @@ class MaintTableView: UITableViewController {
  */
             
             //cell.tagImageView.kf.setImage(with: url)
+            let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
             cell.tagImageView.kf.setImage(with: url, options: [.processor(processor)])
         }
         

@@ -12,10 +12,7 @@ import Kingfisher
 
 class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
     
-
-    
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     private var tagObjects:[TagModel] = []
     //private var dataParse:NSMutableArray = NSMutableArray()
     
@@ -39,7 +36,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = kAppDelegate.appName as String?
+        self.title = "Welcome" //TODO: FIX THIS kAppDelegate.appName as String?
         setupNavigationBar()
         //imageView.kf.indicatorType = .activity
         
@@ -370,9 +367,23 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     // MARK: - PARSE QUERIES
     
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
-    func lookupTagIfo(_ useTagId: String?) {
+    func lookupTagIfo(_ passTagId: String?) {
         //tagId = "info@kcontemporaryart.com:102" //TODO: REMOVE
-        print("USETAGID: \(useTagId ?? "")")
+        print("PASS TAGID: \(passTagId ?? "")")
+        let useTagId:String? = passTagId
+        
+//        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
+//        let tagString = passTagId ?? ""
+//        let arr = tagString.split(separator: "|")
+//        let useTagId:String = String(arr[0])
+//        let arrCount = arr.count
+//        if arrCount > 0 {  //THE APPCODE IS IN THE TAG. USE IT!
+//            kAppDelegate.appCode = arr[1] as NSString
+//        }
+//        print("USE TAGID: \(useTagId)")
+//        print("APPCODE: \(String(describing: kAppDelegate.appCode))")
+        
+        
         
         ///let str = "Andrew, Ben, John, Paul, Peter, Laura"
         ///let array = str.components(separatedBy: ", ")
@@ -391,7 +402,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         let sv = UIViewController.displaySpinner(onView: self.view)
         
         let query = PFQuery(className: "TagOwnerInfo")
-        query.whereKey("ownerId", equalTo: useTagId!)
+        query.whereKey("ownerId", equalTo: useTagId)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                 if let error = error {
                     // NO MATCH FOUND
@@ -406,9 +417,10 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     let ownerEmail = object["ownerEmail"] as? String ?? ""
                     let ownerName = object["ownerName"] as? String ?? ""
                     let ownerPhone = object["ownerPhone"] as? String ?? ""
-                    //print(ownerPhone)
+                    let ownerAppCode = object["ownerAppCode"] as? String ?? ""
+
                     ///let ownerPhotoRef = object["ownerPhotoRef"] as? String ?? ""
-                    // object.objectId;
+
                     let ownerId = object["ownerId"] as? String ?? ""
                     let ownerUrl = object["ownerUrl"] as? String ?? ""
                     let ownerTitle = object["ownerTitle"] as? String ?? ""
@@ -449,11 +461,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     tag["ownerName"] = ownerName
                     tag["ownerEmail"] = ownerEmail
                     tag["ownerPhone"] = ownerPhone
+                    tag["appCode"] = ownerAppCode
+                    tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
 
                     tag["userName"] = self.kAppDelegate.currentUserName
                     tag["userEmail"] = self.kAppDelegate.currentUserEmail //info@kcontemporaryart.com
-                    tag["appName"] = self.kAppDelegate.appCode
-                    tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
+
                     
                     tag["tagPhotoRef"] = ownerObjectId  /// ownerPhotoRef is NO LONGER USED!
                     tag["tagId"] = ownerId
@@ -525,7 +538,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         let appCode = kAppDelegate.appCode as String?
         let userEmail = kAppDelegate.currentUserEmail as String?
         //print ("UserEmail: \(userEmail as Any)")
-        query.whereKey("appName", equalTo: appCode!)
+        query.whereKey("appCode", equalTo: appCode!)
         query.whereKey("userEmail", equalTo: userEmail!)
         query.order(byDescending: "createdAt")
         
@@ -590,8 +603,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     //print(ownerPhone)
                     if (ownerPhone == nil) {ownerPhone = ""}
                     
-                    var appName:String? = cellDataParse["appName"] as? String
-                    if (appName == nil) {appName = ""}
+                    var appCode:String? = cellDataParse["appCode"] as? String
+                    if (appCode == nil) {appCode = ""}
                     var beaconDymo:String? = cellDataParse["beaconDymo"] as? String
                     if (beaconDymo == nil) {beaconDymo = ""}
                     var beaconColor:String? = cellDataParse["beaconColor"] as? String
@@ -653,7 +666,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     var rating:String? = cellDataParse["rating"] as? String
                     if (rating == nil) {rating = ""}
                     
-                    let newObject = TagModel(createdAt: createdAt,tagObjectId: tagObjectId, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, ownerPhone:ownerPhone!, appName: appName!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!, rating: rating!)
+                    let newObject = TagModel(createdAt: createdAt,tagObjectId: tagObjectId, userName: userName!, userEmail: userEmail!, ownerName: ownerName!, ownerEmail:ownerEmail!, ownerPhone:ownerPhone!, appCode: appCode!, beaconDymo: beaconDymo!, beaconColor: beaconColor!, tagPhotoRef: tagPhotoRef!, tagId: tagId!, tagTitle: tagTitle!, tagUrl: tagUrl!, tagInfo: tagInfo!, tagAddress: tagAddress!, latitude: latitude!, longitude: longitude!, tagSubTitle: tagSubTitle!, tagCompany: tagCompany!, tagAddress2: tagAddress2!, tagCity: tagCity!, tagState: tagState!, tagZip: tagZip!, tagCountry: tagCountry!,tagAddrFull: tagAddrFull!,tagPrice: tagPrice!,  tagBeds: tagBeds!,tagBaths: tagBaths!,tagSqFt: tagSqFt!, triggerDistance: triggerDistance!, sequence: sequence!, rating: rating!)
                     
                     self.tagObjects.append(newObject)
                     //self.dataParse.add(object)
@@ -767,9 +780,63 @@ extension AuteurListViewController: UITableViewDataSource {
 
         
         // METHOD 2: ======================================
+//        if let url = URL(string: propertyPhotoFileUrl! ) {
+//          cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+//        }
+        // METHOD 2: ======================================
+        //TODO: USE CONSISTANT PHOTO METHOD
         if let url = URL(string: propertyPhotoFileUrl! ) {
-          cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+            //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+            // Round corner
+            //var processor = RoundCornerImageProcessor(cornerRadius: 20)
+            
+            /*
+             // Downsampling
+             let processor = DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))
+             
+             // Cropping
+             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
+             
+             // Blur
+             let processor = BlurImageProcessor(blurRadius: 5.0)
+             
+             // Overlay with a color & fraction
+             let processor = OverlayImageProcessor(overlay: .red, fraction: 0.7)
+             
+             // Tint with a color
+             let processor = TintImageProcessor(tint: .blue)
+             
+             // Adjust color
+             let processor = ColorControlsProcessor(brightness: 1.0, contrast: 0.7, saturation: 1.1, inputEV: 0.7)
+             
+             // Black & White
+             let processor = BlackWhiteProcessor()
+             
+             // Blend (iOS)
+             let processor = BlendImageProcessor(blendMode: .darken, alpha: 1.0, backgroundColor: .lightGray)
+             
+             // Compositing
+             let processor = CompositingImageProcessor(compositingOperation: .darken, alpha: 1.0, backgroundColor: .lightGray)
+             
+             // Use the process in view extension methods.
+             imageView.kf.setImage(with: url, options: [.processor(processor)])
+             */
+            
+            //cell.tagImageView.kf.setImage(with: url)
+            let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
+            cell.tagImageView.kf.setImage(with: url, options: [.processor(processor)])
         }
+        
+        //=================================================
+        
+        
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
+        
+        
+        cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
+        
+        cell.accessoryType = .detailDisclosureButton
         
         //=================================================
 

@@ -223,11 +223,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMap" {
+        //print(segue.identifier!)
+        if segue.identifier == "ShowMap" {
             let destinationController = segue.destination as! MapViewController
+            //print(tag.tagAddrFull)
             destinationController.tag = tag
             
-        } else if segue.identifier == "showReview" {
+        } else if segue.identifier == "ShowReview" {
             let destinationController = segue.destination as! ReviewViewController
             destinationController.tag = tag
         }
@@ -317,7 +319,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func contactUsButtonPressed(_ sender: UIBarButtonItem) {
         print("CONTACTUSPRESSED")
-        var appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        var applicationName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
@@ -325,7 +327,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             mail.setToRecipients([tag.ownerEmail])
             let subject = tag.tagTitle
             mail.setSubject(subject)
-            var message = "I found this on the " + appName + " website. Please send me more information.<br><br>"
+            var message = "I found this on the " + applicationName + " website. Please send me more information.<br><br>"
             message = message + "\(tag.tagTitle ) <br> \(tag.tagSubTitle )<br>\(tag.tagCompany)"
             mail.setMessageBody(message, isHTML: true)
             //NSLog(@"MESSAGE: %@",message);

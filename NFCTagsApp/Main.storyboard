@@ -13,6 +13,9 @@
         <array key="Rubik-Light.ttf">
             <string>Rubik-Light</string>
         </array>
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
         <array key="Rubik-Regular.ttf">
             <string>Rubik-Regular</string>
         </array>
@@ -623,83 +626,74 @@
         <scene sceneID="2lW-ff-SRb">
             <objects>
                 <viewController id="VaW-2d-StK" customClass="DetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="nYF-QD-CJ3">
+                    <view key="view" contentMode="scaleToFill" id="nYF-QD-CJ3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gdl-CJ-31a">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="808"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gdl-CJ-31a">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="tb4-Qn-VVC" userLabel="Header View" customClass="DetailHeaderView" customModule="NFCTagsApp" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="350"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tall" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-zA-SYj" userLabel="Image">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="350"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-zA-SYj" userLabel="Image">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </imageView>
-                                        <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXR-10-BEy" userLabel="Dim View">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="350"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwg-Vf-QlN" userLabel="Title">
-                                                    <rect key="frame" x="8" y="241" width="94" height="20"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCM-4H-tnq" userLabel="Subtitle">
-                                                    <rect key="frame" x="8" y="285" width="251" height="18"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="251" id="Fnd-H8-gHg"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRx-82-h06" userLabel="ratingImageView">
-                                                    <rect key="frame" x="517" y="97" width="64" height="64"/>
-                                                    <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="64" id="DkM-NE-Avc"/>
-                                                        <constraint firstAttribute="width" constant="64" id="LQJ-JB-eWm"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak1-cW-eK8" userLabel="Price">
-                                                    <rect key="frame" x="267" y="285" width="100" height="20"/>
-                                                    <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="CC8-c1-mc2"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="CM1-Ce-x8t"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwg-Vf-QlN" userLabel="Title">
+                                            <rect key="frame" x="12" y="237" width="394" height="43"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="GRx-82-h06" secondAttribute="trailing" constant="19" id="79Q-WM-5XO"/>
-                                                <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="24" id="KBw-cT-6Jh"/>
-                                                <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="fwg-Vf-QlN" secondAttribute="leading" id="Oqd-0p-Jbv"/>
-                                                <constraint firstItem="ak1-cW-eK8" firstAttribute="firstBaseline" secondItem="uCM-4H-tnq" secondAttribute="baseline" id="S6R-Bt-UHI"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwg-Vf-QlN" secondAttribute="trailing" constant="50" id="SYf-SD-iAi"/>
-                                                <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="GRx-82-h06" secondAttribute="bottom" constant="124" id="WhW-iM-cqC"/>
-                                                <constraint firstAttribute="bottom" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="89" id="faV-o5-gaf"/>
-                                                <constraint firstItem="ak1-cW-eK8" firstAttribute="leading" secondItem="uCM-4H-tnq" secondAttribute="trailing" constant="8" symbolic="YES" id="gpG-fc-lGa"/>
-                                                <constraint firstItem="fwg-Vf-QlN" firstAttribute="leading" secondItem="JXR-10-BEy" secondAttribute="leadingMargin" id="j9h-YQ-e2Y"/>
+                                                <constraint firstAttribute="width" constant="394" id="3tp-O3-BEJ"/>
+                                                <constraint firstAttribute="height" constant="43" id="bqc-mK-DHi"/>
                                             </constraints>
-                                        </view>
+                                            <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="36"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCM-4H-tnq" userLabel="Subtitle">
+                                            <rect key="frame" x="12" y="288" width="330" height="39"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="330" id="5nq-OL-NgO"/>
+                                                <constraint firstAttribute="height" constant="39" id="Imv-rt-t8r"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="24"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRx-82-h06" userLabel="ratingImageView">
+                                            <rect key="frame" x="364" y="288" width="42" height="42"/>
+                                            <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="42" id="bNk-Vw-a7u"/>
+                                                <constraint firstAttribute="width" constant="42" id="mad-0l-iDn"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak1-cW-eK8" userLabel="Price">
+                                            <rect key="frame" x="353.5" y="33" width="52.5" height="20"/>
+                                            <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="2sG-7A-g1o"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="21"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="JXR-10-BEy" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" id="5aN-qZ-r6w"/>
+                                        <constraint firstAttribute="bottom" secondItem="GRx-82-h06" secondAttribute="bottom" constant="20" id="8Xd-Z8-p8A"/>
+                                        <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" constant="12" id="9fb-Wj-ip6"/>
+                                        <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="fwg-Vf-QlN" secondAttribute="leading" id="R4v-aI-oVB"/>
+                                        <constraint firstAttribute="trailing" secondItem="GRx-82-h06" secondAttribute="trailing" constant="8" id="S5L-Mw-e6L"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" id="UX5-Wd-vgc"/>
                                         <constraint firstAttribute="trailing" secondItem="Dhi-zA-SYj" secondAttribute="trailing" id="VKH-Ls-BTa"/>
                                         <constraint firstAttribute="bottom" secondItem="Dhi-zA-SYj" secondAttribute="bottom" id="WmN-mQ-LDI"/>
+                                        <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="8" id="XTj-UP-4dN"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" id="ZDR-Qe-AEv"/>
-                                        <constraint firstAttribute="bottom" secondItem="JXR-10-BEy" secondAttribute="bottom" id="bqF-FG-jTq"/>
-                                        <constraint firstItem="JXR-10-BEy" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" id="p9y-bw-aW5"/>
-                                        <constraint firstAttribute="trailing" secondItem="JXR-10-BEy" secondAttribute="trailing" id="vTp-FJ-H4n"/>
+                                        <constraint firstItem="ak1-cW-eK8" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" constant="33" id="ZHi-lw-pNC"/>
+                                        <constraint firstAttribute="bottom" secondItem="uCM-4H-tnq" secondAttribute="bottom" constant="23" id="eVl-D4-01u"/>
+                                        <constraint firstAttribute="trailing" secondItem="ak1-cW-eK8" secondAttribute="trailing" constant="8" id="wvg-8v-MFo"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="headerImageView" destination="Dhi-zA-SYj" id="1KC-5D-8UK"/>
@@ -711,14 +705,14 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailIconTextCell" id="Ych-6h-1lb" customClass="RestaurantDetailIconTextCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="378" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="378" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ych-6h-1lb" id="4I0-fg-Avw">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hj1-lT-P1u">
-                                                    <rect key="frame" x="23" y="11" width="555" height="19"/>
+                                                    <rect key="frame" x="23" y="11" width="369" height="19"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iPC-eO-XCY">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="19"/>
@@ -728,7 +722,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rd-kk-A1H">
-                                                            <rect key="frame" x="30" y="0.0" width="525" height="19"/>
+                                                            <rect key="frame" x="30" y="0.0" width="339" height="19"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -749,14 +743,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailTextCell" id="Mfd-wD-WGD" customClass="RestaurantDetailTextCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="422" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="422" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mfd-wD-WGD" id="4xq-sR-4e7">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWc-jm-muB">
-                                                    <rect key="frame" x="23" y="11" width="553" height="19"/>
+                                                    <rect key="frame" x="23" y="11" width="367" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik Light" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -774,23 +768,23 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailSeparatorCell" id="HMH-HU-XkY" userLabel="RestaurantDetailSeparatorCell" customClass="RestaurantDetailSeparatorCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="466" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="466" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HMH-HU-XkY" id="SGy-Wb-zou">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Tl-kAH">
-                                                    <rect key="frame" x="18" y="5" width="564" height="26.5"/>
+                                                    <rect key="frame" x="18" y="5" width="378" height="26.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subsection Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXH-5i-UvG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="564" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="20.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENB-qO-8Hs" userLabel="Separator">
-                                                            <rect key="frame" x="0.0" y="25.5" width="564" height="1"/>
+                                                            <rect key="frame" x="0.0" y="25.5" width="378" height="1"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="zfa-MV-PN5"/>
@@ -811,10 +805,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailMapCell" rowHeight="215" id="n0G-uF-cqG" userLabel="RestaurantDetailMapCell" customClass="RestaurantDetailMapCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="510" width="600" height="215"/>
+                                        <rect key="frame" x="0.0" y="510" width="414" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n0G-uF-cqG" id="IAc-hX-I11">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="214.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="214.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCq-GC-mWF">
@@ -845,8 +839,8 @@
                                     <outlet property="delegate" destination="VaW-2d-StK" id="QnS-c1-zyH"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hi8-tS-7gX">
-                                <rect key="frame" x="0.0" y="818" width="600" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hi8-tS-7gX">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="A1a-LB-Dza"/>
                                     <constraint firstAttribute="width" constant="375" id="LAW-qj-3YQ"/>
@@ -865,7 +859,7 @@
                                     </barButtonItem>
                                     <barButtonItem title="Rate This" id="niR-4j-hBe">
                                         <connections>
-                                            <segue destination="Aa3-XZ-WUI" kind="presentation" identifier="showReview" id="aKx-pt-45z"/>
+                                            <segue destination="Aa3-XZ-WUI" kind="presentation" identifier="ShowReview" id="aKx-pt-45z"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -890,7 +884,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SJN-uw-6Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138996" y="-55456.403940886703"/>
+            <point key="canvasLocation" x="-138997.10144927536" y="-55456.47321428571"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Dar-QN-VJP">
@@ -942,7 +936,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo - Tap to change" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ9-nU-ZsJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ9-nU-ZsJ">
                                                     <rect key="frame" x="0.0" y="12" width="375" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1466,7 +1460,6 @@
         <image name="love" width="78" height="82"/>
         <image name="sad" width="78" height="87"/>
         <image name="save" width="20" height="20"/>
-        <image name="tall" width="3024" height="4032"/>
         <image name="text-input" width="298" height="36.5"/>
     </resources>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
