@@ -23,36 +23,37 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     var ratingKeep = ""
     
     override func viewDidLoad() {
-    super.viewDidLoad()
-
+        super.viewDidLoad()
+        //title = "DETAILS"
+        
         headerView.ratingImageView.isUserInteractionEnabled = true
         headerView.ratingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
-
-    
-    //        headerView.headerImageView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.2f];
-
-    navigationItem.largeTitleDisplayMode = .never
-    
-    // Set the table view's delegate and data source
-    tableView.delegate = self
-    tableView.dataSource = self
-    
-    // Configure the table view's style
-    tableView.separatorStyle = .singleLine
-    tableView.contentInsetAdjustmentBehavior = .never
+        
+        
+        //        headerView.headerImageView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.2f];
+        
+        navigationItem.largeTitleDisplayMode = .never
+        
+        // Set the table view's delegate and data source
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // Configure the table view's style
+        tableView.separatorStyle = .singleLine
+        tableView.contentInsetAdjustmentBehavior = .never
         
         ratingKeep = tag.rating
-
-    
-
-//    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//    navigationController?.navigationBar.shadowImage = UIImage()
-//    navigationController?.navigationBar.tintColor = .red
-//    navigationController?.hidesBarsOnSwipe = false
-
-    showInfo()
-    
-}
+        
+        
+        
+        //    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //    navigationController?.navigationBar.shadowImage = UIImage()
+        //    navigationController?.navigationBar.tintColor = .red
+        //    navigationController?.hidesBarsOnSwipe = false
+        
+        showInfo()
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -66,30 +67,23 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func setupNavigationBar() {
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
-        
-        //    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //    navigationController?.navigationBar.shadowImage = UIImage()
-        //    navigationController?.navigationBar.tintColor = .red
-        //    navigationController?.hidesBarsOnSwipe = false
-        
-        //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        //METHOD 0
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.tintColor = .red
+//        navigationController?.hidesBarsOnSwipe = false
         
         //METHOD 1
-        //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-        //        navigationItem.largeTitleDisplayMode = .always
+        //                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+        //                navigationItem.largeTitleDisplayMode = .always
         
         //METHOD2
-        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-        }
-        
+        //        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+        //            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+        //        }
     }
-    
-    func showInfo() {
 
-        
-        
+    func showInfo() {
         // DISPLAY DATABASE VALUES
         headerView.titleLabel.text = tag.tagTitle
         headerView.subTitleLabel.text = tag.tagSubTitle
@@ -275,7 +269,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                     self.headerView.ratingImageView.alpha = 1
                 }, completion: nil)
             }
+            
+
         })
+        
+
     }
     
     func updateRating(passRating:String) {

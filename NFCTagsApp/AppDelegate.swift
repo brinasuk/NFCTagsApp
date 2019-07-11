@@ -128,10 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //    [ESTConfig setupAppID:@"openhousebeacons" andAppToken:@"95febad595a25c04fd5a80b829b35361"];
 
         
-        // SET THE BACKBUTTON STYLE
-        let backButtonImage = UIImage(named: "back")
-        UINavigationBar.appearance().backIndicatorImage = backButtonImage
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+
         
         // SET THE TOOLBAR STYLE
         UIBarButtonItem.appearance().setTitleTextAttributes(
@@ -140,7 +137,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSAttributedString.Key.foregroundColor : UIColor.darkText,
             ], for: .normal)
         
-        //UIFont(name: "Rubik-Medium", size: 34.0
+        // SET THE BACK BUTTONS
+        let backButtonImage = UIImage(named: "backButton_bold")
+        UINavigationBar.appearance().backIndicatorImage = backButtonImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        
+//        // SET THE BACKBUTTON STYLE
+//        let backButtonImage = UIImage(named: "backButtonNew")
+//        UINavigationBar.appearance().backIndicatorImage = backButtonImage
+//        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+//        UINavigationBar.appearance().backgroundColor = .white
+//        UINavigationBar.appearance().tintColor = .darkGray
         
         return true
     }

@@ -481,10 +481,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="DkM-Fl-qMq">
-                                <rect key="frame" x="0.0" y="44" width="375" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08I-j1-Jso" userLabel="Title">
-                                <rect key="frame" x="39" y="132" width="297" height="42"/>
+                                <rect key="frame" x="39" y="132" width="336" height="42"/>
                                 <color key="tintColor" red="0.1215686275" green="0.29411764709999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="297" id="5Cv-Uu-3um"/>
@@ -495,7 +495,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hate This" borderStyle="roundedRect" placeholder="First and Last Name" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="mus-0M-rU4" userLabel="Name">
-                                <rect key="frame" x="50" y="210" width="274" height="30"/>
+                                <rect key="frame" x="50" y="210" width="313" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -505,7 +505,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hatethis@hillsoft.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="toh-aw-w4o" userLabel="Email">
-                                <rect key="frame" x="50" y="260" width="274" height="30"/>
+                                <rect key="frame" x="50" y="260" width="313" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="274" id="QrZ-EO-xsr"/>
@@ -519,7 +519,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hatethis" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="dYz-2a-4NX" userLabel="Password">
-                                <rect key="frame" x="50" y="310" width="274" height="30"/>
+                                <rect key="frame" x="50" y="310" width="313" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="274" id="BmE-bi-c7F"/>
@@ -533,7 +533,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxS-sP-vU1" userLabel="Register Button">
-                                <rect key="frame" x="67" y="384" width="240" height="44"/>
+                                <rect key="frame" x="67" y="384" width="279" height="44"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="OSG-2b-HeC"/>
@@ -548,7 +548,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkW-zk-x1q" userLabel="Cancel Button">
-                                <rect key="frame" x="67" y="452" width="240" height="38"/>
+                                <rect key="frame" x="67" y="452" width="279" height="38"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="h2T-S3-rU5"/>
@@ -1380,39 +1380,39 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pj8-l8-MYB">
                                         <rect key="frame" x="0.0" y="0.0" width="232" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="Love it" image="love"/>
+                                        <state key="normal" title="Love it" image="rate5"/>
                                         <connections>
-                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="love" unwindAction="rateRestaurantWithSegue:" id="WSN-aC-6lZ"/>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="rate5" unwindAction="rateRestaurantWithSegue:" id="WSN-aC-6lZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnm-Ug-nFv">
                                         <rect key="frame" x="0.0" y="92" width="181" height="83"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="Cool" image="cool"/>
+                                        <state key="normal" title="Cool" image="rate4"/>
                                         <connections>
-                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="cool" unwindAction="rateRestaurantWithSegue:" id="Lem-84-3ig"/>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="rate4" unwindAction="rateRestaurantWithSegue:" id="Lem-84-3ig"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxK-xm-k3Y" userLabel="Smile">
                                         <rect key="frame" x="0.0" y="185" width="206" height="86"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="Smile" image="happy"/>
+                                        <state key="normal" title="Smile" image="rate3"/>
                                         <connections>
-                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="smile" unwindAction="rateRestaurantWithSegue:" id="u3p-Gq-Jhr"/>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="rate3" unwindAction="rateRestaurantWithSegue:" id="u3p-Gq-Jhr"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JF-Ow-3aP">
                                         <rect key="frame" x="0.0" y="281" width="246" height="87"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="No Way" image="sad"/>
+                                        <state key="normal" title="No Way" image="rate2"/>
                                         <connections>
-                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="sad" unwindAction="rateRestaurantWithSegue:" id="51t-qd-GTs"/>
+                                            <segue destination="8OW-GW-fhj" kind="unwind" identifier="rate2" unwindAction="rateRestaurantWithSegue:" id="51t-qd-GTs"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-rj-tjo">
                                         <rect key="frame" x="0.0" y="378" width="204" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="None" image="norating1"/>
+                                        <state key="normal" title="None" image="norating_blue"/>
                                         <connections>
                                             <segue destination="8OW-GW-fhj" kind="unwind" identifier="none" unwindAction="rateRestaurantWithSegue:" id="CMD-HO-Npr"/>
                                         </connections>
@@ -1452,13 +1452,13 @@
     <resources>
         <image name="art_launch_image" width="1125" height="2429"/>
         <image name="close" width="16" height="16"/>
-        <image name="cool" width="78" height="83"/>
         <image name="cross" width="33" height="32"/>
-        <image name="happy" width="78" height="86"/>
         <image name="list-item-background" width="375" height="60"/>
-        <image name="love" width="78" height="82"/>
-        <image name="norating1" width="82" height="82"/>
-        <image name="sad" width="78" height="87"/>
+        <image name="norating_blue" width="82" height="82"/>
+        <image name="rate2" width="78" height="87"/>
+        <image name="rate3" width="78" height="86"/>
+        <image name="rate4" width="78" height="83"/>
+        <image name="rate5" width="78" height="82"/>
         <image name="save" width="20" height="20"/>
         <image name="text-input" width="298" height="36.5"/>
     </resources>

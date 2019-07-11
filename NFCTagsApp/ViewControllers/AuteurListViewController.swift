@@ -98,15 +98,19 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     }
     
     func setupNavigationBar() {
-        //Customize the navigation bar
-        //The following 2 lines make the Navigation Bar transparant
-       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.hidesBarsOnSwipe = true
-        
         //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = paleRoseColor
+        
+        //Customize the navigation bar
+        //The following 2 lines make the Navigation Bar transparant
+//       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.hidesBarsOnSwipe = true
+//        
+
         
         //METHOD 1
         //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
