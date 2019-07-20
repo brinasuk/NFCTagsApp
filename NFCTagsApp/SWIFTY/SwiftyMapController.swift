@@ -3,18 +3,24 @@
 import UIKit
 import MapKit
 
-class MapController: UIViewController {
+class SwiftyMapController: UIViewController {
     
 
-    @IBOutlet weak var mapView: MKMapView!
 //    @IBAction func backButtonPressed(_ sender: Any) {
 //    }
     
-    var backButt = UIButton()
-    var latitude: String = ""
-    var longitude: String = ""
-    var latitudeD: Double? = 123
-    var longitudeD: Double? = 456
+    @IBOutlet weak var mapView: MKMapView!
+    
+//    var backButt = UIButton()
+//    var latitude: String = ""
+//    var longitude: String = ""
+//    var latitudeD: Double? = 123
+//    var longitudeD: Double? = 456
+    
+    //var allTagObjects:[TagModel]
+    //var allTagObjects = TagModel()
+    //var dataParse:NSMutableArray = []// = NSMutableArray()
+    var tag = TagModel()
     
     
     
@@ -22,6 +28,13 @@ class MapController: UIViewController {
     super.viewDidLoad()
     self.title = "Map View"
     mapView.delegate = self
+
+    
+//    for item in tagObjects {
+//        print (item.tagTitle)
+//    }
+    
+    //print (dataParse.count)
     
     // Receive data ---> with NSUserdefaults
     let prefs:UserDefaults = UserDefaults.standard
@@ -51,14 +64,19 @@ class MapController: UIViewController {
 //        //prefs.setValue("ALEX", forKey: "SWIFTY")
 //    }
     
-    let tagTitle = prefs.string(forKey: "SWIFTYTITLE")
-    print("tagTitle value = \(String(describing: tagTitle))")
-    let tagAddress = prefs.string(forKey: "SWIFTYADDRESS")
-    print("tagAddress value = \(String(describing: tagAddress))")
-    let latitudeD = prefs.double(forKey: "SWIFTYLATITUDE")
-    print("latitudeD value = \(latitudeD)")
-    let longitudeD = prefs.double(forKey: "SWIFTYLONGITUDE")
-    print("longitudeD value = \(longitudeD)")
+//    let tagTitle = prefs.string(forKey: "SWIFTYTITLE")
+//    print("tagTitle value = \(String(describing: tagTitle))")
+//    let tagAddress = prefs.string(forKey: "SWIFTYADDRESS")
+//    print("tagAddress value = \(String(describing: tagAddress))")
+//    let latitudeD = prefs.double(forKey: "SWIFTYLATITUDE")
+//    print("latitudeD value = \(latitudeD)")
+//    let longitudeD = prefs.double(forKey: "SWIFTYLONGITUDE")
+//    print("longitudeD value = \(longitudeD)")
+    
+    let latitude = tag.latitude
+    let latitudeD = (latitude as NSString).doubleValue
+    let longitude = tag.longitude
+    let longitudeD = (longitude as NSString).doubleValue
     
 //    latitude = "39.60181538"
 //    longitude = "-104.86915379"
@@ -70,9 +88,9 @@ class MapController: UIViewController {
 
     centerMapOnLocation(location: initialLocation)
     
-    let artwork = Artwork(title: tagTitle!,
-                          locationName: tagAddress!,
-                          discipline: "Sculpture",
+    let artwork = Artwork(title: tag.tagTitle,
+                          locationName: tag.tagCompany,
+                          discipline: tag.rating,
                           coordinate: CLLocationCoordinate2D(latitude: latitudeD, longitude: longitudeD))
     mapView.addAnnotation(artwork)
     
@@ -150,7 +168,7 @@ class MapController: UIViewController {
 
 // MARK: - MKMapViewDelegate
 
-extension MapController: MKMapViewDelegate {
+extension SwiftyMapController: MKMapViewDelegate {
     // 1
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         // 2

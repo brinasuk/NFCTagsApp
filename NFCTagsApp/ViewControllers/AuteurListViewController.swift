@@ -146,6 +146,12 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         }
     }
     
+    @IBAction func mapButtonPressed(_ sender: Any) {
+        print("MapButtonPressed")
+        
+    }
+    
+    
     // MARK: - ACTION BUTTONS PRESSED
     @IBAction func scanButtonPressed(_ sender: Any) {
         scanResults = ""
@@ -913,18 +919,23 @@ extension AuteurListViewController: UITableViewDataSource {
 //            else { return }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //print(segue.identifier!)
         if segue.identifier == "TagDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! DetailViewController
                 destinationController.tag = self.tagObjects[indexPath.row]
             }
         }
+        
+        if segue.identifier == "SwiftyMap" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! SwiftyMapController
+                destinationController.tag = self.tagObjects[indexPath.row]
+            }
+        }
     }
-    
-
-    
+                
 
     
     
@@ -1237,7 +1248,7 @@ extension AuteurListViewController: UITableViewDataSource {
             
             if (isAgent == "YES") {
                 kAppDelegate.currentUserIsAgent = true
-                btnMaintenance.title = "Maintenance"
+                btnMaintenance.title = "Manage"
                 btnMaintenance.isEnabled = true
             } else {
                 kAppDelegate.currentUserIsAgent = false
@@ -1364,5 +1375,4 @@ extension AuteurListViewController: UITableViewDataSource {
 //    }
     
 
-    
 }

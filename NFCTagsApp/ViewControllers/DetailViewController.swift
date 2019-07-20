@@ -128,13 +128,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         performSegue(withIdentifier: "ShowReview", sender: self)
     }
 
+    @IBAction func mapButtonPressed(_ sender: Any) {
+         performSegue(withIdentifier: "SwiftyMap", sender: self)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
-        /*
-         TITLE
-         SUBTITLE
-         PRICE
-         */
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -232,12 +231,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //print(segue.identifier!)
         if segue.identifier == "ShowMap" {
-            let destinationController = segue.destination as! MapViewController
-            //print(tag.tagAddrFull)
+            //let destinationController = segue.destination as! MapViewController
+            let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = tag
             
         } else if segue.identifier == "ShowReview" {
             let destinationController = segue.destination as! ReviewViewController
+            destinationController.tag = tag
+        }
+        
+        else if segue.identifier == "SwiftyMap" {
+            let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = tag
         }
     }
@@ -376,8 +380,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             mail.setToRecipients([tag.ownerEmail])
             let subject = tag.tagTitle
             mail.setSubject(subject)
-            var message = "I found this on the " + applicationName + " website. Please send me more information.<br><br>"
+            var message = "I found this while using the " + applicationName + " app. Please send me more information.<br><br>"
             message = message + "\(tag.tagTitle ) <br> \(tag.tagSubTitle )<br>\(tag.tagCompany)"
+            
+            message = message + "<br><br>From: \(tag.userName)"
             mail.setMessageBody(message, isHTML: true)
             //NSLog(@"MESSAGE: %@",message);
             
