@@ -28,6 +28,8 @@ class SwiftyMapController: UIViewController {
     super.viewDidLoad()
     self.title = "Map View"
     mapView.delegate = self
+    setupNavigationBar()
+
 
     
 //    for item in tagObjects {
@@ -37,7 +39,7 @@ class SwiftyMapController: UIViewController {
     //print (dataParse.count)
     
     // Receive data ---> with NSUserdefaults
-    let prefs:UserDefaults = UserDefaults.standard
+    //let prefs:UserDefaults = UserDefaults.standard
     
     
 //    if let latitudeD = prefs.string(forKey: "SWIFTYLATITUDE"){
@@ -77,6 +79,7 @@ class SwiftyMapController: UIViewController {
     let latitudeD = (latitude as NSString).doubleValue
     let longitude = tag.longitude
     let longitudeD = (longitude as NSString).doubleValue
+    //print(latitudeD, longitudeD)
     
 //    latitude = "39.60181538"
 //    longitude = "-104.86915379"
@@ -95,6 +98,26 @@ class SwiftyMapController: UIViewController {
     mapView.addAnnotation(artwork)
     
   }
+    
+    func setupNavigationBar() {
+        //Customize the navigation bar
+        //The following 2 lines make the Navigation Bar transparant
+        //METHOD 0
+                navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                navigationController?.navigationBar.shadowImage = UIImage()
+                navigationController?.navigationBar.tintColor = .darkText //CRITICAL
+                navigationController?.hidesBarsOnSwipe = false
+                navigationController?.navigationBar.prefersLargeTitles = false
+        
+        //METHOD 1
+        //                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+        //                navigationItem.largeTitleDisplayMode = .always
+        
+        //METHOD2
+        //        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+        //            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+        //        }
+    }
     
     let regionRadius: CLLocationDistance = 1000
     func centerMapOnLocation(location: CLLocation) {

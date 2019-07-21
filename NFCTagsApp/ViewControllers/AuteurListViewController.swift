@@ -17,6 +17,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     //private var dataParse:NSMutableArray = NSMutableArray()
     
     private var scanResults: String? = ""
+    
+    var currentRow:Int = 0
 
     //private var objectId:String = ""    //USED BY DELETE
     
@@ -840,7 +842,7 @@ extension AuteurListViewController: UITableViewDataSource {
         //=================================================
         
         
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        //cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
         
         
@@ -862,7 +864,11 @@ extension AuteurListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        //tableView.deselectRow(at: indexPath, animated: true)
+        
+        currentRow = indexPath.row
+        
+        
         //let theVige = self.tagObjects[indexPath.row]
         //let vige = theVige.tagTitle
         //print("VIGE: \(vige)")
@@ -929,10 +935,11 @@ extension AuteurListViewController: UITableViewDataSource {
         }
         
         if segue.identifier == "SwiftyMap" {
-            if let indexPath = tableView.indexPathForSelectedRow {
+
+                print (currentRow)
                 let destinationController = segue.destination as! SwiftyMapController
-                destinationController.tag = self.tagObjects[indexPath.row]
-            }
+                destinationController.tag = self.tagObjects[currentRow]
+
         }
     }
                 
@@ -1055,59 +1062,71 @@ extension AuteurListViewController: UITableViewDataSource {
         
     }
  */
+    func removeItem () {
+        let tag = self.tagObjects[currentRow]
+        let objectId = tag.tagObjectId
+        let query = PFQuery(className: "Tags")
+        print("DELETE + \(objectId)")
+        
+        query.getObjectInBackground(withId: objectId) { (object: PFObject?, error: Error?) in
+            if let error = error {
+                // The query failed
+                print(error.localizedDescription)
+                //self.displayMessage(message: error.localizedDescription)
+            } else if let object = object {
+                // The query succeeded with a matching result
+                print("SUCCESS")
+                object.deleteInBackground()
+                
+                //self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                //self.dataParse.remove(indexPath.row)
+                //completionHandler(true)
+                //self.displayMessage(message: "Successfully Deleted")
+                //self.tableView.reloadData()
+                self.loadTagTable() //DELETE
+            } else {
+                // The query succeeded but no matching result was found
+                //self.displayMessage(message: "No Record Found")
+                print("NO MATCH FOUND")
+            }
+        }
+    }
     
-    // MARK: - Table view delegate 2
+    // MARK: - TRAILING SWIPE Table view delegate
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
             print ("REMOVE ROW")
-            
-            // delete from server
-            let tag = self.tagObjects[indexPath.row]
-            let objectId = tag.tagObjectId
-            let query = PFQuery(className: "Tags")
-            
-            print("DELETE + \(objectId)")
-            
-            query.getObjectInBackground(withId: objectId) { (object: PFObject?, error: Error?) in
-                if let error = error {
-                    // The query failed
-                    print(error.localizedDescription)
-                    //self.displayMessage(message: error.localizedDescription)
-                } else if let object = object {
-                    // The query succeeded with a matching result
-                    print("SUCCESS")
-                    object.deleteInBackground()
-                    
-                    //self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                    //self.dataParse.remove(indexPath.row)
-                    //completionHandler(true)
-                    //self.displayMessage(message: "Successfully Deleted")
-                    //self.tableView.reloadData()
-                    self.loadTagTable() //DELETE
-                } else {
-                    // The query succeeded but no matching result was found
-                    //self.displayMessage(message: "No Record Found")
-                    print("NO MATCH FOUND")
+            Alertift.alert(title: "Remove Item",message: "Are you sure you wish to Remove this Item?")
+                .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+                    print("YES!")
+                    self.removeItem()
+                    completionHandler(true)
                 }
-            }
+                .action(.cancel("No")) { (_, _, _) in
+                    print("No/Cancel Clicked")
+                    completionHandler(false)
+                }
+                .show()
+            
+
             // Call completion handler with true to indicate
-            completionHandler(true)
+            
         }
         
         let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in
-                    let theVige = self.tagObjects[indexPath.row]
+            let theVige = self.tagObjects[indexPath.row]
             let title = theVige.tagTitle
             let defaultText = "Just checking in at " + title
             
             let activityController: UIActivityViewController
             
-//            let imageNaME = theVige.tagUrl
-//            if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
-//                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
-//            } else  {
-//                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
-//            }
+            //            let imageNaME = theVige.tagUrl
+            //            if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
+            //                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+            //            } else  {
+            //                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            //            }
             //TODO: TAKE THIS OUT!
             activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
             
@@ -1122,38 +1141,113 @@ extension AuteurListViewController: UITableViewDataSource {
             completionHandler(true)
         }
         
+        let websiteAction = UIContextualAction(style: .normal, title: "Website") { (action, sourceView, completionHandler) in
+            
+            //SHOW WEBSITE
+            let tag = self.tagObjects[indexPath.row]
+            let link = tag.tagUrl
+            if let url = URL(string: link ) {
+                let safariVC = SFSafariViewController(url: url)
+                self.present(safariVC, animated: true, completion: nil)
+            }
+            completionHandler(true)
+        }
+        
+        let mapAction = UIContextualAction(style: .normal, title: "Map") { (action, sourceView, completionHandler) in
+            
+            //SWIFTYMAP
+            self.performSegue(withIdentifier: "SwiftyMap", sender: self)
+            completionHandler(true)
+        }
+        
+
+        
         // Set the icon and background color for the actions
         deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         deleteAction.image = UIImage(named: "delete")
         
-        shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 1.0)
+        mapAction.backgroundColor = skyBlueColor
+        mapAction.image = UIImage(named: "tick")
+        
+        shareAction.backgroundColor = cactusGreenColor
         shareAction.image = UIImage(named: "share")
         
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+        websiteAction.backgroundColor = steelBlueColor
+        websiteAction.image = UIImage(named: "tick")
         
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction, mapAction, websiteAction])
+        
+        swipeConfiguration.performsFirstActionWithFullSwipe = false
         return swipeConfiguration
     }
     
+    // MARK: - LEADING SWIPE Table view delegate
+/*
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let checkInAction = UIContextualAction(style: .normal, title: "Check-in") { (action, sourceView, completionHandler) in
+        let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in
+            let theVige = self.tagObjects[indexPath.row]
+            let title = theVige.tagTitle
+            let defaultText = "Just checking in at " + title
             
-//            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-//            self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
-//            cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
+            let activityController: UIActivityViewController
             
+            //            let imageNaME = theVige.tagUrl
+            //            if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
+            //                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+            //            } else  {
+            //                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            //            }
+            //TODO: TAKE THIS OUT!
+            activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            
+            if let popoverController = activityController.popoverPresentationController {
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    popoverController.sourceView = cell
+                    popoverController.sourceRect = cell.bounds
+                }
+            }
+            
+            self.present(activityController, animated: true, completion: nil)
             completionHandler(true)
         }
         
-        let checkInIcon = "tick" //restaurants[indexPath.row].isVisited ? "undo" : "tick"
-        checkInAction.backgroundColor = UIColor(red: 38.0/255.0, green: 162.0/255.0, blue: 78.0/255.0, alpha: 1.0)
-        checkInAction.image = UIImage(named: checkInIcon)
+        let websiteAction = UIContextualAction(style: .normal, title: "Website") { (action, sourceView, completionHandler) in
+            
+            //SHOW WEBSITE
+            let tag = self.tagObjects[indexPath.row]
+            let link = tag.tagUrl
+            if let url = URL(string: link ) {
+                let safariVC = SFSafariViewController(url: url)
+                self.present(safariVC, animated: true, completion: nil)
+            }
+            completionHandler(true)
+        }
         
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkInAction])
+        let mapAction = UIContextualAction(style: .normal, title: "Map") { (action, sourceView, completionHandler) in
+            
+            //SWIFTYMAP
+            self.performSegue(withIdentifier: "SwiftyMap", sender: self)
+            completionHandler(true)
+        }
+        
+
+        
+        mapAction.backgroundColor = skyBlueColor
+        mapAction.image = UIImage(named: "tick")
+        
+        shareAction.backgroundColor = cactusGreenColor
+        shareAction.image = UIImage(named: "share")
+        
+        websiteAction.backgroundColor = steelBlueColor
+        websiteAction.image = UIImage(named: "tick")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [shareAction, mapAction, websiteAction])
         
         
         return swipeConfiguration
     }
+*/
 
 // MARK: === SIGN IN ROUTINES ===========
     

@@ -139,4 +139,4 @@ public let dustColor = UIColor(red:236, green:214, blue:197)
  
  // MARK: Browns
  public let royalBlue = UIColor(red:83, green:51, blue:237)
-
+//Example: let myColor = royalBlue

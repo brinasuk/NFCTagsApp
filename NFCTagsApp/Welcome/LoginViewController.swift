@@ -93,7 +93,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //let emailRegisterButton = UIButton(type: .system)
         // IN IB DEFINE BUTTON AS SYSTEM !!!!
         emailRegisterButton.backgroundColor = .clear
-        //Wont Work emailRegisterButton.tintColor = .red
+        //Wont Work emailRegisterButton.tintColor = .white
         //Wont Work emailRegisterButton.titleLabel?.textColor = .blue
         //Does Work emailRegisterButton.setTitleColor(UIColor.red, for: .normal)
         emailRegisterButton.setTitleColor(royalBlue, for: .normal)

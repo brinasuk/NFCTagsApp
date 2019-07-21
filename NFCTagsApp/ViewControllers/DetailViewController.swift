@@ -48,7 +48,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         //    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //    navigationController?.navigationBar.shadowImage = UIImage()
-        //    navigationController?.navigationBar.tintColor = .red
+        //    navigationController?.navigationBar.tintColor = .white
         //    navigationController?.hidesBarsOnSwipe = false
         
         showInfo()
@@ -68,10 +68,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
         //METHOD 0
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.tintColor = .red
-//        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.hidesBarsOnSwipe = false
         
         //METHOD 1
         //                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
@@ -215,18 +215,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
             return cell
 
-            
         default:
             fatalError("Failed to instantiate the table view cell for detail view controller")
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ShowMap" {
-//            let destinationController = segue.destination as! MapViewController
-//            destinationController.tag = tag
-//        }
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //print(segue.identifier!)
