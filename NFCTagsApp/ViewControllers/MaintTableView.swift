@@ -289,9 +289,9 @@ class MaintTableView: UITableViewController {
             imageView.kf.setImage(with: url, options: [.processor(processor)])
  */
             
-            //cell.tagImageView.kf.setImage(with: url)
             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
-            cell.tagImageView.kf.setImage(with: url, options: [.processor(processor)])
+            let placeholderImage = UIImage(named: "icons8-camera-1")
+            cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
         }
         
         //=================================================

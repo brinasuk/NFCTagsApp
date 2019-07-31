@@ -7,7 +7,7 @@ import AlamofireImage
 import SafariServices
 import Alertift
 import Kingfisher
-
+import AVFoundation
 
 
 class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
@@ -19,6 +19,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     private var scanResults: String? = ""
     
     var currentRow:Int = 0
+    var rowCount:Int = 0
 
     //private var objectId:String = ""    //USED BY DELETE
     
@@ -131,6 +132,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         
 
         setupNavigationBar()
+
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
         let currentUser = PFUser.current()
@@ -276,6 +278,9 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             var response:String = ""  //MESSAGE WITH RETURNED PAYLOAD
             var textPayload:String = ""  //THIS IS THE TEXT WE ARE LOOKING FOR!! BINGO!!
             var urlString:String = "" //EXTRACT A URL IF POSSIBLE
+            
+            //VIBRATE
+            AudioServicesPlayAlertSound(SystemSoundID(4095))   //1303 MAIL SENT  //VIBRATE 4095
             
             
             //NSLog(@"IDENTIFIER: %@", message.ide)
@@ -727,18 +732,15 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
 extension AuteurListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //let count = self.dataParse.count
-        let count = self.tagObjects.count
-        if (count > 0) {
-            statusLabel.text = "Swipe left for more options"
-        } else {
-            var myMessage = "Welcome " + kAppDelegate.currentUserName!
-            statusLabel.text = myMessage
-            //myMessage = myMessage + "\nPlease tap the button below to Scan Tags for Information"
-            //displayMessage(message: myMessage)
-        }
-        //TODO: TAKE OUT AFTER DEBUGGING:
-        //statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
-        return count;
+        rowCount = self.tagObjects.count
+//        if (rowCount > 0) {
+//            statusLabel.text = "Swipe < for more options"
+//        } else {
+//            statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
+//        }
+        
+        statusLabel.text = "Swipe < for more options"
+        return rowCount;
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -835,8 +837,11 @@ extension AuteurListViewController: UITableViewDataSource {
              */
             
             //cell.tagImageView.kf.setImage(with: url)
+            //icons8-camera-1
             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
-            cell.tagImageView.kf.setImage(with: url, options: [.processor(processor)])
+            let placeholderImage = UIImage(named: "icons8-camera-1")
+            cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
+   
         }
         
         //=================================================
@@ -1351,7 +1356,7 @@ extension AuteurListViewController: UITableViewDataSource {
             }
             
             btnSignIn.title = "Sign Out"
-            statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
+            //statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
             
         } else {
             //kAppDelegate.loggedInFlag = false

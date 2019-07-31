@@ -46,6 +46,7 @@
 		C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F16228A623900E97DFF /* Spinner.swift */; };
 		C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */; };
 		C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */; };
+		C7B7D05222F0DD0D0069D42D /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C7B7D05122F0DD0D0069D42D /* click.mp3 */; };
 		C7C4844A22871B7F00C6A95B /* DemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4844922871B7F00C6A95B /* DemoModel.swift */; };
 		C7C4844C2287723C00C6A95B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4844B2287723C00C6A95B /* UIColorExtension.swift */; };
 		C7DA87F32291AC8600457112 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F22291AC8600457112 /* RegisterViewController.swift */; };
@@ -110,6 +111,7 @@
 		C7AC6F16228A623900E97DFF /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		C7B7D05122F0DD0D0069D42D /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
 		C7C4844922871B7F00C6A95B /* DemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoModel.swift; sourceTree = "<group>"; };
 		C7C4844B2287723C00C6A95B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		C7DA87F22291AC8600457112 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */,
 				C7156782227BD97700D1A55A /* LaunchScreen.storyboard */,
 				C7156785227BD97700D1A55A /* Info.plist */,
+				C7B7D05122F0DD0D0069D42D /* click.mp3 */,
 				C7156794227BDA0900D1A55A /* Resources */,
 				C7156796227BDA0900D1A55A /* ViewControllers */,
 				C715678B227BDA0900D1A55A /* Cell Views */,
@@ -375,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7156784227BD97700D1A55A /* LaunchScreen.storyboard in Resources */,
+				C7B7D05222F0DD0D0069D42D /* click.mp3 in Resources */,
 				C7156781227BD97700D1A55A /* Assets.xcassets in Resources */,
 				C74C541522D0049E0071F3F1 /* Main.storyboard in Resources */,
 				C715679E227BDA0900D1A55A /* auteurs.json in Resources */,
