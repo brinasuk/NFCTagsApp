@@ -52,9 +52,7 @@ class MaintTableView: UITableViewController {
         self.tableView.backgroundView = imageView
         self.tableView.backgroundColor = coralColor
         view.backgroundColor = paleRoseColor
-        
-        let placeholderImageName = kAppDelegate.placeholderName
-        placeholderImage = UIImage(named: placeholderImageName! as String)!
+
         
         //FORCE A RELOAD OF THE DATA
         kAppDelegate.isDatabaseDirty = true
@@ -288,7 +286,7 @@ class MaintTableView: UITableViewController {
             // Use the process in view extension methods.
             imageView.kf.setImage(with: url, options: [.processor(processor)])
  */
-            
+            //TODO: FIX SIZE
             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
             let placeholderImage = UIImage(named: "icons8-camera-1")
             cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])

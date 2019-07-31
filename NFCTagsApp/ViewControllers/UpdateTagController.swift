@@ -264,14 +264,15 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         let url = URL(string: propertyPhotoFileUrl!)
         //Size refer to the size which you want to resize your original image
         
-        let placeholderImageName = kAppDelegate.placeholderName
-        //TODO: Fix Width and Height. Plug in correct values
+        let placeholderImage = UIImage(named: "icons8-camera-1")
+        
+        //TODO: Fix SIZE Width and Height. Plug in correct values
         let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
         
         photoImageView.kf.indicatorType = .activity
         photoImageView.kf.setImage(
             with: url,
-            placeholder: UIImage(named: placeholderImageName! as String)!,
+            placeholder: placeholderImage,
             options: [
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),

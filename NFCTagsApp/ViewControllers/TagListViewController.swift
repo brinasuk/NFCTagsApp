@@ -10,7 +10,7 @@ import Kingfisher
 import AVFoundation
 
 
-class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
+class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
     
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     private var tagObjects:[TagModel] = []
@@ -39,9 +39,15 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        
         self.title = "Welcome" //TODO: FIX THIS kAppDelegate.appName as String?
-        setupNavigationBar()
-        //imageView.kf.indicatorType = .activity
+        //setupNavigationBar()
+        
+        // SEE IF YOU HAVE A USER ALREADY LOGGED IN
+
         
         //CRITICAL:  CLEAS CACHE!!
         KingfisherManager.shared.cache.clearMemoryCache()
@@ -51,6 +57,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = 92.0 // Use 92.0
         tableView.cellLayoutMarginsFollowReadableWidth = true
+        
+
 
         //        moveDirtyFlag = false
         //        buttonLabel = "Edit"
@@ -87,14 +95,13 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         toolBar.barTintColor = .white //pinkColor  //paleRoseColor//.white // coralColor
         view.backgroundColor = paleRoseColor
         
-        // blur it
-//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
-//        let blurView = UIVisualEffectView(effect: blurEffect)
-//        blurView.frame = imageView.bounds
-//        imageView.addSubview(blurView)
-        
-        let placeholderImageName = kAppDelegate.placeholderName
-        placeholderImage = UIImage(named: placeholderImageName! as String)!
+
+        // THIS IS CRITICAL HERE. IF USER NOT LOGGED IN THEN FORCE A LOGIN
+        // FOR SOME REASON DOES NOT WORK IN FORM_WILLLOAD ????
+        let currentUser = PFUser.current()
+        if currentUser == nil {
+            showLoginScreen()
+        }
         
         //FORCE A RELOAD OF THE DATA
         kAppDelegate.isDatabaseDirty = true
@@ -132,6 +139,13 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         
 
         setupNavigationBar()
+        
+        if (kAppDelegate.isDatabaseDirty == true) {
+            //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
+            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
+            loadTagTable() //GET INFO FOR NEW USER
+            kAppDelegate.isDatabaseDirty = false
+        }
 
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
@@ -142,19 +156,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             showCurrentUserInfo()   //UPDATE CURRENT USER INFO
         }
         
-        if (kAppDelegate.isDatabaseDirty == true) {
-            //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
-            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
-            loadTagTable() //GET INFO FOR NEW USER
-            kAppDelegate.isDatabaseDirty = false
-        }
+
     }
-    
-    @IBAction func mapButtonPressed(_ sender: Any) {
-        print("MapButtonPressed")
-        
-    }
-    
     
     // MARK: - ACTION BUTTONS PRESSED
     @IBAction func scanButtonPressed(_ sender: Any) {
@@ -168,7 +171,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
         
         let currentUser = PFUser.current()
         if currentUser != nil {
-            Alertift.alert(title: "Sign out",message: "Are you sure you wish to Sign Out?")
+            Alertift.alert(title: kAppDelegate.currentUserName!,message: "Are you sure you wish to Sign Out?")
                 .action(.default("Yes"), isPreferred: true) { (_, _, _) in
                     print("YES!")
                     self.actionLogout()
@@ -386,7 +389,7 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
     func lookupTagIfo(_ passTagId: String?) {
         //tagId = "info@kcontemporaryart.com:102" //TODO: REMOVE
-        print("PASS TAGID: \(passTagId ?? "")")
+        //print("PASS TAGID: \(passTagId ?? "")")
         let useTagId:String? = passTagId
         
 //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
@@ -482,9 +485,8 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
                     tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
 
                     tag["userName"] = self.kAppDelegate.currentUserName
-                    tag["userEmail"] = self.kAppDelegate.currentUserEmail //info@kcontemporaryart.com
+                    tag["userEmail"] = self.kAppDelegate.currentUserEmail
 
-                    
                     tag["tagPhotoRef"] = ownerObjectId  /// ownerPhotoRef is NO LONGER USED!
                     tag["tagId"] = ownerId
                     tag["tagTitle"] = ownerTitle
@@ -705,19 +707,19 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
             //RUN ON MAIN THREAD
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                if rowCount == 0 {
-                    let welcome = "Welcome " + self.kAppDelegate.currentUserName!
-                    let message = "Please tap the button below to \nScan Tags for Information"
-                    let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
-                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-                    }
-                    alertView.addAction(OKAction)
-                    if let presenter = alertView.popoverPresentationController {
-                        presenter.sourceView = self.view
-                        presenter.sourceRect = self.view.bounds
-                    }
-                    self.present(alertView, animated: true, completion:nil)
-                }
+//                if rowCount == 0 {
+//                    let welcome = "Welcome " + self.kAppDelegate.currentUserName!
+//                    let message = "Please tap the button below to \nScan Tags for Information"
+//                    let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
+//                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+//                    }
+//                    alertView.addAction(OKAction)
+//                    if let presenter = alertView.popoverPresentationController {
+//                        presenter.sourceView = self.view
+//                        presenter.sourceRect = self.view.bounds
+//                    }
+//                    self.present(alertView, animated: true, completion:nil)
+//                }
             }
             //let sv = UIViewController.displaySpinner(onView: self.view)
             UIViewController.removeSpinner(spinner: sv)
@@ -729,17 +731,33 @@ class AuteurListViewController:UIViewController,SFSafariViewControllerDelegate, 
     // MARK: - Table view
 // TODO: CODE TO REMOVE A ROW
 
-extension AuteurListViewController: UITableViewDataSource {
+extension TagListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //let count = self.dataParse.count
         rowCount = self.tagObjects.count
-//        if (rowCount > 0) {
-//            statusLabel.text = "Swipe < for more options"
-//        } else {
-//            statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
-//        }
         
-        statusLabel.text = "Swipe < for more options"
+        if (rowCount > 0) {
+            statusLabel.text = "Tap or swipe left for more options"
+        } else {
+            statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
+        }
+        
+        if rowCount == 0 {
+            let welcome = "Welcome " + self.kAppDelegate.currentUserName!
+            let message = "Please tap the button below to \nScan nearby Tags for Information"
+            let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+            }
+            alertView.addAction(OKAction)
+            if let presenter = alertView.popoverPresentationController {
+                presenter.sourceView = self.view
+                presenter.sourceRect = self.view.bounds
+            }
+            self.present(alertView, animated: true, completion:nil)
+        }
+        
+
+        
         return rowCount;
     }
 
@@ -837,7 +855,8 @@ extension AuteurListViewController: UITableViewDataSource {
              */
             
             //cell.tagImageView.kf.setImage(with: url)
-            //icons8-camera-1
+
+            //TODO: FIX SIZE
             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
             let placeholderImage = UIImage(named: "icons8-camera-1")
             cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
@@ -1356,7 +1375,7 @@ extension AuteurListViewController: UITableViewDataSource {
             }
             
             btnSignIn.title = "Sign Out"
-            //statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
+            //statusLabel.text = //HANDLED EARLIER
             
         } else {
             //kAppDelegate.loggedInFlag = false

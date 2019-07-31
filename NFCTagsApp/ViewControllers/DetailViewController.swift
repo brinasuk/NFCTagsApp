@@ -115,36 +115,54 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //=================================================
         
         // METHOD 2: ======================================
-        let url = URL(string: propertyPhotoFileUrl!)!
-        let placeholderImageName = kAppDelegate.placeholderName
-        let placeholderImage = UIImage(named: placeholderImageName! as String)!
-        headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+//        let url = URL(string: propertyPhotoFileUrl!)!
+//        let placeholderImageName = kAppDelegate.placeholderName
+//        let placeholderImage = UIImage(named: placeholderImageName! as String)!
+//        headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
 
+        //=================================================
+        
+        // METHOD 3: KINGFISHER ============================
+        //                let propertyPhotoFileUrl = "https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg"
+        
+        //print(propertyPhotoFileUrl)
+        //        let url = URL(string: propertyPhotoFileUrl!)!
+        //        photoImageView.kf.setImage(with: url)
+        //                photoImageView.kf.setImage(with: url, options: [.transition(.fade(2.0))])
+        
+        let url = URL(string: propertyPhotoFileUrl!)
+        //Size refer to the size which you want to resize your original image
+        
+        let placeholderImage = UIImage(named: "icons8-camera-1")
+        //TODO: Fix SIZE Width and Height. Plug in correct values
+        let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
+        
+        headerView.headerImageView.kf.indicatorType = .activity
+        headerView.headerImageView.kf.setImage(
+            with: url,
+            placeholder: placeholderImage,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1.0)),
+                .cacheOriginalImage
+            ])
+        {
+            result in
+            switch result {
+            case .success(let value):
+                //self.imageToUpload = (self.photoImageView.image ?? UIImage())! //or UIImage(
+                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+            case .failure(let error):
+                //self.imageToUpload = nil
+                print("Job failed: \(error.localizedDescription)")
+            }
+        }
         //=================================================
     }
     
     
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "click", withExtension: "mp3") else { return }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            
-            /* iOS 10 and earlier require the following line:
-             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
-            
-            guard let player = player else { return }
-            
-            player.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
+
     
 
 //    @IBAction func imageTapped(sender: AnyObject) {
@@ -373,23 +391,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         self.present(alertView, animated: true, completion:nil)
     }
-    
-    //func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
-    //    let options: [CFString: Any] = [
-    //        kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-    //        kCGImageSourceCreateThumbnailWithTransform: true,
-    //        kCGImageSourceShouldCacheImmediately: true,
-    //        kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
-    //    ]
-    //
-    //    guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
-    //        let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
-    //        else {
-    //            return nil
-    //    }
-    //
-    //    return UIImage(cgImage: image)
-    //}
+
     
     
     
@@ -403,71 +405,32 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
      */
     
     @IBAction func contactUsButtonPressed(_ sender: UIBarButtonItem) {
-        sendEmail()
+        let applicationName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         
-
-        
-        
-//        let data: Data = some data
-//        try data.write(to: temporaryFileURL,
-//                       options: .atomic)
-        
-
-        
-        //       imageToUpload = UIImage()
-        //
-        //        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        //        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-        //        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        //        if let dirPath          = paths.first
-        //        {
-        //            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("Image2.png") //Your image name here
-        //            let image    = UIImage(contentsOfFile: imageURL.path)
-        //            imageToUpload = image!
-        //        }
-        
-        //playSound()
-        AudioServicesPlayAlertSound(SystemSoundID(4095))   //1303 MAIL SENT  //VIBRATE 4095
-
-        }
-
-    func sendEmail() {
-        
-        var applicationName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         if MFMailComposeViewController.canSendMail()  {
-
-        
-        let mail = MFMailComposeViewController()
-        mail.mailComposeDelegate = self
-        mail.setToRecipients([tag.ownerEmail])
-        let subject = tag.tagTitle
-        mail.setSubject(subject)
-        var message = "I found this while using the " + applicationName + " app. Please send me more information.<br><br>"
-        message = message + "\(tag.tagTitle ) <br> \(tag.tagSubTitle )<br>\(tag.tagCompany)"
-        
-        message = message + "<br><br>From: \(tag.userName)<br>"
             
-//            let jpegData: NSData = headerView.headerImageView.image!.jpegData(compressionQuality: 1.0)
             
-        //var imageData = (headerView.headerImageView.image ?? UIImage())!
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([tag.ownerEmail])
+            let subject = tag.tagTitle
+            mail.setSubject(subject)
+            var message = "I found this while using the " + applicationName + " app. Please send me more information.<br><br>"
+            message = message + "\(tag.tagTitle ) <br> \(tag.tagSubTitle )<br>\(tag.tagCompany)"
             
-//            let imageData: NSData = (UIImageJPEGRepresentation(headerView.headerImageView.image!, 0.5) as? NSData)!
+            message = message + "<br><br>From: \(tag.userName)<br>"
             
             let imageData: NSData = (headerView.headerImageView.image!.jpegData(compressionQuality: 0.75)  as? NSData)!
-            
             mail.addAttachmentData(imageData as Data, mimeType: "image/jpeg", fileName: "image.jpg")
-            
             
             mail.setMessageBody(message, isHTML: true)
             self.present(mail, animated: true, completion: nil)
-            
             
         } else {
             displayMessage(message: "Cannot send Email")
             return
         }
     }
-    
     
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult,
@@ -485,7 +448,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
             //AudioServicesPlaySystemSound (systemSoundID)
             //AudioServicesPlayAlertSound(SystemSoundID(1303))   //MAIL SENT
-            playSound()
+            //playSound()
+            
+            //USE THIS. IT WORKS!!
+            AudioServicesPlayAlertSound(SystemSoundID(1303))   //1303 MAIL SENT  //VIBRATE 4095
+            
             self.dismiss(animated: true, completion: nil)
         case .failed:
             self.dismiss(animated: true, completion: {
@@ -502,136 +469,69 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-//    func getImage(_ url:String,handler: @escaping (UIImage?)->Void) {
-//        print(url)
-//
-//        let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
-//                                        isDirectory: true)
-//        let temporaryFileURL =
-//            temporaryDirectoryURL.appendingPathComponent("mailpic.jpg")
-//
-//        print(temporaryFileURL)
-//        Alamofire.request(url, method: .get).responseImage { response in
-//            if let data = response.result.value {
-//                handler(data)
-//            } else {
-//                handler(nil)
-//            }
-//        }
-//    }
-  
-    func getTemporaryFileURL() -> URL {
-        let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
-                                        isDirectory: true)
-        let temporaryFileURL =
-            temporaryDirectoryURL.appendingPathComponent("mailpic.jpg")
-        
-        print(temporaryFileURL)
-        return temporaryFileURL
-    }
-    
-    func alex2  () {
-//        let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
-//                                        isDirectory: true)
-//        let tempFileURL =
-//            tempDirectoryURL.appendingPathComponent("mailpic.jpg")
-        
-        let tempFileURL = getTemporaryFileURL()
 
+
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "click", withExtension: "mp3") else { return }
         
         do {
-            let fileURL: URL = tempFileURL
-            try FileManager.default.removeItem(at: fileURL)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
         }
-        catch let error as NSError {
-            print("Ooops! Something went wrong: \(error)")
-        }
-        
-        
-        
+    }
+}
 
-
-        
-//        if FileManager.fileExistsAtPath(tempFileURL)
-//        {
-//            do
-//            {
-//
-//            }
-//            catch
-//            {
-//            }
-//        }
-
-        var usePhotoLink = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
-
-        if let url = URL(string: usePhotoLink) {
-            URLSession.shared.downloadTask(with: url) { location, response, error in
-                
-                guard let location = location else {
-                    print("download error:", error ?? "")
-                    return
-                }
-                // move the downloaded file from the temporary location url to your app documents directory
-                do {
-                    try FileManager.default.moveItem(at: location, to: tempFileURL)
-                    print("DONE!")
-                } catch {
-                    print(error)
-                }
-                }.resume()
-        }
-        
-
-        
-        
-//        let fullURL = getDocumentsDirectory().appendingPathComponent(filename)
-//        try? data.write(to: fullURL)
-        
-        //                        let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
-        //                                                        isDirectory: true)
-        //                        let temporaryFileURL =
-        //                            temporaryDirectoryURL.appendingPathComponent("mailpic.jpg")
-        //
-        //                        print(temporaryFileURL)
+/*
+ var usePhotoLink = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
  
-        /*
-        var usePhotoLink = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
-        
-        let url = URL(string: usePhotoLink )!
-        let downloader = ImageDownloader.default
-        downloader.downloadImage(with: url) { result in
-            switch result {
+ let url = URL(string: usePhotoLink )!
+ let downloader = ImageDownloader.default
+ downloader.downloadImage(with: url) { result in
+ switch result {
+ 
+ case .success(let value):
+ 
+ print("Image: \(value.image). Got from: \(value.cacheType)")
+ let image:Image = value.image
+ if let jpegData:Data = image.jpegData(compressionQuality: 1.0) {
+ 
+ let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
+ isDirectory: true)
+ let temporaryFileURL =
+ temporaryDirectoryURL.appendingPathComponent("mailpic.jpg")
+ 
+ print(temporaryFileURL)
+ 
+ let data: Data = jpegData
+ try data.write(to: temporaryFileURL,
+ options: .atomic)
+ 
+ 
+ }
+ //                let data: Data = jpegData
+ //                try data.write(to: temporaryFileURL,
+ //                               options: .atomic)
+ case .failure(let error):
+ print(error)
+ }
+ }
+ 
+ */
 
-                                case .success(let value):
-                
-                                    print("Image: \(value.image). Got from: \(value.cacheType)")
-                                    let image:Image = value.image
-                                    if let jpegData:Data = image.jpegData(compressionQuality: 1.0) {
-                
-                                        let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
-                                                                        isDirectory: true)
-                                        let temporaryFileURL =
-                                            temporaryDirectoryURL.appendingPathComponent("mailpic.jpg")
-                
-                                        print(temporaryFileURL)
-                
-                                        let data: Data = jpegData
-                                        try data.write(to: temporaryFileURL,
-                                                       options: .atomic)
-                
-                
-                                    }
-//                let data: Data = jpegData
-//                try data.write(to: temporaryFileURL,
-//                               options: .atomic)
-            case .failure(let error):
-                print(error)
-            }
-        }
-        
-        */
-        
 //        if let url = URL(string: usePhotoLink ) {
 //            let resource = ImageResource(downloadURL: url)
 //            KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil )
@@ -664,230 +564,292 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 //                }
 //            }
 //        }
-        
-    }
-    
-
-    
-    
-    /*
-     if let url = URL(string: usePhotoLink ) {
-     let resource = ImageResource(downloadURL: url)
-     
-     KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
-     switch result {
-     case .success(let value):
-     
-     print("Image: \(value.image). Got from: \(value.cacheType)")
-     let image:Image = value.image
-     if let jpegData = image.jpegData(compressionQuality: 1.0) {
-     mail.addAttachmentData(jpegData,
-     mimeType: "image/jpg",
-     fileName: "Image")
-     mail.setMessageBody(message, isHTML: true)
-     self.present(mail, animated: true, completion: nil)
-     }
-     
-     case .failure(let msg):
-     print("NO PHOTO: \(msg)")
-     //NO PHOTO. DONT WORRY. JUST PRESENT EMMAIL
-     mail.setMessageBody(message, isHTML: true)
-     self.present(mail, animated: true, completion: nil)
-     }
-     }
-     */
-    
-    
-    //    func downloadImage(`with` urlString : String){
-    //        guard let url = URL.init(string: urlString) else {
-    //            return
-    //        }
-    //        let resource = ImageResource(downloadURL: url)
-    //
-    //        KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
-    //            switch result {
-    //            case .success(let value):
-    //                print("Image: \(value.image). Got from: \(value.cacheType)")
-    //            case .failure(let error):
-    //                print("Error: \(error)")
-    //            }
-    //        }
-    //    }
-    
-    
-    
-    
-    //BEACON TAPPED MADISON22
-    // WHENEVER THE USER TAPS A BEACON, SEND THE LEAD TO THE OWNER
-    /*
-     func sendGrid(_ useTitle: String?, usingSubTitle useSubTitle: String?, usingCompany useCompany: String?, usingAddress useAddress: String?, usingOwnerEmail useOwnerEmail: String?) {
-     
-     let sendgrid = SendGrid.apiUser("hillside_ios", apiKey: "46inh2@sa&12")
-     let email = SendGridEmail()
-     
-     let dateFormat = DateFormatter()
-     dateFormat.dateFormat = "EEE, MMM d, h:mm a"
-     //[dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];  //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
-     
-     let dateSubmitted = "\(dateFormat.string(from: Date()))"
-     
-     var sendTo: String
-     //SEND LEAD TO OWNER
-     sendTo = useOwnerEmail ?? ""
-     sendTo = "alex@hillsoft.com" //TODO: ALEX TEMP FIX FOR TESTING. REMOVE FROM FINAL RELEASE !
-     
-     let message = "The following Beacon was tapped: <br><br>"
-     
-     var body = "<h1><b>Beacon Tapped</b></h1>"
-     
-     body = body + ("<h3>")
-     
-     body = body + ("<p><b>Date: </b>")
-     body = body + (dateSubmitted)
-     body = body + ("</p>")
-     
-     body = body + ("</b><p><b>From: </b>")
-     body = body + (kAppDelegate.currentUserName)
-     body = body + ("</p>")
-     body = body + ("</b><p><b>Email: </b>")
-     body = body + (kAppDelegate.currentUserEmail)
-     body = body + ("</p>")
-     
-     body = body + ("</b><p><b>Message: </b>")
-     body = body + (message)
-     
-     
-     
-     body = body + ("<p><b>Title: </b>")
-     body = body + (useTitle ?? "")
-     body = body + ("</p>")
-     
-     body = body + ("<p><b>SubTitle: </b>")
-     body = body + (useSubTitle ?? "")
-     body = body + ("</p>")
-     
-     body = body + ("<p><b>Company: </b>")
-     body = body + (useCompany ?? "")
-     body = body + ("</p>")
-     
-     body = body + ("<p><b>Address: </b>")
-     body = body + (useAddress ?? "")
-     body = body + ("</p>")
-     
-     
-     
-     body = body + ("</h3>")
-     
-     
-     body = body + ("</p>") //NSString *photoLink = [NSString stringWithFormat:@"<br><p>Click for Photo Link <a href=\"%@\">here</a></p><br>",_finderPhotoFileUrl];
-     */
-    
-    /*
-     //TODO: ADD SUPPORT FOR PHOTO
-     NSString *usePhotoLink = @"";
-     if ([_photoId length]==0) {
-     usePhotoLink = @"https://photos.homecards.com/rebeacons/icons8-camera-1.jpg";
-     usePhotoLink = "https://photos.homecards.com/rebeacons/property_placeholder.jpg"
-     } else {
-     usePhotoLink = _finderPhotoFileUrl;
-     }
-     NSString *imageLink = [NSString stringWithFormat:@"<br><p><img src=\"%@\" alt=\"Check that you allow images in your email or no image was provided\" scale=\"0\"></p><br>",usePhotoLink];
-     body = [body stringByAppendingString:imageLink];
-     */
-    
-    /*
-     body = body + ("<br>")
-     
-     email.subject = "Beacon Tapped"
-     email.from = kAppDelegate.currentUserEmail
-     //NSLog(@"NAME: %@  EMAIL: %@",kAppDelegate.currentUserName,kAppDelegate.currentUserEmail);
-     email.to = sendTo
-     email.html = body
-     sendgrid.send(withWeb: email)
-     */
-    
-    
-    
-    
-    
-    
-    
-    // MARK: - TABLECELL ACTIONS
-    //SEND TEXT MADISON22
-    //    func showSMS() {
-    /*
-     if !MFMessageComposeViewController.canSendText() {
-     let warningAlert = UIAlertView(title: "Error", message: "Your device doesn't support SMS!", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
-     warningAlert.show()
-     return
-     }
-     
-     
-     
-     //NSLog(@"index path : %ld", row);
-     let object = listingsArray[row] as? TagModel
-     
-     
-     var currentOwnerEmail = object?["ownerEmail"] as? String
-     if currentOwnerEmail == nil {
-     currentOwnerEmail = ""
-     }
-     
-     var useTitle = object?["tagTitle"] as? String
-     var useAddress = object?["tagAddress"] as? String
-     var useSubTitle = object?["tagSubTitle"] as? String
-     var useCompany = object?["tagCompany"] as? String
-     var currentPropertyAddress = object?["tagAddress"] as? String
-     
-     if currentPropertyAddress == nil {
-     currentPropertyAddress = ""
-     }
-     if useTitle == nil {
-     useTitle = ""
-     }
-     if useSubTitle == nil {
-     useSubTitle = ""
-     }
-     if useCompany == nil {
-     useCompany = ""
-     }
-     if useAddress == nil {
-     useAddress = ""
-     }
-     
-     let message = "\(useTitle ?? "") \(useSubTitle ?? "") \(useCompany ?? "")"
-     //NSLog(@"MESSAGE: %@",message);
-     
-     let recipents = [currentOwnerEmail]
-     //NSString *message = currentPropertyAddress;
-     
-     
-     let messageController = MFMessageComposeViewController()
-     messageController.messageComposeDelegate = self
-     messageController.recipients = recipents
-     messageController.body = message
-     
-     // Present message view controller on screen
-     present(messageController, animated: true)
-     */
-    
-    
-    /*
-     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-     switch result {
-     case .cancelled:
-     break
-     case .failed:
-     let warningAlert = UIAlertView(title: "Error", message: "Failed to send SMS!", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
-     warningAlert.show()
-     case .sent:
-     break
-     default:
-     break
-     }
-     dismiss(animated: true)
-     }
-     */
 
 
-}
+/*
+ if let url = URL(string: usePhotoLink ) {
+ let resource = ImageResource(downloadURL: url)
+ 
+ KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
+ switch result {
+ case .success(let value):
+ 
+ print("Image: \(value.image). Got from: \(value.cacheType)")
+ let image:Image = value.image
+ if let jpegData = image.jpegData(compressionQuality: 1.0) {
+ mail.addAttachmentData(jpegData,
+ mimeType: "image/jpg",
+ fileName: "Image")
+ mail.setMessageBody(message, isHTML: true)
+ self.present(mail, animated: true, completion: nil)
+ }
+ 
+ case .failure(let msg):
+ print("NO PHOTO: \(msg)")
+ //NO PHOTO. DONT WORRY. JUST PRESENT EMMAIL
+ mail.setMessageBody(message, isHTML: true)
+ self.present(mail, animated: true, completion: nil)
+ }
+ }
+ */
+
+
+//    func downloadImage(`with` urlString : String){
+//        guard let url = URL.init(string: urlString) else {
+//            return
+//        }
+//        let resource = ImageResource(downloadURL: url)
+//
+//        KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
+//            switch result {
+//            case .success(let value):
+//                print("Image: \(value.image). Got from: \(value.cacheType)")
+//            case .failure(let error):
+//                print("Error: \(error)")
+//            }
+//        }
+//    }
+
+
+//BEACON TAPPED MADISON22
+// WHENEVER THE USER TAPS A BEACON, SEND THE LEAD TO THE OWNER
+/*
+ func sendGrid(_ useTitle: String?, usingSubTitle useSubTitle: String?, usingCompany useCompany: String?, usingAddress useAddress: String?, usingOwnerEmail useOwnerEmail: String?) {
+ 
+ let sendgrid = SendGrid.apiUser("hillside_ios", apiKey: "46inh2@sa&12")
+ let email = SendGridEmail()
+ 
+ let dateFormat = DateFormatter()
+ dateFormat.dateFormat = "EEE, MMM d, h:mm a"
+ //[dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];  //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+ 
+ let dateSubmitted = "\(dateFormat.string(from: Date()))"
+ 
+ var sendTo: String
+ //SEND LEAD TO OWNER
+ sendTo = useOwnerEmail ?? ""
+ sendTo = "alex@hillsoft.com" //TODO: ALEX TEMP FIX FOR TESTING. REMOVE FROM FINAL RELEASE !
+ 
+ let message = "The following Beacon was tapped: <br><br>"
+ 
+ var body = "<h1><b>Beacon Tapped</b></h1>"
+ 
+ body = body + ("<h3>")
+ 
+ body = body + ("<p><b>Date: </b>")
+ body = body + (dateSubmitted)
+ body = body + ("</p>")
+ 
+ body = body + ("</b><p><b>From: </b>")
+ body = body + (kAppDelegate.currentUserName)
+ body = body + ("</p>")
+ body = body + ("</b><p><b>Email: </b>")
+ body = body + (kAppDelegate.currentUserEmail)
+ body = body + ("</p>")
+ 
+ body = body + ("</b><p><b>Message: </b>")
+ body = body + (message)
+ 
+ 
+ 
+ body = body + ("<p><b>Title: </b>")
+ body = body + (useTitle ?? "")
+ body = body + ("</p>")
+ 
+ body = body + ("<p><b>SubTitle: </b>")
+ body = body + (useSubTitle ?? "")
+ body = body + ("</p>")
+ 
+ body = body + ("<p><b>Company: </b>")
+ body = body + (useCompany ?? "")
+ body = body + ("</p>")
+ 
+ body = body + ("<p><b>Address: </b>")
+ body = body + (useAddress ?? "")
+ body = body + ("</p>")
+ 
+ 
+ 
+ body = body + ("</h3>")
+ 
+ 
+ body = body + ("</p>") //NSString *photoLink = [NSString stringWithFormat:@"<br><p>Click for Photo Link <a href=\"%@\">here</a></p><br>",_finderPhotoFileUrl];
+ */
+
+
+/*
+ //TODO: ADD SUPPORT FOR PHOTO
+ NSString *usePhotoLink = @"";
+ if ([_photoId length]==0) {
+ 
+ usePhotoLink = "https://photos.homecards.com/rebeacons/property_placeholder.jpg"
+ } else {
+ usePhotoLink = _finderPhotoFileUrl;
+ }
+ NSString *imageLink = [NSString stringWithFormat:@"<br><p><img src=\"%@\" alt=\"Check that you allow images in your email or no image was provided\" scale=\"0\"></p><br>",usePhotoLink];
+ body = [body stringByAppendingString:imageLink];
+ */
+
+/*
+ body = body + ("<br>")
+ 
+ email.subject = "Beacon Tapped"
+ email.from = kAppDelegate.currentUserEmail
+ //NSLog(@"NAME: %@  EMAIL: %@",kAppDelegate.currentUserName,kAppDelegate.currentUserEmail);
+ email.to = sendTo
+ email.html = body
+ sendgrid.send(withWeb: email)
+ */
+
+
+// MARK: - TABLECELL ACTIONS
+//SEND TEXT MADISON22
+//    func showSMS() {
+/*
+ if !MFMessageComposeViewController.canSendText() {
+ let warningAlert = UIAlertView(title: "Error", message: "Your device doesn't support SMS!", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+ warningAlert.show()
+ return
+ }
+ 
+ //NSLog(@"index path : %ld", row);
+ let object = listingsArray[row] as? TagModel
+ 
+ 
+ var currentOwnerEmail = object?["ownerEmail"] as? String
+ if currentOwnerEmail == nil {
+ currentOwnerEmail = ""
+ }
+ 
+ var useTitle = object?["tagTitle"] as? String
+ var useAddress = object?["tagAddress"] as? String
+ var useSubTitle = object?["tagSubTitle"] as? String
+ var useCompany = object?["tagCompany"] as? String
+ var currentPropertyAddress = object?["tagAddress"] as? String
+ 
+ if currentPropertyAddress == nil {
+ currentPropertyAddress = ""
+ }
+ if useTitle == nil {
+ useTitle = ""
+ }
+ if useSubTitle == nil {
+ useSubTitle = ""
+ }
+ if useCompany == nil {
+ useCompany = ""
+ }
+ if useAddress == nil {
+ useAddress = ""
+ }
+ 
+ let message = "\(useTitle ?? "") \(useSubTitle ?? "") \(useCompany ?? "")"
+ //NSLog(@"MESSAGE: %@",message);
+ 
+ let recipents = [currentOwnerEmail]
+ //NSString *message = currentPropertyAddress;
+ 
+ 
+ let messageController = MFMessageComposeViewController()
+ messageController.messageComposeDelegate = self
+ messageController.recipients = recipents
+ messageController.body = message
+ 
+ // Present message view controller on screen
+ present(messageController, animated: true)
+ */
+
+/*
+ func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+ switch result {
+ case .cancelled:
+ break
+ case .failed:
+ let warningAlert = UIAlertView(title: "Error", message: "Failed to send SMS!", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+ warningAlert.show()
+ case .sent:
+ break
+ default:
+ break
+ }
+ dismiss(animated: true)
+ }
+ */
+
+//    func getImage(_ url:String,handler: @escaping (UIImage?)->Void) {
+//        print(url)
+//
+//        let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
+//                                        isDirectory: true)
+//        let temporaryFileURL =
+//            temporaryDirectoryURL.appendingPathComponent("mailpic.jpg")
+//
+//        print(temporaryFileURL)
+//        Alamofire.request(url, method: .get).responseImage { response in
+//            if let data = response.result.value {
+//                handler(data)
+//            } else {
+//                handler(nil)
+//            }
+//        }
+//    }
+
+
+//func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
+//    let options: [CFString: Any] = [
+//        kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+//        kCGImageSourceCreateThumbnailWithTransform: true,
+//        kCGImageSourceShouldCacheImmediately: true,
+//        kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
+//    ]
+//
+//    guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
+//        let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+//        else {
+//            return nil
+//    }
+//
+//    return UIImage(cgImage: image)
+//}
+
+
+//func getTemporaryFileURL() -> URL {
+//    let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
+//                                    isDirectory: true)
+//    let temporaryFileURL =
+//        temporaryDirectoryURL.appendingPathComponent("mailpic.jpg")
+//
+//    print(temporaryFileURL)
+//    return temporaryFileURL
+//}
+
+/*
+ func alex2  () {
+ let tempFileURL = getTemporaryFileURL()
+ do {
+ let fileURL: URL = tempFileURL
+ try FileManager.default.removeItem(at: fileURL)
+ }
+ catch let error as NSError {
+ print("Ooops! Something went wrong: \(error)")
+ }
+ var usePhotoLink = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
+ if let url = URL(string: usePhotoLink) {
+ URLSession.shared.downloadTask(with: url) { location, response, error in
+ guard let location = location else {
+ print("download error:", error ?? "")
+ return
+ }
+ // move the downloaded file from the temporary location url to your app documents directory
+ do {
+ try FileManager.default.moveItem(at: location, to: tempFileURL)
+ print("DONE!")
+ } catch {
+ print(error)
+ }
+ }.resume()
+ }
+ }
+ */
+
+
