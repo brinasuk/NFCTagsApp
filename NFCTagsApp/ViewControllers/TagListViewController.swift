@@ -137,16 +137,9 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-
+        
         setupNavigationBar()
         
-        if (kAppDelegate.isDatabaseDirty == true) {
-            //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
-            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
-            loadTagTable() //GET INFO FOR NEW USER
-            kAppDelegate.isDatabaseDirty = false
-        }
-
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
         let currentUser = PFUser.current()
@@ -156,7 +149,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             showCurrentUserInfo()   //UPDATE CURRENT USER INFO
         }
         
-
+        if (kAppDelegate.isDatabaseDirty == true) {
+            //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
+            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
+            loadTagTable() //GET INFO FOR NEW USER
+            kAppDelegate.isDatabaseDirty = false
+        }
     }
     
     // MARK: - ACTION BUTTONS PRESSED
@@ -389,7 +387,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
     func lookupTagIfo(_ passTagId: String?) {
         //tagId = "info@kcontemporaryart.com:102" //TODO: REMOVE
-        //print("PASS TAGID: \(passTagId ?? "")")
+        print("PASS TAGID: \(passTagId ?? "")")
         let useTagId:String? = passTagId
         
 //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
@@ -422,7 +420,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         let sv = UIViewController.displaySpinner(onView: self.view)
         
         let query = PFQuery(className: "TagOwnerInfo")
-        query.whereKey("ownerId", equalTo: useTagId)
+        query.whereKey("ownerId", equalTo: useTagId!)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                 if let error = error {
                     // NO MATCH FOUND
@@ -554,10 +552,10 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     func loadTagTable()
     {
         let query = PFQuery(className:"Tags")
-        let appCode = kAppDelegate.appCode as String?
+        
         let userEmail = kAppDelegate.currentUserEmail as String?
-        //print ("UserEmail: \(userEmail as Any)")
-        query.whereKey("appCode", equalTo: appCode!)
+        ///let appCode = kAppDelegate.appCode as String?
+        ///REMOVE APPCODE query.whereKey("appCode", equalTo: appCode!)
         query.whereKey("userEmail", equalTo: userEmail!)
         query.order(byDescending: "createdAt")
         
@@ -707,19 +705,19 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             //RUN ON MAIN THREAD
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-//                if rowCount == 0 {
-//                    let welcome = "Welcome " + self.kAppDelegate.currentUserName!
-//                    let message = "Please tap the button below to \nScan Tags for Information"
-//                    let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
-//                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-//                    }
-//                    alertView.addAction(OKAction)
-//                    if let presenter = alertView.popoverPresentationController {
-//                        presenter.sourceView = self.view
-//                        presenter.sourceRect = self.view.bounds
-//                    }
-//                    self.present(alertView, animated: true, completion:nil)
-//                }
+                if rowCount == 0 {
+                    let welcome = "Welcome " + self.kAppDelegate.currentUserName!
+                    let message = "Please tap the button below to \nScan nearby Tags for Information"
+                    let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                    }
+                    alertView.addAction(OKAction)
+                    if let presenter = alertView.popoverPresentationController {
+                        presenter.sourceView = self.view
+                        presenter.sourceRect = self.view.bounds
+                    }
+                    self.present(alertView, animated: true, completion:nil)
+                }
             }
             //let sv = UIViewController.displaySpinner(onView: self.view)
             UIViewController.removeSpinner(spinner: sv)
@@ -742,19 +740,19 @@ extension TagListViewController: UITableViewDataSource {
             statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
         }
         
-        if rowCount == 0 {
-            let welcome = "Welcome " + self.kAppDelegate.currentUserName!
-            let message = "Please tap the button below to \nScan nearby Tags for Information"
-            let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-            }
-            alertView.addAction(OKAction)
-            if let presenter = alertView.popoverPresentationController {
-                presenter.sourceView = self.view
-                presenter.sourceRect = self.view.bounds
-            }
-            self.present(alertView, animated: true, completion:nil)
-        }
+//        if rowCount == 0 {
+//            let welcome = "Welcome " + self.kAppDelegate.currentUserName!
+//            let message = "Please tap the button below to \nScan nearby Tags for Information"
+//            let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
+//            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+//            }
+//            alertView.addAction(OKAction)
+//            if let presenter = alertView.popoverPresentationController {
+//                presenter.sourceView = self.view
+//                presenter.sourceRect = self.view.bounds
+//            }
+//            self.present(alertView, animated: true, completion:nil)
+//        }
         
 
         
@@ -890,7 +888,7 @@ extension TagListViewController: UITableViewDataSource {
         
         //tableView.deselectRow(at: indexPath, animated: true)
         
-        currentRow = indexPath.row
+        self.currentRow = indexPath.row
         
         
         //let theVige = self.tagObjects[indexPath.row]
@@ -958,12 +956,12 @@ extension TagListViewController: UITableViewDataSource {
             }
         }
         
-        if segue.identifier == "SwiftyMap" {
-
-                print (currentRow)
-                let destinationController = segue.destination as! SwiftyMapController
-                destinationController.tag = self.tagObjects[currentRow]
-
+        if segue.identifier == "SwiftyMap2" {
+            
+            print (currentRow)
+            let destinationController = segue.destination as! SwiftyMapController
+            destinationController.tag = self.tagObjects[currentRow]
+            
         }
     }
                 
@@ -1087,7 +1085,7 @@ extension TagListViewController: UITableViewDataSource {
     }
  */
     func removeItem () {
-        let tag = self.tagObjects[currentRow]
+        let tag = self.tagObjects[self.currentRow]
         let objectId = tag.tagObjectId
         let query = PFQuery(className: "Tags")
         print("DELETE + \(objectId)")
@@ -1100,14 +1098,20 @@ extension TagListViewController: UITableViewDataSource {
             } else if let object = object {
                 // The query succeeded with a matching result
                 print("SUCCESS")
-                object.deleteInBackground()
+                //object.deleteInBackground()
                 
+                object.deleteInBackground(block: { (deleteSuccessful, error) -> Void in
+                    // User deleted
+                    //self.tableView.reloadData()
+                    self.loadTagTable() //DELETE
+                })
+    
                 //self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 //self.dataParse.remove(indexPath.row)
                 //completionHandler(true)
                 //self.displayMessage(message: "Successfully Deleted")
-                //self.tableView.reloadData()
-                self.loadTagTable() //DELETE
+                
+
             } else {
                 // The query succeeded but no matching result was found
                 //self.displayMessage(message: "No Record Found")
@@ -1179,12 +1183,17 @@ extension TagListViewController: UITableViewDataSource {
         
         let mapAction = UIContextualAction(style: .normal, title: "Map") { (action, sourceView, completionHandler) in
             
-            //SWIFTYMAP
-            self.performSegue(withIdentifier: "SwiftyMap", sender: self)
+            self.showSwiftyMap()
+            
+//                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                let vc = storyboard.instantiateViewControllerWithIdentifier("SignUpViewController")
+//                self.showViewController(vc, sender: self)
+            
+ 
             completionHandler(true)
         }
         
-
+        
         
         // Set the icon and background color for the actions
         deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
@@ -1204,6 +1213,15 @@ extension TagListViewController: UITableViewDataSource {
         swipeConfiguration.performsFirstActionWithFullSwipe = false
         return swipeConfiguration
     }
+    
+    func showSwiftyMap() {
+        DispatchQueue.main.async {
+            //SWIFTYMAP
+            print("SWIFTYMAP2")
+            self.performSegue(withIdentifier: "SwiftyMap2", sender: self)
+        }
+    }
+    
     
     // MARK: - LEADING SWIPE Table view delegate
 /*
@@ -1250,8 +1268,8 @@ extension TagListViewController: UITableViewDataSource {
         
         let mapAction = UIContextualAction(style: .normal, title: "Map") { (action, sourceView, completionHandler) in
             
-            //SWIFTYMAP
-            self.performSegue(withIdentifier: "SwiftyMap", sender: self)
+            //SWIFTYMAP2
+            self.performSegue(withIdentifier: "SwiftyMap2", sender: self)
             completionHandler(true)
         }
         
@@ -1494,3 +1512,32 @@ extension TagListViewController: UITableViewDataSource {
     
 
 }
+
+/*
+ let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in
+ let theVige = self.tagObjects[indexPath.row]
+ let title = theVige.tagTitle
+ let defaultText = "Just checking in at " + title
+ 
+ let activityController: UIActivityViewController
+ 
+ //            let imageNaME = theVige.tagUrl
+ //            if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
+ //                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+ //            } else  {
+ //                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+ //            }
+ //TODO: TAKE THIS OUT!
+ activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+ 
+ if let popoverController = activityController.popoverPresentationController {
+ if let cell = tableView.cellForRow(at: indexPath) {
+ popoverController.sourceView = cell
+ popoverController.sourceRect = cell.bounds
+ }
+ }
+ 
+ self.present(activityController, animated: true, completion: nil)
+ completionHandler(true)
+ }
+ */

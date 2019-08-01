@@ -27,7 +27,7 @@
 		C74C541522D0049E0071F3F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74C541422D0049D0071F3F1 /* Main.storyboard */; };
 		C76D3EEC22AA022000794637 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEB22AA022000794637 /* RoundedTextField.swift */; };
 		C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */; };
-		C76D3EF222AB104400794637 /* MaintTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableView.swift */; };
+		C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableViewController.swift */; };
 		C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF322AB1BA300794637 /* OwnerModel.swift */; };
 		C77968D72286264B00CE6B4C /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77968D62286264B00CE6B4C /* TagListViewController.swift */; };
 		C77ED9AF22A4D5A000C06A45 /* SwiftyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AC22A4D5A000C06A45 /* SwiftyMapController.swift */; };
@@ -90,7 +90,7 @@
 		C74C541422D0049D0071F3F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C76D3EEB22AA022000794637 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewCell.swift; sourceTree = "<group>"; };
-		C76D3EF122AB104400794637 /* MaintTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableView.swift; sourceTree = "<group>"; };
+		C76D3EF122AB104400794637 /* MaintTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewController.swift; sourceTree = "<group>"; };
 		C76D3EF322AB1BA300794637 /* OwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModel.swift; sourceTree = "<group>"; };
 		C77968D62286264B00CE6B4C /* TagListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		C77ED9AC22A4D5A000C06A45 /* SwiftyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyMapController.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 				C77968D62286264B00CE6B4C /* TagListViewController.swift */,
 				C71B63E3229B798A00B6910A /* DetailViewController.swift */,
 				C793547B22A0DCC800DD1828 /* MapViewController.swift */,
-				C76D3EF122AB104400794637 /* MaintTableView.swift */,
+				C76D3EF122AB104400794637 /* MaintTableViewController.swift */,
 				C78159DD22CAC54700625046 /* UpdateTagController.swift */,
 				C705A7AC22D4107300F513A9 /* ReviewViewController.swift */,
 			);
@@ -429,7 +429,7 @@
 				C705A7AD22D4107300F513A9 /* ReviewViewController.swift in Sources */,
 				C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */,
 				C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */,
-				C76D3EF222AB104400794637 /* MaintTableView.swift in Sources */,
+				C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */,
 				C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */,
 				C715679C227BDA0900D1A55A /* Film.swift in Sources */,
 				C7DA87F7229259DC00457112 /* AppDelegate.swift in Sources */,

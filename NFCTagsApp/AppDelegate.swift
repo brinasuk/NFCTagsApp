@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  NFCTagsApp
@@ -49,11 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //TODO: May have mixed up UserObjectId and AgentObjectId. Changed all to User
     //var currentAgentObjectIdvar :String? = ""
     var currentUserObjectId:String? = ""
-
+    
     ///////////////////////////////////////////////////////////////////
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
+        
         
         if (appCode == "art") {
             //appName = "ArtWorks4Me";
@@ -77,23 +78,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          However, it is important to understand that until the user actually changes the value of the setting nothing is actually set. If you check for the setting in your application it will actually return nil unless you set a default value. To do that add the following to the applicationDidFinishLaunching (or didFinishLaunchingWithOptions) method:
          */
         /*
-        //====================================
-        // Set the application defaults
-        let defaults = UserDefaults.standard
-        let appDefaults = ["location" : "YES"]
-        if let appDefaults = appDefaults as? [String : Any] {
-            defaults.register(defaults: appDefaults)
-        }
-        defaults.synchronize()
-        
-        let work: Bool = defaults.bool(forKey: "nfc")
-        
-        //================================
-        let location = UserDefaults.standard.value(forKey: "location") as? [AnyHashable : Any]
-        let value = location as? String
-        print("Location: \(value ?? "")")
-        //================================
- */
+         //====================================
+         // Set the application defaults
+         let defaults = UserDefaults.standard
+         let appDefaults = ["location" : "YES"]
+         if let appDefaults = appDefaults as? [String : Any] {
+         defaults.register(defaults: appDefaults)
+         }
+         defaults.synchronize()
+         
+         let work: Bool = defaults.bool(forKey: "nfc")
+         
+         //================================
+         let location = UserDefaults.standard.value(forKey: "location") as? [AnyHashable : Any]
+         let value = location as? String
+         print("Location: \(value ?? "")")
+         //================================
+         */
         
         
         // PARSE CONFIG
@@ -110,21 +111,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
         
         //PFAnalytics.trackAppOpened(withLaunchOptions: nil)
- 
+        
         
         //================================================//
         // ADDED FOR FACEBOOK
-//     FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        //     FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //Optionally add to ensure your credentials are valid:
-//        FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
+        //        FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
         //================================================//
-
+        
         
         //    // CRITICAL: SETUP REALESTATEBEACONS
         //    [ESTConfig setupAppID:@"openhousebeacons" andAppToken:@"95febad595a25c04fd5a80b829b35361"];
-
         
-
+        
+        
         
         // SET THE TOOLBAR STYLE
         UIBarButtonItem.appearance().setTitleTextAttributes(
@@ -138,12 +139,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorImage = backButtonImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
         
-//        // SET THE BACKBUTTON STYLE
-//        let backButtonImage = UIImage(named: "backButtonNew")
-//        UINavigationBar.appearance().backIndicatorImage = backButtonImage
-//        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
-//        UINavigationBar.appearance().backgroundColor = .white
-//        UINavigationBar.appearance().tintColor = .darkGray
+        //        // SET THE BACKBUTTON STYLE
+        //        let backButtonImage = UIImage(named: "backButtonNew")
+        //        UINavigationBar.appearance().backIndicatorImage = backButtonImage
+        //        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        //        UINavigationBar.appearance().backgroundColor = .white
+        //        UINavigationBar.appearance().tintColor = .darkGray
         
         return true
     }
@@ -152,22 +153,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //FBSDKAppEvents.activateApp()
     }
     
-//    // ADDED FOR FACEBOOK (SEE MORE DETAILED BELOW)
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-//    }
+    //    // ADDED FOR FACEBOOK (SEE MORE DETAILED BELOW)
+    //    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    //        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    //    }
     
     // ADDED FOR FACEBOOK
-//    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-//        //Even though the Facebook SDK can make this determinitaion on its own,
-//        //let's make sure that the facebook SDK only sees urls intended for it,
-//        //facebook has enough info already!
-//        let isFacebookURL = url.scheme != nil && url.scheme!.hasPrefix("fb\(FBSDKSettings.appID())") && url.host == "authorize"
-//        if isFacebookURL {
-//            return FBSDKApplicationDelegate.sharedInstance().application(application, open: url as URL, sourceApplication: sourceApplication, annotation: annotation)
-//        }
-//        return false
-//    }
+    //    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    //        //Even though the Facebook SDK can make this determinitaion on its own,
+    //        //let's make sure that the facebook SDK only sees urls intended for it,
+    //        //facebook has enough info already!
+    //        let isFacebookURL = url.scheme != nil && url.scheme!.hasPrefix("fb\(FBSDKSettings.appID())") && url.host == "authorize"
+    //        if isFacebookURL {
+    //            return FBSDKApplicationDelegate.sharedInstance().application(application, open: url as URL, sourceApplication: sourceApplication, annotation: annotation)
+    //        }
+    //        return false
+    //    }
     
     func startPushNotifications(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay ]) {
@@ -221,10 +222,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // REMOVED FOR FACEBOOK
-//    func applicationWillResignActive(_ application: UIApplication) {
-//        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-//        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-//    }
+    //    func applicationWillResignActive(_ application: UIApplication) {
+    //        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    //        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    //    }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
@@ -247,5 +248,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
 }

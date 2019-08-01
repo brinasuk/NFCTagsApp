@@ -17,7 +17,7 @@ private var ownerObjects:[OwnerModel] = []
 private var CellIdentifier = "MaintTableViewCell"
 private var placeholderImage:UIImage?
 
-class MaintTableView: UITableViewController {
+class MaintTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +80,7 @@ class MaintTableView: UITableViewController {
     {
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerEmail", equalTo: kAppDelegate.currentUserEmail!)
+        // NO APPCODE. FOR MAINT WE WANT ALL TAGS FOR THIS EMAIL
         //query.whereKey("appCode", equalTo: kAppDelegate.appCode!)
                 query.order(byDescending: "ownerNumber")
         
@@ -364,7 +365,7 @@ class MaintTableView: UITableViewController {
 
         let query = PFQuery(className: "Tags")
         query.whereKey("tagId", equalTo: ownerId)
-        query.whereKey("appName", equalTo: kAppDelegate.appCode)
+        query.whereKey("appName", equalTo: kAppDelegate.appC)
         query.whereKey("createdAt", greaterThan: cutoffDate)
         query.order(byDescending: "createdAt")
         query.limit = 500
