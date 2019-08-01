@@ -41,6 +41,7 @@
 		C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9400228F227000A53DDA /* FacebookPost.swift */; };
 		C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9401228F227000A53DDA /* FacebookUser.swift */; };
 		C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A940F228F268B00A53DDA /* LoginViewController.swift */; };
+		C7A6BCF722F26C5A002941A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A6BCF622F26C5A002941A4 /* ViewController.swift */; };
 		C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F16228A623900E97DFF /* Spinner.swift */; };
 		C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */; };
 		C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */; };
@@ -104,6 +105,7 @@
 		C79A9400228F227000A53DDA /* FacebookPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPost.swift; sourceTree = "<group>"; };
 		C79A9401228F227000A53DDA /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		C79A940F228F268B00A53DDA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C7A6BCF622F26C5A002941A4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C7AC6F16228A623900E97DFF /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		C715678B227BDA0900D1A55A /* Cell Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7A6BCF622F26C5A002941A4 /* ViewController.swift */,
 				C715678E227BDA0900D1A55A /* AuteurTableViewCell.swift */,
 				C7156790227BDA0900D1A55A /* FilmTableViewCell.swift */,
 				C71B63D7229AFDD200B6910A /* DetailHeaderView.swift */,
@@ -445,6 +448,7 @@
 				C705A7AF22D5A04800F513A9 /* CircularProgressBar.swift in Sources */,
 				C77968D72286264B00CE6B4C /* TagListViewController.swift in Sources */,
 				C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */,
+				C7A6BCF722F26C5A002941A4 /* ViewController.swift in Sources */,
 				C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */,
 				C793547A22A0B75300DD1828 /* RestaurantDetailMapCell.swift in Sources */,
 				C715679B227BDA0900D1A55A /* FilmTableViewCell.swift in Sources */,

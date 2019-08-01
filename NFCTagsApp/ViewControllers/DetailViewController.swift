@@ -175,7 +175,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     @IBAction func mapButtonPressed(_ sender: Any) {
-         performSegue(withIdentifier: "SwiftyMap", sender: self)
+         performSegue(withIdentifier: "SwiftyMapBtn", sender: self)
     }
     
     @IBAction func websiteButtonPressed(_ sender: UIBarButtonItem) {
@@ -280,17 +280,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //print(segue.identifier!)
-        if segue.identifier == "ShowMap" {
-            //let destinationController = segue.destination as! MapViewController
-            let destinationController = segue.destination as! SwiftyMapController
-            destinationController.tag = tag
-            
-        } else if segue.identifier == "ShowReview" {
+        if segue.identifier == "ShowReview" {
             let destinationController = segue.destination as! ReviewViewController
             destinationController.tag = tag
         }
-        
+            
         else if segue.identifier == "SwiftyMap" {
+            let destinationController = segue.destination as! SwiftyMapController
+            destinationController.tag = tag
+        }
+        
+        else if segue.identifier == "SwiftyMapBtn" {
             let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = tag
         }
