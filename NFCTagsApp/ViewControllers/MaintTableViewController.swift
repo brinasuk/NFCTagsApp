@@ -18,17 +18,14 @@ private var CellIdentifier = "MaintTableViewCell"
 private var placeholderImage:UIImage?
 
 class MaintTableViewController: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Edit Info"
         setupNavigationBar()
         //imageView.kf.indicatorType = .activity
         
-        // Customize the TABLEVIEW
-        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = 92.0 // Use 92.0
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+
         
         //        moveDirtyFlag = false
         //        buttonLabel = "Edit"
@@ -44,23 +41,31 @@ class MaintTableViewController: UITableViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.4
         
-//        let backgroundImageName = "art_launch_image"
-//        backgroundImage.image = UIImage(named: backgroundImageName) // nd-background
-//        backgroundImage.alpha = 0.4
-//        backgroundImage.contentMode = .scaleAspectFill
+        //        let backgroundImageName = "art_launch_image"
+        //        backgroundImage.image = UIImage(named: backgroundImageName) // nd-background
+        //        backgroundImage.alpha = 0.4
+        //        backgroundImage.contentMode = .scaleAspectFill
+        
+        // Customize the TABLEVIEW
+        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
+        
+        tableView.rowHeight = 70.0 // Use 92.0
+        //tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
         
         self.tableView.backgroundView = imageView
         self.tableView.backgroundColor = coralColor
         view.backgroundColor = paleRoseColor
-
+        
         
         //FORCE A RELOAD OF THE DATA
         kAppDelegate.isDatabaseDirty = true
         
         loadObjects()
-
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -68,13 +73,13 @@ class MaintTableViewController: UITableViewController {
     func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
-
-//    @objc func goBackButtonPressed() {
-//        navigationController?.popViewController(animated: true)
-//        //[self dismissViewControllerAnimated:YES completion:nil];
-//    }
     
-
+    //    @objc func goBackButtonPressed() {
+    //        navigationController?.popViewController(animated: true)
+    //        //[self dismissViewControllerAnimated:YES completion:nil];
+    //    }
+    
+    
     
     func loadObjects()
     {
@@ -82,7 +87,7 @@ class MaintTableViewController: UITableViewController {
         query.whereKey("ownerEmail", equalTo: kAppDelegate.currentUserEmail!)
         // NO APPCODE. FOR MAINT WE WANT ALL TAGS FOR THIS EMAIL
         //query.whereKey("appCode", equalTo: kAppDelegate.appCode!)
-                query.order(byDescending: "ownerNumber")
+        query.order(byDescending: "ownerNumber")
         
         query.limit = 500
         ownerObjects = []  //or removeAll
@@ -102,7 +107,7 @@ class MaintTableViewController: UITableViewController {
                 // Do something with the found objects
                 
                 for object in objects {
-
+                    
                     let createdAt:Date = object.createdAt!
                     let ownerObjectId:String = object.objectId! //Used for Photo Name
                     
@@ -156,8 +161,8 @@ class MaintTableViewController: UITableViewController {
                     var ownerCountry:String? = object["ownerCountry"] as? String
                     ///var ownerPhotoRef:String? = object["ownerPhotoRef"] as? String
                     ///if ownerPhotoRef == nil {ownerPhotoRef = ""}
-
-
+                    
+                    
                     if ownerNumber == nil {ownerNumber = ""}
                     if ownerTitle == nil {ownerTitle = ""}
                     if ownerSubTitle == nil {ownerSubTitle = ""}
@@ -193,16 +198,16 @@ class MaintTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 UIViewController.removeSpinner(spinner: sv)
+            }
         }
     }
-}
-
-
-// MARK: - Table view data source
+    
+    
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
@@ -214,26 +219,35 @@ class MaintTableViewController: UITableViewController {
         let count = ownerObjects.count
         return count;
     }
-
-
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MaintTableViewCell", for: indexPath) as! MaintTableViewCell
         
         let owner = ownerObjects[indexPath.row] //The Vige
         
-        //let shortAddress = "\(ownerAddress ?? "") \(ownerAddress2 ?? "") \(ownerCity ?? "")"
 
+        
         cell.tagNumber.text = owner.ownerNumber
         cell.tagTitle.text = owner.ownerTitle
         cell.tagUrl.text = owner.ownerSubTitle
-        cell.tagAddress.text = "" ///TODO: NO LONGER USED owner.ownerPhotoRef
+        
+        //TODO: Implement currentLocale = NSLocale.current as NSLocale
+        //let date = cellDataParse.object(forKey: "createdAt") as? Date ?? NSDate() as Date
+        let date = owner.createdAt
+        let format = DateFormatter()
+        format.dateFormat = "EEE, MMM d, h:mm a"
+        //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+        let formattedDate = format.string(from: date)
+        cell.tagAddress.text = "Date Added: " + formattedDate
 
+        
         //==== IMAGE CODE ============================================================
-//        let cloudinaryAction = "Tag"
-//        let usePhotoRef:String? = owner.ownerObjectId
-//        let photoNumber = 1
-//        let propertyPhotoFileUrl:String? = createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        //        let cloudinaryAction = "Tag"
+        //        let usePhotoRef:String? = owner.ownerObjectId
+        //        let photoNumber = 1
+        //        let propertyPhotoFileUrl:String? = createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
         let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", owner.ownerObjectId, 1)
         
@@ -252,41 +266,41 @@ class MaintTableViewController: UITableViewController {
         
         // METHOD 2: ======================================
         if let url = URL(string: propertyPhotoFileUrl! ) {
-//            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+            //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
             // Round corner
             //let processor = RoundCornerImageProcessor(cornerRadius: 20)
             
             /*
-            // Downsampling
-            let processor = DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))
-            
-            // Cropping
-            let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
-            
-            // Blur
-            let processor = BlurImageProcessor(blurRadius: 5.0)
-            
-            // Overlay with a color & fraction
-            let processor = OverlayImageProcessor(overlay: .red, fraction: 0.7)
-            
-            // Tint with a color
-            let processor = TintImageProcessor(tint: .blue)
-            
-            // Adjust color
-            let processor = ColorControlsProcessor(brightness: 1.0, contrast: 0.7, saturation: 1.1, inputEV: 0.7)
-            
-            // Black & White
-            let processor = BlackWhiteProcessor()
-            
-            // Blend (iOS)
-            let processor = BlendImageProcessor(blendMode: .darken, alpha: 1.0, backgroundColor: .lightGray)
-            
-            // Compositing
-            let processor = CompositingImageProcessor(compositingOperation: .darken, alpha: 1.0, backgroundColor: .lightGray)
-            
-            // Use the process in view extension methods.
-            imageView.kf.setImage(with: url, options: [.processor(processor)])
- */
+             // Downsampling
+             let processor = DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))
+             
+             // Cropping
+             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
+             
+             // Blur
+             let processor = BlurImageProcessor(blurRadius: 5.0)
+             
+             // Overlay with a color & fraction
+             let processor = OverlayImageProcessor(overlay: .red, fraction: 0.7)
+             
+             // Tint with a color
+             let processor = TintImageProcessor(tint: .blue)
+             
+             // Adjust color
+             let processor = ColorControlsProcessor(brightness: 1.0, contrast: 0.7, saturation: 1.1, inputEV: 0.7)
+             
+             // Black & White
+             let processor = BlackWhiteProcessor()
+             
+             // Blend (iOS)
+             let processor = BlendImageProcessor(blendMode: .darken, alpha: 1.0, backgroundColor: .lightGray)
+             
+             // Compositing
+             let processor = CompositingImageProcessor(compositingOperation: .darken, alpha: 1.0, backgroundColor: .lightGray)
+             
+             // Use the process in view extension methods.
+             imageView.kf.setImage(with: url, options: [.processor(processor)])
+             */
             //TODO: FIX SIZE
             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
             let placeholderImage = UIImage(named: "icons8-camera-1")
@@ -298,43 +312,43 @@ class MaintTableViewController: UITableViewController {
         
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
-
-
+        
+        
         cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
-
+        
         cell.accessoryType = .detailDisclosureButton
-
+        
         return cell
     }
     
-
-
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //TODO: NEVER USE THE FOLLOWING LINE. IT DESTROYS PASSING ANYTHING IN THE SEGUE!!!
         //tableView.deselectRow(at: indexPath, animated: true)
-
+        
         performSegue(withIdentifier: "MaintDetailView", sender: self)
-
+        
     }
-
+    
     // ** ACCESSORYBUTTONPRESSED **
-//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//        //NSLog(@"ACCESSORYBUTTON TAPPED: %ld",(long)indexPath.row);
-//
-//        let object = objects[indexPath.row] as? PFObject
-//        let ownerId = object?["ownerId"] as? String
-//        useTitle = object?["ownerTitle"] as? String ?? ""
-//
-//        //    DQAlertView * alertView = [[DQAlertView alloc] initWithTitle:@"TAG ID" message:ownerId  cancelButtonTitle:@"Ok" otherButtonTitle:nil];
-//        //    [alertView show];
-//
-//        showTagEntries(forOwner: ownerId)
-//
-//    }
-
+    //    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    //        //NSLog(@"ACCESSORYBUTTON TAPPED: %ld",(long)indexPath.row);
+    //
+    //        let object = objects[indexPath.row] as? PFObject
+    //        let ownerId = object?["ownerId"] as? String
+    //        useTitle = object?["ownerTitle"] as? String ?? ""
+    //
+    //        //    DQAlertView * alertView = [[DQAlertView alloc] initWithTitle:@"TAG ID" message:ownerId  cancelButtonTitle:@"Ok" otherButtonTitle:nil];
+    //        //    [alertView show];
+    //
+    //        showTagEntries(forOwner: ownerId)
+    //
+    //    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if segue.identifier == "MaintDetailView" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! UpdateTagController
@@ -342,129 +356,129 @@ class MaintTableViewController: UITableViewController {
             }
         }
     }
-
+    
     
     /*
-// MARK: === Show Beacon List ===
-    func showTagEntries(forOwner ownerId: String?) {
-
-        //INITIALIZE THE ARRAY. ALLOW MAX 15 DAYS
-        visits = [AnyHashable](repeating: 0, count: 15)
-        for x in 0..<15 {
-            visits[x] = NSNumber(value: 0)
-        }
-
-        let today = Date()
-        let gregorian = Calendar(identifier: .gregorian)
-        let offsetComponents = DateComponents()
-        offsetComponents.day = -14 // note that I'm setting it to -1
-        let cutoffDate: Date? = gregorian?.date(byAdding: offsetComponents, to: today, options: [])
-        if let cutoffDate = cutoffDate {
-            print("END OF THE WORLD: \(cutoffDate)")
-        }
-
-        let query = PFQuery(className: "Tags")
-        query.whereKey("tagId", equalTo: ownerId)
-        query.whereKey("appName", equalTo: kAppDelegate.appC)
-        query.whereKey("createdAt", greaterThan: cutoffDate)
-        query.order(byDescending: "createdAt")
-        query.limit = 500
-
-        ProgressHUD.show("Searching ...", interaction: false)
-
-        query.findObjectsInBackground(withBlock: { objects, error in
-            if error == nil {
-
-                if objects?.count == 0 {
-                    let alertView = DQAlertView(title: "Statistics", message: "No Entries Found", cancelButtonTitle: "Ok", otherButtonTitle: nil)
-                    alertView.show()
-                    ProgressHUD.dismiss()
-                    return
-                }
-
-                self.statsArray = [AnyHashable](repeating: 0, count: objects?.count ?? 0)
-
-                for object in objects as? [PFObject] ?? [] {
-
-                    let statsItem = TagModel()
-
-                    let createdAt: Date? = object.createdAt() //object[@"currentDate"]; DOES NOT WORK!
-                    //NSDate *createdAt = object[@"createdAt"]; //DOES NOT WORK
-                    let currentLocale = NSLocale.current as NSLocale
-                    Date().description(with: currentLocale)
-                    let dateFormat = DateFormatter()
-                    dateFormat.dateFormat = "EEE, MMM d, h:mm a"
-                    //[dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];  //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
-
-                    //                NSString *localDate = [NSString stringWithFormat:@"Date Added: %@", [dateFormat stringFromDate:createdAt]];
-
-                    var tagTitle = object["tagTitle"] as? String
-                    var tagSubTitle = object["tagSubTitle"] as? String
-                    var tagCompany = object["tagCompany"] as? String
-                    var tagAddress = object["tagAddress"] as? String
-                    var userName = object["userName"] as? String
-                    var userEmail = object["userEmail"] as? String
-
-                    if tagTitle == nil {
-                        tagTitle = ""
-                    }
-                    if tagSubTitle == nil {
-                        tagSubTitle = ""
-                    }
-                    if tagCompany == nil {
-                        tagCompany = ""
-                    }
-                    if tagAddress == nil {
-                        tagAddress = ""
-                    }
-                    if userName == nil {
-                        userName = ""
-                    }
-                    if userEmail == nil {
-                        userEmail = ""
-                    }
-
-                    statsItem.createdAt = createdAt
-                    statsItem.tagTitle = tagTitle
-                    statsItem.tagSubTitle = tagSubTitle
-                    statsItem.tagCompany = tagCompany
-                    statsItem.tagAddress = tagAddress
-                    statsItem.userName = userName
-                    statsItem.userEmail = userEmail
-
-                    self.statsArray.append(statsItem)
-
-                    // HOW MANY DAYS BACK IS THIS ENTRY? USED FOR CHART
-                    let currentDate = Date()
-                    let createdDate: Date? = object.createdAt()
-                    //NOTE: THESE ARE BOTH UTC DATES. NO NEED TO CONVERT!!
-                    var secondsBetween: TimeInterval? = nil
-                    if let createdDate = createdDate {
-                        secondsBetween = currentDate.timeIntervalSince(createdDate)
-                    }
-                    var numberOfDays = Int((secondsBetween ?? 0.0) / 86400) // 86400 is the number of seconds in a day (i.e. 60 seconds, times 60 minuts, times 24 hours
-                    //NSLog(@"There are %d days in between the two dates.", numberOfDays);
-                    // NOTE: TODAY is ZERO, Yesterday is 1 etc
-                    if numberOfDays > 15 {
-                        numberOfDays = 15 //Some defensive programming
-                    }
-
-                    let visit: Int = self.visits[numberOfDays].intValue + 1
-                    self.visits[numberOfDays] = NSNumber(value: visit)
-                }
-
-                ProgressHUD.dismiss()
-                //StatsModel *_statsModel  = [_statsArray objectAtIndex:row];
-                self.performSegue(withIdentifier: "StatsView", sender: self)
-            } else {
-                // Log details of the failure
-                //NSLog(@"Error: %@ %@", error, [error userInfo]);
-                ProgressHUD.showError(((error as NSError?)?.userInfo)["error"])
-            }
-        })
-    }
- 
- */
+     // MARK: === Show Beacon List ===
+     func showTagEntries(forOwner ownerId: String?) {
+     
+     //INITIALIZE THE ARRAY. ALLOW MAX 15 DAYS
+     visits = [AnyHashable](repeating: 0, count: 15)
+     for x in 0..<15 {
+     visits[x] = NSNumber(value: 0)
+     }
+     
+     let today = Date()
+     let gregorian = Calendar(identifier: .gregorian)
+     let offsetComponents = DateComponents()
+     offsetComponents.day = -14 // note that I'm setting it to -1
+     let cutoffDate: Date? = gregorian?.date(byAdding: offsetComponents, to: today, options: [])
+     if let cutoffDate = cutoffDate {
+     print("END OF THE WORLD: \(cutoffDate)")
+     }
+     
+     let query = PFQuery(className: "Tags")
+     query.whereKey("tagId", equalTo: ownerId)
+     query.whereKey("appName", equalTo: kAppDelegate.appC)
+     query.whereKey("createdAt", greaterThan: cutoffDate)
+     query.order(byDescending: "createdAt")
+     query.limit = 500
+     
+     ProgressHUD.show("Searching ...", interaction: false)
+     
+     query.findObjectsInBackground(withBlock: { objects, error in
+     if error == nil {
+     
+     if objects?.count == 0 {
+     let alertView = DQAlertView(title: "Statistics", message: "No Entries Found", cancelButtonTitle: "Ok", otherButtonTitle: nil)
+     alertView.show()
+     ProgressHUD.dismiss()
+     return
+     }
+     
+     self.statsArray = [AnyHashable](repeating: 0, count: objects?.count ?? 0)
+     
+     for object in objects as? [PFObject] ?? [] {
+     
+     let statsItem = TagModel()
+     
+     let createdAt: Date? = object.createdAt() //object[@"currentDate"]; DOES NOT WORK!
+     //NSDate *createdAt = object[@"createdAt"]; //DOES NOT WORK
+     let currentLocale = NSLocale.current as NSLocale
+     Date().description(with: currentLocale)
+     let dateFormat = DateFormatter()
+     dateFormat.dateFormat = "EEE, MMM d, h:mm a"
+     //[dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];  //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+     
+     //                NSString *localDate = [NSString stringWithFormat:@"Date Added: %@", [dateFormat stringFromDate:createdAt]];
+     
+     var tagTitle = object["tagTitle"] as? String
+     var tagSubTitle = object["tagSubTitle"] as? String
+     var tagCompany = object["tagCompany"] as? String
+     var tagAddress = object["tagAddress"] as? String
+     var userName = object["userName"] as? String
+     var userEmail = object["userEmail"] as? String
+     
+     if tagTitle == nil {
+     tagTitle = ""
+     }
+     if tagSubTitle == nil {
+     tagSubTitle = ""
+     }
+     if tagCompany == nil {
+     tagCompany = ""
+     }
+     if tagAddress == nil {
+     tagAddress = ""
+     }
+     if userName == nil {
+     userName = ""
+     }
+     if userEmail == nil {
+     userEmail = ""
+     }
+     
+     statsItem.createdAt = createdAt
+     statsItem.tagTitle = tagTitle
+     statsItem.tagSubTitle = tagSubTitle
+     statsItem.tagCompany = tagCompany
+     statsItem.tagAddress = tagAddress
+     statsItem.userName = userName
+     statsItem.userEmail = userEmail
+     
+     self.statsArray.append(statsItem)
+     
+     // HOW MANY DAYS BACK IS THIS ENTRY? USED FOR CHART
+     let currentDate = Date()
+     let createdDate: Date? = object.createdAt()
+     //NOTE: THESE ARE BOTH UTC DATES. NO NEED TO CONVERT!!
+     var secondsBetween: TimeInterval? = nil
+     if let createdDate = createdDate {
+     secondsBetween = currentDate.timeIntervalSince(createdDate)
+     }
+     var numberOfDays = Int((secondsBetween ?? 0.0) / 86400) // 86400 is the number of seconds in a day (i.e. 60 seconds, times 60 minuts, times 24 hours
+     //NSLog(@"There are %d days in between the two dates.", numberOfDays);
+     // NOTE: TODAY is ZERO, Yesterday is 1 etc
+     if numberOfDays > 15 {
+     numberOfDays = 15 //Some defensive programming
+     }
+     
+     let visit: Int = self.visits[numberOfDays].intValue + 1
+     self.visits[numberOfDays] = NSNumber(value: visit)
+     }
+     
+     ProgressHUD.dismiss()
+     //StatsModel *_statsModel  = [_statsArray objectAtIndex:row];
+     self.performSegue(withIdentifier: "StatsView", sender: self)
+     } else {
+     // Log details of the failure
+     //NSLog(@"Error: %@ %@", error, [error userInfo]);
+     ProgressHUD.showError(((error as NSError?)?.userInfo)["error"])
+     }
+     })
+     }
+     
+     */
     
     @IBAction func close(segue: UIStoryboardSegue) {
         //dismiss(animated: true, completion: nil)

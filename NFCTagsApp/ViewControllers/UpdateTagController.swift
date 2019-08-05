@@ -1,3 +1,4 @@
+
 //
 //  UpdateTagController.swift
 //  NFCTagsApp
@@ -64,6 +65,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     var ownerUrlKeep:String? = ""
     var ownerInfoKeep:String? = ""
     
+    
     @IBOutlet var titleTextField: RoundedTextField! {
         didSet {
             titleTextField.tag = 1
@@ -87,12 +89,12 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         }
     }
     
-//    @IBOutlet var companyTextField: RoundedTextField! {
-//        didSet {
-//            companyTextField.tag = 4
-//            companyTextField.delegate = self
-//        }
-//    }
+    //    @IBOutlet var companyTextField: RoundedTextField! {
+    //        didSet {
+    //            companyTextField.tag = 4
+    //            companyTextField.delegate = self
+    //        }
+    //    }
     
     @IBOutlet var contactTextField: RoundedTextField! {
         didSet {
@@ -108,13 +110,13 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
             
         }
     }
-
-//    @IBOutlet var emailTextField: RoundedTextField! {
-//        didSet {
-//            emailTextField.tag = 7
-//            emailTextField.delegate = self
-//        }
-//    }
+    
+    //    @IBOutlet var emailTextField: RoundedTextField! {
+    //        didSet {
+    //            emailTextField.tag = 7
+    //            emailTextField.delegate = self
+    //        }
+    //    }
     
     @IBOutlet var phoneTextField: RoundedTextField! {
         didSet {
@@ -221,6 +223,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         ownerUrlKeep = owner.ownerUrl
         ownerInfoKeep = owner.ownerInfo
         
+        
         self.latitude = Double(owner.latitude)
         self.longitude = Double(owner.longitude)
         
@@ -229,11 +232,11 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         //photoImageView.contentMode = .scaleAspectFit
         //photoImageView.clipsToBounds = true
         
-
-//        let cloudinaryAction = "Tag"
-//        let usePhotoRef:String? = owner.ownerObjectId  //This is the Owner Photo Name
-//        let photoNumber = 1
-//        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        
+        //        let cloudinaryAction = "Tag"
+        //        let usePhotoRef:String? = owner.ownerObjectId  //This is the Owner Photo Name
+        //        let photoNumber = 1
+        //        let propertyPhotoFileUrl:String? = createPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
         let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", owner.ownerObjectId, 1)
         
@@ -496,17 +499,17 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     
     func saveText () {
         //Special Code when Address has changed. Need to GEOCODE Lat/Lon
-//        print(ownerAddrFullKeep)
-//        print(addressTextField.text)
+        //        print(ownerAddrFullKeep)
+        //        print(addressTextField.text)
         
         if ownerAddrFullKeep != addressTextField.text  {
             geocodeRecord()  //GECOGE AND SAVE RECORD
         } else {
-        //SOMETHING OTHER THAN THE ADDRESS CHANGED.
+            //SOMETHING OTHER THAN THE ADDRESS CHANGED.
             saveRecord()  //JUST SAVE THE RECORD
         }
     }
-        
+    
     func geocodeRecord(){
         // Convert address to coordinate and annotate it on map
         let geoCoder = CLGeocoder()
@@ -514,7 +517,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         //let address = "S Arm Road, V & A Waterfront, Cape Town Western Cape 8002 South Africa"
         //let address = "1 Aldwych, Westminster Borough, London, WC2B 4BZ, United Kingdom"
         //let address = "1 Aldwych London WC2B 4BZ"
-    
+        
         geoCoder.geocodeAddressString(address! , completionHandler: { placemarks, error in
             if let error = error {
                 print(error)
@@ -538,12 +541,12 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
                 }
             }
         }
-    )}
+        )}
     
     func saveRecord(){
         let sv = UIViewController.displaySpinner(onView: self.view)
         let query = PFQuery(className: "TagOwnerInfo")
-
+        
         query.whereKey("objectId", equalTo: owner.ownerObjectId)
         //print(owner.ownerObjectId)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
@@ -628,7 +631,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
                 print("Successfully UPDATED")
             }
         }
-
+        
     }
     
     func uploadImage(){
@@ -638,7 +641,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         )
         //let resizedImage:UIImage? = imageToUpload
         photoImageView.image = resizedImage
-
+        
         
         //TODO: RESIZE PHOTO
         
@@ -700,7 +703,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
                 upload.uploadProgress { progress in
                     self.photoImageView.alpha = CGFloat((1.0 - progress.fractionCompleted))
                     print(progress.fractionCompleted)
-
+                    
                     self.progressBar.setProgress(to: progress.fractionCompleted, withAnimation: true)
                 }
                 
@@ -778,18 +781,18 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     
     //let resizedImage = scaleImageToWidth(with: image, scaledToWidth: 300.0)
     
-//    func scaleImageToWidth(with sourceImage: UIImage?, scaledToWidth i_width: Float) -> UIImage? {
-//        let oldWidth = Float(sourceImage?.size.width ?? 0.0)
-//        let scaleFactor: Float = i_width / oldWidth
-//        let newHeight = Float((sourceImage?.size.height ?? 0.0) * CGFloat(scaleFactor))
-//        let newWidth: Float = oldWidth * scaleFactor
-//
-//        UIGraphicsBeginImageContext(CGSize(width: CGFloat(newWidth), height: CGFloat(newHeight)))
-//        sourceImage?.draw(in: CGRect(x: 0, y: 0, width: CGFloat(newWidth), height: CGFloat(newHeight)))
-//        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        return newImage
-//    }
+    //    func scaleImageToWidth(with sourceImage: UIImage?, scaledToWidth i_width: Float) -> UIImage? {
+    //        let oldWidth = Float(sourceImage?.size.width ?? 0.0)
+    //        let scaleFactor: Float = i_width / oldWidth
+    //        let newHeight = Float((sourceImage?.size.height ?? 0.0) * CGFloat(scaleFactor))
+    //        let newWidth: Float = oldWidth * scaleFactor
+    //
+    //        UIGraphicsBeginImageContext(CGSize(width: CGFloat(newWidth), height: CGFloat(newHeight)))
+    //        sourceImage?.draw(in: CGRect(x: 0, y: 0, width: CGFloat(newWidth), height: CGFloat(newHeight)))
+    //        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+    //        UIGraphicsEndImageContext()
+    //        return newImage
+    //    }
     
     /*
      import AVFoundation
@@ -801,7 +804,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
      
      AVMakeRectWithAspectRatioInsideRect(imageSizeSameAspectRatio, containerViewRect) // Returns {x 0 y 0 w 100 h 200}
      AVMakeRectWithAspectRatioInsideRect(imageSizeDiffAspectRatio, containerViewRect) // Returns {x 0 y 50 w 100 h 100}
- */
+     */
     
     func resizeImage(image: UIImage, withSize: CGSize) -> UIImage {
         //resizeImage(image: UIImage(named: "ImageName"), withSize: CGSize(width: 300, height: 300))
@@ -895,7 +898,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         
         if ownerNameKeep != contactTextField.text  {isDirty = true}
         if ownerPhoneKeep != phoneTextField.text  {isDirty = true}
-
+        
         if ownerAddrFullKeep != addressTextField.text  {isDirty = true}
         
         if ownerUrlKeep != websiteTextField.text  {isDirty = true}
@@ -906,20 +909,20 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     
     // MARK: - SET PHOTO CONSTRAINTS
     
-//    func setPhotoConstraints() {
-//        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
-//        leadingConstraint.isActive = true
-//
-//        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
-//        trailingConstraint.isActive = true
-//
-//        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
-//        topConstraint.isActive = true
-//
-//        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-//        bottomConstraint.isActive = true
-//
-//    }
+    //    func setPhotoConstraints() {
+    //        let leadingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .leading, relatedBy: .equal, toItem: photoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
+    //        leadingConstraint.isActive = true
+    //
+    //        let trailingConstraint = NSLayoutConstraint(item: photoImageView, attribute: .trailing, relatedBy: .equal, toItem: photoImageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+    //        trailingConstraint.isActive = true
+    //
+    //        let topConstraint = NSLayoutConstraint(item: photoImageView, attribute: .top, relatedBy: .equal, toItem: photoImageView.superview, attribute: .top, multiplier: 1, constant: 0)
+    //        topConstraint.isActive = true
+    //
+    //        let bottomConstraint = NSLayoutConstraint(item: photoImageView, attribute: .bottom, relatedBy: .equal, toItem: photoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+    //        bottomConstraint.isActive = true
+    //
+    //    }
     
 }
 

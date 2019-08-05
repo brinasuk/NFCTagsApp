@@ -1,3 +1,4 @@
+
 //
 //  DetailViewController.swift
 //
@@ -17,14 +18,14 @@ import AVFoundation
 
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
-
+    
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     var tag = TagModel()
     var player: AVAudioPlayer?
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: DetailHeaderView!
-
+    
     var ratingKeep = ""
     
     override func viewDidLoad() {
@@ -87,21 +88,21 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
         //        }
     }
-
+    
     func showInfo() {
         // DISPLAY DATABASE VALUES
         headerView.titleLabel.text = tag.tagTitle
         headerView.subTitleLabel.text = tag.tagSubTitle
         headerView.priceLabel.text = tag.tagPrice
         headerView.ratingImageView.image = UIImage(named: tag.rating)
-
+        
         
         // SHOW PHOTO
-//        let tagPhotoRef = tag.tagPhotoRef
-//        let cloudinaryAction = "Tag"
-//        let usePhotoRef:String? = tagPhotoRef
-//        let photoNumber = 1
-//        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        //        let tagPhotoRef = tag.tagPhotoRef
+        //        let cloudinaryAction = "Tag"
+        //        let usePhotoRef:String? = tagPhotoRef
+        //        let photoNumber = 1
+        //        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
         let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
         
@@ -115,11 +116,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //=================================================
         
         // METHOD 2: ======================================
-//        let url = URL(string: propertyPhotoFileUrl!)!
-//        let placeholderImageName = kAppDelegate.placeholderName
-//        let placeholderImage = UIImage(named: placeholderImageName! as String)!
-//        headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
-
+        //        let url = URL(string: propertyPhotoFileUrl!)!
+        //        let placeholderImageName = kAppDelegate.placeholderName
+        //        let placeholderImage = UIImage(named: placeholderImageName! as String)!
+        //        headerView.headerImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        
         //=================================================
         
         // METHOD 3: KINGFISHER ============================
@@ -162,20 +163,31 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
-
-    
-
-//    @IBAction func imageTapped(sender: AnyObject) {
-//        print("Image Tapped.")
-//    }
     
     @objc private func imageTapped(_ recognizer: UITapGestureRecognizer) {
-        print("image tapped")
+        //print("image tapped")
         performSegue(withIdentifier: "ShowReview", sender: self)
     }
-
+    
     @IBAction func mapButtonPressed(_ sender: Any) {
-         performSegue(withIdentifier: "SwiftyMapBtn", sender: self)
+        performSegue(withIdentifier: "SwiftyMapBtn", sender: self)
+    }
+    
+    
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        
+        let activityController: UIActivityViewController
+        let textToShare = "Check out: " + tag.tagTitle
+        
+        if let url = URL.init(string: tag.tagUrl)
+        {
+            let imageData: NSData = ((headerView.headerImageView.image!.jpegData(compressionQuality: 0.25)  as NSData?)!)
+            let shareAll = [textToShare , imageData, url] as [Any?]
+            activityController = UIActivityViewController(activityItems: shareAll as [Any], applicationActivities: nil)
+        } else {
+            activityController = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
+        }
+        self.present(activityController, animated: true, completion: nil)
     }
     
     @IBAction func websiteButtonPressed(_ sender: UIBarButtonItem) {
@@ -232,15 +244,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             cell.selectionStyle = .none
             return cell
             
-    ////////////////////////////////////////
+        ////////////////////////////////////////
         case 4:  //ADDRESS
             var addr:String
             addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
             
-//            // Ex Showing how to remove TRAILING WHITESPACE
-//            let myString = "  \t\t  Let's trim all the whitespace  \n \t  \n  "
-//            let newString = myString.trimmingCharacters(in: CharacterSet.whitespaces)
-//            print(newString)
+            //            // Ex Showing how to remove TRAILING WHITESPACE
+            //            let myString = "  \t\t  Let's trim all the whitespace  \n \t  \n  "
+            //            let newString = myString.trimmingCharacters(in: CharacterSet.whitespaces)
+            //            print(newString)
             
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
             cell.iconImageView.image = UIImage(named: "map")
@@ -271,7 +283,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             cell.selectionStyle = .none
             
             return cell
-
+            
         default:
             fatalError("Failed to instantiate the table view cell for detail view controller")
         }
@@ -289,7 +301,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = tag
         }
-        
+            
         else if segue.identifier == "SwiftyMapBtn" {
             let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = tag
@@ -317,17 +329,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
                 self.headerView.ratingImageView.transform = scaleTransform
                 self.headerView.ratingImageView.alpha = 0
-
+                
                 UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
                     self.headerView.ratingImageView.transform = .identity
                     self.headerView.ratingImageView.alpha = 1
                 }, completion: nil)
             }
             
-
+            
         })
         
-
+        
     }
     
     func updateRating(passRating:String) {
@@ -359,7 +371,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
     }
-
+    
     
     // MARK: - Status bar
     
@@ -367,7 +379,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return .lightContent
     }
     
-        // MARK: - MISC ROUTINES
+    // MARK: - MISC ROUTINES
     func displayMessage(message:String) {
         let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
@@ -391,7 +403,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         self.present(alertView, animated: true, completion:nil)
     }
-
+    
     
     
     
@@ -420,7 +432,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
             message = message + "<br><br>From: \(tag.userName)<br>"
             
-            let imageData: NSData = (headerView.headerImageView.image!.jpegData(compressionQuality: 0.75)  as? NSData)!
+            let imageData: NSData = (headerView.headerImageView.image!.jpegData(compressionQuality: 0.75)  as NSData?)!
             mail.addAttachmentData(imageData as Data, mimeType: "image/jpeg", fileName: "image.jpg")
             
             mail.setMessageBody(message, isHTML: true)
@@ -469,8 +481,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-
-
+    
+    
     
     func playSound() {
         guard let url = Bundle.main.url(forResource: "click", withExtension: "mp3") else { return }

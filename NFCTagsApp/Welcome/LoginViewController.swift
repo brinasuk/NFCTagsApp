@@ -338,7 +338,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // EITHER WAY EXIT OUT OF HERE WHEN YOU ARE DONE
     
     func lookupUser(_ usingFacebookId: String?) {
-        var facebookId = usingFacebookId
+        let facebookId = usingFacebookId
         // IF YOU DON'T HAVE A FACEBOOK ID THEN BAIL OUT. THIS SHOULD BE UNLIKELY
         if (facebookId?.count ?? 0) == 0 {
             displayErrorMessage(message: "Cannot find Facebook ID")

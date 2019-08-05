@@ -20,8 +20,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     var currentRow:Int = 0
     var rowCount:Int = 0
-
-    //private var objectId:String = ""    //USED BY DELETE
+    
+    var deleteObjectId:String = ""    //USED BY DELETE
     
     var placeholderImage:UIImage?
     
@@ -30,7 +30,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnMaintenance: UIBarButtonItem!
     @IBOutlet weak var btnSignIn: UIBarButtonItem!
-
+    
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
@@ -40,26 +40,23 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
-        
-        self.title = "Welcome" //TODO: FIX THIS kAppDelegate.appName as String?
+        self.title = "Scanned Tag List" //TODO: FIX THIS kAppDelegate.appName as String?
         //setupNavigationBar()
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
-
+        
         
         //CRITICAL:  CLEAS CACHE!!
         KingfisherManager.shared.cache.clearMemoryCache()
         KingfisherManager.shared.cache.clearDiskCache()
-
+        
         // Customize the TABLEVIEW
         // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = 92.0 // Use 92.0
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
-
-
+        
+        
         //        moveDirtyFlag = false
         //        buttonLabel = "Edit"
         //        editing = false
@@ -95,7 +92,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         toolBar.barTintColor = .white //pinkColor  //paleRoseColor//.white // coralColor
         view.backgroundColor = paleRoseColor
         
-
+        
         // THIS IS CRITICAL HERE. IF USER NOT LOGGED IN THEN FORCE A LOGIN
         // FOR SOME REASON DOES NOT WORK IN FORM_WILLLOAD ????
         let currentUser = PFUser.current()
@@ -115,12 +112,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
-//       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.hidesBarsOnSwipe = true
-//        
-
+        //       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        navigationController?.navigationBar.shadowImage = UIImage()
+        //        navigationController?.navigationBar.prefersLargeTitles = true
+        //        navigationController?.hidesBarsOnSwipe = true
+        //
+        
         
         //METHOD 1
         //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
@@ -132,7 +129,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         }
         
     }
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -201,12 +198,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //        present(alertController, animated: true, completion: nil)
         //    }
         
-//        let navigationController = storyboard.instantiateViewController(withIdentifier: "AugView") as? UINavigationController
-//
-//        if let navigationController = navigationController {
-//            present(navigationController, animated: true)
+        //        let navigationController = storyboard.instantiateViewController(withIdentifier: "AugView") as? UINavigationController
+        //
+        //        if let navigationController = navigationController {
+        //            present(navigationController, animated: true)
         
-        }
+    }
     
     @IBAction func tryButtonPressed(_ sender: Any) {
         /*
@@ -260,8 +257,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
          */
     }
     
-
-
+    
+    
     
     // MARK: - NFC READER DELEGATES
     
@@ -269,7 +266,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //THIS ERROR ALWAYS COMES UP, EVEN ON A SUCCESSFUL SCAN. ????
         //DO NOT SHOW THIS MESSAGE TO THE USER EVER
         print(error.localizedDescription)
-
+        
     }
     
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
@@ -325,9 +322,9 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                 } else if let wifi = parsedPayload as? VYNFCNDEFWifiSimpleConfigPayload {
                     for case let credential as VYNFCNDEFWifiSimpleConfigCredential in wifi.credentials {
                         response = String(format: "%@SSID: %@\nPassword: %@\nMac Address: %@\nAuth Type: %@\nEncrypt Type: %@",
-                                      response, credential.ssid, credential.networkKey, credential.macAddress,
-                                      VYNFCNDEFWifiSimpleConfigCredential.authTypeString(credential.authType),
-                                      VYNFCNDEFWifiSimpleConfigCredential.encryptTypeString(credential.encryptType)
+                                          response, credential.ssid, credential.networkKey, credential.macAddress,
+                                          VYNFCNDEFWifiSimpleConfigCredential.authTypeString(credential.authType),
+                                          VYNFCNDEFWifiSimpleConfigCredential.encryptTypeString(credential.encryptType)
                         )
                     }
                     if let version2 = wifi.version2 {
@@ -338,7 +335,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                 }
                 
                 NSLog("%@", response)
-
+                
                 //============================================
                 DispatchQueue.main.async(execute: {
                     // IF THERE IS A TEXT PAYLOAD THEN PARSE AND SHOW IT !!!!!
@@ -348,7 +345,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                             
                             // AFTER SUCCESSFULLY SCANNING THE TAG, LOOKUP THE INFO THE OWNER HAS SAVED FOR IT
-
+                            
                             //TODO: HUGE FIX HERE
                             self.lookupTagIfo(textPayload)
                         })
@@ -364,7 +361,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                                 let safariVC = SFSafariViewController(url: url)
                                 self.present(safariVC, animated: true, completion: nil)
                             }
-
+                            
                         })
                     }
                 })
@@ -372,15 +369,15 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         }
     }
     
-//func showWebPagez(_ urlString: String?) {
-//    // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
-//    //session.invalidate()
-//
-//    if let url = URL(string: urlString ?? "") {
-//        let safariVC = SFSafariViewController(url: url)
-//        present(safariVC, animated: true, completion: nil)
-//    }
-//}
+    //func showWebPagez(_ urlString: String?) {
+    //    // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
+    //    //session.invalidate()
+    //
+    //    if let url = URL(string: urlString ?? "") {
+    //        let safariVC = SFSafariViewController(url: url)
+    //        present(safariVC, animated: true, completion: nil)
+    //    }
+    //}
     
     // MARK: - PARSE QUERIES
     
@@ -390,25 +387,25 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         print("PASS TAGID: \(passTagId ?? "")")
         let useTagId:String? = passTagId
         
-//        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
-//        let tagString = passTagId ?? ""
-//        let arr = tagString.split(separator: "|")
-//        let useTagId:String = String(arr[0])
-//        let arrCount = arr.count
-//        if arrCount > 0 {  //THE APPCODE IS IN THE TAG. USE IT!
-//            kAppDelegate.appCode = arr[1] as NSString
-//        }
-//        print("USE TAGID: \(useTagId)")
-//        print("APPCODE: \(String(describing: kAppDelegate.appCode))")
+        //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
+        //        let tagString = passTagId ?? ""
+        //        let arr = tagString.split(separator: "|")
+        //        let useTagId:String = String(arr[0])
+        //        let arrCount = arr.count
+        //        if arrCount > 0 {  //THE APPCODE IS IN THE TAG. USE IT!
+        //            kAppDelegate.appCode = arr[1] as NSString
+        //        }
+        //        print("USE TAGID: \(useTagId)")
+        //        print("APPCODE: \(String(describing: kAppDelegate.appCode))")
         
         
         
         ///let str = "Andrew, Ben, John, Paul, Peter, Laura"
         ///let array = str.components(separatedBy: ", ")
         
-//        let sayHello = "Hello Swift 4 2017";
-//        let result = sayHello.split(separator: " ")
-//        print(result) result.count
+        //        let sayHello = "Hello Swift 4 2017";
+        //        let result = sayHello.split(separator: " ")
+        //        print(result) result.count
         
         
         //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
@@ -422,133 +419,133 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerId", equalTo: useTagId!)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
-                if let error = error {
-                    // NO MATCH FOUND
-                    UIViewController.removeSpinner(spinner: sv)
-                    print(error.localizedDescription)
-                    self.displayErrorMessage(message: error.localizedDescription)
-                } else if let object = object {
-                    // The query succeeded with a matching result
-                    //print("HERE WE ARE!!")
-                    //print(object)
-                    let ownerObjectId = object.objectId
-                    let ownerEmail = object["ownerEmail"] as? String ?? ""
-                    let ownerName = object["ownerName"] as? String ?? ""
-                    let ownerPhone = object["ownerPhone"] as? String ?? ""
-                    let ownerAppCode = object["ownerAppCode"] as? String ?? ""
-
-                    ///let ownerPhotoRef = object["ownerPhotoRef"] as? String ?? ""
-
-                    let ownerId = object["ownerId"] as? String ?? ""
-                    let ownerUrl = object["ownerUrl"] as? String ?? ""
-                    let ownerTitle = object["ownerTitle"] as? String ?? ""
-                    let ownerSubTitle = object["ownerSubTitle"] as? String ?? ""
-                    let ownerCompany = object["ownerCompany"] as? String ?? ""
-                    
-                    
-                    let ownerInfo = object["ownerInfo"] as? String ?? ""
-                    let ownerAddress = object["ownerAddress"] as? String ?? ""
-                    let ownerAddress2 = object["ownerAddress2"] as? String ?? ""
-                    let ownerCity = object["ownerCity"] as? String ?? ""
-                    let ownerState = object["ownerState"] as? String ?? ""
-                    let ownerZip = object["ownerZip"] as? String ?? ""
-                    let ownerCountry = object["ownerCountry"] as? String ?? ""
-                    
-                    let ownerAddrFull = object["ownerAddrFull"] as? String ?? ""
-                    let ownerPrice = object["ownerPrice"] as? String ?? ""
-                    let ownerBeds = object["ownerBeds"] as? String ?? ""
-                    let ownerBaths = object["ownerBaths"] as? String ?? ""
-                    let ownerSqFt = object["ownerSqFt"] as? String ?? ""
-                    
-                    let beaconDymo = object["beaconDymo"] as? String ?? ""
-                    let beaconColor = object["beaconColor"] as? String ?? ""
-                    
-                    let latitude = object["latitude"] as? String ?? "0.0"
-                    let longitude = object["longitude"] as? String ?? "0.0"
-                    
-                    let triggerDistance = object["triggerDistance"] as? Double ?? 0.5
-                    
-                    //IF THIS IS NOT A VALID URL THEN BAIL OUT!!!
-                    guard let url = URL.init(string: ownerUrl)
-                                else { return }
-
-                    
-                    // ADD TO TAGS TABLE
-                    let tag = PFObject(className:"Tags")
-                    
-                    tag["ownerName"] = ownerName
-                    tag["ownerEmail"] = ownerEmail
-                    tag["ownerPhone"] = ownerPhone
-                    tag["appCode"] = ownerAppCode
-                    tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
-
-                    tag["userName"] = self.kAppDelegate.currentUserName
-                    tag["userEmail"] = self.kAppDelegate.currentUserEmail
-
-                    tag["tagPhotoRef"] = ownerObjectId  /// ownerPhotoRef is NO LONGER USED!
-                    tag["tagId"] = ownerId
-                    tag["tagTitle"] = ownerTitle
-                    tag["tagSubTitle"] = ownerSubTitle
-                    tag["tagCompany"] = ownerCompany
-                    tag["tagUrl"] = ownerUrl
-                    
-                    tag["tagInfo"] = ownerInfo
-                    
-                    tag["tagAddress"] = ownerAddress
-                    tag["tagAddress2"] = ownerAddress2
-                    tag["tagCity"] = ownerCity
-                    tag["tagState"] = ownerState
-                    tag["tagZip"] = ownerZip
-                    tag["tagCountry"] = ownerCountry
-                    
-                    tag["tagAddrFull"] = ownerAddrFull
-                    tag["tagPrice"] = ownerPrice
-                    tag["tagBeds"] = ownerBeds
-                    tag["tagBaths"] = ownerBaths
-                    tag["tagSqFt"] = ownerSqFt
-                    
-                    tag["beaconDymo"] = beaconDymo
-                    tag["beaconColor"] = beaconColor
-                    tag["latitude"] = latitude
-                    tag["longitude"] = longitude
-                    
-                    let latitudeD = Double(latitude)
-                    let longitudeD = Double(longitude)
-                    
-                    let point = PFGeoPoint(latitude: latitudeD!, longitude: longitudeD!)
-                    tag["location"] = point
-                    
-                    tag["triggerDistance"] = triggerDistance
-
-                    tag.saveInBackground {
-                        (success: Bool, error: Error?) in
-                        if (success) {
-                            // The object has been saved.
-                            //self.displayMessage(message: "SUCCESS")
-                            UIViewController.removeSpinner(spinner: sv)
-                            print ("SAVED TAG WITH URL: \(ownerUrl)")
-                            self.loadTagTable()  //DISPLAY NEW DATA
-                            if let url = URL(string: ownerUrl ) {
-                                    let safariVC = SFSafariViewController(url: url)
-                                    self.present(safariVC, animated: true, completion: nil)
-                                }
-                            
-                            // SEND THE FOLLOWING OWNER INFO TO SENDGRID
-                            //TODO: PUT BACK?
-//                            if kAppDelegate.sendEmailLead == true {
-//                                self.sendGrid(myTitle, usingSubTitle: mySubTitle, usingCompany: myCompany, usingAddress: myAddress, usingOwnerEmail: myEmail)
-//                            }
-                        } else {
-                            // There was a problem, check error.description
-                            UIViewController.removeSpinner(spinner: sv)
-                            self.displayMessage(message: "FAILED!")
+            if let error = error {
+                // NO MATCH FOUND
+                UIViewController.removeSpinner(spinner: sv)
+                print(error.localizedDescription)
+                self.displayErrorMessage(message: error.localizedDescription)
+            } else if let object = object {
+                // The query succeeded with a matching result
+                //print("HERE WE ARE!!")
+                //print(object)
+                let ownerObjectId = object.objectId
+                let ownerEmail = object["ownerEmail"] as? String ?? ""
+                let ownerName = object["ownerName"] as? String ?? ""
+                let ownerPhone = object["ownerPhone"] as? String ?? ""
+                let ownerAppCode = object["ownerAppCode"] as? String ?? ""
+                
+                ///let ownerPhotoRef = object["ownerPhotoRef"] as? String ?? ""
+                
+                let ownerId = object["ownerId"] as? String ?? ""
+                let ownerUrl = object["ownerUrl"] as? String ?? ""
+                let ownerTitle = object["ownerTitle"] as? String ?? ""
+                let ownerSubTitle = object["ownerSubTitle"] as? String ?? ""
+                let ownerCompany = object["ownerCompany"] as? String ?? ""
+                
+                
+                let ownerInfo = object["ownerInfo"] as? String ?? ""
+                let ownerAddress = object["ownerAddress"] as? String ?? ""
+                let ownerAddress2 = object["ownerAddress2"] as? String ?? ""
+                let ownerCity = object["ownerCity"] as? String ?? ""
+                let ownerState = object["ownerState"] as? String ?? ""
+                let ownerZip = object["ownerZip"] as? String ?? ""
+                let ownerCountry = object["ownerCountry"] as? String ?? ""
+                
+                let ownerAddrFull = object["ownerAddrFull"] as? String ?? ""
+                let ownerPrice = object["ownerPrice"] as? String ?? ""
+                let ownerBeds = object["ownerBeds"] as? String ?? ""
+                let ownerBaths = object["ownerBaths"] as? String ?? ""
+                let ownerSqFt = object["ownerSqFt"] as? String ?? ""
+                
+                let beaconDymo = object["beaconDymo"] as? String ?? ""
+                let beaconColor = object["beaconColor"] as? String ?? ""
+                
+                let latitude = object["latitude"] as? String ?? "0.0"
+                let longitude = object["longitude"] as? String ?? "0.0"
+                
+                let triggerDistance = object["triggerDistance"] as? Double ?? 0.5
+                
+                //IF THIS IS NOT A VALID URL THEN BAIL OUT!!!
+                guard let url = URL.init(string: ownerUrl)
+                    else { return }
+                
+                
+                // ADD TO TAGS TABLE
+                let tag = PFObject(className:"Tags")
+                
+                tag["ownerName"] = ownerName
+                tag["ownerEmail"] = ownerEmail
+                tag["ownerPhone"] = ownerPhone
+                tag["appCode"] = ownerAppCode
+                tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
+                
+                tag["userName"] = self.kAppDelegate.currentUserName
+                tag["userEmail"] = self.kAppDelegate.currentUserEmail
+                
+                tag["tagPhotoRef"] = ownerObjectId  /// ownerPhotoRef is NO LONGER USED!
+                tag["tagId"] = ownerId
+                tag["tagTitle"] = ownerTitle
+                tag["tagSubTitle"] = ownerSubTitle
+                tag["tagCompany"] = ownerCompany
+                tag["tagUrl"] = ownerUrl
+                
+                tag["tagInfo"] = ownerInfo
+                
+                tag["tagAddress"] = ownerAddress
+                tag["tagAddress2"] = ownerAddress2
+                tag["tagCity"] = ownerCity
+                tag["tagState"] = ownerState
+                tag["tagZip"] = ownerZip
+                tag["tagCountry"] = ownerCountry
+                
+                tag["tagAddrFull"] = ownerAddrFull
+                tag["tagPrice"] = ownerPrice
+                tag["tagBeds"] = ownerBeds
+                tag["tagBaths"] = ownerBaths
+                tag["tagSqFt"] = ownerSqFt
+                
+                tag["beaconDymo"] = beaconDymo
+                tag["beaconColor"] = beaconColor
+                tag["latitude"] = latitude
+                tag["longitude"] = longitude
+                
+                let latitudeD = Double(latitude)
+                let longitudeD = Double(longitude)
+                
+                let point = PFGeoPoint(latitude: latitudeD!, longitude: longitudeD!)
+                tag["location"] = point
+                
+                tag["triggerDistance"] = triggerDistance
+                
+                tag.saveInBackground {
+                    (success: Bool, error: Error?) in
+                    if (success) {
+                        // The object has been saved.
+                        //self.displayMessage(message: "SUCCESS")
+                        UIViewController.removeSpinner(spinner: sv)
+                        print ("SAVED TAG WITH URL: \(ownerUrl)")
+                        self.loadTagTable()  //DISPLAY NEW DATA
+                        if let url = URL(string: ownerUrl ) {
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
                         }
+                        
+                        // SEND THE FOLLOWING OWNER INFO TO SENDGRID
+                        //TODO: PUT BACK?
+                        //                            if kAppDelegate.sendEmailLead == true {
+                        //                                self.sendGrid(myTitle, usingSubTitle: mySubTitle, usingCompany: myCompany, usingAddress: myAddress, usingOwnerEmail: myEmail)
+                        //                            }
+                    } else {
+                        // There was a problem, check error.description
+                        UIViewController.removeSpinner(spinner: sv)
+                        self.displayMessage(message: "FAILED!")
                     }
-                    print("Successfully added to TAGS table")
                 }
+                print("Successfully added to TAGS table")
+            }
         }
     }
-
+    
     func loadTagTable()
     {
         let query = PFQuery(className:"Tags")
@@ -582,27 +579,27 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                     
                     //self.dataParse.add(object)
                     
-//                    let createdAt: Date? = object.createdAt()
-//
-//
-//                    let cellDataParse:PFObject = self.dataParse.object(at: rowCount) as! PFObject
-//                    //let objectTagX = object.objectId
-//
-//                    var ownerEmail = object["ownerEmail"] as? String
-//                    if ownerEmail == nil {ownerEmail = ""}
-//
-//                    var tagTitle:String? = cellDataParse["tagTitle"] as? String
-//                    // LONG VERSION: var tagTitle:String? = cellDataParse.object(forKey: "tagTitle") as? String
-//                    if tagTitle == nil {tagTitle = ""}
-//
-//                    print(tagTitle as Any)
+                    //                    let createdAt: Date? = object.createdAt()
+                    //
+                    //
+                    //                    let cellDataParse:PFObject = self.dataParse.object(at: rowCount) as! PFObject
+                    //                    //let objectTagX = object.objectId
+                    //
+                    //                    var ownerEmail = object["ownerEmail"] as? String
+                    //                    if ownerEmail == nil {ownerEmail = ""}
+                    //
+                    //                    var tagTitle:String? = cellDataParse["tagTitle"] as? String
+                    //                    // LONG VERSION: var tagTitle:String? = cellDataParse.object(forKey: "tagTitle") as? String
+                    //                    if tagTitle == nil {tagTitle = ""}
+                    //
+                    //                    print(tagTitle as Any)
                     
                     let cellDataParse:PFObject = object
                     
                     let createdAt:Date = object.createdAt!
                     let tagObjectId:String = object.objectId!
-
-
+                    
+                    
                     var userName:String? = cellDataParse["userName"] as? String
                     if (userName == nil) {userName = ""}
                     var userEmail:String? = cellDataParse["userEmail"] as? String
@@ -613,8 +610,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                     if (ownerEmail == nil) {ownerEmail = ""}
                     
                     //TODO: SEE HOW IT IS DONE
-                    let alex = object["ownerPhone"] as? String ?? ""
-                    print(alex)
+                    //let alex = object["ownerPhone"] as? String ?? ""
+                    //print(alex)
                     
                     var ownerPhone:String? = cellDataParse["ownerPhone"] as? String
                     //print(ownerPhone)
@@ -700,8 +697,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                 }
             }
             
-
-
+            
+            
             //RUN ON MAIN THREAD
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -726,7 +723,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     }
 }
 
-    // MARK: - Table view
+// MARK: - Table view
 // TODO: CODE TO REMOVE A ROW
 
 extension TagListViewController: UITableViewDataSource {
@@ -740,36 +737,36 @@ extension TagListViewController: UITableViewDataSource {
             statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
         }
         
-//        if rowCount == 0 {
-//            let welcome = "Welcome " + self.kAppDelegate.currentUserName!
-//            let message = "Please tap the button below to \nScan nearby Tags for Information"
-//            let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
-//            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-//            }
-//            alertView.addAction(OKAction)
-//            if let presenter = alertView.popoverPresentationController {
-//                presenter.sourceView = self.view
-//                presenter.sourceRect = self.view.bounds
-//            }
-//            self.present(alertView, animated: true, completion:nil)
-//        }
+        //        if rowCount == 0 {
+        //            let welcome = "Welcome " + self.kAppDelegate.currentUserName!
+        //            let message = "Please tap the button below to \nScan nearby Tags for Information"
+        //            let alertView = UIAlertController(title: welcome, message: message, preferredStyle: .alert)
+        //            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        //            }
+        //            alertView.addAction(OKAction)
+        //            if let presenter = alertView.popoverPresentationController {
+        //                presenter.sourceView = self.view
+        //                presenter.sourceRect = self.view.bounds
+        //            }
+        //            self.present(alertView, animated: true, completion:nil)
+        //        }
         
-
+        
         
         return rowCount;
     }
-
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // if editingStyle == .delete {
         // CODE MOVED TO: trailingSwipeActionsConfigurationForRowAt
         // }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AuteurTableViewCell
-
+        
         let tag = self.tagObjects[indexPath.row] //The Vige
         
         cell.tagTitle.text = tag.tagTitle
@@ -784,38 +781,38 @@ extension TagListViewController: UITableViewDataSource {
         //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
         let formattedDate = format.string(from: date)
         cell.dateAdded.text = "Date Added: " + formattedDate
-
+        
         /*
          https://photos.homecards.com/rebeacons/Tag-082C63FE-9AA8-4967-BC04-8F3D6AAF63DA-1.jpg
          */
         
-//        let tagPhotoRef = tag.tagPhotoRef
-//
-//        let cloudinaryAction = "Tag"
-//        let usePhotoRef:String? = tagPhotoRef
-//        let photoNumber = 1
-//        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        //        let tagPhotoRef = tag.tagPhotoRef
+        //
+        //        let cloudinaryAction = "Tag"
+        //        let usePhotoRef:String? = tagPhotoRef
+        //        let photoNumber = 1
+        //        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
-        let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
+        let tagPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
         cell.tagImageView.clipsToBounds = true
         
         // METHOD 1: ======================================
-//        cell.tagImageView?.image = placeholderImage
-//        if let url = URL(string: propertyPhotoFileUrl! ) {
-//            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
-//        }
-
+        //        cell.tagImageView?.image = placeholderImage
+        //        if let url = URL(string: propertyPhotoFileUrl! ) {
+        //            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
+        //        }
+        
         
         // METHOD 2: ======================================
-//        if let url = URL(string: propertyPhotoFileUrl! ) {
-//          cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
-//        }
+        //        if let url = URL(string: propertyPhotoFileUrl! ) {
+        //          cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+        //        }
         // METHOD 2: ======================================
         //TODO: USE CONSISTANT PHOTO METHOD
-        if let url = URL(string: propertyPhotoFileUrl! ) {
+        if let url = URL(string: tagPhotoFileUrl! ) {
             //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
             // Round corner
             //var processor = RoundCornerImageProcessor(cornerRadius: 20)
@@ -853,12 +850,12 @@ extension TagListViewController: UITableViewDataSource {
              */
             
             //cell.tagImageView.kf.setImage(with: url)
-
+            
             //TODO: FIX SIZE
             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
             let placeholderImage = UIImage(named: "icons8-camera-1")
             cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
-   
+            
         }
         
         //=================================================
@@ -873,7 +870,7 @@ extension TagListViewController: UITableViewDataSource {
         cell.accessoryType = .detailDisclosureButton
         
         //=================================================
-
+        
         cell.tagTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         cell.tagSubTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
         cell.tagCompany.font = UIFont(name: "HelveticaNeue-Light", size: 14)
@@ -894,22 +891,22 @@ extension TagListViewController: UITableViewDataSource {
         //let theVige = self.tagObjects[indexPath.row]
         //let vige = theVige.tagTitle
         //print("VIGE: \(vige)")
-    
-
+        
+        
         //TODO:      PUT THE FOLLOWING LINES BACK
-//        let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
-//
-//        var tagUrl:String? = cellDataParse.object(forKey: "tagUrl") as? String
-//        if tagUrl == nil {tagUrl = ""}
-//
-//        if tagUrl != "" {
-//            // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
-//            //session.invalidate()
-//            if let url = URL(string: tagUrl ?? "") {
-//                let safariVC = SFSafariViewController(url: url)
-//                present(safariVC, animated: true, completion: nil)
-//            }
-//        }
+        //        let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
+        //
+        //        var tagUrl:String? = cellDataParse.object(forKey: "tagUrl") as? String
+        //        if tagUrl == nil {tagUrl = ""}
+        //
+        //        if tagUrl != "" {
+        //            // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
+        //            //session.invalidate()
+        //            if let url = URL(string: tagUrl ?? "") {
+        //                let safariVC = SFSafariViewController(url: url)
+        //                present(safariVC, animated: true, completion: nil)
+        //            }
+        //        }
         
     }
     
@@ -918,33 +915,33 @@ extension TagListViewController: UITableViewDataSource {
         //cell.backgroundColor = UIColor(white:1, alpha: 0.5)
     }
     
-        // Override to support conditional editing of the table view.
-        func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-            // Return NO if you do not want the specified item to be editable.
-            return true
-        }
-        
-        func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-            setEditing(true, animated: true)
-        }
-        
-        func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-            setEditing(false, animated: true)
-        }
-        
-        func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-            return true
-        }
-        
-        func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to toIndexPath: IndexPath) {
-//            let objectToMove = listingsArray[fromIndexPath.row]
-//            listingsArray.remove(at: fromIndexPath.row)
-//            listingsArray.insert(objectToMove, at: toIndexPath.row)
-//            moveDirtyFlag = true
-        }
-
-//        guard let url = URL.init(string: "https://en.wikipedia.org/wiki/\(title)")
-//            else { return }
+    // Override to support conditional editing of the table view.
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return NO if you do not want the specified item to be editable.
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        setEditing(true, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        setEditing(false, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to toIndexPath: IndexPath) {
+        //            let objectToMove = listingsArray[fromIndexPath.row]
+        //            listingsArray.remove(at: fromIndexPath.row)
+        //            listingsArray.insert(objectToMove, at: toIndexPath.row)
+        //            moveDirtyFlag = true
+    }
+    
+    //        guard let url = URL.init(string: "https://en.wikipedia.org/wiki/\(title)")
+    //            else { return }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -964,8 +961,8 @@ extension TagListViewController: UITableViewDataSource {
             
         }
     }
-                
-
+    
+    
     
     
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -982,115 +979,187 @@ extension TagListViewController: UITableViewDataSource {
     //        }
     //    }
     
-/*
- //TODO: ALEX PUT BACK
-    // MARK: - Table view delegate 2
+    /*
+     //TODO: ALEX PUT BACK
+     // MARK: - Table view delegate 2
+     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+     let delete = UIContextualAction(style: .destructive, title: "DELETE", handler: { action, sourceView, completionHandler in
+     //NSLog(@"index path of delete: %@", indexPath);
+     print ("REMOVE ROW")
+     
+     // delete from server
+     let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
+     self.objectId = cellDataParse.objectId ?? ""
+     let query = PFQuery(className: "Tags")
+     
+     query.getObjectInBackground(withId: self.objectId) { (object: PFObject?, error: Error?) in
+     if let error = error {
+     // The query failed
+     print(error.localizedDescription)
+     //self.displayMessage(message: error.localizedDescription)
+     } else if let object = object {
+     // The query succeeded with a matching result
+     print("SUCCESS + \(self.objectId)")
+     object.deleteInBackground()
+     
+     //self.tableView.deleteRows(at: [indexPath], with: .automatic)
+     //self.dataParse.remove(indexPath.row)
+     //completionHandler(true)
+     //self.displayMessage(message: "Successfully Deleted")
+     //self.tableView.reloadData()
+     self.showTagTable() //VALENTINA 0
+     } else {
+     // The query succeeded but no matching result was found
+     //self.displayMessage(message: "No Record Found")
+     print("NO MATCH FOUND")
+     }
+     }
+     
+     completionHandler(true)
+     })
+     delete.backgroundColor = UIColor.red //arbitrary color
+     //delete.image = [HCMPlugin bundleImageWithName:@"contactInfoDelete20x20"];
+     
+     let swipeActionConfig = UISwipeActionsConfiguration(actions: [delete])
+     swipeActionConfig.performsFirstActionWithFullSwipe = false
+     return swipeActionConfig
+     }
+     
+     //mapAction
+     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+     
+     //MoreInfo
+     let moreInfoAction = UIContextualAction(style: .normal, title: "More", handler: { action, sourceView, completionHandler in
+     
+     /*
+     self.row = indexPath.row
+     self.moreInfo()
+     */
+     completionHandler(true)
+     })
+     moreInfoAction.backgroundColor = .blue
+     
+     //map
+     let mapAction = UIContextualAction(style: .normal, title: "Map", handler: { action, sourceView, completionHandler in
+     //                                                                           NSLog(@"index path : %ld", (long)indexPath.row);
+     /*
+     self.showMapView(indexPath)
+     */
+     completionHandler(true)
+     })
+     mapAction.backgroundColor = UIColor.purple //arbitrary color
+     
+     //text
+     let smsAction = UIContextualAction(style: .normal, title: "Text", handler: { action, sourceView, completionHandler in
+     //                                                                           NSLog(@"index path : %ld", (long)indexPath.row);
+     /*
+     self.row = indexPath.row
+     self.showSMS()
+     */
+     
+     completionHandler(true)
+     })
+     smsAction.backgroundColor = UIColor.blue //arbitrary color
+     
+     //rate
+     let rateAction = UIContextualAction(style: .normal, title: "Rate", handler: { action, sourceView, completionHandler in
+     //                                                                           NSLog(@"index path : %ld", (long)indexPath.row);
+     /*
+     self.row = indexPath.row
+     self.rateAlert()
+     */
+     completionHandler(true)
+     })
+     //rateAction.backgroundColor = UIColor.steelBlue()
+     rateAction.backgroundColor = UIColor(red: 38.0/255.0, green: 162.0/255.0, blue: 78.0/255.0, alpha: 1.0)
+     
+     //-------------------------------------------------//
+     let swipeActionConfig = UISwipeActionsConfiguration(actions: [moreInfoAction, rateAction, smsAction, mapAction])
+     swipeActionConfig.performsFirstActionWithFullSwipe = false
+     return swipeActionConfig
+     //-------------------------------------------------//
+     
+     }
+     */
+
+    
+    // MARK: - TRAILING SWIPE Table view delegate
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "DELETE", handler: { action, sourceView, completionHandler in
-            //NSLog(@"index path of delete: %@", indexPath);
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
             print ("REMOVE ROW")
+            let tag = self.tagObjects[indexPath.row]
+            self.deleteObjectId = tag.tagObjectId
+            print("DELETE1 + \(self.deleteObjectId)")
+//            Alertift.alert(title: "Remove Item",message: "Are you sure you wish to Remove this Item?")
+//                .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+//                    print("YES!")
+//                    self.removeItem()
+//                    completionHandler(true)
+//                }
+//                .action(.cancel("No")) { (_, _, _) in
+//                    print("No/Cancel Clicked")
+//                    completionHandler(false)
+//                }
+//                .show()
             
-                        // delete from server
-                        let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
-                        self.objectId = cellDataParse.objectId ?? ""
-                        let query = PFQuery(className: "Tags")
-            
-                        query.getObjectInBackground(withId: self.objectId) { (object: PFObject?, error: Error?) in
-                            if let error = error {
-                                // The query failed
-                                print(error.localizedDescription)
-                                //self.displayMessage(message: error.localizedDescription)
-                            } else if let object = object {
-                                // The query succeeded with a matching result
-                                print("SUCCESS + \(self.objectId)")
-                                object.deleteInBackground()
-            
-                                //self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                                //self.dataParse.remove(indexPath.row)
-                                //completionHandler(true)
-                                //self.displayMessage(message: "Successfully Deleted")
-                                //self.tableView.reloadData()
-                                self.showTagTable() //VALENTINA 0
-                            } else {
-                                // The query succeeded but no matching result was found
-                                //self.displayMessage(message: "No Record Found")
-                                print("NO MATCH FOUND")
-                            }
-                        }
-            
+            self.removeItem()
             completionHandler(true)
-        })
-        delete.backgroundColor = UIColor.red //arbitrary color
-        //delete.image = [HCMPlugin bundleImageWithName:@"contactInfoDelete20x20"];
+            
+            
+            // Call completion handler with true to indicate
+            
+        }
         
-        let swipeActionConfig = UISwipeActionsConfiguration(actions: [delete])
-        swipeActionConfig.performsFirstActionWithFullSwipe = false
-        return swipeActionConfig
+        let websiteAction = UIContextualAction(style: .normal, title: "Website") { (action, sourceView, completionHandler) in
+            
+            //SHOW WEBSITE
+            let tag = self.tagObjects[indexPath.row]
+            let link = tag.tagUrl
+            if let url = URL(string: link ) {
+                let safariVC = SFSafariViewController(url: url)
+                self.present(safariVC, animated: true, completion: nil)
+            }
+            completionHandler(true)
+        }
+        
+        let mapAction = UIContextualAction(style: .normal, title: "Map") { (action, sourceView, completionHandler) in
+            DispatchQueue.main.async {
+                //SWIFTYMAP
+                //print("SWIFTYMAP2")
+                self.performSegue(withIdentifier: "SwiftyMap2", sender: self)
+            }
+            completionHandler(true)
+        }
+        
+        // Set the icon and background color for the actions
+        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+        //TODO: PUT ALL GRAPHICS BACK  deleteAction.image = UIImage(named: "delete")
+        
+        mapAction.backgroundColor = skyBlueColor
+        //TODO: ADD NICE IMAGE
+        //mapAction.image = UIImage(named: "tick")
+        
+        //        shareAction.backgroundColor = cactusGreenColor
+        //        shareAction.image = UIImage(named: "share")
+        
+        websiteAction.backgroundColor = steelBlueColor
+        //TODO: ADD NICE IMAGE
+        //websiteAction.image = UIImage(named: "tick")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, mapAction, websiteAction])
+        
+        swipeConfiguration.performsFirstActionWithFullSwipe = false
+        return swipeConfiguration
     }
     
-    //mapAction
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        //MoreInfo
-        let moreInfoAction = UIContextualAction(style: .normal, title: "More", handler: { action, sourceView, completionHandler in
-            
-            /*
-            self.row = indexPath.row
-            self.moreInfo()
-            */
-            completionHandler(true)
-        })
-        moreInfoAction.backgroundColor = .blue
-        
-        //map
-        let mapAction = UIContextualAction(style: .normal, title: "Map", handler: { action, sourceView, completionHandler in
-            //                                                                           NSLog(@"index path : %ld", (long)indexPath.row);
-            /*
-            self.showMapView(indexPath)
-*/
-            completionHandler(true)
-        })
-        mapAction.backgroundColor = UIColor.purple //arbitrary color
-        
-        //text
-        let smsAction = UIContextualAction(style: .normal, title: "Text", handler: { action, sourceView, completionHandler in
-            //                                                                           NSLog(@"index path : %ld", (long)indexPath.row);
-            /*
-            self.row = indexPath.row
-            self.showSMS()
- */
 
-            completionHandler(true)
-        })
-        smsAction.backgroundColor = UIColor.blue //arbitrary color
-        
-        //rate
-        let rateAction = UIContextualAction(style: .normal, title: "Rate", handler: { action, sourceView, completionHandler in
-            //                                                                           NSLog(@"index path : %ld", (long)indexPath.row);
-            /*
-            self.row = indexPath.row
-            self.rateAlert()
-*/
-            completionHandler(true)
-        })
-        //rateAction.backgroundColor = UIColor.steelBlue()
-        rateAction.backgroundColor = UIColor(red: 38.0/255.0, green: 162.0/255.0, blue: 78.0/255.0, alpha: 1.0)
-        
-        //-------------------------------------------------//
-        let swipeActionConfig = UISwipeActionsConfiguration(actions: [moreInfoAction, rateAction, smsAction, mapAction])
-        swipeActionConfig.performsFirstActionWithFullSwipe = false
-        return swipeActionConfig
-        //-------------------------------------------------//
-        
-    }
- */
     func removeItem () {
-        let tag = self.tagObjects[self.currentRow]
-        let objectId = tag.tagObjectId
+        print("DELETE2 + \(self.deleteObjectId)")
         let query = PFQuery(className: "Tags")
-        print("DELETE + \(objectId)")
         
-        query.getObjectInBackground(withId: objectId) { (object: PFObject?, error: Error?) in
+        
+        query.getObjectInBackground(withId: self.deleteObjectId) { (object: PFObject?, error: Error?) in
             if let error = error {
                 // The query failed
                 print(error.localizedDescription)
@@ -1105,13 +1174,13 @@ extension TagListViewController: UITableViewDataSource {
                     //self.tableView.reloadData()
                     self.loadTagTable() //DELETE
                 })
-    
+                
                 //self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 //self.dataParse.remove(indexPath.row)
                 //completionHandler(true)
                 //self.displayMessage(message: "Successfully Deleted")
                 
-
+                
             } else {
                 // The query succeeded but no matching result was found
                 //self.displayMessage(message: "No Record Found")
@@ -1120,183 +1189,12 @@ extension TagListViewController: UITableViewDataSource {
         }
     }
     
-    // MARK: - TRAILING SWIPE Table view delegate
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
-            print ("REMOVE ROW")
-            Alertift.alert(title: "Remove Item",message: "Are you sure you wish to Remove this Item?")
-                .action(.default("Yes"), isPreferred: true) { (_, _, _) in
-                    print("YES!")
-                    self.removeItem()
-                    completionHandler(true)
-                }
-                .action(.cancel("No")) { (_, _, _) in
-                    print("No/Cancel Clicked")
-                    completionHandler(false)
-                }
-                .show()
-            
-
-            // Call completion handler with true to indicate
-            
-        }
-        
-        let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in
-            let theVige = self.tagObjects[indexPath.row]
-            let title = theVige.tagTitle
-            let defaultText = "Just checking in at " + title
-            
-            let activityController: UIActivityViewController
-            
-            //            let imageNaME = theVige.tagUrl
-            //            if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
-            //                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
-            //            } else  {
-            //                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
-            //            }
-            //TODO: TAKE THIS OUT!
-            activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
-            
-            if let popoverController = activityController.popoverPresentationController {
-                if let cell = tableView.cellForRow(at: indexPath) {
-                    popoverController.sourceView = cell
-                    popoverController.sourceRect = cell.bounds
-                }
-            }
-            
-            self.present(activityController, animated: true, completion: nil)
-            completionHandler(true)
-        }
-        
-        let websiteAction = UIContextualAction(style: .normal, title: "Website") { (action, sourceView, completionHandler) in
-            
-            //SHOW WEBSITE
-            let tag = self.tagObjects[indexPath.row]
-            let link = tag.tagUrl
-            if let url = URL(string: link ) {
-                let safariVC = SFSafariViewController(url: url)
-                self.present(safariVC, animated: true, completion: nil)
-            }
-            completionHandler(true)
-        }
-        
-        let mapAction = UIContextualAction(style: .normal, title: "Map") { (action, sourceView, completionHandler) in
-            
-            self.showSwiftyMap()
-            
-//                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                let vc = storyboard.instantiateViewControllerWithIdentifier("SignUpViewController")
-//                self.showViewController(vc, sender: self)
-            
- 
-            completionHandler(true)
-        }
-        
-        
-        
-        // Set the icon and background color for the actions
-        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
-        deleteAction.image = UIImage(named: "delete")
-        
-        mapAction.backgroundColor = skyBlueColor
-        mapAction.image = UIImage(named: "tick")
-        
-        shareAction.backgroundColor = cactusGreenColor
-        shareAction.image = UIImage(named: "share")
-        
-        websiteAction.backgroundColor = steelBlueColor
-        websiteAction.image = UIImage(named: "tick")
-        
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction, mapAction, websiteAction])
-        
-        swipeConfiguration.performsFirstActionWithFullSwipe = false
-        return swipeConfiguration
-    }
-    
-    func showSwiftyMap() {
-        DispatchQueue.main.async {
-            //SWIFTYMAP
-            print("SWIFTYMAP2")
-            self.performSegue(withIdentifier: "SwiftyMap2", sender: self)
-        }
-    }
-    
-    
-    // MARK: - LEADING SWIPE Table view delegate
-/*
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in
-            let theVige = self.tagObjects[indexPath.row]
-            let title = theVige.tagTitle
-            let defaultText = "Just checking in at " + title
-            
-            let activityController: UIActivityViewController
-            
-            //            let imageNaME = theVige.tagUrl
-            //            if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
-            //                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
-            //            } else  {
-            //                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
-            //            }
-            //TODO: TAKE THIS OUT!
-            activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
-            
-            if let popoverController = activityController.popoverPresentationController {
-                if let cell = tableView.cellForRow(at: indexPath) {
-                    popoverController.sourceView = cell
-                    popoverController.sourceRect = cell.bounds
-                }
-            }
-            
-            self.present(activityController, animated: true, completion: nil)
-            completionHandler(true)
-        }
-        
-        let websiteAction = UIContextualAction(style: .normal, title: "Website") { (action, sourceView, completionHandler) in
-            
-            //SHOW WEBSITE
-            let tag = self.tagObjects[indexPath.row]
-            let link = tag.tagUrl
-            if let url = URL(string: link ) {
-                let safariVC = SFSafariViewController(url: url)
-                self.present(safariVC, animated: true, completion: nil)
-            }
-            completionHandler(true)
-        }
-        
-        let mapAction = UIContextualAction(style: .normal, title: "Map") { (action, sourceView, completionHandler) in
-            
-            //SWIFTYMAP2
-            self.performSegue(withIdentifier: "SwiftyMap2", sender: self)
-            completionHandler(true)
-        }
-        
-
-        
-        mapAction.backgroundColor = skyBlueColor
-        mapAction.image = UIImage(named: "tick")
-        
-        shareAction.backgroundColor = cactusGreenColor
-        shareAction.image = UIImage(named: "share")
-        
-        websiteAction.backgroundColor = steelBlueColor
-        websiteAction.image = UIImage(named: "tick")
-        
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [shareAction, mapAction, websiteAction])
-        
-        
-        return swipeConfiguration
-    }
-*/
-
-// MARK: === SIGN IN ROUTINES ===========
+    // MARK: === SIGN IN ROUTINES ===========
     
     func actionLogout() {
         
         let currentUser = PFUser.current()
-
+        
         if currentUser != nil {
             //TODO: FIX ALL PROGRESSHUD
             //ProgressHUD.show("Logging Out ...", interaction: false)
@@ -1333,17 +1231,17 @@ extension TagListViewController: UITableViewDataSource {
         let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as! LoginViewController
         self.present(loginViewController, animated: true, completion: nil)
         
-
-//        let loginViewController =  RegisterViewController()
-//        self.navigationController?.show(loginViewController, sender: self)
         
-//        let registerViewController = RegisterViewController()
-//        navigationController?.pushViewController(registerViewController, animated: true)
+        //        let loginViewController =  RegisterViewController()
+        //        self.navigationController?.show(loginViewController, sender: self)
+        
+        //        let registerViewController = RegisterViewController()
+        //        navigationController?.pushViewController(registerViewController, animated: true)
         //self.navigationController?.pushViewController(loginViewController, animated: true)
-//        self.present(loginViewController, animated: false, completion: nil)
+        //        self.present(loginViewController, animated: false, completion: nil)
     }
-
-
+    
+    
     func showCurrentUserInfo() {
         let currentUser = PFUser.current()
         //print (currentUser)
@@ -1414,16 +1312,16 @@ extension TagListViewController: UITableViewDataSource {
     }
     
     // MARK: - MISC ROUTINES
-//    func createPhotoURL2(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
-//        if useID == nil {
-//            return nil
-//        }
-//        var url = ""
-//        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
-//        //NSLog(@"URL: %@",url);
-//        return url
-//
-//    }
+    //    func createPhotoURL2(_ useAction: String?, withID useID: String?, withNumber useNumber: Int) -> String? {
+    //        if useID == nil {
+    //            return nil
+    //        }
+    //        var url = ""
+    //        url = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, useAction ?? "", useID ?? "", useNumber)
+    //        //NSLog(@"URL: %@",url);
+    //        return url
+    //
+    //    }
     
     func displayMessage(message:String) {
         let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
@@ -1448,7 +1346,7 @@ extension TagListViewController: UITableViewDataSource {
         }
         self.present(alertView, animated: true, completion:nil)
     }
-
+    
     
     func showSimpleAlert() {
         //    Alertift.alert(title: "Sample 1", message: "Simple alert!")
@@ -1506,11 +1404,11 @@ extension TagListViewController: UITableViewDataSource {
         return UIImage(cgImage: image)
     }
     
-//    @IBAction func unwindToMainController(segue: UIStoryboardSegue) {
-//        print ("Return here after adding a new account")
-//    }
+    //    @IBAction func unwindToMainController(segue: UIStoryboardSegue) {
+    //        print ("Return here after adding a new account")
+    //    }
     
-
+    
 }
 
 /*
