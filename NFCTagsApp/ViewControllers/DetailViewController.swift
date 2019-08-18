@@ -196,6 +196,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         if let url = URL(string: urlString ) {
             let safariVC = SFSafariViewController(url: url)
             self.present(safariVC, animated: true, completion: nil)
+            //open (scheme: urlString)
         } else {
             displayMessage(message: "Invalid Web URL")
         }
@@ -380,6 +381,22 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // MARK: - MISC ROUTINES
+    
+    func open(scheme: String) {
+        if let url = URL(string: scheme) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: {
+                                            (success) in
+                                            print("Open \(scheme): \(success)")
+                })
+            } else {
+                let success = UIApplication.shared.openURL(url)
+                print("Open \(scheme): \(success)")
+            }
+        }
+    }
+    
     func displayMessage(message:String) {
         let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in

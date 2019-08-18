@@ -11,6 +11,8 @@ import UIKit
 import Parse
 import UserNotifications
 //import FBSDKLoginKit  // ADDED FOR FACEBOOK
+import SafariServices
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -249,4 +251,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    // RETURNS HERE IF THIS IS A REGISTERED UNIVERSAL LINK
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let sendingAppID = options[.sourceApplication]
+        
+        //TODO: THE FOLLOWING IS FOR TESTING ONLY. YOU NEED TO IMPLEMENT THIS
+        AudioServicesPlayAlertSound(SystemSoundID(1325))   //FANFARE SOUND !!
+        print("SENDINGAPPID: \(String(describing: sendingAppID))")
+        //let options = [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly : true]
+        if URL(string: sendingAppID as! String ) != nil {
+            open(scheme: sendingAppID as! String)
+        }
+        return true
+        
+    }
+    
+    func open(scheme: String) {
+        if let url = URL(string: scheme) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: {
+                                            (success) in
+                                            print("Open \(scheme): \(success)")
+                })
+            } else {
+                let success = UIApplication.shared.openURL(url)
+                print("Open \(scheme): \(success)")
+            }
+        }
+    }
+/*
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
+            return false
+        }
+        
+        // Confirm that the NSUserActivity object contains a valid NDEF message.
+        let ndefMessage = userActivity.ndefMessagePayload
+        guard ndefMessage.records.count > 0,
+            ndefMessage.records[0].typeNameFormat != .empty else {
+                return false
+        }
+        
+        // Send the message to `MessagesTableViewController` for processing.
+        guard let navigationController = window?.rootViewController as? UINavigationController else {
+            return false
+        }
+        
+        navigationController.popToRootViewController(animated: true)
+        let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
+        messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
+        
+        return true
+    }
+*/
 }

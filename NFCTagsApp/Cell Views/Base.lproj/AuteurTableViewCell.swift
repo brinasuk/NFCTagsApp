@@ -1,6 +1,7 @@
 
 import UIKit
 
+
 class AuteurTableViewCell: UITableViewCell {
     //@IBOutlet weak var bioLabel: UILabel!
     //@IBOutlet weak var nameLabel: UILabel!
