@@ -308,4 +308,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 */
+    
+//    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+//        print("Continue User Activity called: ")
+//        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+//            let url = userActivity.webpageURL!
+//            print(url.absoluteString)
+//            //handle url and open whatever page you want to open.
+//        }
+//        return true
+//    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
+            return false
+        }
+        
+        // Confirm that the NSUserActivity object contains a valid NDEF message.
+        let ndefMessage = userActivity.ndefMessagePayload
+        
+        guard
+            let record = ndefMessage.records.first,
+            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
+            let payloadText = String(data: record.payload, encoding: .utf8),
+            let sku = payloadText.split(separator: "/").last else {
+                return false
+        }
+    
+        //TODO: FIX THIS
+//        guard let product = productStore.product(withID: String(sku)) else {
+//            return false
+//        }
+        
+        
+        guard let navigationController = window?.rootViewController as? UINavigationController else {
+            return false
+        }
+        
+        navigationController.dismiss(animated: true, completion: nil)
+        let mainVC = navigationController.topViewController as? TagListViewController
+        //mainVC?.presentProductViewController(product: product)
+        return true
+    }
+    
+
+    
 }

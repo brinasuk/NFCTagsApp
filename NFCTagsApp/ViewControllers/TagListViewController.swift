@@ -40,7 +40,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Scanned Tag List" //TODO: FIX THIS kAppDelegate.appName as String?
+        self.title = "Scanned List" //TODO: FIX THIS kAppDelegate.appName as String?
         //setupNavigationBar()
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
@@ -158,6 +158,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     @IBAction func scanButtonPressed(_ sender: Any) {
         scanResults = ""
         let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
+        session.alertMessage = "Hold your iPhone near the tag to learn more about this item."
         session.begin()
         bounce(scanButton)
     }
@@ -384,7 +385,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
     func lookupTagIfo(_ passTagId: String?) {
         //tagId = "info@kcontemporaryart.com:102" //TODO: REMOVE
-        print("PASS TAGID: \(passTagId ?? "")")
+        print("PASSED TAGID: \(passTagId ?? "")")
         let useTagId:String? = passTagId
         
         //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER

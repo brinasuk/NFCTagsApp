@@ -302,6 +302,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             facebookAPIManager.requestFacebookUser(completion: { (facebookUser) in
                 if let _ = facebookUser.email {
                     let info = "First nameZ: \(facebookUser.firstName!) \n Last name: \(facebookUser.lastName!) \n Email: \(facebookUser.email!)  \n ID: \(facebookUser.id!)"
+                    print(info)
                     //self.displayMessage(message: info)
                     
                     // Create a dictionary with the user's Facebook data
