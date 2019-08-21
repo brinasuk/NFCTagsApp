@@ -21,8 +21,8 @@ class MaintTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Edit Info"
-        setupNavigationBar()
+        self.title = "Tag List"
+        
         //imageView.kf.indicatorType = .activity
         
 
@@ -68,10 +68,12 @@ class MaintTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupNavigationBar()
     }
     
     func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = false
+         self.navigationController?.navigationBar.tintColor = UIColor.darkGray
     }
     
     //    @objc func goBackButtonPressed() {

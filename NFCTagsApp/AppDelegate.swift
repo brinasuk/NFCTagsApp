@@ -43,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var currentUserName:String? = ""
     var currentUserEmail:String? = ""
     
-    //var loggedInFlag:Bool? = false
-    var newAccountFlag:Bool? = false
     var currentUserIsAgent:Bool? = false
     
     var currentUserFacebookId:String? = ""
@@ -126,9 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //    // CRITICAL: SETUP REALESTATEBEACONS
         //    [ESTConfig setupAppID:@"openhousebeacons" andAppToken:@"95febad595a25c04fd5a80b829b35361"];
         
-        
-        
-        
+
         // SET THE TOOLBAR STYLE
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
@@ -345,12 +341,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         
-        navigationController.dismiss(animated: true, completion: nil)
-        let mainVC = navigationController.topViewController as? TagListViewController
+//        navigationController.dismiss(animated: true, completion: nil)
+//        let mainVC = navigationController.topViewController as? TagListViewController
         //mainVC?.presentProductViewController(product: product)
         return true
     }
-    
-
-    
 }

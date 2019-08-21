@@ -123,7 +123,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        goBackButtonPressed()
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - User actions
@@ -165,8 +165,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         var lastName:String = ""
         
         if (name?.count ?? 0) > 0 {
-            
-            //TODO: PUT BACK !!!
+
                         let fullNameArray = name?.components(separatedBy: " ")
                         firstName = fullNameArray?[0] ?? "First"
                         let lastPos: Int = (fullNameArray?.count ?? 0) - 1
@@ -214,9 +213,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Helper methods
     func userLogged(in user: PFUser?) {
-        if (user?[PF_USER_FULLNAME]) != nil {
-            //TODO: SWIFTY ProgressHUD.showSuccess("Welcome \(fullname)!")
-        }
 
         //kAppDelegate.loggedInFlag = true //CRITICAL!!
         kAppDelegate.isDatabaseDirty = true //FORCE RELOAD WITH NEW USER
@@ -241,28 +237,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         //TODO: SWIFTY PUT BACK !!   NotificationCenter.default.post(name: kREFRESHUSERTABLE, object: nil, userInfo: dict)
         */
         
-        //goBackButtonPressed()
-        
-        //DOES NOT WORK. Use newAccountFlag Instead
-        //self.performSegue(withIdentifier: "unwindToMainController", sender: self)
-
-        kAppDelegate.newAccountFlag = true
-        goBackButtonPressed()
-        
-        
-        //DOES NOT WORK navigationController?.popToRootViewController(animated: true)
-        
-        //    [self dismissViewControllerAnimated:YES completion:^{
-        //        PostNotification(NOTIFICATION_USER_LOGGED_IN);
-        //    }];
+        self.performSegue(withIdentifier: "UnwinfToTagListController", sender: self)
     }
     
-    func goBackButtonPressed() {
-        //navigationController?.popViewController(animated: true)
-        //navigationController?.popToRootViewController(animated: true)
-        //[self dismissViewControllerAnimated:YES completion:nil];
-        dismiss(animated: true, completion: nil)
-    }
+
     
     func bounce(_ button: UIButton?) {
         var theAnimation: CABasicAnimation?

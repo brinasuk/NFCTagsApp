@@ -41,7 +41,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         title = "Welcome"
         //kAppDelegate.loggedInFlag = false
-        kAppDelegate.newAccountFlag = false
         
         //GET THE VERSION INFO FROM THE BUNDLE
         var applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
@@ -131,10 +130,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if kAppDelegate.newAccountFlag == true {
-            kAppDelegate.newAccountFlag = false
-            goBackButtonPressed()
-        }
     }
 
     
@@ -195,7 +190,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.userLogged(in: user)
             } else {
 //                ProgressHUD.showError((error as NSError?)?.userInfo["error"])
-                self.displayErrorMessage (message: "Cannot sign in")
+                self.displayErrorMessage (message: "INVALID EMAIL OR PASSWORD")
             }
         };
     }
@@ -386,7 +381,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.userLogged(in: user)
             } else {
                 self.displayErrorMessage(message: "Login Failed")
-                self.goBackButtonPressed()
+                //self.goBackButtonPressed()
             }
         };
         
@@ -431,7 +426,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 print(error.localizedDescription)
                 self.displayErrorMessage(message: error.localizedDescription)
-                self.goBackButtonPressed()
+                //self.goBackButtonPressed()
             } else {
                 print("User Registered successfully")
                 self.userLogged(in: user)
@@ -469,11 +464,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
          //TODO: SWIFTY PUT BACK !!   NotificationCenter.default.post(name: kREFRESHUSERTABLE, object: nil, userInfo: dict)
          */
         
-        goBackButtonPressed()
-        
-//        [self dismiss:YES completion:^{
-//                PostNotification(NOTIFICATION_USER_LOGGED_IN);
-//            }];
+        //UnwinfToTagListController
+        //goBackButtonPressed()
+        self.performSegue(withIdentifier: "UnwinfToTagListController", sender: self)
+
     }
     
 //===============================================

@@ -143,6 +143,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         if currentUser == nil {
             showLoginScreen()
         } else {
+            print("showCurrentUserInfo")
             showCurrentUserInfo()   //UPDATE CURRENT USER INFO
         }
         
@@ -266,6 +267,9 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {
         //THIS ERROR ALWAYS COMES UP, EVEN ON A SUCCESSFUL SCAN. ????
         //DO NOT SHOW THIS MESSAGE TO THE USER EVER
+        if error.localizedDescription == "Feature not supported" {
+            displayMessage(message: "NFC Tag scan not supported")
+        }
         print(error.localizedDescription)
         
     }
@@ -1410,6 +1414,25 @@ extension TagListViewController: UITableViewDataSource {
     //    @IBAction func unwindToMainController(segue: UIStoryboardSegue) {
     //        print ("Return here after adding a new account")
     //    }
+    
+    //UNWIND TO HERE FROM LOGIN or SIGNUP
+    @IBAction func unwindToTagListController(segue: UIStoryboardSegue) {
+        // SEE IF YOU HAVE A USER ALREADY LOGGED IN
+        let currentUser = PFUser.current()
+        if currentUser == nil {
+            showLoginScreen()
+        } else {
+            print("showCurrentUserInfo")
+            showCurrentUserInfo()   //UPDATE CURRENT USER INFO
+        }
+        
+        if (kAppDelegate.isDatabaseDirty == true) {
+            //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
+            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
+            loadTagTable() //GET INFO FOR NEW USER
+            kAppDelegate.isDatabaseDirty = false
+        }
+    }
     
     
 }
