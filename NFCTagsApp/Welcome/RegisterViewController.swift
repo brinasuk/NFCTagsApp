@@ -188,6 +188,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         user.signUpInBackground { (success, error) in
             UIViewController.removeSpinner(spinner: sv)
             if success{
+                print("USERLOGGEDIN")
                 self.userLogged(in: user)
             }else{
                 if let descrip = error?.localizedDescription{

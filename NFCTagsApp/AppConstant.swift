@@ -185,8 +185,8 @@ let TEXT_READ = "Read"
 let PF_ACCOUNTEMAIL = "accountemail"
 let PF_ACCOUNTPASSWORD = "accountpassword"
 //#define		PF_ACCOUNTAPPROVEDYN          @"accountapprovedyn"
-let PF_USER_USERROLE = "userRole"
-let PF_USER_AGENTOBJECTID = "agentObjectID"
+//let PF_USER_USERROLE = "userRole"
+//let PF_USER_AGENTOBJECTID = "agentObjectID"
 
 
 

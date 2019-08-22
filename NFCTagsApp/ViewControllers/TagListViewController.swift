@@ -40,8 +40,14 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Scanned List" //TODO: FIX THIS kAppDelegate.appName as String?
-        //setupNavigationBar()
+
+        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
+        print("Bundle.main.localizedInfoDictionary - \(Bundle.main.localizedInfoDictionary)")
+        
+        let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
+        print("App Display Name - \(applicationName)")
+        
+        self.title = applicationName 
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
         
@@ -143,7 +149,6 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         if currentUser == nil {
             showLoginScreen()
         } else {
-            print("showCurrentUserInfo")
             showCurrentUserInfo()   //UPDATE CURRENT USER INFO
         }
         
@@ -1248,8 +1253,10 @@ extension TagListViewController: UITableViewDataSource {
     
     
     func showCurrentUserInfo() {
+        print("showCurrentUserInfo")
+        
         let currentUser = PFUser.current()
-        //print (currentUser)
+
         if currentUser != nil {
             //kAppDelegate.loggedInFlag = true;
             
@@ -1422,7 +1429,6 @@ extension TagListViewController: UITableViewDataSource {
         if currentUser == nil {
             showLoginScreen()
         } else {
-            print("showCurrentUserInfo")
             showCurrentUserInfo()   //UPDATE CURRENT USER INFO
         }
         

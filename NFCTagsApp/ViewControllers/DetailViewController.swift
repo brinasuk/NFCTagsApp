@@ -434,7 +434,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
      */
     
     @IBAction func contactUsButtonPressed(_ sender: UIBarButtonItem) {
-        let applicationName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        
+//        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
+//        print("Bundle.main.localizedInfoDictionary - \(Bundle.main.localizedInfoDictionary)")
+        
+        let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
+        print("App Display Name - \(applicationName)")
+        
         
         if MFMailComposeViewController.canSendMail()  {
             
