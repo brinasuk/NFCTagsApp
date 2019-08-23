@@ -67,6 +67,11 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "SG_API_KEY"
+            value = "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"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

@@ -41,8 +41,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         super.viewDidLoad()
         
 
-        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
-        print("Bundle.main.localizedInfoDictionary - \(Bundle.main.localizedInfoDictionary)")
+//        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
+//        print("Bundle.main.localizedInfoDictionary - \(Bundle.main.localizedInfoDictionary)")
         
         let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
         print("App Display Name - \(applicationName)")
