@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isDatabaseDirty:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
     
     
-    // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP /////////////////
+    // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP 
     var currentUserName:String? = ""
     var currentUserEmail:String? = ""
     
@@ -53,11 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //var currentAgentObjectIdvar :String? = ""
     var currentUserObjectId:String? = ""
     
-    ///////////////////////////////////////////////////////////////////
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         /*
+
+
         guard let myApiKey = ProcessInfo.processInfo.environment["SG_API_KEY"] else {
             print("ERROR: Unable to retrieve SENDGRID API key")
             return false
@@ -81,6 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
  */
+    
+
 
         if (appCode == "art") {
             //appName = "ArtWorks4Me";

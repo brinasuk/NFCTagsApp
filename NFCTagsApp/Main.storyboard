@@ -474,9 +474,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="DkM-Fl-qMq">
-                                <rect key="frame" x="0.0" y="44" width="375" height="852"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08I-j1-Jso" userLabel="Title">
                                 <rect key="frame" x="39" y="132" width="297" height="42"/>
                                 <color key="tintColor" red="0.1215686275" green="0.29411764709999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -556,6 +553,9 @@
                                     <action selector="cancelButtonPressed:" destination="Y4c-zX-C4t" eventType="touchUpInside" id="18d-vg-uRM"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="DkM-Fl-qMq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -563,7 +563,7 @@
                             <constraint firstItem="DkM-Fl-qMq" firstAttribute="leading" secondItem="GBL-fK-y2Y" secondAttribute="leading" id="2qD-ej-zWg"/>
                             <constraint firstAttribute="bottom" secondItem="DkM-Fl-qMq" secondAttribute="bottom" id="GPj-cx-1pR"/>
                             <constraint firstItem="TxS-sP-vU1" firstAttribute="top" secondItem="dYz-2a-4NX" secondAttribute="bottom" constant="44" id="Gcb-P6-oT5"/>
-                            <constraint firstItem="DkM-Fl-qMq" firstAttribute="trailing" secondItem="GBL-fK-y2Y" secondAttribute="trailing" id="JmU-Ab-JRa"/>
+                            <constraint firstItem="DkM-Fl-qMq" firstAttribute="trailing" secondItem="GBL-fK-y2Y" secondAttribute="trailing" constant="39" id="JmU-Ab-JRa"/>
                             <constraint firstItem="dYz-2a-4NX" firstAttribute="leading" secondItem="GBL-fK-y2Y" secondAttribute="leading" constant="50" id="LkR-p6-XIm"/>
                             <constraint firstItem="mus-0M-rU4" firstAttribute="top" secondItem="08I-j1-Jso" secondAttribute="bottom" constant="36" id="PG3-0N-MrH"/>
                             <constraint firstItem="GBL-fK-y2Y" firstAttribute="trailing" secondItem="TxS-sP-vU1" secondAttribute="trailing" constant="68" id="PoZ-0c-gnc"/>
@@ -598,7 +598,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gb-BD-Koc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="3Nh-M1-rsT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-141095" y="-54678"/>
+            <point key="canvasLocation" x="-141095.65217391305" y="-54678.34821428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3GZ-oG-s4x">

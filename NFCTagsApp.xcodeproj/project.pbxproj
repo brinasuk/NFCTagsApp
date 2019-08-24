@@ -37,6 +37,11 @@
 		C79A9402228F227100A53DDA /* FacebookPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9400228F227000A53DDA /* FacebookPost.swift */; };
 		C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9401228F227000A53DDA /* FacebookUser.swift */; };
 		C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A940F228F268B00A53DDA /* LoginViewController.swift */; };
+		C79E35FA2311D75800943ECD /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F52311D75800943ECD /* DeepLinkManager.swift */; };
+		C79E35FB2311D75800943ECD /* ShortcutParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F62311D75800943ECD /* ShortcutParser.swift */; };
+		C79E35FC2311D75800943ECD /* NotificationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F72311D75800943ECD /* NotificationParser.swift */; };
+		C79E35FD2311D75800943ECD /* DeeplinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F82311D75800943ECD /* DeeplinkParser.swift */; };
+		C79E35FE2311D75800943ECD /* DeeplinkNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F92311D75800943ECD /* DeeplinkNavigator.swift */; };
 		C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F16228A623900E97DFF /* Spinner.swift */; };
 		C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */; };
 		C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */; };
@@ -96,6 +101,11 @@
 		C79A9400228F227000A53DDA /* FacebookPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPost.swift; sourceTree = "<group>"; };
 		C79A9401228F227000A53DDA /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		C79A940F228F268B00A53DDA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C79E35F52311D75800943ECD /* DeepLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
+		C79E35F62311D75800943ECD /* ShortcutParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutParser.swift; sourceTree = "<group>"; };
+		C79E35F72311D75800943ECD /* NotificationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationParser.swift; sourceTree = "<group>"; };
+		C79E35F82311D75800943ECD /* DeeplinkParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeeplinkParser.swift; sourceTree = "<group>"; };
+		C79E35F92311D75800943ECD /* DeeplinkNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeeplinkNavigator.swift; sourceTree = "<group>"; };
 		C7AC6F16228A623900E97DFF /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		C7AC6F17228A623900E97DFF /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		C7AC6F18228A623900E97DFF /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
@@ -169,6 +179,7 @@
 				C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */,
 				C7156785227BD97700D1A55A /* Info.plist */,
 				C7B7D05122F0DD0D0069D42D /* click.mp3 */,
+				C79E35F42311D6FC00943ECD /* Deep Links */,
 				C7156796227BDA0900D1A55A /* ViewControllers */,
 				C715678B227BDA0900D1A55A /* Cell Views */,
 				C7156794227BDA0900D1A55A /* Resources */,
@@ -275,6 +286,18 @@
 				C7FE48D02296103C0079447C /* NetworkingManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C79E35F42311D6FC00943ECD /* Deep Links */ = {
+			isa = PBXGroup;
+			children = (
+				C79E35F52311D75800943ECD /* DeepLinkManager.swift */,
+				C79E35F92311D75800943ECD /* DeeplinkNavigator.swift */,
+				C79E35F82311D75800943ECD /* DeeplinkParser.swift */,
+				C79E35F72311D75800943ECD /* NotificationParser.swift */,
+				C79E35F62311D75800943ECD /* ShortcutParser.swift */,
+			);
+			path = "Deep Links";
 			sourceTree = "<group>";
 		};
 		C7AC6F15228A623900E97DFF /* Extensions */ = {
@@ -418,7 +441,9 @@
 				C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */,
 				C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */,
 				C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */,
+				C79E35FE2311D75800943ECD /* DeeplinkNavigator.swift in Sources */,
 				C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */,
+				C79E35FC2311D75800943ECD /* NotificationParser.swift in Sources */,
 				C7DA87F7229259DC00457112 /* AppDelegate.swift in Sources */,
 				C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */,
 				C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */,
@@ -429,6 +454,7 @@
 				C77ED9AF22A4D5A000C06A45 /* SwiftyMapController.swift in Sources */,
 				C705A7AF22D5A04800F513A9 /* CircularProgressBar.swift in Sources */,
 				C77968D72286264B00CE6B4C /* TagListViewController.swift in Sources */,
+				C79E35FD2311D75800943ECD /* DeeplinkParser.swift in Sources */,
 				C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */,
 				C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */,
 				C793547A22A0B75300DD1828 /* RestaurantDetailMapCell.swift in Sources */,
@@ -437,8 +463,10 @@
 				C74C541322CFCACF0071F3F1 /* MiscRoutines.swift in Sources */,
 				C793547C22A0DCC800DD1828 /* MapViewController.swift in Sources */,
 				C73650FA22831BC20025154F /* Colors.swift in Sources */,
+				C79E35FA2311D75800943ECD /* DeepLinkManager.swift in Sources */,
 				C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */,
 				C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */,
+				C79E35FB2311D75800943ECD /* ShortcutParser.swift in Sources */,
 				C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */,
 				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
 				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,
