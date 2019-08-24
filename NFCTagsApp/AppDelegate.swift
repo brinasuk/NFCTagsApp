@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        /*
         guard let myApiKey = ProcessInfo.processInfo.environment["SG_API_KEY"] else {
             print("ERROR: Unable to retrieve SENDGRID API key")
             return false
@@ -79,32 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
-        
-        /*
-             SendGrid *sendgrid = [SendGrid apiUser:@"hillside_ios" apiKey:@"46inh2@sa&12"];
-
-         SendGridEmail *email = [[SendGridEmail alloc] init];
-         
-         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm a"];  //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
-         _dateSubmitted = [NSString stringWithFormat:@"%@", [NSDate date]];
-         //NSLog(@"%@",_dateSubmitted);
-         [[NSUserDefaults standardUserDefaults] setObject:_dateSubmitted forKey:kDATESUBMITTED];
-         
-         NSString *emailBody = [self makeBody:_dateSubmitted];
-         
-         email.subject = @"Product Finder Lead";
-         email.from = kAppDelegate.currentUserEmail;
-         //NSLog(@"NAME: %@  EMAIL: %@",kAppDelegate.currentUserName,kAppDelegate.currentUserEmail);
-         email.to = _finderTeamEmail;
-         email.html = emailBody;
-         [sendgrid sendWithWeb:email];
-         
-         //NOTE THE FOLLOWING DOES NOT WORK IN THE EMULATOR
-         AudioServicesPlaySystemSound (1001); // PLAY SENTEMAIL SEE EVERNOTE FOR FULL LIST
  */
-        
-
 
         if (appCode == "art") {
             //appName = "ArtWorks4Me";
