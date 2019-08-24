@@ -27,6 +27,7 @@ PODS:
     - Parse/Core (= 1.17.2)
   - Parse/Core (1.17.2):
     - Bolts/Tasks (~> 1.9)
+  - SendGrid (2.1.0)
   - VYNFCKit (0.3.2)
 
 DEPENDENCIES:
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - FacebookLogin
   - Kingfisher
   - Parse
+  - SendGrid (from `https://github.com/scottkawai/sendgrid-swift.git`)
   - VYNFCKit
 
 SPEC REPOS:
@@ -55,6 +57,15 @@ SPEC REPOS:
     - Parse
     - VYNFCKit
 
+EXTERNAL SOURCES:
+  SendGrid:
+    :git: https://github.com/scottkawai/sendgrid-swift.git
+
+CHECKOUT OPTIONS:
+  SendGrid:
+    :commit: 9334fe6c6b0a996291b3379a783a173db02f7945
+    :git: https://github.com/scottkawai/sendgrid-swift.git
+
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
@@ -67,8 +78,9 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 93c5a407ab1a6a17b1b38cff57e89991f714d878
   Kingfisher: d9e7e0b209b59b8f9873aa2f37654e81a7beea51
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
+  SendGrid: 07926b96696f2b2e3b05398be14ac951796a6364
   VYNFCKit: 86a9b711fd1f34f6f7128a2a883cd58dbd781b9d
 
-PODFILE CHECKSUM: 23cce24073392da4cc963306ac09bb0f2a34daef
+PODFILE CHECKSUM: 9d52b76a0cb172e38dfeed93ff0ac1dd31306e8e
 
 COCOAPODS: 1.7.1

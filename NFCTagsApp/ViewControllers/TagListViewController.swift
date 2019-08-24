@@ -41,8 +41,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         super.viewDidLoad()
         
 
-        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
-        print("Bundle.main.localizedInfoDictionary - \(Bundle.main.localizedInfoDictionary)")
+//        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
+//        print("Bundle.main.localizedInfoDictionary - \(Bundle.main.localizedInfoDictionary)")
         
         let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
         print("App Display Name - \(applicationName)")
@@ -866,20 +866,11 @@ extension TagListViewController: UITableViewDataSource {
             let placeholderImage = UIImage(named: "icons8-camera-1")
             cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
             
+            cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
+            
         }
-        
         //=================================================
-        
-        
-        //cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
-        
-        
-        cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
-        
-        cell.accessoryType = .detailDisclosureButton
-        
-        //=================================================
+
         
         cell.tagTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         cell.tagSubTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
@@ -887,7 +878,12 @@ extension TagListViewController: UITableViewDataSource {
         cell.dateAdded.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
+        
+        //THE FOLLOWING MESS UP THE SIZE OF THE CELL !!!
+        //DO NOT PUT THEM BACK !!!!
+        //cell.accessoryType = .detailDisclosureButton
+        //cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
+        
         return cell
     }
     

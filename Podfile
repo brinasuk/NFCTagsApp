@@ -32,4 +32,5 @@ target 'NFCTagsApp' do
    # pod 'DTGradientButton'
    # pod 'AlertViewBuilder'
    pod 'Alertift'
+   pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
 end
