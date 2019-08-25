@@ -15,6 +15,9 @@ import SafariServices
 import AVFoundation
 import SendGrid
 
+import UserNotifications
+
+fileprivate let pusherSecretKey = "paste you pisher key here"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -55,6 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        application.registerForRemoteNotifications()
         
         /*
 
@@ -175,6 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
     // ADDED FOR FACEBOOK
     func applicationWillResignActive(_ application: UIApplication) {
         //FBSDKAppEvents.activateApp()
@@ -264,6 +276,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        Deeplinker.checkDeepLink()
+        
         //App activation code
         
         // ADDED FOR FACEBOOK
@@ -276,6 +291,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    /*
+     // MARK: Notificatons
+     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+     //        pusher.nativePusher.register(deviceToken: deviceToken)
+     //        pusher.nativePusher.subscribe(interestName: "activity")
+     }
+
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("failed registration for remote notifications \(error)")
+    }
+      */
+    
+    /*
     // RETURNS HERE IF THIS IS A REGISTERED UNIVERSAL LINK
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let sendingAppID = options[.sourceApplication]
@@ -290,6 +319,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
         
     }
+ */
     
     func open(scheme: String) {
         if let url = URL(string: scheme) {
@@ -344,6 +374,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return true
 //    }
     
+    /*
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
             return false
@@ -375,4 +407,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //mainVC?.presentProductViewController(product: product)
         return true
     }
+ */
+    
+    /////////////////////////////////////////////////
+    // DEEPLINKS //
+    /////////////////////////////////////////////////
+
+    /*
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("failed registration for remote notifications \(error)")
+    }
+ */
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        Deeplinker.handleRemoteNotification(userInfo)
+    }
+    
+    
+    // MARK: Shortcuts
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        completionHandler(Deeplinker.handleShortcut(item: shortcutItem))
+    }
+    
+    
+    // MARK: Deeplinks
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        Deeplinker.handleDeeplink(url: url)
+        return true
+    }
+    
+    // MARK: Universal Links
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            if let url = userActivity.webpageURL {
+                Deeplinker.handleDeeplink(url: url)
+            }
+        }
+        return true
+    }
+    
+    
 }

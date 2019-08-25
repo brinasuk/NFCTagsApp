@@ -9,8 +9,14 @@ import Alertift
 import Kingfisher
 import AVFoundation
 
+enum ProfileType: String {
+    case guest = "Guest"
+    case host = "Host"
+}
 
 class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
+    
+    var currentProfile = ProfileType.guest
     
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     private var tagObjects:[TagModel] = []
@@ -35,10 +41,23 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     
-    // MARK: - PROGRAM LIFECYCLE
+
     
+    @IBAction func didPressSwitchProfile(_ sender: Any) {
+        currentProfile = currentProfile == .guest ? .host : .guest
+        configureFor(profileType: currentProfile)
+    }
+    
+    func configureFor(profileType: ProfileType) {
+        title = profileType.rawValue
+        ShortcutParser.shared.registerShortcuts(for: profileType)
+    }
+    
+    // MARK: - PROGRAM LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureFor(profileType: currentProfile)
         
 
 //        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
