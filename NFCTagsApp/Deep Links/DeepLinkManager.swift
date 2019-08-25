@@ -53,4 +53,6 @@ class DeepLinkManager {
         // reset deeplink after handling
         self.deeplinkType = nil
     }
+    
+    
 }
