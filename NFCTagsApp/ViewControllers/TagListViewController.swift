@@ -16,7 +16,8 @@ enum ProfileType: String {
 
 class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
     
-    var currentProfile = ProfileType.guest
+    //var currentProfile = ProfileType.guest
+    var currentProfile = ProfileType.host //TODO: REMOVE
     
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     private var tagObjects:[TagModel] = []

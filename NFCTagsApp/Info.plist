@@ -28,10 +28,10 @@
 		</dict>
         <dict>
             <key>CFBundleURLName</key>
-            <string>artworks4me.com</string>
+            <string>artWorks4Me.com</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>deeplinkTutorial</string>
+                <string>artWorks4Me</string>
             </array>
         </dict>
 	</array>

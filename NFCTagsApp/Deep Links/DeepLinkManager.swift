@@ -26,9 +26,11 @@ class DeepLinkManager {
     
     private var deeplinkType: DeeplinkType?
 
+
     func handleRemoteNotification(_ notification: [AnyHashable: Any]) {
         deeplinkType = NotificationParser.shared.handleNotification(notification)
     }
+ 
     
     @discardableResult
     func handleShortcut(item: UIApplicationShortcutItem) -> Bool {
@@ -53,6 +55,4 @@ class DeepLinkManager {
         // reset deeplink after handling
         self.deeplinkType = nil
     }
-    
-    
 }

@@ -15,7 +15,7 @@ import SafariServices
 import AVFoundation
 import SendGrid
 
-import UserNotifications
+//import UserNotifications
 
 fileprivate let pusherSecretKey = "paste you pisher key here"
 
@@ -59,17 +59,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-        application.registerForRemoteNotifications()
+//        let center = UNUserNotificationCenter.current()
+//        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }
+//        }
         
-        /*
-
-
+        // THE FOLLOWING LINE GIVES: “aps-environment”no valid entitlement string found. REMOVE IT!!!
+            //application.registerForRemoteNotifications()
+        
+        /* SENDMAIL EXAMPLE
         guard let myApiKey = ProcessInfo.processInfo.environment["SG_API_KEY"] else {
             print("ERROR: Unable to retrieve SENDGRID API key")
             return false
@@ -209,6 +209,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //        return false
     //    }
     
+    
+    /*
     func startPushNotifications(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay ]) {
             (granted, error) in
@@ -217,17 +219,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.getNotificationSettings()
         }
     }
-    
+
+ 
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             print("Notification settings: \(settings)")
             guard settings.authorizationStatus == .authorized else { return }
             DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
+                // THE FOLLOWING LINE GIVES: “aps-environment”no valid entitlement string found. REMOVE IT!!!
+                //UIApplication.shared.registerForRemoteNotifications()
             }
         }
     }
-    
+
+ 
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         createInstallationOnParse(deviceTokenData: deviceToken)
@@ -237,28 +242,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register: \(error)")
     }
+         */
     
-    func createInstallationOnParse(deviceTokenData:Data){
-        if let installation = PFInstallation.current(){
-            installation.setDeviceTokenFrom(deviceTokenData)
-            installation.setObject(["News"], forKey: "channels")
-            if let userId = PFUser.current()?.objectId {
-                installation.setObject(userId, forKey: "userId")
-            }
-            installation.saveInBackground {
-                (success: Bool, error: Error?) in
-                if (success) {
-                    print("You have successfully saved your push installation to Back4App!")
-                } else {
-                    if let myError = error{
-                        print("Error saving parse installation \(myError.localizedDescription)")
-                    }else{
-                        print("Uknown error")
-                    }
-                }
-            }
-        }
-    }
+//    func createInstallationOnParse(deviceTokenData:Data){
+//        if let installation = PFInstallation.current(){
+//            installation.setDeviceTokenFrom(deviceTokenData)
+//            installation.setObject(["News"], forKey: "channels")
+//            if let userId = PFUser.current()?.objectId {
+//                installation.setObject(userId, forKey: "userId")
+//            }
+//            installation.saveInBackground {
+//                (success: Bool, error: Error?) in
+//                if (success) {
+//                    print("You have successfully saved your push installation to Back4App!")
+//                } else {
+//                    if let myError = error{
+//                        print("Error saving parse installation \(myError.localizedDescription)")
+//                    }else{
+//                        print("Uknown error")
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     // REMOVED FOR FACEBOOK
     //    func applicationWillResignActive(_ application: UIApplication) {
@@ -304,7 +310,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
       */
     
-    /*
+/*
     // RETURNS HERE IF THIS IS A REGISTERED UNIVERSAL LINK
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let sendingAppID = options[.sourceApplication]
@@ -317,7 +323,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             open(scheme: sendingAppID as! String)
         }
         return true
-        
     }
  */
     
@@ -335,34 +340,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-/*
-    func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
-            return false
-        }
-        
-        // Confirm that the NSUserActivity object contains a valid NDEF message.
-        let ndefMessage = userActivity.ndefMessagePayload
-        guard ndefMessage.records.count > 0,
-            ndefMessage.records[0].typeNameFormat != .empty else {
-                return false
-        }
-        
-        // Send the message to `MessagesTableViewController` for processing.
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return false
-        }
-        
-        navigationController.popToRootViewController(animated: true)
-        let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
-        messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
-        
-        return true
-    }
-*/
+    
+
     
 //    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
 //        print("Continue User Activity called: ")
@@ -377,6 +356,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /*
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+     
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
             return false
         }
@@ -419,6 +399,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  */
     
+    // MARK: Deeplinks
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Deeplinker.handleRemoteNotification(userInfo)
     }
@@ -432,18 +413,133 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Deeplinks
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        Deeplinker.handleDeeplink(url: url)
+        print("ZERO: \(url)")
+        //Deeplinker.handleDeeplink(url: url)
+        //ADDED BY ALEX
+        // Send the message to `MessagesTableViewController` for processing.
+        guard let navigationController = window?.rootViewController as? UINavigationController else {
+            return false
+        }
+        
+        
+
+
+                print(url)
+                navigationController.popToRootViewController(animated: true)
+                //Deeplinker.handleDeeplink(url: url)
+
         return true
     }
     
     // MARK: Universal Links
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        print("ONE")
+        
+        //ADDED BY ALEX
+        // Send the message to `MessagesTableViewController` for processing.
+        guard let navigationController = window?.rootViewController as? UINavigationController else {
+            return false
+        }
+        
+        
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             if let url = userActivity.webpageURL {
-                Deeplinker.handleDeeplink(url: url)
+                print(url)
+                navigationController.popToRootViewController(animated: true)
+                //Deeplinker.handleDeeplink(url: url)
             }
         }
         return true
     }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+     print("TWO")
+     guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
+     return false
+     }
+     
+     // Confirm that the NSUserActivity object contains a valid NDEF message.
+     let ndefMessage = userActivity.ndefMessagePayload
+     guard ndefMessage.records.count > 0,
+     ndefMessage.records[0].typeNameFormat != .empty else {
+     return false
+     }
+     
+     // Send the message to `MessagesTableViewController` for processing.
+     guard let navigationController = window?.rootViewController as? UINavigationController else {
+     return false
+     }
+     
+        print(ndefMessage)
+     navigationController.popToRootViewController(animated: true)
+//     let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
+//     messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
+     
+     return true
+     }
+
+    /*
+    //APPCODA
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
+            return false
+        }
+        
+        // Confirm that the NSUserActivity object contains a valid NDEF message.
+        let ndefMessage = userActivity.ndefMessagePayload
+        
+        guard
+            let record = ndefMessage.records.first,
+            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
+            let payloadText = String(data: record.payload, encoding: .utf8),
+            let sku = payloadText.split(separator: "/").last else {
+                return false
+        }
+        
+        guard let product = productStore.product(withID: String(sku)) else {
+            return false
+        }
+        
+        guard let navigationController = window?.rootViewController as? UINavigationController else {
+            return false
+        }
+        
+        navigationController.dismiss(animated: true, completion: nil)
+        let mainVC = navigationController.topViewController as? MainViewController
+        mainVC?.presentProductViewController(product: product)
+        return true
+    }
+    */
+    
+    /*
+    //APPLE
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
+            return false
+        }
+        
+        // Confirm that the NSUserActivity object contains a valid NDEF message.
+        let ndefMessage = userActivity.ndefMessagePayload
+        guard ndefMessage.records.count > 0,
+            ndefMessage.records[0].typeNameFormat != .empty else {
+                return false
+        }
+        
+        // Send the message to `MessagesTableViewController` for processing.
+        guard let navigationController = window?.rootViewController as? UINavigationController else {
+            return false
+        }
+        
+        navigationController.popToRootViewController(animated: true)
+        let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
+        messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
+        
+        return true
+    }
+ */
+
     
 }
