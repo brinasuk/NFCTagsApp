@@ -24,32 +24,35 @@ let Deeplinker = DeepLinkManager()
 class DeepLinkManager {
     fileprivate init() {}
     
+    //Based on this deeplinkType the app will decide, what page it has to open
     private var deeplinkType: DeeplinkType?
 
 
-    func handleRemoteNotification(_ notification: [AnyHashable: Any]) {
-        deeplinkType = NotificationParser.shared.handleNotification(notification)
-    }
+//    func handleRemoteNotification(_ notification: [AnyHashable: Any]) {
+//        deeplinkType = NotificationParser.shared.handleNotification(notification)
+//    }
  
     
-    @discardableResult
-    func handleShortcut(item: UIApplicationShortcutItem) -> Bool {
-        deeplinkType = ShortcutParser.shared.handleShortcut(item)
-        return deeplinkType != nil
-    }
+//    @discardableResult
+//    func handleShortcut(item: UIApplicationShortcutItem) -> Bool {
+//        deeplinkType = ShortcutParser.shared.handleShortcut(item)
+//        return deeplinkType != nil
+//    }
     
     @discardableResult
     func handleDeeplink(url: URL) -> Bool {
         deeplinkType = DeeplinkParser.shared.parseDeepLink(url)
+        print("DeeplinkType1: \(String(describing: deeplinkType))")
         return deeplinkType != nil
     }
     
-    // check existing deepling and perform action
+    //Based on this deeplinkType the app will decide, what page it has to open:
+    // check existing deeplink and perform action
     func checkDeepLink() {
         guard let deeplinkType = deeplinkType else {
             return
         }
-        
+        print("DeeplinkType2: \(String(describing: deeplinkType))")
         DeeplinkNavigator.shared.proceedToDeeplink(deeplinkType)
         
         // reset deeplink after handling

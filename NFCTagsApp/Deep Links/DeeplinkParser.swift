@@ -18,17 +18,20 @@ class DeeplinkParser {
         }
         
         var pathComponents = components.path.components(separatedBy: "/")
-
+        print("PathComponents: \(pathComponents)")
+        
         // the first component is empty
         pathComponents.removeFirst()
-        
+        print("HOST: \(host)")
         switch host {
         case "messages":
             if let messageId = pathComponents.first {
+                print("MESSAGES")
                 return DeeplinkType.messages(.details(id: messageId))
             }
         case "request":
             if let requestId = pathComponents.first {
+                print("REQUEST")
                 return DeeplinkType.request(id: requestId)
             }
         default:

@@ -19,15 +19,15 @@ class DeeplinkNavigator {
     func proceedToDeeplink(_ type: DeeplinkType) {
         switch type {
         case .activity:
-            displayAlert(title: "Activity")
+            displayAlert(title: "(Activity)")
         case .messages(.root):
-            displayAlert(title: "Messages Root")
+            displayAlert(title: "(Messages Root)")
         case .messages(.details(id: let id)):
-            displayAlert(title: "Messages Details \(id)")
+            displayAlert(title: "Messages Details: \(id)")
         case .newListing:
-            displayAlert(title: "New Listing")
+            displayAlert(title: "(New Listing)")
         case .request(id: let id):
-            displayAlert(title: "Request Details \(id)")
+            displayAlert(title: "Request Details: \(id)")
    
         }
     }

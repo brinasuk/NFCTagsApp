@@ -38,8 +38,6 @@
 		C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A9401228F227000A53DDA /* FacebookUser.swift */; };
 		C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79A940F228F268B00A53DDA /* LoginViewController.swift */; };
 		C79E35FA2311D75800943ECD /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F52311D75800943ECD /* DeepLinkManager.swift */; };
-		C79E35FB2311D75800943ECD /* ShortcutParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F62311D75800943ECD /* ShortcutParser.swift */; };
-		C79E35FC2311D75800943ECD /* NotificationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F72311D75800943ECD /* NotificationParser.swift */; };
 		C79E35FD2311D75800943ECD /* DeeplinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F82311D75800943ECD /* DeeplinkParser.swift */; };
 		C79E35FE2311D75800943ECD /* DeeplinkNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79E35F92311D75800943ECD /* DeeplinkNavigator.swift */; };
 		C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC6F16228A623900E97DFF /* Spinner.swift */; };
@@ -102,8 +100,6 @@
 		C79A9401228F227000A53DDA /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		C79A940F228F268B00A53DDA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C79E35F52311D75800943ECD /* DeepLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
-		C79E35F62311D75800943ECD /* ShortcutParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutParser.swift; sourceTree = "<group>"; };
-		C79E35F72311D75800943ECD /* NotificationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationParser.swift; sourceTree = "<group>"; };
 		C79E35F82311D75800943ECD /* DeeplinkParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeeplinkParser.swift; sourceTree = "<group>"; };
 		C79E35F92311D75800943ECD /* DeeplinkNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeeplinkNavigator.swift; sourceTree = "<group>"; };
 		C7AC6F16228A623900E97DFF /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
@@ -292,10 +288,8 @@
 			isa = PBXGroup;
 			children = (
 				C79E35F52311D75800943ECD /* DeepLinkManager.swift */,
-				C79E35F92311D75800943ECD /* DeeplinkNavigator.swift */,
 				C79E35F82311D75800943ECD /* DeeplinkParser.swift */,
-				C79E35F72311D75800943ECD /* NotificationParser.swift */,
-				C79E35F62311D75800943ECD /* ShortcutParser.swift */,
+				C79E35F92311D75800943ECD /* DeeplinkNavigator.swift */,
 			);
 			path = "Deep Links";
 			sourceTree = "<group>";
@@ -443,7 +437,6 @@
 				C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */,
 				C79E35FE2311D75800943ECD /* DeeplinkNavigator.swift in Sources */,
 				C7AC6F19228A623900E97DFF /* Spinner.swift in Sources */,
-				C79E35FC2311D75800943ECD /* NotificationParser.swift in Sources */,
 				C7DA87F7229259DC00457112 /* AppDelegate.swift in Sources */,
 				C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */,
 				C7AC6F1A228A623900E97DFF /* UINavigationController+Ext.swift in Sources */,
@@ -466,7 +459,6 @@
 				C79E35FA2311D75800943ECD /* DeepLinkManager.swift in Sources */,
 				C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */,
 				C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */,
-				C79E35FB2311D75800943ECD /* ShortcutParser.swift in Sources */,
 				C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */,
 				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
 				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,

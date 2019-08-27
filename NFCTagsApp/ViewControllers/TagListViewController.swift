@@ -16,8 +16,7 @@ enum ProfileType: String {
 
 class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
     
-    //var currentProfile = ProfileType.guest
-    var currentProfile = ProfileType.host //TODO: REMOVE
+    var currentProfile = ProfileType.guest
     
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     private var tagObjects:[TagModel] = []
@@ -44,25 +43,22 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
 
     
-    @IBAction func didPressSwitchProfile(_ sender: Any) {
-        currentProfile = currentProfile == .guest ? .host : .guest
-        configureFor(profileType: currentProfile)
-    }
+//    @IBAction func didPressSwitchProfile(_ sender: Any) {
+//        currentProfile = currentProfile == .guest ? .host : .guest
+//        configureFor(profileType: currentProfile)
+//    }
     
-    func configureFor(profileType: ProfileType) {
-        title = profileType.rawValue
-        ShortcutParser.shared.registerShortcuts(for: profileType)
-    }
+//    func configureFor(profileType: ProfileType) {
+//        title = profileType.rawValue
+//        ShortcutParser.shared.registerShortcuts(for: profileType)
+//    }
     
     // MARK: - PROGRAM LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureFor(profileType: currentProfile)
-        
+        //configureFor(profileType: currentProfile)
 
-//        print("Bundle.main.infoDictionary - \(Bundle.main.infoDictionary)")
-//        print("Bundle.main.localizedInfoDictionary - \(Bundle.main.localizedInfoDictionary)")
         
         let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
         print("App Display Name - \(applicationName)")

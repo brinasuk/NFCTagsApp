@@ -69,30 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // THE FOLLOWING LINE GIVES: “aps-environment”no valid entitlement string found. REMOVE IT!!!
             //application.registerForRemoteNotifications()
         
-        /* SENDMAIL EXAMPLE
+        // HANDLE SENDMAIL KEY
         guard let myApiKey = ProcessInfo.processInfo.environment["SG_API_KEY"] else {
             print("ERROR: Unable to retrieve SENDGRID API key")
             return false
         }
         Session.shared.authentication = Authentication.apiKey(myApiKey)
         
-        let personalization = Personalization(recipients: "alex@hillsoft.com")
-        let plainText = Content(contentType: ContentType.plainText, value: "Well Done, VIGE!")
-        let htmlText = Content(contentType: ContentType.htmlText, value: "<h1>Well Done, VIGE!</h1>")
-        let email = Email(
-            personalizations: [personalization],
-            from: "jlevy@hillsoft.com",
-            content: [plainText, htmlText],
-            subject: "Hello World"
-        )
-        do {
-            try Session.shared.send(request: email)
-            print("Hopefully sent")
-            AudioServicesPlayAlertSound(SystemSoundID(1303))   //1303 MAIL SENT  //VIBRATE 4095
-        } catch {
-            print(error)
-        }
- */
+
     
 
 
@@ -283,7 +267,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         
-        Deeplinker.checkDeepLink()
+        //TODO: PUT BACK (MAYBE) Deeplinker.checkDeepLink()
         
         //App activation code
         
@@ -326,20 +310,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  */
     
-    func open(scheme: String) {
-        if let url = URL(string: scheme) {
-            if #available(iOS 10, *) {
-                UIApplication.shared.open(url, options: [:],
-                                          completionHandler: {
-                                            (success) in
-                                            print("Open \(scheme): \(success)")
-                })
-            } else {
-                let success = UIApplication.shared.openURL(url)
-                print("Open \(scheme): \(success)")
-            }
-        }
-    }
+//    func open(scheme: String) {
+//        if let url = URL(string: scheme) {
+//            if #available(iOS 10, *) {
+//                UIApplication.shared.open(url, options: [:],
+//                                          completionHandler: {
+//                                            (success) in
+//                                            print("Open \(scheme): \(success)")
+//                })
+//            } else {
+//                let success = UIApplication.shared.openURL(url)
+//                print("Open \(scheme): \(success)")
+//            }
+//        }
+//    }
     
 
     
@@ -399,78 +383,95 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  */
     
-    // MARK: Deeplinks
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        Deeplinker.handleRemoteNotification(userInfo)
-    }
+//    // MARK: Notifications
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        Deeplinker.handleRemoteNotification(userInfo)
+//    }
     
     
-    // MARK: Shortcuts
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        completionHandler(Deeplinker.handleShortcut(item: shortcutItem))
-    }
+//    // MARK: Shortcuts
+//    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+//        completionHandler(Deeplinker.handleShortcut(item: shortcutItem))
+//    }
     
     
     // MARK: Deeplinks
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("ZERO: \(url)")
-        //Deeplinker.handleDeeplink(url: url)
+        print("OPENURL: \(url.path)")
+        sendEmail(title: "OPENURL", message: url.path)
+        Deeplinker.handleDeeplink(url: url)
         //ADDED BY ALEX
         // Send the message to `MessagesTableViewController` for processing.
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return false
         }
-        
-        
-
-
-                print(url)
-                navigationController.popToRootViewController(animated: true)
-                //Deeplinker.handleDeeplink(url: url)
+        //navigationController.popToRootViewController(animated: true)
 
         return true
     }
+    //    //APPCODA TUTORIAL SECTION ON LINKS
+    //    - (BOOL)application:(UIApplication *)application
+    //    openURL:(NSURL *)url
+    //    sourceApplication:(NSString *)sourceApplication
+    //    annotation:(id)annotation {
+    //    if ([[url path] isEqualToString:@"/reviews"]) {
+    //    ReviewViewController *viewController = [[ReviewViewController alloc] init];
+    //    viewController.reviewID = [url query];
+    //    [self.navigationController pushViewController:viewController animated:NO];
+    //    }
+    //    return YES;
+    //    }
     
     // MARK: Universal Links
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        print("ONE")
         
         //ADDED BY ALEX
-        // Send the message to `MessagesTableViewController` for processing.
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return false
         }
         
-        
+        // Send the message to `MessagesTableViewController` for processing.
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             if let url = userActivity.webpageURL {
-                print(url)
-                navigationController.popToRootViewController(animated: true)
-                //Deeplinker.handleDeeplink(url: url)
+                print("CONTINUE ACTIVITY: \(url.path)")
+                sendEmail(title: "CONTINUE ACTIVITY", message: url.path)
+                Deeplinker.handleDeeplink(url: url)
+                //navigationController.popToRootViewController(animated: true)
             }
         }
         return true
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-     print("TWO")
      guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
      return false
      }
      
      // Confirm that the NSUserActivity object contains a valid NDEF message.
      let ndefMessage = userActivity.ndefMessagePayload
+        
      guard ndefMessage.records.count > 0,
      ndefMessage.records[0].typeNameFormat != .empty else {
      return false
      }
+        
+        //let payloadText = String(data: record.payload, encoding: .utf8)
+        
+        guard
+            let record = ndefMessage.records.first,
+            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
+            let payloadText = String(data: record.payload, encoding: .utf8),
+            let sku = payloadText.split(separator: "/").last else {
+                return false
+        }
      
      // Send the message to `MessagesTableViewController` for processing.
      guard let navigationController = window?.rootViewController as? UINavigationController else {
      return false
      }
      
-        print(ndefMessage)
+     print("PAYLOADTEXT: \(payloadText)")
+     sendEmail(title: "PAYLOADTEXT", message: payloadText)
      navigationController.popToRootViewController(animated: true)
 //     let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
 //     messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
@@ -541,5 +542,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  */
 
+    private func sendEmail(title: String, message:String) {
+        let personalization = Personalization(recipients: "alex@hillsoft.com")
+//        let plainText = Content(contentType: ContentType.plainText, value: "Well Done, VIGE!")
+        let htmlText = Content(contentType: ContentType.htmlText, value: message)
+        let email = Email(
+            personalizations: [personalization],
+            from: "support@hillsoft.com",
+            content: [htmlText],
+            subject: title
+        )
+        do {
+            try Session.shared.send(request: email)
+            //print("Hopefully sent")
+            AudioServicesPlayAlertSound(SystemSoundID(1303))   //1303 MAIL SENT  //VIBRATE 4095
+        } catch {
+            print(error)
+        }
+    }
     
 }
