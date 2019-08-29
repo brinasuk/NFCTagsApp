@@ -6,9 +6,7 @@
 //  Copyright © 2019 Hillside Software. All rights reserved.
 //
 
-//import Foundation
 import Parse
-//import QuartzCore
 import UIKit
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
@@ -24,11 +22,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet private weak var headerLabel: UILabel!
 
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Email SignUp"
+        title = "SignUp"
         registerButton.layer.cornerRadius = 20
         registerButton.clipsToBounds = true
         
@@ -36,9 +32,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         //    NSString *displayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         let displayName = "Please Sign Up"
         headerLabel.text = displayName
-        
-
-        
         
         textFieldEmail.autocorrectionType = .no // NO SPELL CHECK
         textFieldName.autocorrectionType = .no
@@ -131,7 +124,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         var name = textFieldName.text
         let email = textFieldEmail.text?.lowercased()
         let password = textFieldPassword.text
-        //---------------------------------------------------------------------------------------------------------------------------------------------
+
         if (name?.count ?? 0) == 0 {
             displayErrorMessage (message: "Please enter your Name.")
             return
@@ -199,6 +192,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    // MARK: - Helper methods
+    
     func displayErrorMessage(message:String) {
         let alertView = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
@@ -211,8 +206,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.present(alertView, animated: true, completion:nil)
     }
     
-    
-    // MARK: - Helper methods
     func userLogged(in user: PFUser?) {
 
         //kAppDelegate.loggedInFlag = true //CRITICAL!!
@@ -240,8 +233,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         self.performSegue(withIdentifier: "UnwinfToTagListController", sender: self)
     }
-    
-
     
     func bounce(_ button: UIButton?) {
         var theAnimation: CABasicAnimation?

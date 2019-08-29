@@ -272,7 +272,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func actionLoginFacebook(_ sender: Any) {
         bounce(facebookLoginButton)
-        AccessToken.current = nil //Logout
+        
+        //AccessToken.current = nil //Logout
+        logoutFacebook() //If you are logged in, logout
         
         //do login with permissions for email and public profile
         LoginManager().logIn(permissions: ["email","public_profile"], from: nil) {
@@ -330,6 +332,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.fbResultsDict["email"] = fb_email
                         self.fbResultsDict["first_name"] = fb_firstName
                         self.fbResultsDict["last_name"] = fb_lastName
+                        
+                        //LOGOUT. ONLY ONE USER CAN BE LOGGED IN TO FACEBOOK
+                        self.logoutFacebook()
                         
                         // LOOK FOR THE facebookId in the PFUser TABLE
                         self.lookupUser(facebookId)
@@ -419,11 +424,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //SEE IF A FACEBOOK ENTRY ALREADY EXISTS IN THR USER TABLE !!
         let query = PFQuery(className: "_User")
-        //let facebookId = "123456" //TODO:
         query.whereKey("facebookId", equalTo: facebookId!)
         //ProgressHUD.show("", interaction: false)
     
-        
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if let object = object {
                 // The query succeeded with a matching result
@@ -439,11 +442,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func logoutFacebook() {
-//        if FBSDKAccessToken.current() {
-//            // User is logged in, do work such as go to next view controller.
-//            print("LOGGING OUT!")
-//            FBSDKAccessToken.currentAccessToken = nil
-//        }
+        if (AccessToken.current != nil) {
+            // User is logged in, do work such as go to next view controller.
+            print("LOGGING OUT!")
+            AccessToken.current = nil
+        }
     }
     
     func existingFacebookUserLogin99(_ useLogin: String?, withPassword usePassword: String?) {
@@ -544,70 +547,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.performSegue(withIdentifier: "UnwinfToTagListController", sender: self)
 
     }
-    
-//===============================================
-// OLD FACEBOOK LOGING USING SDK FBSDKLoginKit
-// THIS SDK IS HUGE - TRY TO AVOID IT
-//===============================================
-
-
-    
-    /*
-    //function is fetching the user data
-    func getFBUserData(){
-        if((AccessToken.current) != nil){
-            GraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
-                if (error == nil){
-                    //self.dict = result as! [String : AnyObject]
-                    // Create a dictionary with the user's Facebook data
-                    let userData = result as? [AnyHashable : Any]
-                    let email = userData?["email"] as? String
-                    print("EMAIL: \(String(describing: email))")
-                    self.displayMessage(message: email!)
-                    
-                    print(result!)
-                    self.goBackButtonPressed()
-                }
-            })
-        }
-    }
- */
-    
-    /*
-    func getALEXUserData(){
-        LoginManager().logIn(permissions: ["email", "public_profile", "user_photos"], from: self as UIViewController, handler: { (result, error) -> Void in
-            if error != nil {
-                LoginManager().logOut()
-                if let error = error as NSError? {
-                    let errorDetails = [NSLocalizedDescriptionKey : "Processing Error. Please try again!"]
-                    let customError = NSError(domain: "Error!", code: error.code, userInfo: errorDetails)
-                    onCompletion(nil, customError)
-                } else {
-                    onCompletion(nil, error as NSError?)
-                }
-                
-            } else if (result?.isCancelled)! {
-                LoginManager().logOut()
-                let errorDetails = [NSLocalizedDescriptionKey : "Request cancelled!"]
-                let customError = NSError(domain: "Request cancelled!", code: 1001, userInfo: errorDetails)
-                AnyCollection(nil, customError)
-            } else {
-                let pictureRequest = GraphRequest(graphPath: "me", parameters: permissionDictionary)
-                let _ = pictureRequest?.start(completionHandler: {
-                    (connection, result, error) -> Void in
-                    
-                    if error == nil {
-                        onCompletion(result as? Dictionary<String, AnyObject>, nil)
-                    } else {
-                        onCompletion(nil, error as NSError?)
-                    }
-                })
-            }
-        })
-    }
- */
-    
-    
 }
     
 
