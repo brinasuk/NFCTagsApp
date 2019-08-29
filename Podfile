@@ -9,28 +9,33 @@ target 'NFCTagsApp' do
   inhibit_all_warnings!
 
   # Pods for NFCTagsApp
-   pod 'Parse'
+  
    # pod 'FBSDKCoreKit'
    # pod 'FBSDKLoginKit'
    
-   pod 'FacebookCore'
-   pod 'FacebookLogin'
+   # OLD pod 'FacebookCore'
+   # OLD pod 'FacebookLogin'
+   
+   pod 'Parse'
+   
+   pod 'FacebookSDK'
+   pod 'FBSDKShareKit'
+   pod 'FBSDKLoginKit', '~> 5.0'
+   
+   #pod 'FacebookSDK'
+   #pod 'FacebookSDK/LoginKit'
+   #pod 'FacebookSDK/ShareKit'
+   #pod 'FacebookSDK/PlacesKit'
+   #pod 'FBSDKMessengerShareKit'
 
-  #pod 'FacebookCore'
-  #pod 'FacebookLogin'
-  #pod 'FacebookShare'
-  #pod 'AFNetworking'
   #pod 'TwitterKit'
   #pod 'TwitterCore'
   
-  #pod 'PKCCrop'
    pod 'CropViewController'
    pod 'VYNFCKit'
    pod 'Kingfisher'
    pod 'Alamofire'
    pod 'AlamofireImage'
-   # pod 'DTGradientButton'
-   # pod 'AlertViewBuilder'
    pod 'Alertift'
    pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
 end

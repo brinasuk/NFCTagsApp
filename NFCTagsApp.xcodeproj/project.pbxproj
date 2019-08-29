@@ -49,7 +49,6 @@
 		C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F4229259CE00457112 /* AppConstant.swift */; };
 		C7DA87F7229259DC00457112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F6229259DC00457112 /* AppDelegate.swift */; };
 		C7F08AC62309E69800CAC5E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F08AC52309E69800CAC5E4 /* LaunchScreen.storyboard */; };
-		C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FE48CF2296103C0079447C /* FacebookAPIManager.swift */; };
 		C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FE48D02296103C0079447C /* NetworkingManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,7 +110,6 @@
 		C7DA87F4229259CE00457112 /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		C7DA87F6229259DC00457112 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F08AC52309E69800CAC5E4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C7FE48CF2296103C0079447C /* FacebookAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAPIManager.swift; sourceTree = "<group>"; };
 		C7FE48D02296103C0079447C /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -278,7 +276,6 @@
 			children = (
 				C79A9400228F227000A53DDA /* FacebookPost.swift */,
 				C79A9401228F227000A53DDA /* FacebookUser.swift */,
-				C7FE48CF2296103C0079447C /* FacebookAPIManager.swift */,
 				C7FE48D02296103C0079447C /* NetworkingManager.swift */,
 			);
 			path = Models;
@@ -459,7 +456,6 @@
 				C79E35FA2311D75800943ECD /* DeepLinkManager.swift in Sources */,
 				C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */,
 				C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */,
-				C7FE48D12296103D0079447C /* FacebookAPIManager.swift in Sources */,
 				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
 				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,
 				C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */,

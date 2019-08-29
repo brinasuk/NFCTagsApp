@@ -8,14 +8,17 @@
 
 import UIKit
 import Parse
-import FacebookLogin
-import FacebookCore
+//import FacebookLogin
+//import FacebookCore
 //import FBSDKLoginKit  // ADDED FOR FACEBOOK
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let readPermissions: [ReadPermission] = [ .publicProfile, .email ]
+    //private let readPermissions: [permissions] = [ .publicProfile, .email ]
+    //permissions: ["email", "public_profile", "user_photos"]
     private var fbResultsDict: [AnyHashable : Any] = [:] //STORE USER INFO RETURNED BY FB HERE
     /*
  id
@@ -265,28 +268,97 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //Here's the facebook login code, have your login procedure call this:
     //    let facebookReadPermissions = ["public_profile", "email", "user_friends"]
     //Some other options: "user_about_me", "user_birthday", "user_hometown", "user_likes", "user_interests", "user_photos", "friends_photos", "friends_hometown", "friends_location", "friends_education_history"
-    
-    
+
+
     @IBAction func actionLoginFacebook(_ sender: Any) {
         bounce(facebookLoginButton)
-        let loginManager = LoginManager()
-        loginManager.logIn(readPermissions: readPermissions, viewController: self, completion: didReceiveFacebookLoginResult)
+        AccessToken.current = nil //Logout
+        
+        //do login with permissions for email and public profile
+        LoginManager().logIn(permissions: ["email","public_profile"], from: nil) {
+            (result, error) -> Void in
+            //if we have an error display it and abort
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            //make sure we have a result, otherwise abort
+            guard let result = result else { return }
+            //if cancelled nothing todo
+            if result.isCancelled { return }
+            else {
+                //login successfull, now request the fields we like to have in this case first name and last name
+                GraphRequest(graphPath: "me", parameters: ["fields" : "first_name, last_name, name, email"]).start() {
+                    (connection, result, error) in
+                    //if we have an error display it and abort
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    //parse the fields out of the result
+                    //self.didLoginWithFacebook()
+                    
+                    if
+                        let fields = result as? [String:Any],
+                        let fb_firstName = fields["first_name"] as? String,
+                        let fb_lastName = fields["last_name"] as? String,
+                        let fb_id = fields["id"] as? String,
+                        let fb_name = fields["name"] as? String,
+                        let fb_email = fields["email"] as? String
+                        //                    id
+                        //                    first_name
+                        //                    last_name
+                        //                    name
+                    {
+                        print("ID -> \(fb_id)")
+                        print("LastName -> \(fb_lastName)")
+                        print("FirstName -> \(fb_firstName)")
+                        print("Name -> \(fb_name)")
+                        
+                        // Create a dictionary with the user's Facebook data
+                        var facebookId = fb_id
+                        facebookId = fb_id.trimmingCharacters(in: CharacterSet.whitespaces)
+//                        let name = fb_lastName
+//                        let email = fb_email
+//                        let firstName = fb_firstName
+//                        let lastName = fb_lastName
+                        
+                        //IMPORTANT TO SAVE THESE VALUES FROM FB FOR USE LATER
+                        self.fbResultsDict = [AnyHashable : Any]()
+                        self.fbResultsDict["id"] = facebookId
+                        self.fbResultsDict["name"] = fb_name
+                        self.fbResultsDict["email"] = fb_email
+                        self.fbResultsDict["first_name"] = fb_firstName
+                        self.fbResultsDict["last_name"] = fb_lastName
+                        
+                        // LOOK FOR THE facebookId in the PFUser TABLE
+                        self.lookupUser(facebookId)
+                    }
+
+                }
+            }
+        }
+        
     }
     
-    //STEP1: TRY TO LOGIN TO FACEBOOK. NEED THE UNIQUE FACEBOOKID
-    private func didReceiveFacebookLoginResult(loginResult: LoginResult) {
-        switch loginResult {
-        case .success:
-            didLoginWithFacebook()
-        case .failed(_):
-            displayErrorMessage(message: "FAILED TO LOG IN WITH FACEBOOK")
-                goBackButtonPressed()
-        default:
-            displayErrorMessage(message: "UNABLE TO LOG IN WITH FACEBOOK")
-            goBackButtonPressed()
-        }
-    }
+//    private func didReceiveFacebookLoginResult(log: L)
 
+//    //STEP1: TRY TO LOGIN TO FACEBOOK. NEED THE UNIQUE FACEBOOKID
+//    private func didReceiveFacebookLoginResult(loginResult: Log) {
+//        switch loginResult {
+//        case .success:
+//            didLoginWithFacebook()
+//        case .failed(_):
+//            displayErrorMessage(message: "FAILED TO LOG IN WITH FACEBOOK")
+//                goBackButtonPressed()
+//        default:
+//            displayErrorMessage(message: "UNABLE TO LOG IN WITH FACEBOOK")
+//            goBackButtonPressed()
+//        }
+//    }
+
+    
+    /*
     //STEP2: SUCCESSFULLY LOGGED ITO FACEBOOK
     // GET THE INFORMATION FOR USE LATER IF NECESSAY, SAVE IN fbResultsDict
     // LOOK FOR THE facebookId in the PFUser TABLE
@@ -295,6 +367,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let accessToken = AccessToken.current {
             let facebookAPIManager = FacebookAPIManager(accessToken: accessToken)
             facebookAPIManager.requestFacebookUser(completion: { (facebookUser) in
+                
                 if let _ = facebookUser.email {
                     let info = "First nameZ: \(facebookUser.firstName!) \n Last name: \(facebookUser.lastName!) \n Email: \(facebookUser.email!)  \n ID: \(facebookUser.id!)"
                     print(info)
@@ -324,6 +397,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         AccessToken.current = nil //Logout
     }
+    */
     
     //STEP3: FIND AN ENTRY IN PFUser TABLE WITH THIS FACE BOOK ID
     // ONE OF TWO THINGS WILL HAPPEN:
@@ -335,6 +409,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func lookupUser(_ usingFacebookId: String?) {
         let facebookId = usingFacebookId
+        print(facebookId)
         // IF YOU DON'T HAVE A FACEBOOK ID THEN BAIL OUT. THIS SHOULD BE UNLIKELY
         if (facebookId?.count ?? 0) == 0 {
             displayErrorMessage(message: "Cannot find Facebook ID")
@@ -474,36 +549,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 // OLD FACEBOOK LOGING USING SDK FBSDKLoginKit
 // THIS SDK IS HUGE - TRY TO AVOID IT
 //===============================================
-/*
-    @IBAction func actionLoginFacebookXXX(_ sender: Any) {
-        bounce(facebookLoginButton)
-        
-        let loginManager = LoginManager()
-        loginManager.logIn(readPermissions: [ .publicProfile ], viewController: self) { loginResult in
-            
-            self.displayMessage(message: "\(loginResult)")
-            switch loginResult {
-            case .failed(let error):
-                print(error)
-                self.displayMessage(message: "Error")
-            case .cancelled:
-                print("User cancelled login.")
-                self.displayMessage(message: "Cancelled")
-            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                self.displayMessage(message: "Success")
-                self.getFBUserData()
-                
-            }
-        }
-        
-        //            let loginFacebookView = LoginFacebookView()
-        //            navigationController?.pushViewController(loginFacebookView, animated: true)
-    }
+
+
     
+    /*
     //function is fetching the user data
     func getFBUserData(){
-        if((FBSDKAccessToken.current()) != nil){
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+        if((AccessToken.current) != nil){
+            GraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
                 if (error == nil){
                     //self.dict = result as! [String : AnyObject]
                     // Create a dictionary with the user's Facebook data
@@ -519,5 +572,42 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
  */
-
+    
+    /*
+    func getALEXUserData(){
+        LoginManager().logIn(permissions: ["email", "public_profile", "user_photos"], from: self as UIViewController, handler: { (result, error) -> Void in
+            if error != nil {
+                LoginManager().logOut()
+                if let error = error as NSError? {
+                    let errorDetails = [NSLocalizedDescriptionKey : "Processing Error. Please try again!"]
+                    let customError = NSError(domain: "Error!", code: error.code, userInfo: errorDetails)
+                    onCompletion(nil, customError)
+                } else {
+                    onCompletion(nil, error as NSError?)
+                }
+                
+            } else if (result?.isCancelled)! {
+                LoginManager().logOut()
+                let errorDetails = [NSLocalizedDescriptionKey : "Request cancelled!"]
+                let customError = NSError(domain: "Request cancelled!", code: 1001, userInfo: errorDetails)
+                AnyCollection(nil, customError)
+            } else {
+                let pictureRequest = GraphRequest(graphPath: "me", parameters: permissionDictionary)
+                let _ = pictureRequest?.start(completionHandler: {
+                    (connection, result, error) -> Void in
+                    
+                    if error == nil {
+                        onCompletion(result as? Dictionary<String, AnyObject>, nil)
+                    } else {
+                        onCompletion(nil, error as NSError?)
+                    }
+                })
+            }
+        })
+    }
+ */
+    
+    
 }
+    
+

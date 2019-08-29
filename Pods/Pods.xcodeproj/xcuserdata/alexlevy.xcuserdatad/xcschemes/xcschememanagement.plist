@@ -44,12 +44,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FacebookCore.xcscheme</key>
+		<key>FBSDKMarketingKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FacebookLogin.xcscheme</key>
+		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
