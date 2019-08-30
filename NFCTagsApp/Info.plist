@@ -18,14 +18,16 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.6</string>
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb1947672418784277</string>
-			</array>
-		</dict>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb377004996297600</string>
+            </array>
+        </dict>
         <dict>
             <key>CFBundleURLName</key>
             <string>deeplinkTutorial.com</string>
@@ -43,12 +45,10 @@
             </array>
         </dict>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
-	<key>FacebookAppID</key>
-	<string>1947672418784277</string>
-	<key>FacebookDisplayName</key>
-	<string>Digital Smart Flyers</string>
+    <key>FacebookAppID</key>
+    <string>377004996297600</string>
+    <key>FacebookDisplayName</key>
+    <string>ArtWorks4Me</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

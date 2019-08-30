@@ -3,24 +3,8 @@ PODS:
   - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
   - Alertift (4.0)
-  - Bolts (1.9.0):
-    - Bolts/AppLinks (= 1.9.0)
-    - Bolts/Tasks (= 1.9.0)
-  - Bolts/AppLinks (1.9.0):
-    - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
   - CropViewController (2.4.0)
-  - FacebookSDK (4.44.1):
-    - Bolts (~> 1.9)
-    - FacebookSDK/CoreKit (= 4.44.1)
-    - FacebookSDK/MarketingKit (= 4.44.1)
-  - FacebookSDK/CoreKit (4.44.1):
-    - Bolts (~> 1.9)
-    - FBSDKCoreKit
-  - FacebookSDK/MarketingKit (4.44.1):
-    - Bolts (~> 1.9)
-    - FacebookSDK/CoreKit
-    - FBSDKMarketingKit
   - FBSDKCoreKit (5.2.1):
     - FBSDKCoreKit/Basics (= 5.2.1)
     - FBSDKCoreKit/Core (= 5.2.1)
@@ -28,10 +12,6 @@ PODS:
   - FBSDKCoreKit/Core (5.2.1):
     - FBSDKCoreKit/Basics
   - FBSDKLoginKit (5.2.1):
-    - FBSDKCoreKit (~> 5.0)
-  - FBSDKMarketingKit (4.38.0):
-    - FBSDKCoreKit
-  - FBSDKShareKit (5.2.1):
     - FBSDKCoreKit (~> 5.0)
   - Kingfisher (5.3.1)
   - Parse (1.17.2):
@@ -46,9 +26,7 @@ DEPENDENCIES:
   - AlamofireImage
   - Alertift
   - CropViewController
-  - FacebookSDK
   - FBSDKLoginKit (~> 5.0)
-  - FBSDKShareKit
   - Kingfisher
   - Parse
   - SendGrid (from `https://github.com/scottkawai/sendgrid-swift.git`)
@@ -61,11 +39,8 @@ SPEC REPOS:
     - Alertift
     - Bolts
     - CropViewController
-    - FacebookSDK
     - FBSDKCoreKit
     - FBSDKLoginKit
-    - FBSDKMarketingKit
-    - FBSDKShareKit
     - Kingfisher
     - Parse
     - VYNFCKit
@@ -85,16 +60,13 @@ SPEC CHECKSUMS:
   Alertift: 393ace2617e96e95b4e85c88e80a85bf2d85c698
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CropViewController: a090820b15fc3da68e694d7c192a4708c576828b
-  FacebookSDK: 98dd798abb2fe8148d010d30f5d9b4b47bc30922
   FBSDKCoreKit: e1ab8d86f5eea2d7aa6ab12acca3e1d2dcb11983
   FBSDKLoginKit: 6e20e44775ddf4b159a8ca676834325e13d12221
-  FBSDKMarketingKit: e609f39d74ab273cf52e2f8b7e8829ed412b2827
-  FBSDKShareKit: 75a25e88b15b66e67ed03826080eff825afff520
   Kingfisher: d9e7e0b209b59b8f9873aa2f37654e81a7beea51
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
   SendGrid: 07926b96696f2b2e3b05398be14ac951796a6364
   VYNFCKit: 86a9b711fd1f34f6f7128a2a883cd58dbd781b9d
 
-PODFILE CHECKSUM: 0aed8a9405fa35187d03dca2caf73c592214b32d
+PODFILE CHECKSUM: c08ee461f6e8582f76a53c7d28978ec2a5468a06
 
 COCOAPODS: 1.7.1

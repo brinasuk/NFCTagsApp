@@ -14,6 +14,8 @@ import UserNotifications
 import SafariServices
 import AVFoundation
 import SendGrid
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 //import UserNotifications
 
@@ -35,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    var theVige:NSString? = "ALEX"
     var appCode:NSString? = "art"  //OR "art" OR "disp" or "re" or "show"
     //var appName:NSString? = ""
     //var placeholderName:NSString? = ""
@@ -43,18 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sendEmailFlag:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
     var isDatabaseDirty:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
     
-    
     // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP 
     var currentUserName:String? = ""
     var currentUserEmail:String? = ""
-    
     var currentUserIsAgent:Bool? = false
-    
-    var currentUserFacebookId:String? = ""
+    //var currentUserFacebookId:String? = ""
     var currentUserRole:String? = ""
+    
     //TODO: May have mixed up UserObjectId and AgentObjectId. Changed all to User
     //var currentAgentObjectIdvar :String? = ""
     var currentUserObjectId:String? = ""
+    var deeplink:String? = ""
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -176,10 +176,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //FBSDKAppEvents.activateApp()
     }
     
-    //    // ADDED FOR FACEBOOK (SEE MORE DETAILED BELOW)
-    //    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-    //        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-    //    }
+        // ADDED FOR FACEBOOK (SEE MORE DETAILED BELOW)
+        func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+            return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        }
     
     // ADDED FOR FACEBOOK
     //    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
@@ -204,7 +204,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
- 
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             print("Notification settings: \(settings)")
@@ -216,7 +215,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
- 
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         createInstallationOnParse(deviceTokenData: deviceToken)
@@ -346,7 +344,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Confirm that the NSUserActivity object contains a valid NDEF message.
-        let ndefMessage = userActivity.ndefMessagePayload
+        let ndefMessage = userActivity.ndefMessagePayload //(1)
         
         guard
             let record = ndefMessage.records.first,
@@ -355,13 +353,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let sku = payloadText.split(separator: "/").last else {
                 return false
         }
+        print("SKU: \(sku)")
     
         //TODO: FIX THIS
 //        guard let product = productStore.product(withID: String(sku)) else {
 //            return false
 //        }
-        
-        
+     
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return false
         }
@@ -395,20 +393,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     
     
+//    - (BOOL)application:(UIApplication *)application
+//    openURL:(NSURL *)url
+//
+//    sourceApplication:(NSString *)sourceApplication
+//    annotation:(id)annotation {
+//
+//    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+//    openURL:url
+//    sourceApplication:sourceApplication
+//    annotation:annotation
+//    ];
+//    // Add any custom logic here.
+//    return handled;
+//    }
+
+
+
     // MARK: Deeplinks
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        //let payloadText = String(data: record.payload, encoding: .utf8),
+        let sku = url.path.split(separator: "/").last
         print("OPENURL: \(url.path)")
         sendEmail(title: "OPENURL", message: url.path)
-        Deeplinker.handleDeeplink(url: url)
+        deeplink = String(sku ?? "")
+        //Deeplinker.handleDeeplink(url: url)
+
+        
         //ADDED BY ALEX
         // Send the message to `MessagesTableViewController` for processing.
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return false
         }
-        //navigationController.popToRootViewController(animated: true)
 
+        navigationController.popToRootViewController(animated: true)
         return true
+        
     }
+    
     //    //APPCODA TUTORIAL SECTION ON LINKS
     //    - (BOOL)application:(UIApplication *)application
     //    openURL:(NSURL *)url
@@ -425,17 +448,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Universal Links
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
-        //ADDED BY ALEX
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return false
-        }
+//        //ADDED BY ALEX
+//        guard let navigationController = window?.rootViewController as? UINavigationController else {
+//            return false
+//        }
         
         // Send the message to `MessagesTableViewController` for processing.
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             if let url = userActivity.webpageURL {
                 print("CONTINUE ACTIVITY: \(url.path)")
+                let sku = url.path.split(separator: "/").last
                 sendEmail(title: "CONTINUE ACTIVITY", message: url.path)
-                Deeplinker.handleDeeplink(url: url)
+                deeplink = String(sku ?? "")
+                //Deeplinker.handleDeeplink(url: url)
                 //navigationController.popToRootViewController(animated: true)
             }
         }
@@ -447,100 +472,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      return false
      }
      
-     // Confirm that the NSUserActivity object contains a valid NDEF message.
-     let ndefMessage = userActivity.ndefMessagePayload
-        
-     guard ndefMessage.records.count > 0,
-     ndefMessage.records[0].typeNameFormat != .empty else {
-     return false
-     }
-        
-        //let payloadText = String(data: record.payload, encoding: .utf8)
-        
-        guard
-            let record = ndefMessage.records.first,
-            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
-            let payloadText = String(data: record.payload, encoding: .utf8),
-            let sku = payloadText.split(separator: "/").last else {
-                return false
-        }
-     
-     // Send the message to `MessagesTableViewController` for processing.
-     guard let navigationController = window?.rootViewController as? UINavigationController else {
-     return false
-     }
-     
-     print("PAYLOADTEXT: \(payloadText)")
-     sendEmail(title: "PAYLOADTEXT", message: payloadText)
-     navigationController.popToRootViewController(animated: true)
-//     let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
-//     messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
-     
-     return true
-     }
-
-    /*
-    //APPCODA
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
-            return false
-        }
-        
         // Confirm that the NSUserActivity object contains a valid NDEF message.
-        let ndefMessage = userActivity.ndefMessagePayload
+        let ndefMessage = userActivity.ndefMessagePayload //(2)
         
-        guard
-            let record = ndefMessage.records.first,
-            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
-            let payloadText = String(data: record.payload, encoding: .utf8),
-            let sku = payloadText.split(separator: "/").last else {
-                return false
-        }
-        
-        guard let product = productStore.product(withID: String(sku)) else {
-            return false
-        }
-        
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return false
-        }
-        
-        navigationController.dismiss(animated: true, completion: nil)
-        let mainVC = navigationController.topViewController as? MainViewController
-        mainVC?.presentProductViewController(product: product)
-        return true
-    }
-    */
-    
-    /*
-    //APPLE
-    func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
-            return false
-        }
-        
-        // Confirm that the NSUserActivity object contains a valid NDEF message.
-        let ndefMessage = userActivity.ndefMessagePayload
         guard ndefMessage.records.count > 0,
             ndefMessage.records[0].typeNameFormat != .empty else {
                 return false
         }
         
-        // Send the message to `MessagesTableViewController` for processing.
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return false
+        guard
+            let record = ndefMessage.records.first,
+            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
+            let payloadText = String(data: record.payload, encoding: .utf8),
+            let sku = payloadText.split(separator: "/").last else {
+                return false
         }
+        print("NDEFMESSAGE: \(ndefMessage)")
+        print("SKU: \(sku)")
+     print("PAYLOADTEXT: \(payloadText)")
+     sendEmail(title: "PAYLOADTEXT", message: payloadText)
+        deeplink = String(sku)
+    
+        //     // Send the message to `MessagesTableViewController` for processing.
+        //     guard let navigationController = window?.rootViewController as? UINavigationController else {
+        //     return false
+        //     }
         
-        navigationController.popToRootViewController(animated: true)
-        let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
-        messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
-        
-        return true
-    }
- */
+//     navigationController.popToRootViewController(animated: true)
+//     let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
+//     messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
+     
+     return true
+     }
 
     private func sendEmail(title: String, message:String) {
         let personalization = Personalization(recipients: "alex@hillsoft.com")

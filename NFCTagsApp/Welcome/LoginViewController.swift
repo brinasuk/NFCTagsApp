@@ -275,6 +275,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //AccessToken.current = nil //Logout
         logoutFacebook() //If you are logged in, logout
+        //TODO: ALEX TAKE OUT !!!!!
+        displayMessage(message: "LOGINMANAGER")
         
         //do login with permissions for email and public profile
         LoginManager().logIn(permissions: ["email","public_profile"], from: nil) {
@@ -414,7 +416,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func lookupUser(_ usingFacebookId: String?) {
         let facebookId = usingFacebookId
-        print(facebookId)
+        //TODO: ALEX TAKE OUT !!!!!
+        displayMessage(message: facebookId ?? "")
+        print(facebookId as Any)
         // IF YOU DON'T HAVE A FACEBOOK ID THEN BAIL OUT. THIS SHOULD BE UNLIKELY
         if (facebookId?.count ?? 0) == 0 {
             displayErrorMessage(message: "Cannot find Facebook ID")
@@ -524,7 +528,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String
         kAppDelegate.currentUserName = user?[PF_USER_FULLNAME] as? String
-        kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String
+//        kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String
         kAppDelegate.currentUserRole = user?[PF_USER_USERROLE] as? String
         kAppDelegate.currentUserObjectId = user?[PF_USER_AGENTOBJECTID] as? String
         kAppDelegate.currentUserObjectId = user?.objectId
@@ -544,6 +548,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //UnwinfToTagListController
         //goBackButtonPressed()
+        //TODO: ALEX TAKE OUT !!!!!
+        displayMessage(message: "Ready to PERFORM SEGUE")
         self.performSegue(withIdentifier: "UnwinfToTagListController", sender: self)
 
     }

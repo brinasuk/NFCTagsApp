@@ -18,8 +18,8 @@ target 'NFCTagsApp' do
    
    pod 'Parse'
    
-   pod 'FacebookSDK'
-   pod 'FBSDKShareKit'
+   #pod 'FacebookSDK'
+   #pod 'FBSDKShareKit'
    pod 'FBSDKLoginKit', '~> 5.0'
    
    #pod 'FacebookSDK'

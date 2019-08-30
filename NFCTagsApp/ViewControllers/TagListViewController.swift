@@ -152,9 +152,13 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        displayMessage(message: kAppDelegate.deeplink ?? "")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    super.viewWillAppear(animated)
         
         
         setupNavigationBar()
@@ -174,6 +178,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             loadTagTable() //GET INFO FOR NEW USER
             kAppDelegate.isDatabaseDirty = false
         }
+        
+        
     }
     
     // MARK: - ACTION BUTTONS PRESSED
@@ -1225,7 +1231,7 @@ extension TagListViewController: UITableViewDataSource {
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
             //kAppDelegate.loggedInFlag = false
-            kAppDelegate.currentUserFacebookId = ""
+            //kAppDelegate.currentUserFacebookId = ""
             kAppDelegate.currentUserRole = "User"
             //kAppDelegate.currentAgentObjectId = ""
             kAppDelegate.currentUserObjectId = ""
@@ -1283,10 +1289,10 @@ extension TagListViewController: UITableViewDataSource {
             }
             //print (kAppDelegate.currentUserName)
             
-            kAppDelegate.currentUserFacebookId = currentUser?.object(forKey: PF_USER_FACEBOOKID) as? String
-            if kAppDelegate.currentUserFacebookId == nil {
-                kAppDelegate.currentUserFacebookId = ""
-            }
+//            kAppDelegate.currentUserFacebookId = currentUser?.object(forKey: PF_USER_FACEBOOKID) as? String
+//            if kAppDelegate.currentUserFacebookId == nil {
+//                kAppDelegate.currentUserFacebookId = ""
+//            }
             
             kAppDelegate.currentUserRole = currentUser?.object(forKey: PF_USER_USERROLE) as? String  // Agent or Builder or User or Anything
             if kAppDelegate.currentUserRole == nil {
@@ -1321,7 +1327,7 @@ extension TagListViewController: UITableViewDataSource {
             //kAppDelegate.loggedInFlag = false
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
-            kAppDelegate.currentUserFacebookId = ""
+            //kAppDelegate.currentUserFacebookId = ""
             kAppDelegate.currentUserRole = "User"
             kAppDelegate.currentUserObjectId = ""
             kAppDelegate.currentUserIsAgent = false

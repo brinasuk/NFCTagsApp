@@ -213,7 +213,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String
         kAppDelegate.currentUserName = user?[PF_USER_FULLNAME] as? String
-        kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String
+//        kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String
         kAppDelegate.currentUserRole = user?[PF_USER_USERROLE] as? String
         kAppDelegate.currentUserObjectId = user?[PF_USER_AGENTOBJECTID] as? String
         kAppDelegate.currentUserObjectId = user?.objectId
