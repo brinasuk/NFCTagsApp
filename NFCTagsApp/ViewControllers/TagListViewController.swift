@@ -154,7 +154,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        displayMessage(message: kAppDelegate.deeplink ?? "")
+        //displayMessage(message: kAppDelegate.deeplink ?? "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1271,7 +1271,7 @@ extension TagListViewController: UITableViewDataSource {
     
     
     func showCurrentUserInfo() {
-        print("showCurrentUserInfo")
+        //print("showCurrentUserInfo")
         
         let currentUser = PFUser.current()
 

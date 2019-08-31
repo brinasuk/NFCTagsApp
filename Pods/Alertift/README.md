@@ -10,7 +10,7 @@ Alertift.alert(title: "Alertift", message: "Alertift is swifty, modern, and awes
 ```
 
 [![GitHub release](https://img.shields.io/github/release/sgr-ksmt/Alertift.svg)](https://github.com/sgr-ksmt/Alertift/releases)
-![Language](https://img.shields.io/badge/language-Swift%204.1-orange.svg)
+![Language](https://img.shields.io/badge/language-Swift%205.0-orange.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods](https://img.shields.io/badge/Cocoa%20Pods-✓-4BC51D.svg?style=flat)](https://cocoapods.org/pods/Alertift)
 [![CocoaPodsDL](https://img.shields.io/cocoapods/dt/Alertift.svg)](https://cocoapods.org/pods/Alertift)
@@ -30,8 +30,8 @@ Alertift.alert(title: "Alertift", message: "Alertift is swifty, modern, and awes
 
 ## Requirements
 - iOS 9.0+
-- Xcode 8.1+
-- Swift 3.0+
+- Xcode 10+
+- Swift 5.0+
 
 ## Installation
 
@@ -40,7 +40,13 @@ Alertift.alert(title: "Alertift", message: "Alertift is swifty, modern, and awes
 - Add the following to your *Cartfile*:
 
 ```bash
-# Swift4 or later
+# Swift5.0
+github "sgr-ksmt/Alertift" ~> 4.1
+
+# Swift4.2
+github "sgr-ksmt/Alertift" ~> 4.0
+
+# Swift4 or 4.1
 github "sgr-ksmt/Alertift" ~> 3.2
 
 # Less than Swift4
@@ -58,7 +64,12 @@ github "sgr-ksmt/Alertift" ~> 2.0
 it, simply add the following line to your Podfile:
 
 ```ruby
-# Swift4 or later
+# Swift5.0 or later
+pod 'Alertift', '~> 4.1'
+# Swift4.2
+pod 'Alertift', '4.0'
+
+# Swift4 or 4.1
 pod 'Alertift', '~> 3.0'
 
 # Less than Swift4
@@ -69,9 +80,6 @@ and run `pod install`
 
 ### Manually Install
 Download all `*.swift` files and put your project.
-
-## Change log
-Change log is [here](https://github.com/sgr-ksmt/Alertift/blob/master/CHANGELOG.md).
 
 ## Communication
 - If you found a bug, open an issue.

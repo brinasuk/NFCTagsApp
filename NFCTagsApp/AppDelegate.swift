@@ -10,16 +10,15 @@
 import UIKit
 import Parse
 import UserNotifications
-//import FBSDKLoginKit  // ADDED FOR FACEBOOK
+
 import SafariServices
 import AVFoundation
 import SendGrid
 import FBSDKCoreKit
-import FBSDKLoginKit
+//import FBSDKLoginKit  // ADDED FOR FACEBOOK AUG2019
 
 //import UserNotifications
-
-fileprivate let pusherSecretKey = "paste you pisher key here"
+//fileprivate let pusherSecretKey = "paste you pisher key here"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sendEmailFlag:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
     var isDatabaseDirty:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
     
-    // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP 
+    // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP
     var currentUserName:String? = ""
     var currentUserEmail:String? = ""
     var currentUserIsAgent:Bool? = false
@@ -54,32 +53,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //TODO: May have mixed up UserObjectId and AgentObjectId. Changed all to User
     //var currentAgentObjectIdvar :String? = ""
     var currentUserObjectId:String? = ""
-    var deeplink:String? = ""
+    var deeplinkFound:String? = ""
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        let center = UNUserNotificationCenter.current()
-//        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            }
-//        }
+        //        let center = UNUserNotificationCenter.current()
+        //        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+        //            if let error = error {
+        //                print(error.localizedDescription)
+        //            }
+        //        }
         
         // THE FOLLOWING LINE GIVES: “aps-environment”no valid entitlement string found. REMOVE IT!!!
-            //application.registerForRemoteNotifications()
+        //application.registerForRemoteNotifications()
         
-        // HANDLE SENDMAIL KEY
-        guard let myApiKey = ProcessInfo.processInfo.environment["SG_API_KEY"] else {
-            print("ERROR: Unable to retrieve SENDGRID API key")
-            return false
-        }
-        Session.shared.authentication = Authentication.apiKey(myApiKey)
         
-
-    
-
-
+        //============================================================//
+        //NOTE: THIS DOES NOT RUN STAND ALONE ON YOUR iPHONE. DO NOT EVER USE IT!!
+//        // HANDLE SENDMAIL KEY
+//        guard let myApiKey = ProcessInfo.processInfo.environment["SG_API_KEY"] else {
+//            print("ERROR: Unable to retrieve SENDGRID API key")
+//            return false
+//        }
+//        Session.shared.authentication = Authentication.apiKey(myApiKey)
+        //============================================================//
+        
+        
+        
+        
+        // SETUP VARIABLES FOR THIS APP
         if (appCode == "art") {
             //appName = "ArtWorks4Me";
         }
@@ -148,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //    // CRITICAL: SETUP REALESTATEBEACONS
         //    [ESTConfig setupAppID:@"openhousebeacons" andAppToken:@"95febad595a25c04fd5a80b829b35361"];
         
-
+        
         // SET THE TOOLBAR STYLE
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
@@ -176,10 +179,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //FBSDKAppEvents.activateApp()
     }
     
-        // ADDED FOR FACEBOOK (SEE MORE DETAILED BELOW)
-        func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-            return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        }
+    // ADDED FOR FACEBOOK (SEE MORE DETAILED BELOW)
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return
+            ApplicationDelegate.shared.application(application, open: url as URL, sourceApplication: sourceApplication, annotation: annotation)
+        //            ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
     
     // ADDED FOR FACEBOOK
     //    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
@@ -195,58 +201,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     /*
-    func startPushNotifications(){
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay ]) {
-            (granted, error) in
-            print("Permission granted: \(granted)")
-            guard granted else { return }
-            self.getNotificationSettings()
-        }
-    }
-
-    func getNotificationSettings() {
-        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-            print("Notification settings: \(settings)")
-            guard settings.authorizationStatus == .authorized else { return }
-            DispatchQueue.main.async {
-                // THE FOLLOWING LINE GIVES: “aps-environment”no valid entitlement string found. REMOVE IT!!!
-                //UIApplication.shared.registerForRemoteNotifications()
-            }
-        }
-    }
-
-    func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        createInstallationOnParse(deviceTokenData: deviceToken)
-    }
+     func startPushNotifications(){
+     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay ]) {
+     (granted, error) in
+     print("Permission granted: \(granted)")
+     guard granted else { return }
+     self.getNotificationSettings()
+     }
+     }
+     
+     func getNotificationSettings() {
+     UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+     print("Notification settings: \(settings)")
+     guard settings.authorizationStatus == .authorized else { return }
+     DispatchQueue.main.async {
+     // THE FOLLOWING LINE GIVES: “aps-environment”no valid entitlement string found. REMOVE IT!!!
+     //UIApplication.shared.registerForRemoteNotifications()
+     }
+     }
+     }
+     
+     func application(_ application: UIApplication,
+     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+     createInstallationOnParse(deviceTokenData: deviceToken)
+     }
+     
+     func application(_ application: UIApplication,
+     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+     print("Failed to register: \(error)")
+     }
+     */
     
-    func application(_ application: UIApplication,
-                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register: \(error)")
-    }
-         */
-    
-//    func createInstallationOnParse(deviceTokenData:Data){
-//        if let installation = PFInstallation.current(){
-//            installation.setDeviceTokenFrom(deviceTokenData)
-//            installation.setObject(["News"], forKey: "channels")
-//            if let userId = PFUser.current()?.objectId {
-//                installation.setObject(userId, forKey: "userId")
-//            }
-//            installation.saveInBackground {
-//                (success: Bool, error: Error?) in
-//                if (success) {
-//                    print("You have successfully saved your push installation to Back4App!")
-//                } else {
-//                    if let myError = error{
-//                        print("Error saving parse installation \(myError.localizedDescription)")
-//                    }else{
-//                        print("Uknown error")
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func createInstallationOnParse(deviceTokenData:Data){
+    //        if let installation = PFInstallation.current(){
+    //            installation.setDeviceTokenFrom(deviceTokenData)
+    //            installation.setObject(["News"], forKey: "channels")
+    //            if let userId = PFUser.current()?.objectId {
+    //                installation.setObject(userId, forKey: "userId")
+    //            }
+    //            installation.saveInBackground {
+    //                (success: Bool, error: Error?) in
+    //                if (success) {
+    //                    print("You have successfully saved your push installation to Back4App!")
+    //                } else {
+    //                    if let myError = error{
+    //                        print("Error saving parse installation \(myError.localizedDescription)")
+    //                    }else{
+    //                        print("Uknown error")
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     // REMOVED FOR FACEBOOK
     //    func applicationWillResignActive(_ application: UIApplication) {
@@ -285,148 +291,152 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      //        pusher.nativePusher.register(deviceToken: deviceToken)
      //        pusher.nativePusher.subscribe(interestName: "activity")
      }
-
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("failed registration for remote notifications \(error)")
-    }
-      */
-    
-/*
-    // RETURNS HERE IF THIS IS A REGISTERED UNIVERSAL LINK
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let sendingAppID = options[.sourceApplication]
-        
-        //TODO: THE FOLLOWING IS FOR TESTING ONLY. YOU NEED TO IMPLEMENT THIS
-        AudioServicesPlayAlertSound(SystemSoundID(1325))   //FANFARE SOUND !!
-        print("SENDINGAPPID: \(String(describing: sendingAppID))")
-        //let options = [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly : true]
-        if URL(string: sendingAppID as! String ) != nil {
-            open(scheme: sendingAppID as! String)
-        }
-        return true
-    }
- */
-    
-//    func open(scheme: String) {
-//        if let url = URL(string: scheme) {
-//            if #available(iOS 10, *) {
-//                UIApplication.shared.open(url, options: [:],
-//                                          completionHandler: {
-//                                            (success) in
-//                                            print("Open \(scheme): \(success)")
-//                })
-//            } else {
-//                let success = UIApplication.shared.openURL(url)
-//                print("Open \(scheme): \(success)")
-//            }
-//        }
-//    }
-    
-
-    
-//    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-//        print("Continue User Activity called: ")
-//        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-//            let url = userActivity.webpageURL!
-//            print(url.absoluteString)
-//            //handle url and open whatever page you want to open.
-//        }
-//        return true
-//    }
+     
+     
+     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+     print("failed registration for remote notifications \(error)")
+     }
+     */
     
     /*
-    
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+     // RETURNS HERE IF THIS IS A REGISTERED UNIVERSAL LINK
+     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+     let sendingAppID = options[.sourceApplication]
      
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
-            return false
-        }
-        
-        // Confirm that the NSUserActivity object contains a valid NDEF message.
-        let ndefMessage = userActivity.ndefMessagePayload //(1)
-        
-        guard
-            let record = ndefMessage.records.first,
-            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
-            let payloadText = String(data: record.payload, encoding: .utf8),
-            let sku = payloadText.split(separator: "/").last else {
-                return false
-        }
-        print("SKU: \(sku)")
+     //TODO: THE FOLLOWING IS FOR TESTING ONLY. YOU NEED TO IMPLEMENT THIS
+     AudioServicesPlayAlertSound(SystemSoundID(1325))   //FANFARE SOUND !!
+     print("SENDINGAPPID: \(String(describing: sendingAppID))")
+     //let options = [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly : true]
+     if URL(string: sendingAppID as! String ) != nil {
+     open(scheme: sendingAppID as! String)
+     }
+     return true
+     }
+     */
     
-        //TODO: FIX THIS
-//        guard let product = productStore.product(withID: String(sku)) else {
-//            return false
-//        }
+    //    func open(scheme: String) {
+    //        if let url = URL(string: scheme) {
+    //            if #available(iOS 10, *) {
+    //                UIApplication.shared.open(url, options: [:],
+    //                                          completionHandler: {
+    //                                            (success) in
+    //                                            print("Open \(scheme): \(success)")
+    //                })
+    //            } else {
+    //                let success = UIApplication.shared.openURL(url)
+    //                print("Open \(scheme): \(success)")
+    //            }
+    //        }
+    //    }
+    
+    
+    
+    //    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    //        print("Continue User Activity called: ")
+    //        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+    //            let url = userActivity.webpageURL!
+    //            print(url.absoluteString)
+    //            //handle url and open whatever page you want to open.
+    //        }
+    //        return true
+    //    }
+    
+    /*
      
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return false
-        }
-        
-//        navigationController.dismiss(animated: true, completion: nil)
-//        let mainVC = navigationController.topViewController as? TagListViewController
-        //mainVC?.presentProductViewController(product: product)
-        return true
-    }
- */
+     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+     
+     guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
+     return false
+     }
+     
+     // Confirm that the NSUserActivity object contains a valid NDEF message.
+     let ndefMessage = userActivity.ndefMessagePayload //(1)
+     
+     guard
+     let record = ndefMessage.records.first,
+     record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
+     let payloadText = String(data: record.payload, encoding: .utf8),
+     let sku = payloadText.split(separator: "/").last else {
+     return false
+     }
+     print("SKU: \(sku)")
+     
+     //TODO: FIX THIS
+     //        guard let product = productStore.product(withID: String(sku)) else {
+     //            return false
+     //        }
+     
+     guard let navigationController = window?.rootViewController as? UINavigationController else {
+     return false
+     }
+     
+     //        navigationController.dismiss(animated: true, completion: nil)
+     //        let mainVC = navigationController.topViewController as? TagListViewController
+     //mainVC?.presentProductViewController(product: product)
+     return true
+     }
+     */
+    
+    // DEEPLINKS
+    
+    /*
+     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+     print("failed registration for remote notifications \(error)")
+     }
+     */
+    
+    //    // MARK: Notifications
+    //    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    //        Deeplinker.handleRemoteNotification(userInfo)
+    //    }
+    
+    
+    //    // MARK: Shortcuts
+    //    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+    //        completionHandler(Deeplinker.handleShortcut(item: shortcutItem))
+    //    }
+    
+    
+    //    - (BOOL)application:(UIApplication *)application
+    //    openURL:(NSURL *)url
+    //
+    //    sourceApplication:(NSString *)sourceApplication
+    //    annotation:(id)annotation {
+    //
+    //    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+    //    openURL:url
+    //    sourceApplication:sourceApplication
+    //    annotation:annotation
+    //    ];
+    //    // Add any custom logic here.
+    //    return handled;
+    //    }
     
     /////////////////////////////////////////////////
     // DEEPLINKS //
     /////////////////////////////////////////////////
-
-    /*
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("failed registration for remote notifications \(error)")
-    }
- */
     
-//    // MARK: Notifications
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        Deeplinker.handleRemoteNotification(userInfo)
-//    }
-    
-    
-//    // MARK: Shortcuts
-//    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-//        completionHandler(Deeplinker.handleShortcut(item: shortcutItem))
-//    }
-    
-    
-//    - (BOOL)application:(UIApplication *)application
-//    openURL:(NSURL *)url
-//
-//    sourceApplication:(NSString *)sourceApplication
-//    annotation:(id)annotation {
-//
-//    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-//    openURL:url
-//    sourceApplication:sourceApplication
-//    annotation:annotation
-//    ];
-//    // Add any custom logic here.
-//    return handled;
-//    }
-
-
-
     // MARK: Deeplinks
+    //ONE
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         //let payloadText = String(data: record.payload, encoding: .utf8),
         let sku = url.path.split(separator: "/").last
         print("OPENURL: \(url.path)")
-        sendEmail(title: "OPENURL", message: url.path)
-        deeplink = String(sku ?? "")
+        print("ONE")
+        print("URL: \(url)")
+        print("SKU: \(String(describing: sku))")
+        //sendEmail(title: "OPENURL", message: url.path)
+        deeplinkFound = String(sku ?? "")
         //Deeplinker.handleDeeplink(url: url)
-
+        
         
         //ADDED BY ALEX
         // Send the message to `MessagesTableViewController` for processing.
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return false
         }
-
+        
         navigationController.popToRootViewController(animated: true)
         return true
         
@@ -446,20 +456,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //    }
     
     // MARK: Universal Links
+    //TWO
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
-//        //ADDED BY ALEX
-//        guard let navigationController = window?.rootViewController as? UINavigationController else {
-//            return false
-//        }
+        //        //ADDED BY ALEX
+        //        guard let navigationController = window?.rootViewController as? UINavigationController else {
+        //            return false
+        //        }
         
         // Send the message to `MessagesTableViewController` for processing.
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             if let url = userActivity.webpageURL {
                 print("CONTINUE ACTIVITY: \(url.path)")
                 let sku = url.path.split(separator: "/").last
-                sendEmail(title: "CONTINUE ACTIVITY", message: url.path)
-                deeplink = String(sku ?? "")
+                print("TWO")
+                print("URL: \(url)")
+                print("SKU: \(String(describing: sku))")
+                
+                //sendEmail(title: "CONTINUE ACTIVITY", message: url.path)
+                deeplinkFound = String(sku ?? "")
                 //Deeplinker.handleDeeplink(url: url)
                 //navigationController.popToRootViewController(animated: true)
             }
@@ -467,11 +482,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    //THREE
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-     guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
-     return false
-     }
-     
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
+            return false
+        }
+        
         // Confirm that the NSUserActivity object contains a valid NDEF message.
         let ndefMessage = userActivity.ndefMessagePayload //(2)
         
@@ -487,27 +503,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let sku = payloadText.split(separator: "/").last else {
                 return false
         }
+        print("THREE")
         print("NDEFMESSAGE: \(ndefMessage)")
         print("SKU: \(sku)")
-     print("PAYLOADTEXT: \(payloadText)")
-     sendEmail(title: "PAYLOADTEXT", message: payloadText)
-        deeplink = String(sku)
-    
+        print("PAYLOADTEXT: \(payloadText)")
+        //sendEmail(title: "PAYLOADTEXT", message: payloadText)
+        deeplinkFound = String(sku)
+        
         //     // Send the message to `MessagesTableViewController` for processing.
         //     guard let navigationController = window?.rootViewController as? UINavigationController else {
         //     return false
         //     }
         
-//     navigationController.popToRootViewController(animated: true)
-//     let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
-//     messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
-     
-     return true
-     }
+        //     navigationController.popToRootViewController(animated: true)
+        //     let messageTableViewController = navigationController.topViewController as? MessagesTableViewController
+        //     messageTableViewController?.addMessage(fromUserActivity: ndefMessage)
+        
+        return true
+    }
 
-    private func sendEmail(title: String, message:String) {
+    /*
+     //NOTE: HUGE BUG. SENDGRID DOES NOT WORK WITH PARSE ON AN iPHONE
+     //NOTE: THIS DOES NOT RUN STAND ALONE ON YOUR iPHONE. DO NOT EVER USE IT!!
+     private func sendgridEmail(title: String, message:String) {
         let personalization = Personalization(recipients: "alex@hillsoft.com")
-//        let plainText = Content(contentType: ContentType.plainText, value: "Well Done, VIGE!")
+        //        let plainText = Content(contentType: ContentType.plainText, value: "Well Done, VIGE!")
         let htmlText = Content(contentType: ContentType.htmlText, value: message)
         let email = Email(
             personalizations: [personalization],
@@ -523,5 +543,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
     }
+ */
     
 }

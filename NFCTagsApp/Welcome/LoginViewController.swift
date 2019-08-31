@@ -10,9 +10,8 @@ import UIKit
 import Parse
 //import FacebookLogin
 //import FacebookCore
-//import FBSDKLoginKit  // ADDED FOR FACEBOOK
-import FBSDKCoreKit
-import FBSDKLoginKit
+import FBSDKLoginKit  // ADDED FOR FACEBOOK AUG2019
+
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -182,7 +181,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             displayErrorMessage (message: "Please enter your password.")
             return
         }
-        
+
         //TODO: Swifty ProgressHUD.show("Signing in...", interaction: false)
         let sv = UIViewController.displaySpinner(onView: self.view)
         PFUser.logInWithUsername(inBackground: email ?? "", password: password ?? "") { (user, error) in
@@ -191,6 +190,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 //_useObjectId = user.objectId;
                 //NSLog(@"USEROBJECTID: %@",_useObjectId);
                 self.userLogged(in: user)
+                self.displayErrorMessage (message: "LOGIN SUCCESS")
             } else {
 //                ProgressHUD.showError((error as NSError?)?.userInfo["error"])
                 self.displayErrorMessage (message: "INVALID EMAIL OR PASSWORD")
@@ -275,8 +275,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //AccessToken.current = nil //Logout
         logoutFacebook() //If you are logged in, logout
-        //TODO: ALEX TAKE OUT !!!!!
-        displayMessage(message: "LOGINMANAGER")
         
         //do login with permissions for email and public profile
         LoginManager().logIn(permissions: ["email","public_profile"], from: nil) {
@@ -416,9 +414,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func lookupUser(_ usingFacebookId: String?) {
         let facebookId = usingFacebookId
-        //TODO: ALEX TAKE OUT !!!!!
-        displayMessage(message: facebookId ?? "")
-        print(facebookId as Any)
+        //print(facebookId as Any)
         // IF YOU DON'T HAVE A FACEBOOK ID THEN BAIL OUT. THIS SHOULD BE UNLIKELY
         if (facebookId?.count ?? 0) == 0 {
             displayErrorMessage(message: "Cannot find Facebook ID")
@@ -454,7 +450,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func existingFacebookUserLogin99(_ useLogin: String?, withPassword usePassword: String?) {
-        
+
         let email = useLogin
         let password = usePassword
         //TODO: HUD PUT BACK  ProgressHUD.show("Signing in...", interaction: false)
@@ -548,8 +544,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //UnwinfToTagListController
         //goBackButtonPressed()
-        //TODO: ALEX TAKE OUT !!!!!
-        displayMessage(message: "Ready to PERFORM SEGUE")
         self.performSegue(withIdentifier: "UnwinfToTagListController", sender: self)
 
     }
