@@ -428,6 +428,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("SKU: \(String(describing: sku))")
         //sendEmail(title: "OPENURL", message: url.path)
         deeplinkFound = String(sku ?? "")
+        //Posting a notification2
+        NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
         //Deeplinker.handleDeeplink(url: url)
         
         
@@ -472,6 +474,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("TWO")
                 print("URL: \(url)")
                 print("SKU: \(String(describing: sku))")
+                NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
                 
                 //sendEmail(title: "CONTINUE ACTIVITY", message: url.path)
                 deeplinkFound = String(sku ?? "")
@@ -509,6 +512,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("PAYLOADTEXT: \(payloadText)")
         //sendEmail(title: "PAYLOADTEXT", message: payloadText)
         deeplinkFound = String(sku)
+        NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
         
         //     // Send the message to `MessagesTableViewController` for processing.
         //     guard let navigationController = window?.rootViewController as? UINavigationController else {

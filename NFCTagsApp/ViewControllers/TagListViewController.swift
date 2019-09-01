@@ -124,6 +124,18 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         //FORCE A RELOAD OF THE DATA
         kAppDelegate.isDatabaseDirty = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDeepLink), name: Notification.Name("DEEPLINKFOUND"), object: nil)
+    }
+    
+    @objc func handleDeepLink() {
+        var deepLink:String? = kAppDelegate.deeplinkFound ?? ""
+        if deepLink == nil {deepLink = ""}  //JUST IN CASE
+        print ("DEEPLINK PASSED IS: \(String(describing: deepLink))")
+        //myLink = "info@kcontemporaryart.com:102"
+        if deepLink!.count > 0 {
+            lookupTagIfo(deepLink)
+        }
     }
     
     func setupNavigationBar() {
@@ -181,6 +193,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         
     }
+    
+
     
     // MARK: - ACTION BUTTONS PRESSED
     @IBAction func scanButtonPressed(_ sender: Any) {
@@ -415,9 +429,18 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
     func lookupTagIfo(_ passTagId: String?) {
-        //tagId = "info@kcontemporaryart.com:102" //TODO: REMOVE
-        print("PASSED TAGID: \(passTagId ?? "")")
-        let useTagId:String? = passTagId
+        //tagId = "info@kcontemporaryart.com:102"
+        
+        let useTagId:String = passTagId ?? ""
+        //if useTagId == nil {useTagId = ""} //Just in case
+        
+        //useTagId = "info@kcontemporaryart.com:102"
+        //useTagId = "https://artworks4me.com/alex@hillsoft.com:101"
+
+        guard let lastComponent = useTagId.split(separator: "/").last else { return  }
+        let sku = String (lastComponent)
+        //print("PASSED TAGID:\(useTagId)")
+        //print("PASSED SKU:\(sku)")
         
         //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
         //        let tagString = passTagId ?? ""
@@ -449,7 +472,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         let sv = UIViewController.displaySpinner(onView: self.view)
         
         let query = PFQuery(className: "TagOwnerInfo")
-        query.whereKey("ownerId", equalTo: useTagId!)
+        query.whereKey("ownerId", equalTo: sku ?? "")
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if let error = error {
                 // NO MATCH FOUND
