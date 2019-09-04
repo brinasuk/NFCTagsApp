@@ -663,7 +663,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
  var sendTo: String
  //SEND LEAD TO OWNER
  sendTo = useOwnerEmail ?? ""
- sendTo = "alex@hillsoft.com" //TODO: ALEX TEMP FIX FOR TESTING. REMOVE FROM FINAL RELEASE !
  
  let message = "The following Beacon was tapped: <br><br>"
  

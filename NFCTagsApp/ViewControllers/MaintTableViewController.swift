@@ -21,7 +21,7 @@ class MaintTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Tag List"
+        self.title = "Manage Tags"
         
         //imageView.kf.indicatorType = .activity
         

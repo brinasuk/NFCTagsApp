@@ -15,7 +15,7 @@ import SafariServices
 import AVFoundation
 import SendGrid
 import FBSDKCoreKit
-//import FBSDKLoginKit  // ADDED FOR FACEBOOK AUG2019
+import FBSDKLoginKit  // ADDED FOR FACEBOOK AUG2019
 
 //import UserNotifications
 //fileprivate let pusherSecretKey = "paste you pisher key here"
@@ -50,11 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //var currentUserFacebookId:String? = ""
     var currentUserRole:String? = ""
     
-    //TODO: May have mixed up UserObjectId and AgentObjectId. Changed all to User
-    //var currentAgentObjectIdvar :String? = ""
-    var currentUserObjectId:String? = ""
+    //TODO: May have mixed up UserObjectId and AgentObjectId.
+    // Replaced all currentAgentObjectId with currentUserObjectId
+    //var currentAgentObjectId var :String? = ""
+    var currentUserObjectId:String? = ""  // NOT currentAgentObjectId
     var deeplinkFound:String? = ""
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -142,9 +142,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //================================================//
         // ADDED FOR FACEBOOK
-        //     FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        //Optionally add to ensure your credentials are valid:
-        //        FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
+        // ADDED SEPT 2019
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+//        ApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+//        //Optionally add to ensure your credentials are valid:
+//        LoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
         //================================================//
         
         
@@ -270,13 +273,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
-        //TODO: PUT BACK (MAYBE) Deeplinker.checkDeepLink()
-        
         //App activation code
         
-        // ADDED FOR FACEBOOK
-        //FBSDKAppEvents.activateApp()
+        //TODO: PUT BACK (MAYBE) Deeplinker.checkDeepLink()
+  
+        // MAY BE NEEDED FOR FACEBOOK. SEEMS TO WORK Ok WITHOUT IT
+        //AppEvents.activateApp()
         
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
@@ -361,10 +363,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      }
      print("SKU: \(sku)")
      
-     //TODO: FIX THIS
-     //        guard let product = productStore.product(withID: String(sku)) else {
-     //            return false
-     //        }
+
+             guard let product = productStore.product(withID: String(sku)) else {
+                 return false
+             }
      
      guard let navigationController = window?.rootViewController as? UINavigationController else {
      return false
@@ -415,15 +417,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /////////////////////////////////////////////////
     // DEEPLINKS //
     /////////////////////////////////////////////////
+
     
     // MARK: Deeplinks
     //ONE
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
+        // ADDED FOR FACEBOOK! SEPT 2019. CRITICAL. DO NOT REMOVE!!
+        let appId: String = Settings.appID
+        if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host ==  "authorize" {
+            return ApplicationDelegate.shared.application(app, open: url, options: options)
+        }
+        
         //let payloadText = String(data: record.payload, encoding: .utf8),
         let sku = url.path.split(separator: "/").last
-        print("OPENURL: \(url.path)")
+        
         print("ONE")
+        print("OPENURL: \(url.path)")
         print("URL: \(url)")
         print("SKU: \(String(describing: sku))")
         //sendEmail(title: "OPENURL", message: url.path)

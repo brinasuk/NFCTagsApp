@@ -11,7 +11,7 @@
  public let PF_ACCOUNTPASSWORD = "accountpassword"
  public let PF_ACCOUNTAPPROVEDYN = "accountapprovedyn"
  public let PF_USER_USERROLE = "userRole"
- public let PF_USER_AGENTOBJECTID = "agentObjectID"
+ //public let PF_USER_AGENTOBJECTID = "agentObjectID"
  public let PF_PASSWORD = "password"
  
  public let PF_USER_FACEBOOKID = "facebookId"
@@ -28,7 +28,6 @@
  
  public let kNOTIFYBEACONINRANGE = "NOTIFYBEACONINRANGE"
  public let kSTOPSCANNINGBUTTONS = "STOPSCANNINGBUTTONS"
- public let kREFRESHUSERTABLE = "REFRESHUSERTABLE"
  
 // public let kFlagButtonColor = [UIColor colorWithRed:255.0/255.0 green:150.0/255.0 blue:0/255.0 alpha:1]
 // #define kMoreButtonColor        [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:1]

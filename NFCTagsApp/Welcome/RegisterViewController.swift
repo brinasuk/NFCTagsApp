@@ -208,28 +208,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     func userLogged(in user: PFUser?) {
 
-        //kAppDelegate.loggedInFlag = true //CRITICAL!!
         kAppDelegate.isDatabaseDirty = true //FORCE RELOAD WITH NEW USER
         
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String
         kAppDelegate.currentUserName = user?[PF_USER_FULLNAME] as? String
 //        kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String
         kAppDelegate.currentUserRole = user?[PF_USER_USERROLE] as? String
-        kAppDelegate.currentUserObjectId = user?[PF_USER_AGENTOBJECTID] as? String
+        //kAppDelegate.currentUserObjectId = user?[PF_USER_AGENTOBJECTID] as? String
         kAppDelegate.currentUserObjectId = user?.objectId
         //TODO: THESE IS AN AGENTOBJECTID IN THE PARSE TABLE BUT IT IS UNUSED
          
          //NOTE: WHEN AN AGENT FIRST CREATES AN ACCOUNT SET THIS TO NO. ONLY WHEN THEY BUT BEACONS ONLINE CAN HILLSIDE STAFF SET THIS MANUALLY IN THE AGENTS TABLE TO 'YES' !!
          kAppDelegate.currentUserIsAgent = false
 
-        /*
-        //TODO: NOT SURE WHAT THIS IS. TRY TO FIX!
-        //CRITICAL. SET NUMBER OF ROWS IN MENU whenever you change kAppDelegate.currentUserIsAgent
-        let dict = [
-            "ACTION": "EMAILREGISTER"
-        ] //CONSTANCE4
-        //TODO: SWIFTY PUT BACK !!   NotificationCenter.default.post(name: kREFRESHUSERTABLE, object: nil, userInfo: dict)
-        */
         
         self.performSegue(withIdentifier: "UnwinfToTagListController", sender: self)
     }

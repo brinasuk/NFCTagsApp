@@ -56,6 +56,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     // MARK: - PROGRAM LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+        
+//        let string = "$1,abc234,567.99"
+//        let result = string.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
+//        print (result)
         
         //configureFor(profileType: currentProfile)
 
@@ -166,7 +172,6 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //displayMessage(message: kAppDelegate.deeplink ?? "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,7 +191,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         if (kAppDelegate.isDatabaseDirty == true) {
             //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
-            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
+            //THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
             loadTagTable() //GET INFO FOR NEW USER
             kAppDelegate.isDatabaseDirty = false
         }
@@ -224,10 +229,10 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         }
     }
     
-    @IBAction private func btnMaintenancePressed(_ sender: Any) {
-        // BUTTON IS HIDDEN FROM EVERYDAY JOE USERS
-        //TODO: PUT BACK  performSegue(withIdentifier: "MaintTableView", sender: self)
-    }
+//    @IBAction private func btnMaintenancePressed(_ sender: Any) {
+//        // BUTTON IS HIDDEN FROM EVERYDAY JOE USERS
+//        //TODO: PUT BACK  performSegue(withIdentifier: "MaintTableView", sender: self)
+//    }
     
     @IBAction private func btnAugRealityPressed(_ sender: Any) {
         // CHECK FOR ARKit AVAILABILITY
@@ -309,7 +314,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //THIS ERROR ALWAYS COMES UP, EVEN ON A SUCCESSFUL SCAN. ????
         //DO NOT SHOW THIS MESSAGE TO THE USER EVER
         if error.localizedDescription == "Feature not supported" {
-            displayMessage(message: "NFC Tag scan not supported")
+            displayMessage(message: "NFC tag scanning is unavailable on this device")
         }
         print(error.localizedDescription)
         
@@ -329,14 +334,14 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             
             //NSLog(@"IDENTIFIER: %@", message.ide)
             
-            //        for message in messages {
-            //            for record in message.records {
-            //                print(record.identifier)
-            //                print(record.payload)
-            //                print(record.type)
-            //                print(record.typeNameFormat)
-            //            }
-            //        }
+                    for message in messages {
+                        for record in message.records {
+                            print(record.identifier)
+                            print(record.payload)
+                            print(record.type)
+                            print(record.typeNameFormat)
+                        }
+                    }
             
             for payload in message.records {
                 guard let parsedPayload = VYNFCNDEFPayloadParser.parse(payload) else {
@@ -391,8 +396,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                             
                             // AFTER SUCCESSFULLY SCANNING THE TAG, LOOKUP THE INFO THE OWNER HAS SAVED FOR IT
-                            
-                            //TODO: HUGE FIX HERE
+
                             self.lookupTagIfo(textPayload)
                         })
                     }
@@ -402,11 +406,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                         // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
                         session.invalidate()
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                            // The following replaces showwebview
-                            if let url = URL(string: urlString ) {
-                                let safariVC = SFSafariViewController(url: url)
-                                self.present(safariVC, animated: true, completion: nil)
-                            }
+                            
+                            self.showWebPage(urlString)
+//                            if let url = URL(string: urlString ) {
+//                                let safariVC = SFSafariViewController(url: url)
+//                                self.present(safariVC, animated: true, completion: nil)
+//                            }
                             
                         })
                     }
@@ -415,21 +420,14 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         }
     }
     
-    //func showWebPagez(_ urlString: String?) {
-    //    // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
-    //    //session.invalidate()
-    //
-    //    if let url = URL(string: urlString ?? "") {
-    //        let safariVC = SFSafariViewController(url: url)
-    //        present(safariVC, animated: true, completion: nil)
-    //    }
-    //}
+
     
     // MARK: - PARSE QUERIES
     
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
     func lookupTagIfo(_ passTagId: String?) {
         //tagId = "info@kcontemporaryart.com:102"
+        print(passTagId as Any)
         
         let useTagId:String = passTagId ?? ""
         //if useTagId == nil {useTagId = ""} //Just in case
@@ -439,8 +437,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 
         guard let lastComponent = useTagId.split(separator: "/").last else { return  }
         let sku = String (lastComponent)
-        //print("PASSED TAGID:\(useTagId)")
-        //print("PASSED SKU:\(sku)")
+        print("PASSED TAGID:\(useTagId)")
+        print("PASSED SKU:\(sku)")
         
         //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
         //        let tagString = passTagId ?? ""
@@ -472,13 +470,16 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         let sv = UIViewController.displaySpinner(onView: self.view)
         
         let query = PFQuery(className: "TagOwnerInfo")
-        query.whereKey("ownerId", equalTo: sku ?? "")
+        query.whereKey("ownerId", equalTo: sku )
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
-            if let error = error {
+            if error != nil {
                 // NO MATCH FOUND
                 UIViewController.removeSpinner(spinner: sv)
-                print(error.localizedDescription)
-                self.displayErrorMessage(message: error.localizedDescription)
+                //NO MATCH IN DATABASE. JUST SHOW A MESSAGE WITH TAG INFO
+                self.showWebPage(useTagId)
+                
+//                print(error.localizedDescription)
+//                self.displayErrorMessage(message: error.localizedDescription)
             } else if let object = object {
                 // The query succeeded with a matching result
                 //print("HERE WE ARE!!")
@@ -521,8 +522,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                 let triggerDistance = object["triggerDistance"] as? Double ?? 0.5
                 
                 //IF THIS IS NOT A VALID URL THEN BAIL OUT!!!
-                guard let url = URL.init(string: ownerUrl)
-                    else { return }
+                if self.verifyUrl(urlString: ownerUrl) == false {return}
+
                 
                 
                 // ADD TO TAGS TABLE
@@ -934,6 +935,7 @@ extension TagListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        //TODO: NEVER USE THE FOLLOWING LINE. IT DESTROYS PASSING ANYTHING IN THE SEGUE!!!
         //tableView.deselectRow(at: indexPath, animated: true)
         
         self.currentRow = indexPath.row
@@ -944,7 +946,7 @@ extension TagListViewController: UITableViewDataSource {
         //print("VIGE: \(vige)")
         
         
-        //TODO:      PUT THE FOLLOWING LINES BACK
+        //TODO:  TO SWITCH PUT THE FOLLOWING LINES BACK
         //        let cellDataParse:PFObject = self.dataParse.object(at: indexPath.row) as! PFObject
         //
         //        var tagUrl:String? = cellDataParse.object(forKey: "tagUrl") as? String
@@ -1016,22 +1018,10 @@ extension TagListViewController: UITableViewDataSource {
     
     
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if let destination = segue.destination as? AuteurDetailViewController,
-    //            let indexPath = tableView.indexPathForSelectedRow {
-    //            //TODO: FIX THIS destination.selectedAuteur = auteurs[indexPath.row]
-    //            //            if let indexPath = tableView.indexPathForSelectedRow {
-    //            //                let destinationController = segue.destination as! RestaurantDetailViewController
-    //            //                destinationController.restaurantImageName = restaurantImages[indexPath.row]
-    //            //                destinationController.restaurantName = restaurantNames[indexPath.row]
-    //            //                destinationController.restaurantType = restaurantTypes[indexPath.row]
-    //            //                destinationController.restaurantLocation = restaurantLocations[indexPath.row]
-    //            //            }
-    //        }
-    //    }
+
     
     /*
-     //TODO: ALEX PUT BACK
+     //TODO: DON'T WORRY. DELETE CODE HANDLED ELSEWHERE
      // MARK: - Table view delegate 2
      func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
      let delete = UIContextualAction(style: .destructive, title: "DELETE", handler: { action, sourceView, completionHandler in
@@ -1247,29 +1237,20 @@ extension TagListViewController: UITableViewDataSource {
         let currentUser = PFUser.current()
         
         if currentUser != nil {
-            //TODO: FIX ALL PROGRESSHUD
+
             //ProgressHUD.show("Logging Out ...", interaction: false)
             PFUser.logOut()
             
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
-            //kAppDelegate.loggedInFlag = false
             //kAppDelegate.currentUserFacebookId = ""
             kAppDelegate.currentUserRole = "User"
-            //kAppDelegate.currentAgentObjectId = ""
             kAppDelegate.currentUserObjectId = ""
             kAppDelegate.currentUserIsAgent = false
             
             //[self showHideButtons];
             //ProgressHUD.dismiss()
             btnSignIn.title = "Sign In"
-            
-            //CRITICAL. SET NUMBER OF ROWS IN MENU !!
-            let dict = [
-                "ACTION": "LOGOUT"
-            ]
-            //TODO: WHAT EXACTLY IS THIS DOING?
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kREFRESHUSERTABLE), object: nil, userInfo: dict)
             
             showLoginScreen()
         }
@@ -1299,7 +1280,6 @@ extension TagListViewController: UITableViewDataSource {
         let currentUser = PFUser.current()
 
         if currentUser != nil {
-            //kAppDelegate.loggedInFlag = true;
             
             kAppDelegate.currentUserEmail = currentUser?.email
             if kAppDelegate.currentUserEmail == nil {
@@ -1322,11 +1302,12 @@ extension TagListViewController: UITableViewDataSource {
                 kAppDelegate.currentUserRole = "User"
             }
             
-            kAppDelegate.currentUserObjectId = currentUser?.object(forKey: PF_USER_AGENTOBJECTID) as? String
-            if kAppDelegate.currentUserObjectId == nil {
-                kAppDelegate.currentUserObjectId = ""
-            }
-            //TODO: PUT BACK? kAppDelegate.currentUserObjectId = currentUser?.objectId
+//            kAppDelegate.currentUserObjectId = currentUser?.object(forKey: PF_USER_AGENTOBJECTID) as? String
+//            if kAppDelegate.currentUserObjectId == nil {
+//                kAppDelegate.currentUserObjectId = ""
+//            }
+            //TODO: PUT BACK? YES!!!!
+            kAppDelegate.currentUserObjectId = currentUser?.objectId
             
             var isAgent = currentUser?.object(forKey: PF_ISAGENTYN) as? String
             if isAgent == nil {
@@ -1335,7 +1316,7 @@ extension TagListViewController: UITableViewDataSource {
             
             if (isAgent == "YES") {
                 kAppDelegate.currentUserIsAgent = true
-                btnMaintenance.title = "Manage"
+                btnMaintenance.title = "Manage Tags"
                 btnMaintenance.isEnabled = true
             } else {
                 kAppDelegate.currentUserIsAgent = false
@@ -1347,7 +1328,6 @@ extension TagListViewController: UITableViewDataSource {
             //statusLabel.text = //HANDLED EARLIER
             
         } else {
-            //kAppDelegate.loggedInFlag = false
             kAppDelegate.currentUserEmail = "anonymous@hillsoft.com"
             kAppDelegate.currentUserName = "anonymous"
             //kAppDelegate.currentUserFacebookId = ""
@@ -1376,7 +1356,38 @@ extension TagListViewController: UITableViewDataSource {
     //
     //    }
     
-
+    func showWebPage(_ urlString: String?) {
+        //YOU ARE HERE BECAUSE THE TAG DOES NOT CONTAIN A VALID URL
+        //COULD BE MISING HTTP:// or HTTPS://
+        if verifyUrl(urlString: urlString) == false {
+            let alertView = UIAlertController(title: "Tag Contains", message: urlString, preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+            }
+            alertView.addAction(OKAction)
+            if let presenter = alertView.popoverPresentationController {
+                presenter.sourceView = self.view
+                presenter.sourceRect = self.view.bounds
+            }
+            self.present(alertView, animated: true, completion:nil)
+            return
+        }
+        if let url = URL(string: urlString ?? "") {
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true, completion: nil)
+        }
+    }
+    
+    func verifyUrl (urlString: String?) -> Bool {
+        //Check for nil
+        if let urlString = urlString {
+            // create NSURL instance
+            if let url = NSURL(string: urlString) {
+                // check if your application can open the NSURL instance
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
+    }
     
     func displayMessage(message:String) {
         let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
@@ -1475,7 +1486,7 @@ extension TagListViewController: UITableViewDataSource {
         
         if (kAppDelegate.isDatabaseDirty == true) {
             //GET INFO FOR NEW USER IF NEW LOGIN or DATA CHANGED!!
-            //TODO: THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
+            //THIS STATEMENT IS CRITICAL. RELOAD THE PHOTO/DATA AFTER MAINT CHANGES.
             loadTagTable() //GET INFO FOR NEW USER
             kAppDelegate.isDatabaseDirty = false
         }

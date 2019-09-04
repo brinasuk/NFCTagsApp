@@ -30,17 +30,4 @@ extension UIViewController {
         }
     }
     
-    //TODO: SEE IF YOU CAN MAKE THIS WORK
-//    class func displayMessageX(message:String) {
-//        let alertView = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-//        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-//        }
-//        alertView.addAction(OKAction)
-//        if let presenter = alertView.popoverPresentationController {
-//            presenter.sourceView = self.view
-//            presenter.sourceRect = self.view.bounds
-//        }
-//        self.present(alertView, animated: true, completion:nil)
-//    }
-    
 }

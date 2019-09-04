@@ -269,7 +269,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         
         let placeholderImage = UIImage(named: "icons8-camera-1")
         
-        //TODO: Fix SIZE Width and Height. Plug in correct values
+        //TODO: RESIZE Width and Height. Plug in correct values
         let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
         
         photoImageView.kf.indicatorType = .activity
@@ -287,7 +287,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
             switch result {
             case .success(let value):
                 self.imageToUpload = (self.photoImageView.image ?? UIImage())! //or UIImage(
-                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+//                print("Task done for: \(value.source.url?.absoluteString ?? "")")
             case .failure(let error):
                 self.imageToUpload = nil
                 print("Job failed: \(error.localizedDescription)")

@@ -115,7 +115,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="sOV-Rc-2en"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Manage" id="lnr-g4-LfB">
+                                    <barButtonItem title="Manage Tags" id="lnr-g4-LfB">
                                         <connections>
                                             <segue destination="Wbr-7r-70g" kind="show" id="Pcm-5D-WrO"/>
                                         </connections>
@@ -361,11 +361,11 @@
         <scene sceneID="2lW-ff-SRb">
             <objects>
                 <viewController id="VaW-2d-StK" customClass="DetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="nYF-QD-CJ3">
+                    <view key="view" contentMode="scaleToFill" id="nYF-QD-CJ3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gdl-CJ-31a">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gdl-CJ-31a">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="tb4-Qn-VVC" userLabel="Header View" customClass="DetailHeaderView" customModule="NFCTagsApp" customModuleProvider="target">
@@ -582,7 +582,7 @@
                                     <outlet property="delegate" destination="VaW-2d-StK" id="QnS-c1-zyH"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hi8-tS-7gX">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hi8-tS-7gX">
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="A1a-LB-Dza"/>
@@ -1263,7 +1263,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="alex" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="laW-1O-UIy">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="laW-1O-UIy">
                                 <rect key="frame" x="70" y="260" width="274" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1276,7 +1276,7 @@
                                     <outlet property="delegate" destination="bji-6S-h7v" id="gtg-Vz-SG4"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="alex@hillsoft.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="HT2-FF-TEJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="HT2-FF-TEJ">
                                 <rect key="frame" x="68" y="200" width="276" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1375,7 +1375,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hate This" borderStyle="roundedRect" placeholder="First and Last Name" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="tR4-yX-nMj" userLabel="Name">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First and Last Name" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="tR4-yX-nMj" userLabel="Name">
                                 <rect key="frame" x="50" y="210" width="313" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1385,7 +1385,7 @@
                                     <outlet property="delegate" destination="lwy-OP-2Bg" id="EUr-M5-hHP"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hatethis@hillsoft.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="HlU-Gw-Toj" userLabel="Email">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="HlU-Gw-Toj" userLabel="Email">
                                 <rect key="frame" x="50" y="260" width="313" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1399,7 +1399,7 @@
                                     <outlet property="delegate" destination="lwy-OP-2Bg" id="YSP-R1-c5D"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hatethis" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="yul-QM-nsg" userLabel="Password">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="yul-QM-nsg" userLabel="Password">
                                 <rect key="frame" x="50" y="310" width="313" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1502,7 +1502,7 @@
         <image name="text-input" width="298" height="36.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JOf-sv-hGR"/>
+        <segue reference="gfT-in-4Ae"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
