@@ -1,4 +1,5 @@
 import UIKit
+import Foundation
 import CoreNFC
 import VYNFCKit
 import Parse
@@ -56,8 +57,6 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     // MARK: - PROGRAM LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         
 //        let string = "$1,abc234,567.99"
 //        let result = string.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
@@ -429,12 +428,17 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //tagId = "info@kcontemporaryart.com:102"
         print(passTagId as Any)
         
-        let useTagId:String = passTagId ?? ""
+        let passedTagId:String = passTagId ?? ""
+        let useTagId = passedTagId.trimmingCharacters(in: CharacterSet.whitespaces) //Trim trailing Spaces etc
+        
+        //            print(newString)
         //if useTagId == nil {useTagId = ""} //Just in case
         
         //useTagId = "info@kcontemporaryart.com:102"
         //useTagId = "https://artworks4me.com/alex@hillsoft.com:101"
+//useTagId = "https://artworks4me.com://tags/info@kcontemporaryart.com:101"
 
+        
         guard let lastComponent = useTagId.split(separator: "/").last else { return  }
         let sku = String (lastComponent)
         print("PASSED TAGID:\(useTagId)")
@@ -1127,29 +1131,25 @@ extension TagListViewController: UITableViewDataSource {
     // MARK: - TRAILING SWIPE Table view delegate
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, sourceView, completionHandler) in
             print ("REMOVE ROW")
             let tag = self.tagObjects[indexPath.row]
             self.deleteObjectId = tag.tagObjectId
-            print("DELETE1 + \(self.deleteObjectId)")
-//            Alertift.alert(title: "Remove Item",message: "Are you sure you wish to Remove this Item?")
-//                .action(.default("Yes"), isPreferred: true) { (_, _, _) in
-//                    print("YES!")
-//                    self.removeItem()
-//                    completionHandler(true)
-//                }
-//                .action(.cancel("No")) { (_, _, _) in
-//                    print("No/Cancel Clicked")
-//                    completionHandler(false)
-//                }
-//                .show()
+            //print("DELETE1 + \(self.deleteObjectId)")
             
-            self.removeItem()
+            Alertift.alert(title: "Remove Item",message: "Are you sure you wish to Remove this Item?")
+                .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+                    //print("YES!")
+                    self.removeItem()
+                    //completionHandler(true)
+                }
+                .action(.cancel("No")) { (_, _, _) in
+                    //print("No/Cancel Clicked")
+                    //completionHandler(false)
+                }
+                .show()
+
             completionHandler(true)
-            
-            
-            // Call completion handler with true to indicate
-            
         }
         
         let websiteAction = UIContextualAction(style: .normal, title: "Website") { (action, sourceView, completionHandler) in

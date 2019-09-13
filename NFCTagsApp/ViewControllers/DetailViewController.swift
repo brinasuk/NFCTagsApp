@@ -280,6 +280,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
             //var addr = tag.tagAddress + " " + tag.tagAddress2 + " " + tag.tagCity
             let addr = tag.tagAddrFull
+            //TODO: SWIFTY MAP USES LAT/LON. CHOOSE ONE WAY OR THE OTHER
             cell.configure(location: addr)  //NOTE: THIS IS DEFINED IN THE CELL
             cell.selectionStyle = .none
             
@@ -507,27 +508,27 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "click", withExtension: "mp3") else { return }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            
-            /* iOS 10 and earlier require the following line:
-             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
-            
-            guard let player = player else { return }
-            
-            player.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
+//    func playSound() {
+//        guard let url = Bundle.main.url(forResource: "click", withExtension: "mp3") else { return }
+//
+//        do {
+//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+//            try AVAudioSession.sharedInstance().setActive(true)
+//
+//            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+//
+//            /* iOS 10 and earlier require the following line:
+//             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+//
+//            guard let player = player else { return }
+//
+//            player.play()
+//
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+//    }
 }
 
 /*

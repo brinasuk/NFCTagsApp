@@ -467,6 +467,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //    return YES;
     //    }
     
+
+
     // MARK: Universal Links
     //TWO
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
@@ -536,6 +538,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+
     /*
      //NOTE: HUGE BUG. SENDGRID DOES NOT WORK WITH PARSE ON AN iPHONE
      //NOTE: THIS DOES NOT RUN STAND ALONE ON YOUR iPHONE. DO NOT EVER USE IT!!
@@ -559,4 +562,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  */
     
+/*
+    func application(
+        _ application: UIApplication,
+        continue userActivity: NSUserActivity,
+        restorationHandler: @escaping ([UIUserActivityRestoring]?
+        ) -> Void) -> Bool {
+        
+        // 1
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let url = userActivity.webpageURL,
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+                return false
+        }
+        
+//        // 2
+//        if let computer = ItemHandler.sharedInstance.items
+//            .filter({ $0.path == components.path}).first {
+//            presentDetailViewController(computer)
+//            return true
+//        }
+        
+        // 3
+        if let webpageUrl = URL(string: "http://rw-universal-links-final.herokuapp.com") {
+            application.open(webpageUrl)
+            return false
+        }
+        
+        return false
+    }
+  */
 }

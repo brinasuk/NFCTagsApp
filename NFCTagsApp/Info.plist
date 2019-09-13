@@ -17,38 +17,38 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6</string>
-    <key>CFBundleVersion</key>
-    <string>1.0.0</string>
+	<string>1.7</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb377004996297600</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>deeplinkTutorial.com</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>deeplinkTutorial</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>artworks4me.com</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>artworks4me</string>
-            </array>
-        </dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb377004996297600</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>deeplinkTutorial.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>deeplinkTutorial</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>artworks4me.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>artworks4me</string>
+			</array>
+		</dict>
 	</array>
-    <key>FacebookAppID</key>
-    <string>377004996297600</string>
-    <key>FacebookDisplayName</key>
-    <string>ArtWorks4Me</string>
+	<key>CFBundleVersion</key>
+	<string>1.0.0</string>
+	<key>FacebookAppID</key>
+	<string>377004996297600</string>
+	<key>FacebookDisplayName</key>
+	<string>ArtWorks4Me</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
