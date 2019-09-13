@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Replaced all currentAgentObjectId with currentUserObjectId
     //var currentAgentObjectId var :String? = ""
     var currentUserObjectId:String? = ""  // NOT currentAgentObjectId
-    var deeplinkFound:String? = ""
+    var currentDeeplink:String? = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -437,7 +437,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("URL: \(url)")
         print("SKU: \(String(describing: sku))")
         //sendEmail(title: "OPENURL", message: url.path)
-        deeplinkFound = String(sku ?? "")
+        currentDeeplink = String(sku ?? "")
         //Posting a notification2
         NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
         //Deeplinker.handleDeeplink(url: url)
@@ -486,10 +486,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("TWO")
                 print("URL: \(url)")
                 print("SKU: \(String(describing: sku))")
+                currentDeeplink = String(sku ?? "")
                 NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
                 
                 //sendEmail(title: "CONTINUE ACTIVITY", message: url.path)
-                deeplinkFound = String(sku ?? "")
+                
                 //Deeplinker.handleDeeplink(url: url)
                 //navigationController.popToRootViewController(animated: true)
             }
@@ -523,7 +524,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("SKU: \(sku)")
         print("PAYLOADTEXT: \(payloadText)")
         //sendEmail(title: "PAYLOADTEXT", message: payloadText)
-        deeplinkFound = String(sku)
+        currentDeeplink  = String(sku)
         NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
         
         //     // Send the message to `MessagesTableViewController` for processing.

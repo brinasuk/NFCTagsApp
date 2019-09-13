@@ -134,12 +134,13 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     }
     
     @objc func handleDeepLink() {
-        var deepLink:String? = kAppDelegate.deeplinkFound ?? ""
+        var deepLink:String? = kAppDelegate.currentDeeplink ?? ""
         if deepLink == nil {deepLink = ""}  //JUST IN CASE
         print ("DEEPLINK PASSED IS: \(String(describing: deepLink))")
         //myLink = "info@kcontemporaryart.com:102"
         if deepLink!.count > 0 {
             lookupTagIfo(deepLink)
+            kAppDelegate.currentDeeplink = "" //NBB: DONT REUSE THIS SAME LINK NEXT TIME
         }
     }
     
@@ -1132,7 +1133,7 @@ extension TagListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, sourceView, completionHandler) in
-            print ("REMOVE ROW")
+            //print ("REMOVE ROW")
             let tag = self.tagObjects[indexPath.row]
             self.deleteObjectId = tag.tagObjectId
             //print("DELETE1 + \(self.deleteObjectId)")
@@ -1196,30 +1197,27 @@ extension TagListViewController: UITableViewDataSource {
     
 
     func removeItem () {
-        print("DELETE2 + \(self.deleteObjectId)")
+        //print("DELETE2 + \(self.deleteObjectId)")
         let query = PFQuery(className: "Tags")
         
+        let sv = UIViewController.displaySpinner(onView: self.view)
         
         query.getObjectInBackground(withId: self.deleteObjectId) { (object: PFObject?, error: Error?) in
             if let error = error {
                 // The query failed
+                UIViewController.removeSpinner(spinner: sv)
                 print(error.localizedDescription)
                 //self.displayMessage(message: error.localizedDescription)
             } else if let object = object {
                 // The query succeeded with a matching result
-                print("SUCCESS")
-                //object.deleteInBackground()
-                
+                //print("SUCCESS")
+
                 object.deleteInBackground(block: { (deleteSuccessful, error) -> Void in
                     // User deleted
                     //self.tableView.reloadData()
+                    UIViewController.removeSpinner(spinner: sv)
                     self.loadTagTable() //DELETE
                 })
-                
-                //self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                //self.dataParse.remove(indexPath.row)
-                //completionHandler(true)
-                //self.displayMessage(message: "Successfully Deleted")
                 
                 
             } else {
@@ -1360,15 +1358,17 @@ extension TagListViewController: UITableViewDataSource {
         //YOU ARE HERE BECAUSE THE TAG DOES NOT CONTAIN A VALID URL
         //COULD BE MISING HTTP:// or HTTPS://
         if verifyUrl(urlString: urlString) == false {
-            let alertView = UIAlertController(title: "Tag Contains", message: urlString, preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-            }
-            alertView.addAction(OKAction)
-            if let presenter = alertView.popoverPresentationController {
-                presenter.sourceView = self.view
-                presenter.sourceRect = self.view.bounds
-            }
-            self.present(alertView, animated: true, completion:nil)
+            displayMessage(message: urlString ?? "nil")
+            
+//            let alertView = UIAlertController(title: "Tag Contains:", message: urlString, preferredStyle: .alert)
+//            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+//            }
+//            alertView.addAction(OKAction)
+//            if let presenter = alertView.popoverPresentationController {
+//                presenter.sourceView = self.view
+//                presenter.sourceRect = self.view.bounds
+//            }
+//            self.present(alertView, animated: true, completion:nil)
             return
         }
         if let url = URL(string: urlString ?? "") {

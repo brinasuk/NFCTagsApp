@@ -34,14 +34,6 @@
 				<string>deeplinkTutorial</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>artworks4me.com</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>artworks4me</string>
-			</array>
-		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.0</string>
