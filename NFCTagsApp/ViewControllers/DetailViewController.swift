@@ -105,6 +105,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
         let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
+        //"https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg"
         
         //        cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         //        cell.tagImageView.layer.masksToBounds = true

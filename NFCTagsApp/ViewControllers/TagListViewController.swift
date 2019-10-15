@@ -54,9 +54,27 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //        ShortcutParser.shared.registerShortcuts(for: profileType)
 //    }
     
+//    func getQueryStringParameter(url: String, param: String) -> String? {
+//        guard let url = URLComponents(string: url) else { return nil }
+//        return url.queryItems?.first(where: { $0.name == param })?.value
+//    }
+    
+    
     // MARK: - PROGRAM LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let urlString:String = "http://artworks4me.com/?tag=12345"
+        let sku = urlString.split(separator: "?").last
+        print("SKU: \(String(describing: sku))")
+        
+//
+//        var tagID:String? = ""
+//
+//        tagID = getQueryStringParameter(url: urlString, param: "taxg")
+//
+//        print (tagID ?? "alex nil")
+        
         
 //        let string = "$1,abc234,567.99"
 //        let result = string.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
@@ -130,9 +148,11 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //FORCE A RELOAD OF THE DATA
         kAppDelegate.isDatabaseDirty = true
         
+        //WATCH OUT FOR UNIVERSAL LINKS FROM SCANNED TAGS
         NotificationCenter.default.addObserver(self, selector: #selector(handleDeepLink), name: Notification.Name("DEEPLINKFOUND"), object: nil)
     }
     
+    //OK! DEEP LINK FOUND. GO AHEAD AND SHOW IT!
     @objc func handleDeepLink() {
         var deepLink:String? = kAppDelegate.currentDeeplink ?? ""
         if deepLink == nil {deepLink = ""}  //JUST IN CASE
@@ -424,9 +444,9 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     // MARK: - PARSE QUERIES
     
-    // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE MATCHING OWNER INFO
+    // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE OWNER BY IT'S UNIQUE ID
     func lookupTagIfo(_ passTagId: String?) {
-        //tagId = "info@kcontemporaryart.com:102"
+        //EXAMPLE: tagId = "info@kcontemporaryart.com:102"
         print(passTagId as Any)
         
         let passedTagId:String = passTagId ?? ""
