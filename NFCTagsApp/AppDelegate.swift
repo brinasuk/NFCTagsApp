@@ -361,7 +361,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      let sku = payloadText.split(separator: "/").last else {
      return false
      }
-     print("SKU: \(sku)")
+     print("1SKU: \(sku)")
      
 
              guard let product = productStore.product(withID: String(sku)) else {
@@ -435,7 +435,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("ONE")
         print("OPENURL: \(url.path)")
         print("URL: \(url)")
-        print("SKU: \(String(describing: sku))")
+        print("2SKU: \(String(describing: sku))")
         //sendEmail(title: "OPENURL", message: url.path)
         currentDeeplink = String(sku ?? "")
         //Posting a notification2
@@ -485,7 +485,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let sku = url.path.split(separator: "/").last
                 print("TWO")
                 print("URL: \(url)")
-                print("SKU: \(String(describing: sku))")
+                print("3SKU: \(String(describing: sku))")
                 currentDeeplink = String(sku ?? "")
                 NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
                 
@@ -521,7 +521,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         print("THREE")
         print("NDEFMESSAGE: \(ndefMessage)")
-        print("SKU: \(sku)")
+        print("4SKU: \(sku)")
         print("PAYLOADTEXT: \(payloadText)")
         //sendEmail(title: "PAYLOADTEXT", message: payloadText)
         currentDeeplink  = String(sku)

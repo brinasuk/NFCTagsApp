@@ -54,10 +54,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //        ShortcutParser.shared.registerShortcuts(for: profileType)
 //    }
     
-//    func getQueryStringParameter(url: String, param: String) -> String? {
-//        guard let url = URLComponents(string: url) else { return nil }
-//        return url.queryItems?.first(where: { $0.name == param })?.value
-//    }
+
     
     
     // MARK: - PROGRAM LIFECYCLE
@@ -68,12 +65,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         let sku = urlString.split(separator: "?").last
         print("SKU: \(String(describing: sku))")
         
-//
-//        var tagID:String? = ""
-//
-//        tagID = getQueryStringParameter(url: urlString, param: "taxg")
-//
-//        print (tagID ?? "alex nil")
+
+        var tagID:String? = ""
+
+        tagID = getQueryStringParameter(url: urlString, param: "taxg")
+
+        print (tagID ?? "alex nil")
         
         
 //        let string = "$1,abc234,567.99"
@@ -377,6 +374,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                     response = String(format: "%@%@", response, parsedPayload.uriString)
                     // urlString ADDED BY ALEX !!!!!
                     urlString = parsedPayload.uriString
+                    //LINK COMES IN HERE!!!!!!!!
                 } else if let parsedPayload = parsedPayload as? VYNFCNDEFTextXVCardPayload {
                     response = "[TextXVCard payload]\n"
                     response = String(format: "%@%@", response, parsedPayload.text)
@@ -406,6 +404,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                 }
                 
                 NSLog("%@", response)
+                NSLog("MESSAGE:%@",  urlString)
                 
                 //============================================
                 DispatchQueue.main.async(execute: {
@@ -1514,6 +1513,22 @@ extension TagListViewController: UITableViewDataSource {
     
     
 }
+
+    func getQueryStringParameter(url: String, param: String) -> String? {
+        guard let url = URLComponents(string: url) else { return nil }
+//        if let components = url {
+//            components.host
+//            components.query
+//            components.percentEncodedQuery
+//
+//            if let queryItems = components.queryItems {
+//                for queryItem in queryItems {
+//                    print("\(queryItem.name): \(queryItem.value)")
+//                }
+//            }
+//        }
+        return url.queryItems?.first(where: { $0.name == param })?.value
+    }
 
 /*
  let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in

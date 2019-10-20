@@ -1,5 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "C2AC7F62-0B9E-4D09-9AB2-C29B1399406D"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A767988E-2546-4B87-82EF-7698F892893C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/VYNFCKit/VYNFCKit/VYNFCNDEFPayloadParser.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "+parseMessageHeader:length:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "310010C0-B610-454B-AB82-FA6EACC3B097"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NFCTagsApp/ViewControllers/TagListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "readerSession(_:didDetectNDEFs:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8555263C-33DC-43BB-9F57-90440DB12EFF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NFCTagsApp/ViewControllers/TagListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
+            landmarkName = "readerSession(_:didDetectNDEFs:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8555263C-33DC-43BB-9F57-90440DB12EFF - 89fcda186d78c2d0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NFCTagsApp.TagListViewController.readerSession(_: __C.NFCNDEFReaderSession, didDetectNDEFs: Swift.Array&lt;__C.NFCNDEFMessage&gt;) -&gt; ()"
+                  moduleName = "NFCTagsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexlevy/Xcode_10_2_WORK/NFCTagsApp/NFCTagsApp/ViewControllers/TagListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "410"
+                  endingLineNumber = "410"
+                  offsetFromSymbolStart = "8068">
+               </Location>
+               <Location
+                  uuid = "8555263C-33DC-43BB-9F57-90440DB12EFF - 149bb64f983e5c01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in NFCTagsApp.TagListViewController.readerSession(_: __C.NFCNDEFReaderSession, didDetectNDEFs: Swift.Array&lt;__C.NFCNDEFMessage&gt;) -&gt; ()"
+                  moduleName = "NFCTagsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexlevy/Xcode_10_2_WORK/NFCTagsApp/NFCTagsApp/ViewControllers/TagListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "345"
+                  endingLineNumber = "345"
+                  offsetFromSymbolStart = "320">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4C926A2A-F89D-4BAD-BF57-371D8BBDDCDD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NFCTagsApp/ViewControllers/TagListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "405"
+            endingLineNumber = "405"
+            landmarkName = "readerSession(_:didDetectNDEFs:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
