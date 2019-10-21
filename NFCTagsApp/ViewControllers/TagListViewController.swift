@@ -61,16 +61,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let urlString:String = "http://artworks4me.com/?tag=12345"
-        let sku = urlString.split(separator: "?").last
-        print("SKU: \(String(describing: sku))")
-        
 
-        var tagID:String? = ""
-
-        tagID = getQueryStringParameter(url: urlString, param: "taxg")
-
-        print (tagID ?? "alex nil")
         
         
 //        let string = "$1,abc234,567.99"
@@ -351,14 +342,14 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             
             //NSLog(@"IDENTIFIER: %@", message.ide)
             
-                    for message in messages {
-                        for record in message.records {
-                            print(record.identifier)
-                            print(record.payload)
-                            print(record.type)
-                            print(record.typeNameFormat)
-                        }
-                    }
+//                    for message in messages {
+//                        for record in message.records {
+//                            print(record.identifier)
+//                            print(record.payload)
+//                            print(record.type)
+//                            print(record.typeNameFormat)
+//                        }
+//                    }
             
             for payload in message.records {
                 guard let parsedPayload = VYNFCNDEFPayloadParser.parse(payload) else {
@@ -372,12 +363,17 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                 } else if let parsedPayload = parsedPayload as? VYNFCNDEFURIPayload {
                     response = "[URI payload]\n"
                     response = String(format: "%@%@", response, parsedPayload.uriString)
+                    
+                    // ADDED BY ALEX SUNDAY OCT 20/2019
+                    //NFC TAG SCAN NOW COMES IN HERE!!!!!!!!
                     // urlString ADDED BY ALEX !!!!!
                     urlString = parsedPayload.uriString
-                    //LINK COMES IN HERE!!!!!!!!
+                    textPayload = ""
                 } else if let parsedPayload = parsedPayload as? VYNFCNDEFTextXVCardPayload {
                     response = "[TextXVCard payload]\n"
                     response = String(format: "%@%@", response, parsedPayload.text)
+                    textPayload = parsedPayload.text
+                    
                 } else if let sp = parsedPayload as? VYNFCNDEFSmartPosterPayload {
                     response = "[SmartPoster payload]\n"
                     for textPayload in sp.payloadTexts {
@@ -387,7 +383,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                     }
                     response = String(format: "%@%@", response, sp.payloadURI.uriString)
                     // urlString ADDED BY ALEX !!!!!
-                    urlString = sp.payloadURI.uriString
+                    textPayload = sp.payloadURI.uriString
+                    
                 } else if let wifi = parsedPayload as? VYNFCNDEFWifiSimpleConfigPayload {
                     for case let credential as VYNFCNDEFWifiSimpleConfigCredential in wifi.credentials {
                         response = String(format: "%@SSID: %@\nPassword: %@\nMac Address: %@\nAuth Type: %@\nEncrypt Type: %@",
@@ -403,38 +400,34 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                     response = "Parsed but unhandled payload type"
                 }
                 
-                NSLog("%@", response)
-                NSLog("MESSAGE:%@",  urlString)
+                print("RESPONSE: \(response)")
+                print("MESSAGE: \(urlString)")
+                print("PAYLOAD: \(textPayload)")
                 
                 //============================================
                 DispatchQueue.main.async(execute: {
-                    // IF THERE IS A TEXT PAYLOAD THEN PARSE AND SHOW IT !!!!!
-                    if textPayload.count > 0 {  // ans ADDED BY ALEX
+                    // IF THIS IS A VALID URL THEN ADD TO TAG TABLE AND SHOW IT
+                    if urlString.count > 0 {  // ans ADDED BY ALEX
                         // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
                         session.invalidate()
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                             
-                            // AFTER SUCCESSFULLY SCANNING THE TAG, LOOKUP THE INFO THE OWNER HAS SAVED FOR IT
-
-                            self.lookupTagIfo(textPayload)
+                            // AFTER SUCCESSFULLY SCANNING THE TAG, LOOKUP THE INFO IN THE TAGOWNER TABLE AND DISPLAY THE WEBSITE
+                            self.lookupTagIfo(urlString)
                         })
                     }
                     
-                    // IF THERE IS A VALID URL HERE THEN SHOW IT
-                    if urlString.count > 0 {
-                        // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
-                        session.invalidate()
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                            
-                            self.showWebPage(urlString)
-//                            if let url = URL(string: urlString ) {
-//                                let safariVC = SFSafariViewController(url: url)
-//                                self.present(safariVC, animated: true, completion: nil)
-//                            }
-                            
-                        })
-                    }
+                    // IF THERE IS A TEXT PAYLOAD THEN PARSE AND SHOW IT !!!!!
+                     if textPayload.count > 0 {
+                         // Close NFC reader session and open URI after delay. Not all can be opened on iOS.
+                         session.invalidate()
+                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                             self.showWebPage(textPayload)
+                         })
+                     }
                 })
+                
+                
             }
         }
     }
@@ -442,27 +435,36 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 
     
     // MARK: - PARSE QUERIES
-    
     // AFTER SUCCESSFULLY SCANNING A TAG, LOOKUP THE OWNER BY IT'S UNIQUE ID
-    func lookupTagIfo(_ passTagId: String?) {
-        //EXAMPLE: tagId = "info@kcontemporaryart.com:102"
-        print(passTagId as Any)
+    func lookupTagIfo(_ passTagInfo: String?) {
+        //useTagId = "info@kcontemporaryart.com:102"  //OLD - NO LONGER WORKS
+        //useTagId = "tag=info@kcontemporaryart.com:102"
+        //useTagId = "https://artworks4me.com/?tag=alex@hillsoft.com:101"
+        //useTagId = "http://artworks4me.com/?tag=12345"
         
-        let passedTagId:String = passTagId ?? ""
-        let useTagId = passedTagId.trimmingCharacters(in: CharacterSet.whitespaces) //Trim trailing Spaces etc
-        
-        //            print(newString)
-        //if useTagId == nil {useTagId = ""} //Just in case
-        
-        //useTagId = "info@kcontemporaryart.com:102"
-        //useTagId = "https://artworks4me.com/alex@hillsoft.com:101"
-//useTagId = "https://artworks4me.com://tags/info@kcontemporaryart.com:101"
+        let passedTag:String = passTagInfo ?? ""
+        let passedUrl = passedTag.trimmingCharacters(in: CharacterSet.whitespaces) //Trim trailing Spaces etc
+        print(passedUrl as Any)
 
+        //let myTag = passedUrl.split(separator: "?").last
+        let myTag = getQueryStringParameter(url: passedUrl, param: "tag")
+        let tag:String = String(myTag ?? "")
         
-        guard let lastComponent = useTagId.split(separator: "/").last else { return  }
-        let sku = String (lastComponent)
-        print("PASSED TAGID:\(useTagId)")
-        print("PASSED SKU:\(sku)")
+        //IF tag= NOT FOUND THEN DISPLAY THIS LINK WEBSITE AND USE BAIL OUT
+        print("TAG: \(tag)")
+        if (tag == "") {
+            self.showWebPage(passedUrl)
+            return
+        }
+        
+//        var tagID:String? = ""
+//        tagID = getQueryStringParameter(url: passedUrl, param: "tag")
+//        print (tagID ?? "alex nil")
+        
+//        guard let lastComponent = useTagId.split(separator: "/").last else { return  }
+//        let sku = String (lastComponent)
+//        print("PASSED TAGID:\(useTagId)")
+//        print("PASSED SKU:\(sku)")
         
         //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
         //        let tagString = passTagId ?? ""
@@ -477,14 +479,6 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         
         
-        ///let str = "Andrew, Ben, John, Paul, Peter, Laura"
-        ///let array = str.components(separatedBy: ", ")
-        
-        //        let sayHello = "Hello Swift 4 2017";
-        //        let result = sayHello.split(separator: " ")
-        //        print(result) result.count
-        
-        
         //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         //or: AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         //AudioServicesPlaySystemSound(1103) // SMSReceived (see SystemSoundID below)
@@ -493,14 +487,15 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         let sv = UIViewController.displaySpinner(onView: self.view)
         
+        //WE DO HAVE A TAG. SEE IF YOU CAN FIND IT IN THE DATABASE
         let query = PFQuery(className: "TagOwnerInfo")
-        query.whereKey("ownerId", equalTo: sku )
+        query.whereKey("ownerId", equalTo: tag )
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if error != nil {
                 // NO MATCH FOUND
                 UIViewController.removeSpinner(spinner: sv)
                 //NO MATCH IN DATABASE. JUST SHOW A MESSAGE WITH TAG INFO
-                self.showWebPage(useTagId)
+                self.showWebPage(passedUrl)
                 
 //                print(error.localizedDescription)
 //                self.displayErrorMessage(message: error.localizedDescription)
@@ -1378,16 +1373,6 @@ extension TagListViewController: UITableViewDataSource {
         //COULD BE MISING HTTP:// or HTTPS://
         if verifyUrl(urlString: urlString) == false {
             displayMessage(message: urlString ?? "nil")
-            
-//            let alertView = UIAlertController(title: "Tag Contains:", message: urlString, preferredStyle: .alert)
-//            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-//            }
-//            alertView.addAction(OKAction)
-//            if let presenter = alertView.popoverPresentationController {
-//                presenter.sourceView = self.view
-//                presenter.sourceRect = self.view.bounds
-//            }
-//            self.present(alertView, animated: true, completion:nil)
             return
         }
         if let url = URL(string: urlString ?? "") {
@@ -1516,17 +1501,6 @@ extension TagListViewController: UITableViewDataSource {
 
     func getQueryStringParameter(url: String, param: String) -> String? {
         guard let url = URLComponents(string: url) else { return nil }
-//        if let components = url {
-//            components.host
-//            components.query
-//            components.percentEncodedQuery
-//
-//            if let queryItems = components.queryItems {
-//                for queryItem in queryItems {
-//                    print("\(queryItem.name): \(queryItem.value)")
-//                }
-//            }
-//        }
         return url.queryItems?.first(where: { $0.name == param })?.value
     }
 
