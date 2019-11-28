@@ -271,6 +271,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func actionLoginFacebook(_ sender: Any) {
         bounce(facebookLoginButton)
+        print("FACEBOOK START")
         
         //AccessToken.current = nil //Logout
         logoutFacebook() //If you are logged in, logout
@@ -284,11 +285,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             //make sure we have a result, otherwise abort
+            
             guard let result = result else { return }
+            print(result)
             //if cancelled nothing todo
-            if result.isCancelled { return }
+            if result.isCancelled {
+                print("CANCELLED")
+                return
+                
+            }
+                
             else {
                 //login successfull, now request the fields we like to have in this case first name and last name
+                print("FACEBOOK OK")
                 GraphRequest(graphPath: "me", parameters: ["fields" : "first_name, last_name, name, email"]).start() {
                     (connection, result, error) in
                     //if we have an error display it and abort
