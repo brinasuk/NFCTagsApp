@@ -22,32 +22,21 @@ import FBSDKLoginKit  // ADDED FOR FACEBOOK AUG2019
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    //NOTE (0) SEARCH FOR 'PRODUCT NAME' AND CHANGE THIS !!!
-    //NOTE (1) MANUALY CHANGE BOTH DISPLAY NAME AND BUNDLE IDENTIFIER IN TARGET eg artworks4me or besthome4me
-    //NOTE (2) MANUALLY CHANGE LAUNCH SCREEN
-    //NOTE (3) MANUALLY CHANGE THE FOLLOWING _APPCODE
-    /*
-     * ART GUYS APP = art; com.hillsidesoftware.artworks4me
-     * DISPENSARIES = disp
-     * OPEN HOUSES = re; com.hillsidesoftware.besthome4me
-     * SHOWROOM = show;
-     */
+
     
     var window: UIWindow?
     
-    var appCode:NSString? = "art"  //OR "art" OR "disp" or "re" or "show"
-    //var appName:NSString? = ""
+    var appCode:NSString? = ""  //OR "art" OR "disp" or "re" or "show"
+
     //var placeholderName:NSString? = ""
     var tagOrBeacon:Bool? = false  //NO = NFC TAG, YES = BEACON
     var sendEmailFlag:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
-    var isDatabaseDirty:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
+    var isDatabaseDirty:Bool? = false
     
     // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP
     var currentUserName:String? = ""
     var currentUserEmail:String? = ""
-    var currentUserIsAgent:Bool? = false
-    //var currentUserFacebookId:String? = ""
+    //var currentUserIsAgent:Bool? = false
     var currentUserRole:String? = ""
     
     //TODO: May have mixed up UserObjectId and AgentObjectId.
@@ -57,6 +46,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var currentDeeplink:String? = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // SETTINGS FOR EACH APP. art/re/wine/disp ETC
+        
+        //NOTE (0) SEARCH FOR 'PRODUCT NAME' AND CHANGE THIS !!!
+        //NOTE (1) MANUALY CHANGE BOTH DISPLAY NAME AND BUNDLE IDENTIFIER IN TARGET INFO.PLIST eg artworks4me or besthome4me
+        //NOTE (2) MANUALLY CHANGE LAUNCH SCREEN
+        //NOTE (3) MANUALLY CHANGE THE FOLLOWING _APPCODE
+        /*
+         * ART GUYS APP = art; com.hillsidesoftware.artworks4me
+         * WINE
+         * DISPENSARIES = disp
+         * OPEN HOUSES = re; com.hillsidesoftware.besthome4me
+         * SHOWROOM = show;
+         */
+        
+        appCode = "art"
+        // YOU GET THE APPNAME LATER FROM THE INI BUNDLE
+//        let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
+//        print("App Display Name - \(applicationName)")
+        
         
         //        let center = UNUserNotificationCenter.current()
         //        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
@@ -82,22 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        // SETUP VARIABLES FOR THIS APP
-        if (appCode == "art") {
-            //appName = "ArtWorks4Me";
-        }
-        if (appCode == "re") {
-            //appName = "BestHome4Me";
-        }
-        if (appCode == "disp") {
-            //appName = "Dispensaries";
-        }
-        if (appCode == "show") {
-            //appName = "Showrooms";
-        }
-        if (appCode == "shop") {
-            //appName = "Shopping Cart";
-        }
+
         
         
         /*

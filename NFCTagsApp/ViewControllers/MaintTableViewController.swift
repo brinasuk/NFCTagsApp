@@ -87,7 +87,7 @@ class MaintTableViewController: UITableViewController {
     {
         let query = PFQuery(className: "TagOwnerInfo")
         query.whereKey("ownerEmail", equalTo: kAppDelegate.currentUserEmail!)
-        // NO APPCODE. FOR MAINT WE WANT ALL TAGS FOR THIS EMAIL
+        // NO APPCODE IN MAINT. FOR MAINT WE WANT ALL OWNER TAGS TO APPEAR
         //query.whereKey("appCode", equalTo: kAppDelegate.appCode!)
         query.order(byDescending: "ownerNumber")
         
@@ -113,7 +113,6 @@ class MaintTableViewController: UITableViewController {
                     let createdAt:Date = object.createdAt!
                     let ownerObjectId:String = object.objectId! //Used for Photo Name
                     
-                    //var appName:String? = kAppDelegate.appName as String?
                     var ownerAppCode:String? = object["ownerAppCode"] as? String
                     if ownerAppCode == nil {ownerAppCode = ""}
                     var ownerName:String? = object["ownerName"] as? String
@@ -381,7 +380,7 @@ class MaintTableViewController: UITableViewController {
      
      let query = PFQuery(className: "Tags")
      query.whereKey("tagId", equalTo: ownerId)
-     query.whereKey("appName", equalTo: kAppDelegate.appC)
+     /query.whereKey("appName", equalTo: kAppDelegate.appC)
      query.whereKey("createdAt", greaterThan: cutoffDate)
      query.order(byDescending: "createdAt")
      query.limit = 500

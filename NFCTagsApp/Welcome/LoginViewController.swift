@@ -538,7 +538,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //TODO: THESE IS AN AGENTOBJECTID IN THE PARSE TABLE BUT IT IS UNUSED
         
         //NOTE: WHEN AN AGENT FIRST CREATES AN ACCOUNT SET THIS TO NO. ONLY WHEN THEY BUT BEACONS ONLINE CAN HILLSIDE STAFF SET THIS MANUALLY IN THE AGENTS TABLE TO 'YES' !!
-        kAppDelegate.currentUserIsAgent = false
+        //kAppDelegate.currentUserIsAgent = false
 
         
         //UnwinfToTagListController

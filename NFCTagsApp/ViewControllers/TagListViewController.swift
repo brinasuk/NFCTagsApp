@@ -351,6 +351,23 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //                        }
 //                    }
             
+//            print("Detected tags with \(messages.count) messages")
+//
+//            for messageIndex in 0 ..< messages.count {
+//
+//                let message = messages[messageIndex]
+////                print("\tMessage \(messageIndex) with length \(message.length)")
+//
+//                for recordIndex in 0 ..< message.records.count {
+//
+//                    let record = message.records[recordIndex]
+//                    print("\t\tRecord \(recordIndex)")
+//                    print("\t\t\tidentifier: \(String(describing: String(data: record.identifier, encoding: .utf8)))")
+//                    print("\t\t\ttype: \(String(describing: String(data: record.type, encoding: .utf8)))")
+//                    print("\t\t\tpayload: \(String(data: record.payload, encoding: .utf8))")
+//                }
+//            }
+            
             for payload in message.records {
                 guard let parsedPayload = VYNFCNDEFPayloadParser.parse(payload) else {
                     continue
@@ -465,20 +482,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //        let sku = String (lastComponent)
 //        print("PASSED TAGID:\(useTagId)")
 //        print("PASSED SKU:\(sku)")
-        
-        //        //UPDATED JULY2019. ADDED OPTION TO SPECIFY APPCODE in TAG AFTER PIPE DELIMETER
-        //        let tagString = passTagId ?? ""
-        //        let arr = tagString.split(separator: "|")
-        //        let useTagId:String = String(arr[0])
-        //        let arrCount = arr.count
-        //        if arrCount > 0 {  //THE APPCODE IS IN THE TAG. USE IT!
-        //            kAppDelegate.appCode = arr[1] as NSString
-        //        }
-        //        print("USE TAGID: \(useTagId)")
-        //        print("APPCODE: \(String(describing: kAppDelegate.appCode))")
-        
-        
-        
+
         //AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         //or: AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         //AudioServicesPlaySystemSound(1103) // SMSReceived (see SystemSoundID below)
@@ -1258,7 +1262,7 @@ extension TagListViewController: UITableViewDataSource {
             //kAppDelegate.currentUserFacebookId = ""
             kAppDelegate.currentUserRole = "User"
             kAppDelegate.currentUserObjectId = ""
-            kAppDelegate.currentUserIsAgent = false
+            //kAppDelegate.currentUserIsAgent = false
             
             //[self showHideButtons];
             //ProgressHUD.dismiss()
@@ -1327,11 +1331,11 @@ extension TagListViewController: UITableViewDataSource {
             }
             
             if (isAgent == "YES") {
-                kAppDelegate.currentUserIsAgent = true
+                //kAppDelegate.currentUserIsAgent = true
                 btnMaintenance.title = "Manage Tags"
                 btnMaintenance.isEnabled = true
             } else {
-                kAppDelegate.currentUserIsAgent = false
+                //kAppDelegate.currentUserIsAgent = false
                 btnMaintenance.title = ""
                 btnMaintenance.isEnabled = false
             }
@@ -1345,7 +1349,7 @@ extension TagListViewController: UITableViewDataSource {
             //kAppDelegate.currentUserFacebookId = ""
             kAppDelegate.currentUserRole = "User"
             kAppDelegate.currentUserObjectId = ""
-            kAppDelegate.currentUserIsAgent = false
+            //kAppDelegate.currentUserIsAgent = false
             
             btnSignIn.title = "Sign In"
             statusLabel.text = "Please Sign In"
