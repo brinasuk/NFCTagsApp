@@ -86,6 +86,8 @@ class MaintTableViewController: UITableViewController {
     func loadObjects()
     {
         let query = PFQuery(className: "TagOwnerInfo")
+        //print(kAppDelegate.currentUserEmail)
+        
         query.whereKey("ownerEmail", equalTo: kAppDelegate.currentUserEmail!)
         // NO APPCODE IN MAINT. FOR MAINT WE WANT ALL OWNER TAGS TO APPEAR
         //query.whereKey("appCode", equalTo: kAppDelegate.appCode!)
@@ -250,7 +252,14 @@ class MaintTableViewController: UITableViewController {
         //        let photoNumber = 1
         //        let propertyPhotoFileUrl:String? = createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
-        let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", owner.ownerObjectId, 1)
+        
+        
+        var propertyPhotoFileUrl:String = ""
+        if (propertyPhotoFileUrl == "") {
+            propertyPhotoFileUrl = "icons8-camera-1"}
+        else {
+            propertyPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", owner.ownerObjectId, 1)
+        }
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
@@ -266,7 +275,7 @@ class MaintTableViewController: UITableViewController {
         
         
         // METHOD 2: ======================================
-        if let url = URL(string: propertyPhotoFileUrl! ) {
+        if let url = URL(string: propertyPhotoFileUrl ) {
             //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
             // Round corner
             //let processor = RoundCornerImageProcessor(cornerRadius: 20)
@@ -380,7 +389,7 @@ class MaintTableViewController: UITableViewController {
      
      let query = PFQuery(className: "Tags")
      query.whereKey("tagId", equalTo: ownerId)
-     /query.whereKey("appName", equalTo: kAppDelegate.appC)
+     //query.whereKey("appName", equalTo: kAppDelegate.appC)
      query.whereKey("createdAt", greaterThan: cutoffDate)
      query.order(byDescending: "createdAt")
      query.limit = 500

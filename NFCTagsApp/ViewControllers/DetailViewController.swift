@@ -103,8 +103,16 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //        let usePhotoRef:String? = tagPhotoRef
         //        let photoNumber = 1
         //        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+    
         
-        let propertyPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
+        var propertyPhotoFileUrl:String = ""
+        if (tag.tagPhotoRef == "") {
+            propertyPhotoFileUrl = "icons8-camera-1"}
+        else {
+            propertyPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
+        }
+        
+        
         //"https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg"
         
         //        cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
@@ -132,7 +140,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //        photoImageView.kf.setImage(with: url)
         //                photoImageView.kf.setImage(with: url, options: [.transition(.fade(2.0))])
         
-        let url = URL(string: propertyPhotoFileUrl!)
+        let url = URL(string: propertyPhotoFileUrl)
         //Size refer to the size which you want to resize your original image
         
         let placeholderImage = UIImage(named: "icons8-camera-1")

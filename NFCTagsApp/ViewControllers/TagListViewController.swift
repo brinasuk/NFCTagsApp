@@ -872,7 +872,14 @@ extension TagListViewController: UITableViewDataSource {
         //        let photoNumber = 1
         //        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
         
-        let tagPhotoFileUrl:String? = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
+        
+        var tagPhotoFileUrl:String = ""
+        if (tag.tagPhotoRef == "") {
+            tagPhotoFileUrl = "icons8-camera-1"}
+        else {
+            tagPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
+        }
+        
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
@@ -891,7 +898,7 @@ extension TagListViewController: UITableViewDataSource {
         //        }
         // METHOD 2: ======================================
         //TODO: USE CONSISTANT PHOTO METHOD
-        if let url = URL(string: tagPhotoFileUrl! ) {
+        if let url = URL(string: tagPhotoFileUrl ) {
             //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
             // Round corner
             //var processor = RoundCornerImageProcessor(cornerRadius: 20)
