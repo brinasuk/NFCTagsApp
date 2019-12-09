@@ -291,6 +291,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
             case .failure(let error):
                 self.imageToUpload = nil
                 print("Job failed: \(error.localizedDescription)")
+                
             }
         }
         //=================================================
@@ -301,6 +302,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     // MARK: - Crop Controller Delegate Methods
     
     //SHOW CROPVIEWCONTROLLER
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
         
@@ -337,8 +339,9 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         //DISMISS THE PHOTO PICKER AND PRESENT THE CROPVIEW
         self.image = image
         picker.dismiss(animated: true, completion: {
-            self.present(cropController, animated: true, completion: nil)
-            //self.navigationController!.pushViewController(cropController, animated: true)
+            //ROMEE1
+            //self.present(cropController, animated: true, completion: nil)
+            self.navigationController!.pushViewController(cropController, animated: true)
         })
     }
     
@@ -346,13 +349,22 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         
         isDirtyPhoto = true
-        
+
         self.croppedRect = cropRect
         self.croppedAngle = angle
         imageView.image = image
         imageToUpload = image
         photoImageView.image = image
-        cropViewController.dismiss(animated: true, completion: nil)
+        
+        //ROMEE2
+        print("ONE")
+        //cropViewController.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        
+        print("TWO")
+        print("HERE")
+        
     }
     
     // MARK: - UITextFieldDelegate methods
@@ -677,6 +689,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         //        }
         
         //UPLOADS FILE EXAMPLE: https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg
+        //https://photos.homecards.com/rebeacons/Tag-MPn2N6FjNO-1.jpg
         
         progressBar.isHidden = false
         let sv = UIViewController.displaySpinner(onView: self.view)
@@ -695,7 +708,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
                 //print(result)
                 
                 upload.uploadProgress(closure: { (progress) in
-                    //print(progress)
+                    print(progress)
                     //self.progressBar.setProgress(to: self.progress, withAnimation: true)
                     
                 })
@@ -710,10 +723,17 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
                 upload.responseJSON { response in
                     print("Succesfully uploaded")
                     print(response)
-                    if let err = response.error{
-                        self.displayErrorMessage(message: err as! String)
-                        return
-                    }
+                    
+                    //TODO: THE FOLLOWING err CANNOT BE CONVERTED TO STRING !!
+                    // FIX ALL OCCURRENCES OF THIS IN THE APP
+                    //Could not cast value of type 'Alamofire.AFError' (0x107776700) to 'Swift.String'
+                    
+//                    if let err = response.error{
+//                        self.displayErrorMessage(message: err as! String)
+//                        return
+//                    }
+                    
+                    
                     UIViewController.removeSpinner(spinner: sv)
                     self.onCompletion()
                 }

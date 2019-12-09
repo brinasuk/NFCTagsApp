@@ -630,6 +630,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         let query = PFQuery(className:"Tags")
         
         let userEmail = kAppDelegate.currentUserEmail as String?
+        //print(userEmail)
+        
         ///let appCode = kAppDelegate.appCode as String?
         ///REMOVE APPCODE query.whereKey("appCode", equalTo: appCode!)
         query.whereKey("userEmail", equalTo: userEmail!)

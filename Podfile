@@ -43,5 +43,5 @@ target 'NFCTagsApp' do
    pod 'Alamofire'
    pod 'AlamofireImage'
    pod 'Alertift'
-   pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
+   #pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
 end

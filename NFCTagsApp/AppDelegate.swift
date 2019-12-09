@@ -13,7 +13,7 @@ import UserNotifications
 
 import SafariServices
 import AVFoundation
-import SendGrid
+//import SendGrid
 import FBSDKCoreKit
 import FBSDKLoginKit  // ADDED FOR FACEBOOK AUG2019
 
