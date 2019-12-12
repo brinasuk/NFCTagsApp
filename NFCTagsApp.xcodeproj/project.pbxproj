@@ -24,6 +24,15 @@
 		C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */; };
 		C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableViewController.swift */; };
 		C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF322AB1BA300794637 /* OwnerModel.swift */; };
+		C77930F923A2C36D00D997F2 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930F823A2C36D00D997F2 /* MasterViewController.swift */; };
+		C779310223A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */; };
+		C779310323A2C3EC00D997F2 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */; };
+		C779310523A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310423A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift */; };
+		C779310923A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C779310723A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodeld */; };
+		C779310D23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310B23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift */; };
+		C779310E23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310C23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift */; };
+		C779311423A2C73800D997F2 /* ReallySimpleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779311323A2C73800D997F2 /* ReallySimpleNote.swift */; };
+		C779311723A2C74B00D997F2 /* ReallySimpleNoteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779311623A2C74B00D997F2 /* ReallySimpleNoteStorage.swift */; };
 		C77ED9AF22A4D5A000C06A45 /* SwiftyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AC22A4D5A000C06A45 /* SwiftyMapController.swift */; };
 		C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AD22A4D5A000C06A45 /* Artwork.swift */; };
 		C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */; };
@@ -85,6 +94,15 @@
 		C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewCell.swift; sourceTree = "<group>"; };
 		C76D3EF122AB104400794637 /* MaintTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewController.swift; sourceTree = "<group>"; };
 		C76D3EF322AB1BA300794637 /* OwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModel.swift; sourceTree = "<group>"; };
+		C77930F823A2C36D00D997F2 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteUITableViewCell.swift; sourceTree = "<group>"; };
+		C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
+		C779310423A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteCreateChangeViewController.swift; sourceTree = "<group>"; };
+		C779310823A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReallySimpleNotesData.xcdatamodel; sourceTree = "<group>"; };
+		C779310B23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteDateHelper.swift; sourceTree = "<group>"; };
+		C779310C23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteCoreDataHelper.swift; sourceTree = "<group>"; };
+		C779311323A2C73800D997F2 /* ReallySimpleNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNote.swift; sourceTree = "<group>"; };
+		C779311623A2C74B00D997F2 /* ReallySimpleNoteStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteStorage.swift; sourceTree = "<group>"; };
 		C77ED9AC22A4D5A000C06A45 /* SwiftyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyMapController.swift; sourceTree = "<group>"; };
 		C77ED9AD22A4D5A000C06A45 /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkViews.swift; sourceTree = "<group>"; };
@@ -174,6 +192,7 @@
 				C7156785227BD97700D1A55A /* Info.plist */,
 				C7B7D05122F0DD0D0069D42D /* click.mp3 */,
 				C7156796227BDA0900D1A55A /* ViewControllers */,
+				C77930F723A2C31700D997F2 /* NOTES */,
 				C715678B227BDA0900D1A55A /* Cell Views */,
 				C7156794227BDA0900D1A55A /* Resources */,
 				C79E35F42311D6FC00943ECD /* Deep Links */,
@@ -249,6 +268,54 @@
 				C71B63D6229AEDD600B6910A /* Rubik-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C77930F723A2C31700D997F2 /* NOTES */ = {
+			isa = PBXGroup;
+			children = (
+				C779310A23A2C71400D997F2 /* Helpers */,
+				C779311223A2C73800D997F2 /* Note */,
+				C779311523A2C74B00D997F2 /* Storage */,
+				C779310623A2C6D700D997F2 /* CoreDataModel */,
+				C77930F823A2C36D00D997F2 /* MasterViewController.swift */,
+				C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */,
+				C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */,
+				C779310423A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift */,
+			);
+			path = NOTES;
+			sourceTree = "<group>";
+		};
+		C779310623A2C6D700D997F2 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				C779310723A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodeld */,
+			);
+			path = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		C779310A23A2C71400D997F2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C779310B23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift */,
+				C779310C23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C779311223A2C73800D997F2 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				C779311323A2C73800D997F2 /* ReallySimpleNote.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		C779311523A2C74B00D997F2 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C779311623A2C74B00D997F2 /* ReallySimpleNoteStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		C77ED9AB22A4D5A000C06A45 /* SWIFTY */ = {
@@ -427,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7C4844C2287723C00C6A95B /* UIColorExtension.swift in Sources */,
+				C779311723A2C74B00D997F2 /* ReallySimpleNoteStorage.swift in Sources */,
 				C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */,
 				C705A7AD22D4107300F513A9 /* ReviewViewController.swift in Sources */,
 				C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */,
@@ -441,16 +509,23 @@
 				C7AFF3312318D7FE00179F06 /* AppDelegate.swift in Sources */,
 				C71B63E4229B798A00B6910A /* DetailViewController.swift in Sources */,
 				C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */,
+				C779310523A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift in Sources */,
 				C77ED9AF22A4D5A000C06A45 /* SwiftyMapController.swift in Sources */,
 				C705A7AF22D5A04800F513A9 /* CircularProgressBar.swift in Sources */,
 				C79E35FD2311D75800943ECD /* DeeplinkParser.swift in Sources */,
 				C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */,
+				C779310D23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift in Sources */,
+				C779310923A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodeld in Sources */,
 				C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */,
 				C793547A22A0B75300DD1828 /* RestaurantDetailMapCell.swift in Sources */,
 				C7879E872318D8FC00289A8A /* TagListViewController.swift in Sources */,
+				C779310223A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift in Sources */,
+				C779311423A2C73800D997F2 /* ReallySimpleNote.swift in Sources */,
 				C76D3EEC22AA022000794637 /* RoundedTextField.swift in Sources */,
+				C779310E23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift in Sources */,
 				C71B63D8229AFDD200B6910A /* DetailHeaderView.swift in Sources */,
 				C74C541322CFCACF0071F3F1 /* MiscRoutines.swift in Sources */,
+				C779310323A2C3EC00D997F2 /* NoteDetailViewController.swift in Sources */,
 				C793547C22A0DCC800DD1828 /* MapViewController.swift in Sources */,
 				C73650FA22831BC20025154F /* Colors.swift in Sources */,
 				C79E35FA2311D75800943ECD /* DeepLinkManager.swift in Sources */,
@@ -458,6 +533,7 @@
 				C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */,
 				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
 				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,
+				C77930F923A2C36D00D997F2 /* MasterViewController.swift in Sources */,
 				C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */,
 				C73A297F2293479C00554EF1 /* TagModel.swift in Sources */,
 				C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */,
@@ -663,6 +739,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C779310723A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C779310823A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodel */,
+			);
+			currentVersion = C779310823A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodel */;
+			path = ReallySimpleNotesData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C715676E227BD97700D1A55A /* Project object */;
 }

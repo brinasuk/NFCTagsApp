@@ -209,6 +209,10 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
 
     
+//    @IBAction func tryButtonPressed(_ sender: Any) {
+//                        self.performSegue(withIdentifier: "TryButton", sender: self)
+//    }
+    
     // MARK: - ACTION BUTTONS PRESSED
     @IBAction func scanButtonPressed(_ sender: Any) {
         scanResults = ""
@@ -261,7 +265,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
     }
     
-    @IBAction func tryButtonPressed(_ sender: Any) {
+    @IBAction func tryButtonPressed2(_ sender: Any) {
         /*
          
          //        Alertift.alert(title: "Sample 1", message: "Simple alert!")

@@ -34,7 +34,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //title = "DETAILS"
         
         //TODO: ALEX TESTING
-        let backButtonImage = UIImage(systemName: SFSymbol.square.rawValue)
+        //let backButtonImage = UIImage(systemName: SFSymbol.square.rawValue)
         
         
             headerView.ratingImageView.isUserInteractionEnabled = true
