@@ -14,7 +14,8 @@ import MessageUI
 import SafariServices
 import Parse
 import AVFoundation
-
+//import THNotesTextView
+import SFSymbol
 
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
@@ -32,7 +33,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         //title = "DETAILS"
         
-        headerView.ratingImageView.isUserInteractionEnabled = true
+        //TODO: ALEX TESTING
+        let backButtonImage = UIImage(systemName: SFSymbol.square.rawValue)
+        
+        
+            headerView.ratingImageView.isUserInteractionEnabled = true
         headerView.ratingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
         
         
@@ -179,6 +184,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @IBAction func mapButtonPressed(_ sender: Any) {
+        /* DOES NOT WORK - DELETE
+        let vc = instantiateViewController(withIdentifier: "THNotesTextView") as! THNotesTextView
+        self.dismiss(animated: false, completion: nil)
+        self.presentingViewController?.present(vc, animated: false, completion: nil)
+        
+        var instanceOfCustomObject = THNotesTextView()
+        //instanceOfCustomObject.someProperty = "Hello World"
+        //print(instanceOfCustomObject.someProperty)
+        //instanceOfCustomObject.someMethod()
+        
+        */
+        
         performSegue(withIdentifier: "SwiftyMapBtn", sender: self)
     }
     

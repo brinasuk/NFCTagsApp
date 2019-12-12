@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 target 'NFCTagsApp' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -43,5 +43,6 @@ target 'NFCTagsApp' do
    pod 'Alamofire'
    pod 'AlamofireImage'
    pod 'Alertift'
+   pod 'SFSymbol'
    #pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
 end

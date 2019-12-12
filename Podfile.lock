@@ -18,6 +18,7 @@ PODS:
     - Parse/Core (= 1.17.2)
   - Parse/Core (1.17.2):
     - Bolts/Tasks (~> 1.9)
+  - SFSymbol (0.2.0)
   - VYNFCKit (0.3.2)
 
 DEPENDENCIES:
@@ -28,10 +29,11 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 5.0)
   - Kingfisher
   - Parse
+  - SFSymbol
   - VYNFCKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
     - Alertift
@@ -42,6 +44,8 @@ SPEC REPOS:
     - Kingfisher
     - Parse
     - VYNFCKit
+  trunk:
+    - SFSymbol
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -53,8 +57,9 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 6e20e44775ddf4b159a8ca676834325e13d12221
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
+  SFSymbol: 1ca569c1fbe7becf174c16cc1495de93e7d66686
   VYNFCKit: 86a9b711fd1f34f6f7128a2a883cd58dbd781b9d
 
-PODFILE CHECKSUM: 7d844a118b5b914290af0ea3ee62e13f0814a9fb
+PODFILE CHECKSUM: efe2810338e282a1f64045d34722845e0e95cdfe
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.8.4
