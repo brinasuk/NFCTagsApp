@@ -255,12 +255,8 @@ class MaintTableViewController: UITableViewController {
         
         
         var propertyPhotoFileUrl:String = ""
-        if (propertyPhotoFileUrl == "") {
-            propertyPhotoFileUrl = "icons8-camera-1"}
-        else {
             propertyPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", owner.ownerObjectId, 1)
-        }
-        
+
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
         cell.tagImageView.clipsToBounds = true
@@ -273,6 +269,7 @@ class MaintTableViewController: UITableViewController {
         //            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
         //        }
         
+        print(propertyPhotoFileUrl)
         
         // METHOD 2: ======================================
         if let url = URL(string: propertyPhotoFileUrl ) {

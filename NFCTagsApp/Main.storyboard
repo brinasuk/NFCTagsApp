@@ -329,7 +329,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="atU-kW-OOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-140688.79999999999" y="-55410.591133004928"/>
+            <point key="canvasLocation" x="-140761" y="-55456"/>
         </scene>
         <!--Swifty Map Controller-->
         <scene sceneID="rdz-gI-gar">
@@ -1490,51 +1490,34 @@
             </objects>
             <point key="canvasLocation" x="-141095" y="-54678"/>
         </scene>
-        <!--Master-->
-        <scene sceneID="T0G-JB-idT">
-            <objects>
-                <navigationController title="Master" id="N6n-PB-Uxx" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="aQl-kL-Ltv"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="I1j-P1-N6q">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="lma-49-zhp" kind="relationship" relationship="rootViewController" id="w2z-mZ-uG5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nw9-Xp-3uP" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-141467" y="-55892"/>
-        </scene>
         <!--Detail-->
         <scene sceneID="l1r-sV-iRL">
             <objects>
                 <viewController title="Detail" id="6hS-nT-d6I" customClass="NoteDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cA2-mB-bSQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Title" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68X-z1-YRr">
-                                <rect key="frame" x="20" y="108" width="374" height="36"/>
+                                <rect key="frame" x="20" y="20" width="374" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Note Text" translatesAutoresizingMaskIntoConstraints="NO" id="hpn-eh-wwL" userLabel="Note Text View">
-                                <rect key="frame" x="16" y="176" width="382" height="616"/>
+                                <rect key="frame" x="16" y="88" width="382" height="650"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ls-a3-Mne">
-                                <rect key="frame" x="16" y="152" width="382" height="16"/>
+                                <rect key="frame" x="16" y="64" width="382" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lo2-XN-VAj">
-                                <rect key="frame" x="20" y="800" width="374" height="42"/>
+                                <rect key="frame" x="20" y="746" width="374" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="✎ Edit"/>
                                 <connections>
@@ -1572,39 +1555,28 @@
             </objects>
             <point key="canvasLocation" x="-144114" y="-55194"/>
         </scene>
-        <!--Split View Controller-->
-        <scene sceneID="CQz-i3-sXt">
-            <objects>
-                <splitViewController id="N2R-EY-GgU" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="v9E-WK-Yyc"/>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sRv-NV-fCK" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-145678" y="-55652"/>
-        </scene>
         <!--Really Simple Note Create Change View Controller-->
         <scene sceneID="xxF-mM-NC5">
             <objects>
                 <viewController id="78Y-rN-0Yz" customClass="ReallySimpleNoteCreateChangeViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAt-P1-msZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GoK-Jm-rUX">
-                                <rect key="frame" x="16" y="104" width="182" height="17"/>
+                                <rect key="frame" x="16" y="16" width="182" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duq-NG-eWd">
-                                <rect key="frame" x="16" y="171" width="382" height="17"/>
+                                <rect key="frame" x="16" y="83" width="382" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Note 1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5fg-T5-YCq">
-                                <rect key="frame" x="16" y="129" width="382" height="34"/>
+                                <rect key="frame" x="16" y="41" width="382" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -1613,19 +1585,19 @@
                                 </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1i-gc-juY">
-                                <rect key="frame" x="16" y="196" width="382" height="596"/>
+                                <rect key="frame" x="16" y="108" width="382" height="630"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLs-zw-J1g">
-                                <rect key="frame" x="150" y="104" width="248" height="17"/>
+                                <rect key="frame" x="150" y="16" width="248" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIi-PZ-8HP">
-                                <rect key="frame" x="16" y="800" width="382" height="42"/>
+                                <rect key="frame" x="16" y="746" width="382" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="✓ OK"/>
                                 <connections>
@@ -1675,7 +1647,7 @@
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" customClass="MasterViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2mu-kt-DcW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -1722,7 +1694,6 @@
                                     <outlet property="noteDateLabel" destination="LIe-aq-RIz" id="nCV-W9-gJ0"/>
                                     <outlet property="noteTextLabel" destination="LrP-dj-4wN" id="5QT-6W-SdA"/>
                                     <outlet property="noteTitleLabel" destination="cSV-tb-YsT" id="AAz-ro-xpl"/>
-                                    <segue destination="qfz-q4-NIw" kind="showDetail" identifier="showDetail" id="erb-zu-sWv"/>
                                     <segue destination="78Y-rN-0Yz" kind="show" identifier="showCreateNoteSegue" trigger="accessoryAction" id="kUe-KS-Neb"/>
                                 </connections>
                             </tableViewCell>
@@ -1734,15 +1705,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="never" id="dLp-mQ-pxz"/>
+                    <connections>
+                        <segue destination="6hS-nT-d6I" kind="show" identifier="showDetail" id="PI8-6u-JL5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nI-yZ-der" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-143038" y="-55880"/>
+            <point key="canvasLocation" x="-144757" y="-56059"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BdD-JB-Mxw">
             <objects>
                 <navigationController id="qfz-q4-NIw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="dRP-7c-Lfd"/>
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="LgC-Do-1ZW">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1770,8 +1745,9 @@
         <image name="text-input" width="298" height="36.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Hc-AF-05g"/>
+        <segue reference="RXm-0f-Gar"/>
         <segue reference="kUe-KS-Neb"/>
+        <segue reference="PI8-6u-JL5"/>
         <segue reference="gfT-in-4Ae"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

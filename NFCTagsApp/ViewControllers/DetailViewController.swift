@@ -129,6 +129,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //                headerView.headerImageView.image = resizedImage(at: url, for: CGSize(width: 375,height: 358))
         //=================================================
         
+        print(propertyPhotoFileUrl)
         // METHOD 2: ======================================
         //        let url = URL(string: propertyPhotoFileUrl!)!
         //        let placeholderImageName = kAppDelegate.placeholderName

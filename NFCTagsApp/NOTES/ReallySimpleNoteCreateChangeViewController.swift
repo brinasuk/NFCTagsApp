@@ -17,6 +17,38 @@ class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewD
     
     private let noteCreationTimeStamp : Int64 = Date().toSeconds()
     private(set) var changingReallySimpleNote : ReallySimpleNote?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // set text view delegate so that we can react on text change
+        noteTextTextView.delegate = self
+        
+        // check if we are in create mode or in change mode
+        if let changingReallySimpleNote = self.changingReallySimpleNote {
+            // in change mode: initialize for fields with data coming from note to be changed
+            noteDateLabel.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+            noteTextTextView.text = changingReallySimpleNote.noteText
+            noteTitleTextField.text = changingReallySimpleNote.noteTitle
+            // enable done button by default
+            noteDoneButton.isEnabled = true
+        } else {
+            // in create mode: set initial time stamp label
+            noteDateLabel.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+        }
+        
+        // initialize text view UI - border width, radius and color
+        noteTextTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        noteTextTextView.layer.borderWidth = 1.0
+        noteTextTextView.layer.cornerRadius = 5
+
+        // For back button in navigation bar, change text
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+
+
 
     @IBAction func noteTitleChanged(_ sender: UITextField, forEvent event: UIEvent) {
         if self.changingReallySimpleNote != nil {
@@ -92,36 +124,6 @@ class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewD
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // set text view delegate so that we can react on text change
-        noteTextTextView.delegate = self
-        
-        // check if we are in create mode or in change mode
-        if let changingReallySimpleNote = self.changingReallySimpleNote {
-            // in change mode: initialize for fields with data coming from note to be changed
-            noteDateLabel.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
-            noteTextTextView.text = changingReallySimpleNote.noteText
-            noteTitleTextField.text = changingReallySimpleNote.noteTitle
-            // enable done button by default
-            noteDoneButton.isEnabled = true
-        } else {
-            // in create mode: set initial time stamp label
-            noteDateLabel.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
-        }
-        
-        // initialize text view UI - border width, radius and color
-        noteTextTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        noteTextTextView.layer.borderWidth = 1.0
-        noteTextTextView.layer.cornerRadius = 5
-
-        // For back button in navigation bar, change text
-        let backButton = UIBarButtonItem()
-        backButton.title = "Back"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-    }
-
     //Handle the text changes here
     func textViewDidChange(_ textView: UITextView) {
         if self.changingReallySimpleNote != nil {

@@ -897,7 +897,7 @@ extension TagListViewController: UITableViewDataSource {
         //            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
         //        }
         
-        
+        print(tagPhotoFileUrl)
         // METHOD 2: ======================================
         //        if let url = URL(string: propertyPhotoFileUrl! ) {
         //          cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)

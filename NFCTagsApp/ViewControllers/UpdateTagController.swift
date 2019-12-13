@@ -248,6 +248,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         //=================================================
         //=================================================
         
+        print(propertyPhotoFileUrl)
         // METHOD 2: ======================================
         //                let url = URL(string: propertyPhotoFileUrl!)!
         //                let placeholderImageName = kAppDelegate.placeholderName

@@ -33,6 +33,7 @@
 		C779310E23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310C23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift */; };
 		C779311423A2C73800D997F2 /* ReallySimpleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779311323A2C73800D997F2 /* ReallySimpleNote.swift */; };
 		C779311723A2C74B00D997F2 /* ReallySimpleNoteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779311623A2C74B00D997F2 /* ReallySimpleNoteStorage.swift */; };
+		C779311923A30FEB00D997F2 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779311823A30FEB00D997F2 /* NoteModel.swift */; };
 		C77ED9AF22A4D5A000C06A45 /* SwiftyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AC22A4D5A000C06A45 /* SwiftyMapController.swift */; };
 		C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AD22A4D5A000C06A45 /* Artwork.swift */; };
 		C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */; };
@@ -103,6 +104,7 @@
 		C779310C23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteCoreDataHelper.swift; sourceTree = "<group>"; };
 		C779311323A2C73800D997F2 /* ReallySimpleNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNote.swift; sourceTree = "<group>"; };
 		C779311623A2C74B00D997F2 /* ReallySimpleNoteStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteStorage.swift; sourceTree = "<group>"; };
+		C779311823A30FEB00D997F2 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		C77ED9AC22A4D5A000C06A45 /* SwiftyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyMapController.swift; sourceTree = "<group>"; };
 		C77ED9AD22A4D5A000C06A45 /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		C77ED9AE22A4D5A000C06A45 /* ArtworkViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkViews.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				C779311323A2C73800D997F2 /* ReallySimpleNote.swift */,
+				C779311823A30FEB00D997F2 /* NoteModel.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */,
 				C705A7AD22D4107300F513A9 /* ReviewViewController.swift in Sources */,
 				C77ED9B122A4D5A000C06A45 /* ArtworkViews.swift in Sources */,
+				C779311923A30FEB00D997F2 /* NoteModel.swift in Sources */,
 				C79A9403228F227100A53DDA /* FacebookUser.swift in Sources */,
 				C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */,
 				C79E35FE2311D75800943ECD /* DeeplinkNavigator.swift in Sources */,
