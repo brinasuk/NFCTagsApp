@@ -8,12 +8,36 @@
 
 import Foundation
 import CoreData
+import Parse
 
 class ReallySimpleNoteCoreDataHelper {
     
     private(set) static var count: Int = 0
     
-    static func createNoteInCoreData(
+    static func createNoteInParseOUT(noteToBeCreated:NoteModel) {
+        
+    let note = PFObject(className:"Notes")
+        
+    let noteTitle = noteToBeCreated.noteTitle
+    let noteText = noteToBeCreated.noteText
+    let noteTagId = noteToBeCreated.noteTagId
+    let notePhotoRef = noteToBeCreated.notePhotoRef
+        
+    note["noteTitle"] = noteTitle
+    note["noteText"] = noteText
+    note["noteTagId"] = noteTagId
+    note["notePhotoRef"] = notePhotoRef
+        
+    note.saveInBackground { (succeeded, error)  in
+        if (succeeded) {
+            // The object has been saved.
+        } else {
+            // There was a problem, check error.description
+        }
+    }
+    }
+    
+    static func createNoteInCoreDataX(
         noteToBeCreated:          ReallySimpleNote,
         intoManagedObjectContext: NSManagedObjectContext) {
         

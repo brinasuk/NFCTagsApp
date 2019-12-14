@@ -281,8 +281,8 @@
 				C779310623A2C6D700D997F2 /* CoreDataModel */,
 				C77930F823A2C36D00D997F2 /* MasterViewController.swift */,
 				C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */,
-				C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */,
 				C779310423A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift */,
+				C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */,
 			);
 			path = NOTES;
 			sourceTree = "<group>";

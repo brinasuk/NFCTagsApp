@@ -14,6 +14,24 @@ class NoteDetailViewController: UIViewController {
     @IBOutlet weak var noteTextTextView: UITextView!
     @IBOutlet weak var noteDate: UILabel!
     
+    var currentNoteObjectId: String = ""
+    var noteObject:NoteModel?
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        configureView()
+        print (currentNoteObjectId)
+    }
+    
+    var detailItem: NoteModel? {
+        didSet {
+            // Update the view.
+            configureView()
+        }
+    }
+    
     func configureView() {
         // Update the user interface for the detail item.
         if let detail = detailItem {
@@ -21,28 +39,20 @@ class NoteDetailViewController: UIViewController {
                let dateLabel = noteDate,
                let textView = noteTextTextView {
                 topicLabel.text = detail.noteTitle
-                dateLabel.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: detail.noteTimeStamp))
+                dateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: detail.noteTimeStamp))
                 textView.text = detail.noteText
             }
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        configureView()
-    }
-
-    var detailItem: ReallySimpleNote? {
-        didSet {
-            // Update the view.
-            configureView()
-        }
-    }
-
+    // EDIT BUTTON TAPPED
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showChangeNoteSegue" {
             let changeNoteViewController = segue.destination as! ReallySimpleNoteCreateChangeViewController
+            
+            //ADDED BY ALEX
+            changeNoteViewController.passNoteObjectId = currentNoteObjectId
+            
             if let detail = detailItem {
                 changeNoteViewController.setChangingReallySimpleNote(
                     changingReallySimpleNote: detail)

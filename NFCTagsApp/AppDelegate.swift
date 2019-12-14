@@ -591,7 +591,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   */
     
     // MARK: - Split view
-
+/*
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController = secondaryAsNavController.topViewController as? NoteDetailViewController else { return false }
@@ -601,6 +601,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return false
     }
+ */
 
     // MARK: - Core Data stack
     

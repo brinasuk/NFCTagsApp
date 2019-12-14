@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewDelegate {
     
@@ -15,8 +16,12 @@ class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewD
     @IBOutlet weak var noteDoneButton: UIButton!
     @IBOutlet weak var noteDateLabel: UILabel!
     
+    var passTagId:String = ""
+    var passPhotoRef:String = ""
+    var passNoteObjectId:String = ""
+    
     private let noteCreationTimeStamp : Int64 = Date().toSeconds()
-    private(set) var changingReallySimpleNote : ReallySimpleNote?
+    private(set) var changingReallySimpleNote : NoteModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +31,21 @@ class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewD
         
         // check if we are in create mode or in change mode
         if let changingReallySimpleNote = self.changingReallySimpleNote {
+            // CHANGE MODE
             // in change mode: initialize for fields with data coming from note to be changed
-            noteDateLabel.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+            noteDateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
             noteTextTextView.text = changingReallySimpleNote.noteText
             noteTitleTextField.text = changingReallySimpleNote.noteTitle
             // enable done button by default
             noteDoneButton.isEnabled = true
         } else {
+            // INSERT MODE
             // in create mode: set initial time stamp label
-            noteDateLabel.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+            
+            noteTextTextView.text = ""
+            noteTitleTextField.text = ""
+            
+            noteDateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
         }
         
         // initialize text view UI - border width, radius and color
@@ -48,7 +59,9 @@ class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewD
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
-
+    func setChangingReallySimpleNote(changingReallySimpleNote : NoteModel) {
+        self.changingReallySimpleNote = changingReallySimpleNote
+    }
 
     @IBAction func noteTitleChanged(_ sender: UITextField, forEvent event: UIEvent) {
         if self.changingReallySimpleNote != nil {
@@ -57,6 +70,21 @@ class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewD
         } else {
             // create mode
             if ( sender.text?.isEmpty ?? true ) || ( noteTextTextView.text?.isEmpty ?? true ) {
+                noteDoneButton.isEnabled = false
+            } else {
+                noteDoneButton.isEnabled = true
+            }
+        }
+    }
+    
+    //Handle the text changes here
+    func textViewDidChange(_ textView: UITextView) {
+        if self.changingReallySimpleNote != nil {
+            // change mode
+            noteDoneButton.isEnabled = true
+        } else {
+            // create mode
+            if ( noteTitleTextField.text?.isEmpty ?? true ) || ( textView.text?.isEmpty ?? true ) {
                 noteDoneButton.isEnabled = false
             } else {
                 noteDoneButton.isEnabled = true
@@ -75,67 +103,83 @@ class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewD
         }
     }
     
-    func setChangingReallySimpleNote(changingReallySimpleNote : ReallySimpleNote) {
-        self.changingReallySimpleNote = changingReallySimpleNote
-    }
-    
     private func addItem() -> Void {
-        let note = ReallySimpleNote(
-            noteTitle:     noteTitleTextField.text!,
-            noteText:      noteTextTextView.text,
-            noteTimeStamp: noteCreationTimeStamp)
-
-        ReallySimpleNoteStorage.storage.addNote(noteToBeAdded: note)
+        let noteTitle:String = noteTitleTextField.text ?? ""
+        let noteText:String = noteTextTextView.text ?? ""
         
-        performSegue(
-            withIdentifier: "backToMasterView",
-            sender: self)
+        let note = PFObject(className:"Notes")
+
+        note["noteTitle"] = noteTitle
+        note["noteText"] = noteText
+        note["noteTagId"] = passTagId
+        note["notePhotoRef"] = passPhotoRef
+            
+        note.saveInBackground { (succeeded, error)  in
+            if (succeeded) {
+                // The object has been saved.
+                print("SUCCESS")
+
+//                self.dismiss(animated: true, completion: nil)
+//                self.popViewController(animated: true)
+                self.performSegue(withIdentifier: "unwindtoMaster", sender: self)
+
+            } else {
+                // There was a problem, check error.description
+                print ("ERROR")
+                self.performSegue(withIdentifier: "unwindtoMaster", sender: self)
+            }
+        }
+        
+//        ReallySimpleNoteStorage.storage.addNote(passTagId: passTagId,passPhotoRef:passPhotoRef,noteTitle: noteTitle,noteText: noteText)
+        
+//        performSegue(
+//            withIdentifier: "backToMasterView",
+//            sender: self)
+        //dismiss(animated: true, completion: nil)
+//        navigationController!.popViewController(animated: true)
+    
+        
     }
 
     private func changeItem() -> Void {
         // get changed note instance
-        if let changingReallySimpleNote = self.changingReallySimpleNote {
-            // change the note through note storage
-            ReallySimpleNoteStorage.storage.changeNote(
-                noteToBeChanged: ReallySimpleNote(
-                    noteId:        changingReallySimpleNote.noteId,
-                    noteTitle:     noteTitleTextField.text!,
-                    noteText:      noteTextTextView.text,
-                    noteTimeStamp: noteCreationTimeStamp)
-            )
-            // navigate back to list of notes
-            performSegue(
-                withIdentifier: "backToMasterView",
-                sender: self)
-        } else {
-            // create alert
-            let alert = UIAlertController(
-                title: "Unexpected error",
-                message: "Cannot change the note, unexpected error occurred. Try again later.",
-                preferredStyle: .alert)
-            
-            // add OK action
-            alert.addAction(UIAlertAction(title: "OK",
-                                          style: .default ) { (_) in self.performSegue(
-                                              withIdentifier: "backToMasterView",
-                                              sender: self)})
-            // show alert
-            self.present(alert, animated: true)
-        }
-    }
-    
-    //Handle the text changes here
-    func textViewDidChange(_ textView: UITextView) {
         if self.changingReallySimpleNote != nil {
-            // change mode
-            noteDoneButton.isEnabled = true
-        } else {
-            // create mode
-            if ( noteTitleTextField.text?.isEmpty ?? true ) || ( textView.text?.isEmpty ?? true ) {
-                noteDoneButton.isEnabled = false
-            } else {
-                noteDoneButton.isEnabled = true
+            // change the note through note storage
+            let noteTitle:String = noteTitleTextField.text ?? ""
+            let noteText:String = noteTextTextView.text ?? ""
+            
+            let query = PFQuery(className:"Notes")
+            query.getObjectInBackground(withId: passNoteObjectId) { (note: PFObject?, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    self.performSegue(withIdentifier: "unwindtoMaster", sender: self)
+                } else if let note = note {
+                    note["noteTitle"] = noteTitle
+                    note["noteText"] = noteText
+                    //note.saveInBackground()
+                    note.saveInBackground {
+                        (success: Bool, error: Error?) in
+                        if (success) {
+                            print("The object has been UPDATED.")
+                            self.performSegue(withIdentifier: "unwindtoMaster", sender: self)
+                        } else {
+                            print ("There was a problem UPDATING, check error.description")
+                            self.performSegue(withIdentifier: "unwindtoMaster", sender: self)
+                        }
+                    }
+                }
             }
+            
+//            ReallySimpleNoteStorage.storage.changeNote(noteTitle: noteTitle, noteText: noteText)
+            
+            // navigate back to list of notes
+//            performSegue(
+//                withIdentifier: "backToMasterView",
+//                sender: self)
+            //dismiss(animated: true, completion: nil)
+            
+            
+            
         }
     }
 

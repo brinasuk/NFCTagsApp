@@ -8,15 +8,24 @@
 
 import UIKit
 import Parse
+import Alertift
 
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
     private var noteObjects:[NoteModel] = []
+    var currentTagId:String = ""
+    var currentPhotoRef:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadNotesTable()
+        
+        self.title = "My Notes"
+        
+        //THE FOLLOWING TWO VARIABLES ARE PASSED FROM THE TAG RECORD FOR ADDNEW
+        //TODO: ALEX FIX THIS
+        currentTagId = "g0p978oKXB"
+        currentPhotoRef = "wsBAstguyt"
         
         // Core data initialization
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -45,7 +54,7 @@ class MasterViewController: UITableViewController {
 
         
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.leftBarButtonItem = editButtonItem
+        //navigationItem.leftBarButtonItem = editButtonItem
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
@@ -55,11 +64,14 @@ class MasterViewController: UITableViewController {
 //            let controllers = split.viewControllers
 //            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
 //        }
+        
+        loadNotesTable()
     }
 
     override func viewWillAppear(_ animated: Bool) {
 //ALEX        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        
     }
     
     func loadNotesTable()
@@ -112,14 +124,29 @@ class MasterViewController: UITableViewController {
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //ADDED BY ALEX
+        if segue.identifier == "showCreateNoteSegue" {
+            let vc = segue.destination as! ReallySimpleNoteCreateChangeViewController
+            vc.passTagId = currentTagId
+            vc.passPhotoRef = currentPhotoRef
+        }
+        
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 //let object = objects[indexPath.row]
-                let object = ReallySimpleNoteStorage.storage.readNote(at: indexPath.row)
+                //TODO: ALEX FIX READNOTE
+//                let object = ReallySimpleNoteStorage.storage.readNote(at: indexPath.row)
+                
 //                let controller = (segue.destination as! UINavigationController).topViewController as! NoteDetailViewController
 //                controller.detailItem = object
 //                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 //                controller.navigationItem.leftItemsSupplementBackButton = true
+                
+                let note:NoteModel = noteObjects[indexPath.row]
+                
+                let destinationController = segue.destination as! NoteDetailViewController
+                destinationController.detailItem = note //object
+                destinationController.currentNoteObjectId = note.noteObjectId
             }
         }
     }
@@ -158,14 +185,31 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //objects.remove(at: indexPath.row)
-            ReallySimpleNoteStorage.storage.removeNote(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+//            ReallySimpleNoteStorage.storage.removeNote(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            let note = self.noteObjects[indexPath.row]
+            //self.deleteObjectId = note.noteObjectId
+             //print("DELETE1 + \(self.deleteObjectId)")
+             
+             Alertift.alert(title: "Remove Item",message: "Are you sure you wish to Remove this Item?")
+                 .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+                     //print("YES!")
+                    //let sv = UIViewController.displaySpinner(onView: self.view)
+                    
+                    self.removeNote(objectId: note.noteObjectId)
+                     //ReallySimpleNoteStorage.removeItem(note.noteObjectId)
+                 }
+                 .action(.cancel("No")) { (_, _, _) in
+                     //print("No/Cancel Clicked")
+                 }
+                 .show()
+
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
@@ -180,7 +224,42 @@ class MasterViewController: UITableViewController {
         performSegue(withIdentifier: "showDetail", sender: self)
     }
     
+    func removeNote(objectId: String) {
+        //print("DELETE2 + \(self.deleteObjectId)")
+        let query = PFQuery(className: "Notes")
+        
+        let sv = UIViewController.displaySpinner(onView: self.view)
+        
+        query.getObjectInBackground(withId: objectId) { (object: PFObject?, error: Error?) in
+            if let error = error {
+                // The query failed
+                UIViewController.removeSpinner(spinner: sv)
+                print(error.localizedDescription)
+                //self.displayMessage(message: error.localizedDescription)
+            } else if let object = object {
+                // The query succeeded with a matching result
+                print("SUCCESS DELETED")
 
-
+                object.deleteInBackground(block: { (deleteSuccessful, error) -> Void in
+                    // User deleted
+                    //self.tableView.reloadData()
+                    UIViewController.removeSpinner(spinner: sv)
+                    self.loadNotesTable() //DELETE
+                })
+                
+                
+            } else {
+                // The query succeeded but no matching result was found
+                //self.displayMessage(message: "No Record Found")
+                print("NO MATCH FOUND")
+            }
+        }
+    }
+    
+@IBAction func unwindToMaster(segue:UIStoryboardSegue) {
+    print("BACK HERE")
+    loadNotesTable()
+    }
+    
 }
 
