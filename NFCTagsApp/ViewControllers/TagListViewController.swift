@@ -858,6 +858,18 @@ extension TagListViewController: UITableViewDataSource {
         cell.tagSubTitle.text = tag.tagSubTitle
         cell.tagCompany.text = tag.tagCompany
         
+        
+        //TODO: FOR WINE APP ONLY. TAKE OUT!!!!
+        //tagSubtitle + tagCountry = REGION + COUNTRY
+        //tagCompany + beaconDymo = COMPANY + GRAPE
+        cell.tagTitle.text = tag.tagTitle
+        cell.tagSubTitle.text = tag.tagSubTitle + ". " + tag.tagCountry
+        cell.tagCompany.text = tag.tagCompany + ", " + tag.beaconDymo
+        
+        
+        
+        
+        
         //TODO: Implement currentLocale = NSLocale.current as NSLocale
         //let date = cellDataParse.object(forKey: "createdAt") as? Date ?? NSDate() as Date
         let date = tag.createdAt
@@ -948,7 +960,10 @@ extension TagListViewController: UITableViewDataSource {
             let placeholderImage = UIImage(named: "icons8-camera-1")
             cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
             
-            cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
+            //cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
+            
+            //TODO: TAKE OUT. WINE APP ONLY
+            cell.tagImageView.contentMode = .scaleAspectFill
             
         }
         //=================================================

@@ -542,8 +542,17 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
                 // Get the first placemark
                 let placemark = placemarks[0]
                 
-                self.latitude = placemark.location?.coordinate.latitude
-                self.longitude = placemark.location?.coordinate.longitude
+                let lat:Double = placemark.location?.coordinate.latitude ?? 0.0
+                let lon:Double = placemark.location?.coordinate.longitude ?? 0.0
+                //RESTRICT THE DEC PART TO AT MOST 5 DEC PLACES
+                self.latitude = Double(round(lat*100000)/100000)
+                self.longitude = Double(round(lon*100000)/100000)
+
+                
+                //TODO: KEEP THIS TO MAX 6 DEC PLACES
+                //var lat:Double? = 0.0
+                //print(String(format: "%.3f", totalWorkTimeInHours))
+                
                 print("Lat: \(String(describing: self.latitude)), Lon: \(String(describing: self.longitude))")
                 
                 if self.latitude == 0.0 && self.longitude == 0.0 {
@@ -598,6 +607,8 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
                 object["ownerAddrFull"] = self.addressTextField.text
                 object["ownerUrl"] = self.websiteTextField.text
                 object["ownerInfo"] = self.descriptionTextView.text
+                
+
                 
                 object["latitude"] = self.latitude.map { String($0) } ?? "0.0"
                 object["longitude"] = self.longitude.map { String($0) } ?? "0.0"

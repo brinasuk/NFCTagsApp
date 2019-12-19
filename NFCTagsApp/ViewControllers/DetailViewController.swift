@@ -98,6 +98,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         // DISPLAY DATABASE VALUES
         headerView.titleLabel.text = tag.tagTitle
         headerView.subTitleLabel.text = tag.tagSubTitle
+        //TODO: WINE APP ONLY
+        headerView.subTitleLabel.text = tag.tagSubTitle + ". " + tag.tagCountry
         headerView.priceLabel.text = tag.tagPrice
         headerView.ratingImageView.image = UIImage(named: tag.rating)
         
