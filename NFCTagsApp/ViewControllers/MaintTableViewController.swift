@@ -56,7 +56,7 @@ class MaintTableViewController: UITableViewController {
         
         self.tableView.backgroundView = imageView
         self.tableView.backgroundColor = coralColor
-        view.backgroundColor = paleRoseColor
+        //view.backgroundColor = orange600
         
         
         //FORCE A RELOAD OF THE DATA

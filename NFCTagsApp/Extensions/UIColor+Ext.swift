@@ -15,4 +15,13 @@ extension UIColor {
         let blueValue = CGFloat(blue) / 255.0
         self.init(red: redValue, green: greenValue, blue: blueValue, alpha: 1.0)
     }
+    
+    fileprivate enum MaterialUI {
+    static let orange600 = UIColor(red:   0xFB / 0xFF,
+                                   green: 0x8C / 0xFF,
+                                   blue:  0x00 / 0xFF,
+                                   alpha: 1) // #FB8C00
+    }
+
 }
+

@@ -10,6 +10,11 @@ import Alertift
 import Kingfisher
 import AVFoundation
 
+/*
+statusLabel.backgroundColor = .white
+statusLabel.textColor = royalBlue
+*/
+
 enum ProfileType: String {
     case guest = "Guest"
     case host = "Host"
@@ -61,7 +66,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        overrideUserInterfaceStyle = .light
         
         
 //        let string = "$1,abc234,567.99"
@@ -107,6 +112,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         //MAKE THE STATUSLABEL CORNERS ROUNDED
         statusView.backgroundColor = paleRoseColor //or CORAL
+        statusView.backgroundColor = burntOrangeColor
+        
         
         statusLabel.layer.cornerRadius = 5.0
         statusLabel.layer.masksToBounds = true
@@ -122,7 +129,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         imageView.alpha = 0.8
         self.tableView.backgroundView = imageView
         self.tableView.backgroundColor = coralColor
-        toolBar.barTintColor = .white //pinkColor  //paleRoseColor//.white // coralColor
+        toolBar.barTintColor = .white //pinkColor
         view.backgroundColor = paleRoseColor
         
         
@@ -156,7 +163,10 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         navigationController?.navigationBar.prefersLargeTitles = true
-        view.backgroundColor = paleRoseColor
+        
+        //DARKMODE
+        view.backgroundColor = customAccent
+        //view.backgroundColor = .secondarySystemBackground
         
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
@@ -1017,6 +1027,7 @@ extension TagListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //cell.backgroundColor = UIColor.black
         //cell.backgroundColor = UIColor(white:1, alpha: 0.5)
+        //cell.textColor = UIColor.secondaryLabel
     }
     
     // Override to support conditional editing of the table view.
