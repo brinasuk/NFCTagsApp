@@ -84,7 +84,7 @@ public let maroonColor = UIColor(red:80, green:4, blue:28)
 public let watermelonColor = UIColor(red:242, green:71, blue:63)
 public let tomatoColor = UIColor(red:255, green:99, blue:71)
 public let pinkLipstickColor = UIColor(red:255, green:105, blue:180)
-public let paleRoseColor = UIColor(red:255, green:228, blue:225)
+//public let paleRoseColor = UIColor(red:255, green:228, blue:225)
 public let crimsonColor = UIColor(red:187, green:18, blue:36)
 
 
@@ -166,7 +166,7 @@ private let orange600 = UIColor(red:   0xFB / 0xFF,
                                blue:  0x00 / 0xFF,
                                alpha: 1) // #FB8C00
 
-public var customAccent: UIColor {
+public var newPaleRoseColor: UIColor {
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             if traitCollection.userInterfaceStyle == .dark {

@@ -59,14 +59,30 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //        ShortcutParser.shared.registerShortcuts(for: profileType)
 //    }
     
-
+    func  setupDarkMode() {
+        overrideUserInterfaceStyle = .light //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+        
+        //DARKMODE
+        view.backgroundColor = newPaleRoseColor //customAccent
+        //view.backgroundColor = .secondarySystemBackground
+        //view.backgroundColor = .systemBackground
+        //view.backgroundColor = .secondarySystemGroupedBackground
+        //let aColor = UIColor(named: "customControlColor")
+       // yourLabel.color = UIColor.secondaryLabel
+        
+        //self.label.textColor = .label
+        self.view.backgroundColor = .systemBackground
+        //let themeColor = UIColor(named: "themeColor")
+      }
     
     
     // MARK: - PROGRAM LIFECYCLE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        overrideUserInterfaceStyle = .light
+
+        setupDarkMode()
         
         
 //        let string = "$1,abc234,567.99"
@@ -111,7 +127,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         scanButton.tintColor = .white
         
         //MAKE THE STATUSLABEL CORNERS ROUNDED
-        statusView.backgroundColor = paleRoseColor //or CORAL
+        statusView.backgroundColor = newPaleRoseColor //or CORAL
         statusView.backgroundColor = burntOrangeColor
         
         
@@ -130,7 +146,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         self.tableView.backgroundView = imageView
         self.tableView.backgroundColor = coralColor
         toolBar.barTintColor = .white //pinkColor
-        view.backgroundColor = paleRoseColor
+        view.backgroundColor = newPaleRoseColor
         
         
         // THIS IS CRITICAL HERE. IF USER NOT LOGGED IN THEN FORCE A LOGIN
@@ -146,6 +162,9 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //WATCH OUT FOR UNIVERSAL LINKS FROM SCANNED TAGS
         NotificationCenter.default.addObserver(self, selector: #selector(handleDeepLink), name: Notification.Name("DEEPLINKFOUND"), object: nil)
     }
+    
+  
+    
     
     //OK! DEEP LINK FOUND. GO AHEAD AND SHOW IT!
     @objc func handleDeepLink() {
@@ -164,9 +183,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        //DARKMODE
-        view.backgroundColor = customAccent
-        //view.backgroundColor = .secondarySystemBackground
+
         
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
@@ -183,7 +200,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         //METHOD2
         if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
         }
         
     }
@@ -1027,8 +1044,14 @@ extension TagListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //cell.backgroundColor = UIColor.black
         //cell.backgroundColor = UIColor(white:1, alpha: 0.5)
-        //cell.textColor = UIColor.secondaryLabel
+
+    if #available(iOS 13, *) {
+        //cell.backgroundColor = [UIColor systemBackgroundColor];
+    } else {
+        //cell.backgroundColor = [UIColor systemBackgroundColor];
     }
+    }
+
     
     // Override to support conditional editing of the table view.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
