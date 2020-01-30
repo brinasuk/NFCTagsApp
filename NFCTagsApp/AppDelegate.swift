@@ -152,10 +152,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // SET THE TOOLBAR STYLE
+        
+        var tabTextColor:UIColor = .systemPink
+
+        tabTextColor = .label
+        //tabTextColor = .systemRed
+        //tabTextColor = .systemFill
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 14.0),
-                NSAttributedString.Key.foregroundColor : UIColor.darkText,
+                NSAttributedString.Key.foregroundColor : tabTextColor,
             ], for: .normal)
         
         // SET THE BACK BUTTONS

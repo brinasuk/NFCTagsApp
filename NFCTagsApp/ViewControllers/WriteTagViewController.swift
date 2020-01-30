@@ -31,37 +31,33 @@ class WriteTagViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBAction func writeButtonPressed(_ sender: Any) {
 
-                   //FORMAT: https://artworks4me.com/?tag=wine101 where wine101=ownerId in PARSE DATABASE
-                       
-                             //DispatchQueue.main.async {
-                                //self.label.text = "\(data.count) bytes downloaded"
-                               let useTagEmail:String? = self.tagEmail.text
-                               let useTagNumber:String? = self.tagNumber.text
-                               
-                               //let useTagNumber = self.tagNumber.text ?? ""
-                               //let useTagEmail = self.tagEmail.text ?? ""
-                               
-
+        //FORMAT: https://artworks4me.com/?tag=wine101 where wine101=ownerId in PARSE DATABASE
+        //let tagInfo = "info@kcontemporaryart.com:103"
         
-        let hashids = Hashids(salt:"bluegrotto", minHashLength:8, alphabet:"abcdefghij1234567890")
+        print("TAG BUTTON PRESSED")
+
+        let useTagEmail:String? = self.tagEmail.text
+        let useTagNumber:String? = self.tagNumber.text
+
         // TODO: NEED TO CONVERT wine@hillsoft.com -> 1001. Each customer needs a unique integer ID
-        var hash:String = hashids.encode(1001, Int(useTagNumber!)!)! // hash:"249jgi6j"
-        print(hash as Any)
-        let values = hashids.decode(hash); // values:[1,2,3]
-        print (values)
+        let hashids = Hashids(salt:"bluegrotto", minHashLength:8, alphabet:"abcdefghij1234567890")
+        let hash:String = hashids.encode(1001, Int(useTagNumber!)!)! // hash:"249jgi6j"
+        //print(hash as Any)
+        //let values = hashids.decode(hash); // values:[1,2,3]
+        //print (values)
         
         tagInfo = hash
                                
+        //let tagInfo = "info@kcontemporaryart.com:103"
+        //tagInfo = useTagEmail! + ":" + useTagNumber
         
-                               //let tagInfo = "info@kcontemporaryart.com:103"
-                               //tagInfo = useTagEmail! + ":" + useTagNumber!
-                               self.tagResult.text! = tagInfo
-                       //}
+        self.tagResult.text! = tagInfo
 
-                       print("TAGINFO: \(tagInfo)")
-                       //os_log("url: %@", (urlComponent?.string)!)
 
-        print("TAG BUTTON PRESSED")
+        print("TAGINFO: \(tagInfo)")
+        //os_log("url: %@", (urlComponent?.string)!)
+
+
         guard NFCNDEFReaderSession.readingAvailable else {
             let alertController = UIAlertController(
                 title: "Scanning Not Supported",
@@ -86,7 +82,7 @@ class WriteTagViewController: UIViewController, UINavigationControllerDelegate, 
      
     //        var urlComponent = URLComponents(string: "https://fishtagcreator.example.com/")
             
-            var urlComponent = URLComponents(string: "http://artworks4me.com/")
+            var urlComponent = URLComponents(string: "https://artworks4me.com/")
 
             urlComponent?.queryItems = [URLQueryItem(name: "tag", value: tagInfo)]
             

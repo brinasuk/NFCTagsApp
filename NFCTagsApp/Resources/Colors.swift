@@ -84,7 +84,7 @@ public let maroonColor = UIColor(red:80, green:4, blue:28)
 public let watermelonColor = UIColor(red:242, green:71, blue:63)
 public let tomatoColor = UIColor(red:255, green:99, blue:71)
 public let pinkLipstickColor = UIColor(red:255, green:105, blue:180)
-//public let paleRoseColor = UIColor(red:255, green:228, blue:225)
+public let paleRoseColor = UIColor(red:255, green:228, blue:225)
 public let crimsonColor = UIColor(red:187, green:18, blue:36)
 
 

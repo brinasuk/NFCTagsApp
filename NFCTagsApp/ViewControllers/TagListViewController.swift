@@ -10,10 +10,7 @@ import Alertift
 import Kingfisher
 import AVFoundation
 
-/*
-statusLabel.backgroundColor = .white
-statusLabel.textColor = royalBlue
-*/
+
 
 enum ProfileType: String {
     case guest = "Guest"
@@ -36,6 +33,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     var deleteObjectId:String = ""    //USED BY DELETE
     
     var placeholderImage:UIImage?
+    var navbarBackColor:UIColor?
+    var navbarTextColor:UIColor?
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -61,9 +60,37 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     func  setupDarkMode() {
         overrideUserInterfaceStyle = .light //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+
+        //tabTextColor = .label
+        //tabTextColor = .systemRed
+        //tabTextColor = .systemFill
+        
+        navbarBackColor = paleRoseColor //or CORAL
+        navbarTextColor = .darkText //or CORAL
+        statusView.backgroundColor = coralColor
+
+        statusLabel.backgroundColor = .systemBackground
+        statusLabel.textColor = royalBlue
+        
+        toolBar.barTintColor = .systemBackground
+
+
+        //SET UI CONFIG COLORS
+        let backgroundImageName = "art_launch_image"
+        let backgroundImage = UIImage(named: backgroundImageName)
+        let imageView = UIImageView(image: backgroundImage)
+        imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.8
+        self.tableView.backgroundView = imageView
+        self.tableView.backgroundColor = coralColor
+       
+        //toolBar.barTintColor = .systemPink
+        view.backgroundColor = paleRoseColor
         
         //DARKMODE
-        view.backgroundColor = newPaleRoseColor //customAccent
+        //view.backgroundColor = newPaleRoseColor //customAccent
+        view.backgroundColor = paleRoseColor //customAccent
+        
         //view.backgroundColor = .secondarySystemBackground
         //view.backgroundColor = .systemBackground
         //view.backgroundColor = .secondarySystemGroupedBackground
@@ -71,8 +98,10 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
        // yourLabel.color = UIColor.secondaryLabel
         
         //self.label.textColor = .label
-        self.view.backgroundColor = .systemBackground
+        
+        //self.view.backgroundColor = .systemBackground
         //let themeColor = UIColor(named: "themeColor")
+ 
       }
     
     
@@ -127,8 +156,10 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         scanButton.tintColor = .white
         
         //MAKE THE STATUSLABEL CORNERS ROUNDED
-        statusView.backgroundColor = newPaleRoseColor //or CORAL
-        statusView.backgroundColor = burntOrangeColor
+        //MOVED TO DARKMODE
+        //statusView.backgroundColor = newPaleRoseColor //or CORAL
+
+        
         
         
         statusLabel.layer.cornerRadius = 5.0
@@ -136,17 +167,9 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         statusLabel.backgroundColor = .white
         statusLabel.textColor = royalBlue
         statusLabel.font.withSize(16.0)
+
         
-        //SET UI CONFIG COLORS
-        let backgroundImageName = "art_launch_image"
-        let backgroundImage = UIImage(named: backgroundImageName)
-        let imageView = UIImageView(image: backgroundImage)
-        imageView.contentMode = .scaleAspectFill
-        imageView.alpha = 0.8
-        self.tableView.backgroundView = imageView
-        self.tableView.backgroundColor = coralColor
-        toolBar.barTintColor = .white //pinkColor
-        view.backgroundColor = newPaleRoseColor
+
         
         
         // THIS IS CRITICAL HERE. IF USER NOT LOGGED IN THEN FORCE A LOGIN
@@ -178,32 +201,53 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         }
     }
     
-    func setupNavigationBar() {
-        //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-
-        
-        //Customize the navigation bar
-        //The following 2 lines make the Navigation Bar transparant
-        //       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //        navigationController?.navigationBar.shadowImage = UIImage()
-        //        navigationController?.navigationBar.prefersLargeTitles = true
-        //        navigationController?.hidesBarsOnSwipe = true
-        //
-        
-        
-        //METHOD 1
-        //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-        //        navigationItem.largeTitleDisplayMode = .always
-        
-        //METHOD2
-        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
+        func setupNavigationBar() {
+            //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
+            self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+            navigationController?.navigationBar.prefersLargeTitles = true
+            view.backgroundColor = paleRoseColor
+            
+            //Customize the navigation bar
+            //The following 2 lines make the Navigation Bar transparant
+            //       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            //        navigationController?.navigationBar.shadowImage = UIImage()
+            //        navigationController?.navigationBar.prefersLargeTitles = true
+            //        navigationController?.hidesBarsOnSwipe = true
+            //
+            
+            
+            //METHOD 1
+            //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+            //        navigationItem.largeTitleDisplayMode = .always
+            
+            //METHOD2
+            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+            }
+            
+            //METHOD3
+    //        let navBarAppearance = UINavigationBarAppearance()
+    //        navBarAppearance.configureWithOpaqueBackground()
+    //        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.myColor,
+    //                                                     .font: UIFont(name: "MyFont", size: 42)!]
+    //        navBarAppearance.backgroundColor = .white
+    //        navBarAppearance.shadowColor = nil
+    //        navigationController?.navigationBar.isTranslucent = false
+    //        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            
+            /*
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: navbarTextColor]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: navbarTextColor]
+                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+                navigationController?.navigationBar.standardAppearance = navBarAppearance
+                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            }
+ */
+            
         }
-        
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -313,7 +357,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
          .messageTextColor(.blue)
          .action(.default("Hi Vige")) { (action, index, _) in
          print(action, index)
-         print ("LOVE THE VIGE")
+
          }
          
          //            .action(.default("⭐")) { (action, index, _) in
@@ -936,7 +980,7 @@ extension TagListViewController: UITableViewDataSource {
         //            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
         //        }
         
-        print(tagPhotoFileUrl)
+        //print(tagPhotoFileUrl)
         // METHOD 2: ======================================
         //        if let url = URL(string: propertyPhotoFileUrl! ) {
         //          cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
