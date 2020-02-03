@@ -152,6 +152,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // SET THE TOOLBAR STYLE
+//        let attrs = [
+//            NSAttributedString.Key.foregroundColor: UIColor.red,
+//            NSAttributedString.Key.font: UIFont(name: "Georgia-Bold", size: 24)!
+//        ]
+//
+//        UINavigationBar.appearance().titleTextAttributes = attrs
         
         var tabTextColor:UIColor = .systemPink
 

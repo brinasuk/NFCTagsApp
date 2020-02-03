@@ -10,8 +10,6 @@ import Alertift
 import Kingfisher
 import AVFoundation
 
-
-
 enum ProfileType: String {
     case guest = "Guest"
     case host = "Host"
@@ -19,7 +17,11 @@ enum ProfileType: String {
 
 class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFCNDEFReaderSessionDelegate, UITableViewDelegate {
     
+    var userInterfaceStyle: UIUserInterfaceStyle?
     var currentProfile = ProfileType.guest
+    var listBackgroundImage:UIImage?
+    
+
     
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     private var tagObjects:[TagModel] = []
@@ -35,6 +37,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     var placeholderImage:UIImage?
     var navbarBackColor:UIColor?
     var navbarTextColor:UIColor?
+    var textColor:UIColor?
+    var cellBackGroundImageName:String = "list-item-background"
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -58,44 +62,100 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //        ShortcutParser.shared.registerShortcuts(for: profileType)
 //    }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        //update user interface
+        setupDarkMode()
+    }
+
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        // Trait collection will change. Use this one so you know what the state is changing to.
+        userInterfaceStyle = newCollection.userInterfaceStyle
+        
+    }
+    
     func  setupDarkMode() {
         overrideUserInterfaceStyle = .light //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-
-        //tabTextColor = .label
-        //tabTextColor = .systemRed
-        //tabTextColor = .systemFill
         
-        navbarBackColor = paleRoseColor //or CORAL
-        navbarTextColor = .darkText //or CORAL
-        statusView.backgroundColor = coralColor
-
-        statusLabel.backgroundColor = .systemBackground
-        statusLabel.textColor = royalBlue
-        
-        toolBar.barTintColor = .systemBackground
-
-
+ 
         //SET UI CONFIG COLORS
+        cellBackGroundImageName = "list-item-background"
+        
         let backgroundImageName = "art_launch_image"
         let backgroundImage = UIImage(named: backgroundImageName)
         let imageView = UIImageView(image: backgroundImage)
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.8
         self.tableView.backgroundView = imageView
-        self.tableView.backgroundColor = coralColor
-       
-        //toolBar.barTintColor = .systemPink
-        view.backgroundColor = paleRoseColor
         
-        //DARKMODE
+        
+        //tabTextColor = .label
+        //tabTextColor = .systemRed
+        //tabTextColor = .systemFill
+
+        navbarTextColor = .label
+        textColor = .label
+        
+        navbarBackColor = .secondarySystemBackground // paleRoseColor
+        //navbarBackColor = .systemGroupedBackground//alex
+        //navbarBackColor = .systemBlue
+        
+        
+        //toolBar.barTintColor = navbarBackColor
+        //view.backgroundColor = navbarBackColor
+
+        statusView.backgroundColor = .systemGray4
+        
+        let labelColor1:UIColor = .systemGray6
+        let labelColor2:UIColor = textColor!
+        let labelBorder:UIColor = .systemTeal
+        //tryThisColor = .systemRed
+        statusLabel.backgroundColor = labelColor1
+        statusLabel.textColor = labelColor2
+        statusView.backgroundColor = labelBorder
+        
+        statusLabel.layer.cornerRadius = 5.0
+        statusLabel.layer.masksToBounds = true
+        //statusLabel.backgroundColor = .white
+        //statusLabel.textColor = royalBlue
+        statusLabel.font.withSize(16.0)
+        
+        //SET THE SCANBUTTON DEFAULTS
+        scanButton.backgroundColor = .systemBlue
+        scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        scanButton.layer.cornerRadius = scanButton.frame.height/2
+        scanButton.layer.masksToBounds = true
+        scanButton.tintColor = textColor
+        
+        switch overrideUserInterfaceStyle {
+         case .dark:
+             // User Interface is Dark
+             cellBackGroundImageName = "list-item-background-dark"
+             ()
+         case .light:
+             // User Interface is Light
+             cellBackGroundImageName = "list-item-background"
+             ()
+         case .unspecified:
+             //your choice
+             cellBackGroundImageName = "list-item-background"
+             ()
+         @unknown default:
+             cellBackGroundImageName = "list-item-background"
+             ()
+             //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
+         }
+
+
+        
         //view.backgroundColor = newPaleRoseColor //customAccent
-        view.backgroundColor = paleRoseColor //customAccent
+        //view.backgroundColor = paleRoseColor //customAccent
         
         //view.backgroundColor = .secondarySystemBackground
         //view.backgroundColor = .systemBackground
         //view.backgroundColor = .secondarySystemGroupedBackground
         //let aColor = UIColor(named: "customControlColor")
-       // yourLabel.color = UIColor.secondaryLabel
+        // yourLabel.color = UIColor.secondaryLabel
         
         //self.label.textColor = .label
         
@@ -104,13 +164,78 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
  
       }
     
+        func setupNavigationBar() {
+            //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
+            self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+//            //navigationController?.navigationBar.prefersLargeTitles = true
+//            navigationController?.navigationBar.prefersLargeTitles = false
+//            self.navigationController?.navigationBar.tintColor = UIColor.darkGray
+
+            
+//            //METHOD 0
+//            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            navigationController?.navigationBar.shadowImage = UIImage()
+//            navigationController?.navigationBar.tintColor = .yellow
+//            navigationController?.hidesBarsOnSwipe = false
+            
+            //FROM THE BOOK!
+            //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            //navigationController?.navigationBar.shadowImage = UIImage()
+//            if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
+//                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
+//            }
+
+            
+            //Customize the navigation bar
+            //The following 2 lines make the Navigation Bar transparant
+                   navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                    navigationController?.navigationBar.shadowImage = UIImage()
+                    navigationController?.navigationBar.prefersLargeTitles = true
+                    navigationController?.hidesBarsOnSwipe = true
+            
+            
+            
+            //METHOD 1
+            //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+            //        navigationItem.largeTitleDisplayMode = .always
+            
+//            //METHOD2
+//            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+//                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
+//            }
+            
+//            //METHOD3
+//            let navBarAppearance = UINavigationBarAppearance()
+//            navBarAppearance.configureWithOpaqueBackground()
+//            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: .redColor, UIFont(name: "MyFont", size: 42)!]
+//            navBarAppearance.backgroundColor = .white
+//            navBarAppearance.shadowColor = nil
+//            navigationController?.navigationBar.isTranslucent = false
+//            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            
+
+            
+            let foreGroundColor:UIColor = .systemOrange
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: foreGroundColor]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: navbarTextColor!]
+                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+//                navigationController?.navigationBar.standardAppearance = navBarAppearance
+//                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            }
+
+            
+        }
+    
     
     // MARK: - PROGRAM LIFECYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        userInterfaceStyle = self.traitCollection.userInterfaceStyle
         setupDarkMode()
         
         
@@ -146,32 +271,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //        showNavigationButtons()
         //
         //        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didChangePreferredContentSize(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
-        
-        //SET THE SCANBUTTON DEFAULTS
-        let myColor = royalBlue
-        scanButton.backgroundColor = myColor
-        scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        scanButton.layer.cornerRadius = scanButton.frame.height/2
-        scanButton.layer.masksToBounds = true
-        scanButton.tintColor = .white
-        
-        //MAKE THE STATUSLABEL CORNERS ROUNDED
-        //MOVED TO DARKMODE
-        //statusView.backgroundColor = newPaleRoseColor //or CORAL
 
-        
-        
-        
-        statusLabel.layer.cornerRadius = 5.0
-        statusLabel.layer.masksToBounds = true
-        statusLabel.backgroundColor = .white
-        statusLabel.textColor = royalBlue
-        statusLabel.font.withSize(16.0)
-
-        
-
-        
-        
         // THIS IS CRITICAL HERE. IF USER NOT LOGGED IN THEN FORCE A LOGIN
         // FOR SOME REASON DOES NOT WORK IN FORM_WILLLOAD ????
         let currentUser = PFUser.current()
@@ -201,56 +301,18 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         }
     }
     
-        func setupNavigationBar() {
-            //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
-            self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-            navigationController?.navigationBar.prefersLargeTitles = true
-            view.backgroundColor = paleRoseColor
-            
-            //Customize the navigation bar
-            //The following 2 lines make the Navigation Bar transparant
-            //       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            //        navigationController?.navigationBar.shadowImage = UIImage()
-            //        navigationController?.navigationBar.prefersLargeTitles = true
-            //        navigationController?.hidesBarsOnSwipe = true
-            //
-            
-            
-            //METHOD 1
-            //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-            //        navigationItem.largeTitleDisplayMode = .always
-            
-            //METHOD2
-            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-            }
-            
-            //METHOD3
-    //        let navBarAppearance = UINavigationBarAppearance()
-    //        navBarAppearance.configureWithOpaqueBackground()
-    //        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.myColor,
-    //                                                     .font: UIFont(name: "MyFont", size: 42)!]
-    //        navBarAppearance.backgroundColor = .white
-    //        navBarAppearance.shadowColor = nil
-    //        navigationController?.navigationBar.isTranslucent = false
-    //        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            
-            /*
-            if #available(iOS 13.0, *) {
-                let navBarAppearance = UINavigationBarAppearance()
-                navBarAppearance.configureWithOpaqueBackground()
-                navBarAppearance.titleTextAttributes = [.foregroundColor: navbarTextColor]
-                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: navbarTextColor]
-                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-                navigationController?.navigationBar.standardAppearance = navBarAppearance
-                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            }
- */
-            
-        }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //TEMP FIX TODO:
+        for view in self.navigationController?.navigationBar.subviews ?? [] {
+             let subviews = view.subviews
+             if subviews.count > 0, let label = subviews[0] as? UILabel {
+                label.textColor = .systemYellow //<replace with your color>
+             }
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -920,26 +982,15 @@ extension TagListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        var line1:String = ""
+        var line2:String = ""
+        var line3:String = ""
+        var line4:String = ""
+        
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AuteurTableViewCell
         
         let tag = self.tagObjects[indexPath.row] //The Vige
-        
-        cell.tagTitle.text = tag.tagTitle
-        cell.tagSubTitle.text = tag.tagSubTitle
-        cell.tagCompany.text = tag.tagCompany
-        
-        
-        //TODO: FOR WINE APP ONLY. TAKE OUT!!!!
-        //tagSubtitle + tagCountry = REGION + COUNTRY
-        //tagCompany + beaconDymo = COMPANY + GRAPE
-        cell.tagTitle.text = tag.tagTitle
-        cell.tagSubTitle.text = tag.tagSubTitle + ". " + tag.tagCountry
-        cell.tagCompany.text = tag.tagCompany + ", " + tag.beaconDymo
-        
-        
-        
-        
         
         //TODO: Implement currentLocale = NSLocale.current as NSLocale
         //let date = cellDataParse.object(forKey: "createdAt") as? Date ?? NSDate() as Date
@@ -948,27 +999,42 @@ extension TagListViewController: UITableViewDataSource {
         format.dateFormat = "EEE, MMM d, h:mm a"
         //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
         let formattedDate = format.string(from: date)
-        cell.dateAdded.text = "Date Added: " + formattedDate
         
-        /*
-         https://photos.homecards.com/rebeacons/Tag-082C63FE-9AA8-4967-BC04-8F3D6AAF63DA-1.jpg
-         */
+        //art
+        line1 = tag.tagTitle
+        line2 = tag.tagSubTitle
+        line3 = tag.tagCompany
+        line4 = "Date Added: " + formattedDate
         
-        //        let tagPhotoRef = tag.tagPhotoRef
-        //
-        //        let cloudinaryAction = "Tag"
-        //        let usePhotoRef:String? = tagPhotoRef
-        //        let photoNumber = 1
-        //        let propertyPhotoFileUrl:String? = UIViewController.createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
-        
-        
+        //wine
+        if (tag.appCode == "wine"){
+
+            //FOR WINE APP ONLY
+            //tagSubtitle + tagCountry = REGION + COUNTRY
+            //tagCompany + beaconDymo = COMPANY + GRAPE
+            cell.tagImageView.contentMode = .scaleAspectFill
+            line1 = "Line1"
+            line2 = "Line2"
+            line3 = "Line3"
+            line4 = "Line4"
+//            line1 = tag.tagTitle
+//            line2 = tag.tagSubTitle + ". " + tag.tagCountry
+//            line3 = tag.tagCompany + ", " + tag.beaconDymo
+//            line4 = "Date Added: " + formattedDate
+        }
+
+        cell.tagTitle.text = line1
+        cell.tagSubTitle.text = line2
+        cell.tagCompany.text = line3
+        cell.dateAdded.text = line4
+
+        // SHOW PHOTO
         var tagPhotoFileUrl:String = ""
         if (tag.tagPhotoRef == "") {
             tagPhotoFileUrl = "icons8-camera-1"}
         else {
             tagPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
         }
-        
         
         cell.tagImageView.layer.cornerRadius = cell.tagImageView.frame.size.width / 4
         cell.tagImageView.layer.masksToBounds = true
@@ -1033,8 +1099,7 @@ extension TagListViewController: UITableViewDataSource {
             
             //cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
             
-            //TODO: TAKE OUT. WINE APP ONLY
-            cell.tagImageView.contentMode = .scaleAspectFill
+
             
         }
         //=================================================
@@ -1045,12 +1110,27 @@ extension TagListViewController: UITableViewDataSource {
         cell.tagCompany.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         cell.dateAdded.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+
+        
+        //cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         //THE FOLLOWING MESS UP THE SIZE OF THE CELL !!!
         //DO NOT PUT THEM BACK !!!!
         //cell.accessoryType = .detailDisclosureButton
         //cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
+//        cell.listItemBackground = UIImageView(image:  "list-background-image-dark")
+        
+        
+        let image = UIImage(named: cellBackGroundImageName)
+        //let listItemBackground = UIImageView(image: image!)
+//        listItemBackground = UIImageView(frame: CGRectMake(0, 0, 100, 100))
+//        listItemBackground.layer.borderWidth=1.0
+//        listItemBackground.layer.masksToBounds = false
+//        listItemBackground.layer.borderColor = UIColor.whiteColor().CGColor
+//        listItemBackground.layer.cornerRadius = 13;
+//        listItemBackground.clipsToBounds = true
+
+        cell.listItemBackground!.image = image
         
         return cell
     }
@@ -1086,14 +1166,14 @@ extension TagListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //cell.backgroundColor = UIColor.black
-        //cell.backgroundColor = UIColor(white:1, alpha: 0.5)
+//        cell.backgroundColor = UIColor.red
+//        cell.backgroundColor = UIColor(white:1, alpha: 0.5)
 
     if #available(iOS 13, *) {
         //cell.backgroundColor = [UIColor systemBackgroundColor];
     } else {
         //cell.backgroundColor = [UIColor systemBackgroundColor];
-    }
+        }
     }
 
     
@@ -1642,3 +1722,27 @@ extension TagListViewController: UITableViewDataSource {
  completionHandler(true)
  }
  */
+//
+//class DarkModeAwareNavigationController: UINavigationController {
+//
+//  override init(rootViewController: UIViewController) {
+//       super.init(rootViewController: rootViewController)
+//       self.updateBarTintColor()
+//  }
+//
+//  required init?(coder aDecoder: NSCoder) {
+//       super.init(coder: aDecoder)
+//       self.updateBarTintColor()
+//  }
+//
+//  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//       super.traitCollectionDidChange(previousTraitCollection)
+//       self.updateBarTintColor()
+//  }
+//
+//  private func updateBarTintColor() {
+//       if #available(iOS 13.0, *) {
+//            self.navigationBar.barTintColor = UITraitCollection.current.userInterfaceStyle == .dark ? .black : .white
+//  }
+//  }
+//}

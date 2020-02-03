@@ -114,7 +114,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Manage Tags" id="lnr-g4-LfB">
-                                        <color key="tintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <segue destination="Wbr-7r-70g" kind="show" id="Pcm-5D-WrO"/>
                                         </connections>
@@ -146,7 +146,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z97-T2-V6R">
                                 <rect key="frame" x="10" y="92" width="394" height="22"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -159,7 +159,7 @@
                                     <constraint firstAttribute="height" constant="36" id="qdY-Zd-aGx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Scan Tags"/>
+                                <state key="normal" title="Tap to Scan Tags"/>
                                 <connections>
                                     <action selector="scanButtonPressed:" destination="kBe-lp-QEI" eventType="touchUpInside" id="Gld-HH-6Ql"/>
                                 </connections>
@@ -183,7 +183,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwP-SP-hDP">
-                                                    <rect key="frame" x="98" y="0.0" width="310" height="86"/>
+                                                    <rect key="frame" x="98" y="22" width="310" height="64"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TagTitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Caz-z0-qiP">
                                                             <rect key="frame" x="0.0" y="2" width="300" height="24"/>
@@ -246,15 +246,19 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="SwP-SP-hDP" secondAttribute="trailing" constant="-13" id="0GN-gs-9ka"/>
                                                 <constraint firstItem="N1R-BH-X4M" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leading" id="0sb-8e-dsJ"/>
+                                                <constraint firstItem="N1R-BH-X4M" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leadingMargin" constant="-20" id="3Gt-KK-vll"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="N1R-BH-X4M" secondAttribute="bottom" constant="-11" id="865-bZ-WMI"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="top" constant="5" id="AeQ-6w-Jb1"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="SwP-SP-hDP" secondAttribute="trailing" constant="-14" id="NT1-aj-g2L"/>
                                                 <constraint firstItem="N1R-BH-X4M" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="top" id="NXC-bb-ail"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="top" constant="5" id="U1A-fv-f0O"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="N1R-BH-X4M" secondAttribute="trailing" constant="-20" id="Zu6-6v-QFT"/>
+                                                <constraint firstItem="N1R-BH-X4M" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="topMargin" constant="-11" id="eSM-Rv-aDA"/>
                                                 <constraint firstAttribute="trailing" secondItem="N1R-BH-X4M" secondAttribute="trailing" id="ifm-9M-EKR"/>
                                                 <constraint firstItem="SwP-SP-hDP" firstAttribute="leading" secondItem="wb7-Tv-LHg" secondAttribute="trailing" constant="8" symbolic="YES" id="nm4-eB-apM"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leading" constant="12" id="oqD-CZ-tEH"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="SwP-SP-hDP" secondAttribute="bottom" constant="-7" id="qmf-M4-2rm"/>
-                                                <constraint firstItem="SwP-SP-hDP" firstAttribute="top" secondItem="N1R-BH-X4M" secondAttribute="top" id="upf-Gj-W5Y"/>
+                                                <constraint firstItem="SwP-SP-hDP" firstAttribute="top" secondItem="N1R-BH-X4M" secondAttribute="top" constant="22" id="upf-Gj-W5Y"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leading" constant="12" id="uqE-LO-ezy"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -262,6 +266,7 @@
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dateAdded" destination="Zb4-hq-2YA" id="VpM-rk-ZIH"/>
+                                            <outlet property="listItemBackground" destination="N1R-BH-X4M" id="22a-7M-cZS"/>
                                             <outlet property="tagCompany" destination="nIh-X1-nEb" id="7Ps-HV-qYT"/>
                                             <outlet property="tagImageView" destination="wb7-Tv-LHg" id="pd4-jl-lCC"/>
                                             <outlet property="tagSubTitle" destination="kxc-7q-4SS" id="qCc-Jk-0vO"/>
@@ -317,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RS-bj-rsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-139855.20000000001" y="-55456.403940886703"/>
+            <point key="canvasLocation" x="-139856.52173913043" y="-55456.47321428571"/>
         </scene>
         <!--Write Tag View Controller-->
         <scene sceneID="njR-9G-dzd">
@@ -1804,7 +1809,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kUe-KS-Neb"/>
-        <segue reference="PI8-6u-JL5"/>
+        <segue reference="K8T-2y-s8M"/>
         <segue reference="gfT-in-4Ae"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
