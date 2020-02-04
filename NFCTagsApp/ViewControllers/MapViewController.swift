@@ -19,6 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         // Customize the map view
         mapView.delegate = self
         mapView.showsCompass = true
@@ -55,6 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
         })
     }
+    
     
     // MARK: - MKMapViewDelegate methods
     

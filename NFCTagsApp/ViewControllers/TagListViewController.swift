@@ -75,7 +75,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     }
     
     func  setupDarkMode() {
-        overrideUserInterfaceStyle = .light //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+        overrideUserInterfaceStyle = .dark //TODO: TAKE THIS OUT OF FINAL VERSION !!!
         
  
         //SET UI CONFIG COLORS
@@ -982,11 +982,6 @@ extension TagListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var line1:String = ""
-        var line2:String = ""
-        var line3:String = ""
-        var line4:String = ""
-        
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AuteurTableViewCell
         
@@ -1001,32 +996,23 @@ extension TagListViewController: UITableViewDataSource {
         let formattedDate = format.string(from: date)
         
         //art
-        line1 = tag.tagTitle
-        line2 = tag.tagSubTitle
-        line3 = tag.tagCompany
-        line4 = "Date Added: " + formattedDate
+        cell.tagImageView.contentMode = .scaleAspectFit
+        cell.tagTitle.text = tag.tagTitle
+        cell.tagSubTitle.text = tag.tagSubTitle
+        cell.tagCompany.text = tag.tagCompany
+        cell.dateAdded.text = "Date Added: " + formattedDate
         
         //wine
         if (tag.appCode == "wine"){
-
             //FOR WINE APP ONLY
             //tagSubtitle + tagCountry = REGION + COUNTRY
             //tagCompany + beaconDymo = COMPANY + GRAPE
             cell.tagImageView.contentMode = .scaleAspectFill
-            line1 = "Line1"
-            line2 = "Line2"
-            line3 = "Line3"
-            line4 = "Line4"
-//            line1 = tag.tagTitle
-//            line2 = tag.tagSubTitle + ". " + tag.tagCountry
-//            line3 = tag.tagCompany + ", " + tag.beaconDymo
-//            line4 = "Date Added: " + formattedDate
+            cell.tagTitle.text = tag.tagTitle
+            cell.tagSubTitle.text = tag.tagSubTitle + ". " + tag.tagCountry
+            cell.tagCompany.text = tag.tagCompany + ", " + tag.beaconDymo
+            cell.dateAdded.text = "Date Added: " + formattedDate
         }
-
-        cell.tagTitle.text = line1
-        cell.tagSubTitle.text = line2
-        cell.tagCompany.text = line3
-        cell.dateAdded.text = line4
 
         // SHOW PHOTO
         var tagPhotoFileUrl:String = ""
@@ -1107,8 +1093,16 @@ extension TagListViewController: UITableViewDataSource {
         
         cell.tagTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         cell.tagSubTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        cell.tagCompany.font = UIFont(name: "HelveticaNeue-Light", size: 14)
-        cell.dateAdded.font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        cell.tagCompany.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        cell.dateAdded.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        
+        cell.tagTitle.textColor = .label
+        cell.tagSubTitle.textColor = .tertiaryLabel
+        cell.tagCompany.textColor = .quaternaryLabel
+        cell.dateAdded.textColor = .label
+        
+        cell.backgroundColor = .systemRed
+        
         
 
         

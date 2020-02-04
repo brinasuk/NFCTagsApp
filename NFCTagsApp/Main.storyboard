@@ -183,7 +183,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwP-SP-hDP">
-                                                    <rect key="frame" x="98" y="22" width="310" height="64"/>
+                                                    <rect key="frame" x="98" y="0.0" width="310" height="86"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TagTitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Caz-z0-qiP">
                                                             <rect key="frame" x="0.0" y="2" width="300" height="24"/>
@@ -246,19 +246,15 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="SwP-SP-hDP" secondAttribute="trailing" constant="-13" id="0GN-gs-9ka"/>
                                                 <constraint firstItem="N1R-BH-X4M" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leading" id="0sb-8e-dsJ"/>
-                                                <constraint firstItem="N1R-BH-X4M" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leadingMargin" constant="-20" id="3Gt-KK-vll"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="N1R-BH-X4M" secondAttribute="bottom" constant="-11" id="865-bZ-WMI"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="top" constant="5" id="AeQ-6w-Jb1"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="SwP-SP-hDP" secondAttribute="trailing" constant="-14" id="NT1-aj-g2L"/>
                                                 <constraint firstItem="N1R-BH-X4M" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="top" id="NXC-bb-ail"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="top" constant="5" id="U1A-fv-f0O"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="N1R-BH-X4M" secondAttribute="trailing" constant="-20" id="Zu6-6v-QFT"/>
-                                                <constraint firstItem="N1R-BH-X4M" firstAttribute="top" secondItem="Ztw-yb-0S2" secondAttribute="topMargin" constant="-11" id="eSM-Rv-aDA"/>
                                                 <constraint firstAttribute="trailing" secondItem="N1R-BH-X4M" secondAttribute="trailing" id="ifm-9M-EKR"/>
                                                 <constraint firstItem="SwP-SP-hDP" firstAttribute="leading" secondItem="wb7-Tv-LHg" secondAttribute="trailing" constant="8" symbolic="YES" id="nm4-eB-apM"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leading" constant="12" id="oqD-CZ-tEH"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="SwP-SP-hDP" secondAttribute="bottom" constant="-7" id="qmf-M4-2rm"/>
-                                                <constraint firstItem="SwP-SP-hDP" firstAttribute="top" secondItem="N1R-BH-X4M" secondAttribute="top" constant="22" id="upf-Gj-W5Y"/>
+                                                <constraint firstItem="SwP-SP-hDP" firstAttribute="top" secondItem="N1R-BH-X4M" secondAttribute="top" id="upf-Gj-W5Y"/>
                                                 <constraint firstItem="wb7-Tv-LHg" firstAttribute="leading" secondItem="Ztw-yb-0S2" secondAttribute="leading" constant="12" id="uqE-LO-ezy"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -266,7 +262,7 @@
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dateAdded" destination="Zb4-hq-2YA" id="VpM-rk-ZIH"/>
-                                            <outlet property="listItemBackground" destination="N1R-BH-X4M" id="22a-7M-cZS"/>
+                                            <outlet property="listItemBackground" destination="N1R-BH-X4M" id="unz-UB-h0x"/>
                                             <outlet property="tagCompany" destination="nIh-X1-nEb" id="7Ps-HV-qYT"/>
                                             <outlet property="tagImageView" destination="wb7-Tv-LHg" id="pd4-jl-lCC"/>
                                             <outlet property="tagSubTitle" destination="kxc-7q-4SS" id="qCc-Jk-0vO"/>
@@ -322,7 +318,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RS-bj-rsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-139856.52173913043" y="-55456.47321428571"/>
+            <point key="canvasLocation" x="-139855.20000000001" y="-55456.403940886703"/>
         </scene>
         <!--Write Tag View Controller-->
         <scene sceneID="njR-9G-dzd">
@@ -651,7 +647,7 @@
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="A1a-LB-Dza"/>
-                                    <constraint firstAttribute="width" constant="375" id="LAW-qj-3YQ"/>
+                                    <constraint firstAttribute="width" constant="414" id="LAW-qj-3YQ"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Rate It" id="niR-4j-hBe">
@@ -683,7 +679,6 @@
                         <constraints>
                             <constraint firstItem="Gdl-CJ-31a" firstAttribute="top" secondItem="eBK-Y0-w1n" secondAttribute="top" constant="-88" id="1xK-7s-PWF"/>
                             <constraint firstAttribute="bottom" secondItem="Gdl-CJ-31a" secondAttribute="bottom" constant="88" id="20N-JZ-JWu"/>
-                            <constraint firstItem="hi8-tS-7gX" firstAttribute="leading" secondItem="eBK-Y0-w1n" secondAttribute="leading" id="C2w-ae-3QF"/>
                             <constraint firstItem="hi8-tS-7gX" firstAttribute="trailing" secondItem="eBK-Y0-w1n" secondAttribute="trailing" id="WzE-QX-Yo3"/>
                             <constraint firstItem="Gdl-CJ-31a" firstAttribute="trailing" secondItem="eBK-Y0-w1n" secondAttribute="trailing" id="X5k-LO-og4"/>
                             <constraint firstItem="hi8-tS-7gX" firstAttribute="bottom" secondItem="eBK-Y0-w1n" secondAttribute="bottom" id="Z3k-fa-vIO"/>
@@ -1809,8 +1804,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kUe-KS-Neb"/>
-        <segue reference="K8T-2y-s8M"/>
-        <segue reference="gfT-in-4Ae"/>
+        <segue reference="PI8-6u-JL5"/>
+        <segue reference="G25-Qc-G81"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

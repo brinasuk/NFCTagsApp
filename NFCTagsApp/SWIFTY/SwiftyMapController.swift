@@ -28,6 +28,7 @@ class SwiftyMapController: UIViewController {
     super.viewDidLoad()
     self.title = "Map View"
     mapView.delegate = self
+    setupDarkMode()
     setupNavigationBar()
 
 
@@ -98,6 +99,81 @@ class SwiftyMapController: UIViewController {
     mapView.addAnnotation(artwork)
     
   }
+    
+           func  setupDarkMode() {
+               overrideUserInterfaceStyle = .dark //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+               
+        
+               //SET UI CONFIG COLORS
+    //           cellBackGroundImageName = "list-item-background"
+    //
+    //           let backgroundImageName = "art_launch_image"
+    //           let backgroundImage = UIImage(named: backgroundImageName)
+    //           let imageView = UIImageView(image: backgroundImage)
+    //           imageView.contentMode = .scaleAspectFill
+    //           imageView.alpha = 0.8
+    //           self.tableView.backgroundView = imageView
+               
+               
+               //tabTextColor = .label
+               //tabTextColor = .systemRed
+               //tabTextColor = .systemFill
+
+    //           navbarTextColor = .label
+    //           textColor = .label
+    //
+    //           navbarBackColor = .secondarySystemBackground // paleRoseColor
+    //           //navbarBackColor = .systemGroupedBackground//alex
+    //           //navbarBackColor = .systemBlue
+    //
+    //
+    //           //toolBar.barTintColor = navbarBackColor
+    //           //view.backgroundColor = navbarBackColor
+    //
+    //           statusView.backgroundColor = .systemGray4
+    //
+    //           let labelColor1:UIColor = .systemGray6
+    //           let labelColor2:UIColor = textColor!
+    //           let labelBorder:UIColor = .systemTeal
+    //           //tryThisColor = .systemRed
+    //           statusLabel.backgroundColor = labelColor1
+    //           statusLabel.textColor = labelColor2
+    //           statusView.backgroundColor = labelBorder
+    //
+    //           statusLabel.layer.cornerRadius = 5.0
+    //           statusLabel.layer.masksToBounds = true
+    //           //statusLabel.backgroundColor = .white
+    //           //statusLabel.textColor = royalBlue
+    //           statusLabel.font.withSize(16.0)
+    //
+    //           //SET THE SCANBUTTON DEFAULTS
+    //           scanButton.backgroundColor = .systemBlue
+    //           scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+    //           scanButton.layer.cornerRadius = scanButton.frame.height/2
+    //           scanButton.layer.masksToBounds = true
+    //           scanButton.tintColor = textColor
+    //
+    //           switch overrideUserInterfaceStyle {
+    //            case .dark:
+    //                // User Interface is Dark
+    //                cellBackGroundImageName = "list-item-background-dark"
+    //                ()
+    //            case .light:
+    //                // User Interface is Light
+    //                cellBackGroundImageName = "list-item-background"
+    //                ()
+    //            case .unspecified:
+    //                //your choice
+    //                cellBackGroundImageName = "list-item-background"
+    //                ()
+    //            @unknown default:
+    //                cellBackGroundImageName = "list-item-background"
+    //                ()
+    //                //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
+    //            }
+        
+             }
+
     
     func setupNavigationBar() {
         //Customize the navigation bar
