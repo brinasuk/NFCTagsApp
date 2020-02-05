@@ -68,7 +68,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
        func  setupDarkMode() {
-           overrideUserInterfaceStyle = .dark //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+           //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+           if (kAppDelegate.isDarkMode == true) {
+               overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
            
     
            //SET UI CONFIG COLORS
@@ -304,7 +306,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
-            
+
             //0 COMPANY  //CANNOT CHANGE
             //1 CONTACT (OWNERNAME)
             //2 PHONE      (OWNERPHONE)
@@ -315,28 +317,60 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         case 0: //COMPANY
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            cell.iconImageView.image = UIImage(named: "company")
+            
+            if #available(iOS 13.0, *) {
+                let companyImage = UIImage(systemName: "rectangle.stack.person.crop")!
+                let dmCompanyImage = companyImage.withTintColor(.label, renderingMode: .alwaysOriginal)
+                cell.iconImageView.image = dmCompanyImage
+            } else {
+                cell.iconImageView.image = UIImage(named: "company")
+            }
+            
             cell.shortTextLabel.text = tag.tagCompany
             cell.selectionStyle = .none
             return cell
             
         case 1: //CONTACT
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            cell.iconImageView.image = UIImage(named: "contact")
+            
+            if #available(iOS 13.0, *) {
+                let contactImage = UIImage(systemName: "person")!
+                let dmContactImage = contactImage.withTintColor(.label, renderingMode: .alwaysOriginal)
+                cell.iconImageView.image = dmContactImage
+            } else {
+                cell.iconImageView.image = UIImage(named: "contact")
+            }
+            
             cell.shortTextLabel.text = tag.ownerName
             cell.selectionStyle = .none
             return cell
             
         case 2: //PHONE
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            cell.iconImageView.image = UIImage(named: "phone")
+            
+            if #available(iOS 13.0, *) {
+                let phoneImage = UIImage(systemName: "phone")!
+                let dmPhoneImage = phoneImage.withTintColor(.label, renderingMode: .alwaysOriginal)
+                cell.iconImageView.image = dmPhoneImage
+            } else {
+                cell.iconImageView.image = UIImage(named: "phone")
+            }
+            
             cell.shortTextLabel.text = tag.ownerPhone
             cell.selectionStyle = .none
             return cell
             
         case 3: //EMAIL
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            cell.iconImageView.image = UIImage(named: "email")
+            
+            if #available(iOS 13.0, *) {
+                let emailImage = UIImage(systemName: "envelope")!
+                let dmEmailImage = emailImage.withTintColor(.label, renderingMode: .alwaysOriginal)
+                cell.iconImageView.image = dmEmailImage
+            } else {
+                cell.iconImageView.image = UIImage(named: "email")
+            }
+            
             cell.shortTextLabel.text = tag.ownerEmail
             cell.selectionStyle = .none
             return cell
@@ -352,7 +386,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             //            print(newString)
             
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            cell.iconImageView.image = UIImage(named: "map")
+            
+            if #available(iOS 13.0, *) {
+                let mapImage = UIImage(systemName: "map")!
+                let dmMapImage = mapImage.withTintColor(.label, renderingMode: .alwaysOriginal)
+                cell.iconImageView.image = dmMapImage
+            } else {
+                cell.iconImageView.image = UIImage(named: "map")
+            }
+            
             cell.shortTextLabel.text = addr
             cell.selectionStyle = .none
             return cell

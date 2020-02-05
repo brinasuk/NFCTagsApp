@@ -75,7 +75,9 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     }
     
     func  setupDarkMode() {
-        overrideUserInterfaceStyle = .dark //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+        //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+        if (kAppDelegate.isDarkMode == true) {
+            overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
         
  
         //SET UI CONFIG COLORS
