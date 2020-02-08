@@ -26,21 +26,28 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: DetailHeaderView!
-    
+
     var ratingKeep = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDarkMode()
         
-        //title = "DETAILS"
+//        if #available(iOS 13.0, *) {
+//            let backImage = UIImage(systemName: "clear")!
+//            let dmBackImage = backImage.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
+//            headerView.backImageView.image = dmBackImage
+//        } else {
+//            headerView.backImageView.image = UIImage(named: "Close-Button")
+//        }
+
+
+        headerView.ratingImageView.isUserInteractionEnabled = true
+//        headerView.backImageView.isUserInteractionEnabled = true
         
-        //TODO: ALEX TESTING
-        //let backButtonImage = UIImage(systemName: SFSymbol.square.rawValue)
-        
-        
-            headerView.ratingImageView.isUserInteractionEnabled = true
         headerView.ratingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
+        
+//        headerView.backImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backButtonTapped)))
         
         navigationItem.largeTitleDisplayMode = .never
         
@@ -61,10 +68,30 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupNavigationBar()
+        //CRITICAL STEP, ESPECIALLY AFTER COMING HERE FROM ANOTHER VIEW!! iOS13
+        hideNavigationBar()
+
+    }
+    
+    func hideNavigationBar () {
+        
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//         navigationController?.navigationBar.shadowImage = UIImage()
+         //navigationController?.navigationBar.prefersLargeTitles = true
+         //navigationController?.hidesBarsOnSwipe = true
+        
+        
         navigationController?.hidesBarsOnSwipe = false
         //NB: THIS LINE UNHIDES THE NAVIGATION BAR
+        //YOU ABSOLUTELY WANT THE BACK BUTTON. JUST MAKE EVERYTHING ELSE TRANSPARENT
         navigationController?.setNavigationBarHidden(false, animated: true)
+
+        let transparentAppearance = UINavigationBarAppearance()
+            transparentAppearance.configureWithTransparentBackground()
+
+        navigationController?.navigationBar.scrollEdgeAppearance = transparentAppearance
+        navigationController?.navigationBar.standardAppearance = transparentAppearance
+
     }
     
        func  setupDarkMode() {
@@ -144,7 +171,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
          }
        
     
-    func setupNavigationBar() {
+    func setupNavigationBarX() {
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
         //METHOD 0
@@ -254,6 +281,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //print("image tapped")
         performSegue(withIdentifier: "ShowReview", sender: self)
     }
+    
+//        @objc private func backButtonTapped(_ recognizer: UITapGestureRecognizer) {
+//            navigationController?.popViewController(animated: true)
+//        }
     
     @IBAction func mapButtonPressed(_ sender: Any) {
         /* DOES NOT WORK - DELETE

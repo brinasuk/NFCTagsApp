@@ -52,6 +52,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
 
     
+    
 //    @IBAction func didPressSwitchProfile(_ sender: Any) {
 //        currentProfile = currentProfile == .guest ? .host : .guest
 //        configureFor(profileType: currentProfile)
@@ -166,70 +167,71 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
  
       }
     
-        func setupNavigationBar() {
-            //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
-            self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-//            //navigationController?.navigationBar.prefersLargeTitles = true
-//            navigationController?.navigationBar.prefersLargeTitles = false
-//            self.navigationController?.navigationBar.tintColor = UIColor.darkGray
+    
+    func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        //            //navigationController?.navigationBar.prefersLargeTitles = true
+        //            navigationController?.navigationBar.prefersLargeTitles = false
+        //            self.navigationController?.navigationBar.tintColor = UIColor.darkGray
 
-            
-//            //METHOD 0
-//            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//            navigationController?.navigationBar.shadowImage = UIImage()
-//            navigationController?.navigationBar.tintColor = .yellow
-//            navigationController?.hidesBarsOnSwipe = false
-            
-            //FROM THE BOOK!
-            //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            //navigationController?.navigationBar.shadowImage = UIImage()
-//            if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
-//                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
-//            }
+                    
+        //            //METHOD 0
+        //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //            navigationController?.navigationBar.shadowImage = UIImage()
+        //            navigationController?.navigationBar.tintColor = .yellow
+        //            navigationController?.hidesBarsOnSwipe = false
+                    
+                    //FROM THE BOOK!
+                    //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                    //navigationController?.navigationBar.shadowImage = UIImage()
+        //            if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
+        //                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
+        //            }
 
-            
-            //Customize the navigation bar
-            //The following 2 lines make the Navigation Bar transparant
-                   navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-                    navigationController?.navigationBar.shadowImage = UIImage()
-                    navigationController?.navigationBar.prefersLargeTitles = true
-                    navigationController?.hidesBarsOnSwipe = true
-            
-            
-            
-            //METHOD 1
-            //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-            //        navigationItem.largeTitleDisplayMode = .always
-            
-//            //METHOD2
-//            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-//                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
-//            }
-            
-//            //METHOD3
-//            let navBarAppearance = UINavigationBarAppearance()
-//            navBarAppearance.configureWithOpaqueBackground()
-//            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: .redColor, UIFont(name: "MyFont", size: 42)!]
-//            navBarAppearance.backgroundColor = .white
-//            navBarAppearance.shadowColor = nil
-//            navigationController?.navigationBar.isTranslucent = false
-//            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            
-
-            
-            let foreGroundColor:UIColor = .systemOrange
-            if #available(iOS 13.0, *) {
-                let navBarAppearance = UINavigationBarAppearance()
-                navBarAppearance.configureWithOpaqueBackground()
-                navBarAppearance.titleTextAttributes = [.foregroundColor: foreGroundColor]
-                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: navbarTextColor!]
-                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-//                navigationController?.navigationBar.standardAppearance = navBarAppearance
-//                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            }
-
-            
+                    
+                    //Customize the navigation bar
+                    //The following 2 lines make the Navigation Bar transparant
+//                           navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//                            navigationController?.navigationBar.shadowImage = UIImage()
+//                            navigationController?.navigationBar.prefersLargeTitles = true
+//                            navigationController?.hidesBarsOnSwipe = true
+                    
+                    
+                    
+                    //METHOD 1
+                    //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+                    //        navigationItem.largeTitleDisplayMode = .always
+                    
+        //            //METHOD2
+        //            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+        //                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
+        //            }
+                    
+        //            //METHOD3
+        //            let navBarAppearance = UINavigationBarAppearance()
+        //            navBarAppearance.configureWithOpaqueBackground()
+        //            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: .redColor, UIFont(name: "MyFont", size: 42)!]
+        //            navBarAppearance.backgroundColor = .white
+        //            navBarAppearance.shadowColor = nil
+        //            navigationController?.navigationBar.isTranslucent = false
+        //            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+         //self.navigationController?.navigationBar.tintColor = UIColor.darkGray
+        
+                    let titleTextColor:UIColor = .systemOrange
+                    let largeTitleTextColor:UIColor = .systemBlue
+                    let navbarBackColor:UIColor = .systemTeal
+        
+                    if #available(iOS 13.0, *) {
+                        let navBarAppearance = UINavigationBarAppearance()
+                        navBarAppearance.configureWithOpaqueBackground()
+                        navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: largeTitleTextColor]
+                        navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+                        navigationController?.navigationBar.standardAppearance = navBarAppearance
+                        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
+    }
     
     
     // MARK: - PROGRAM LIFECYCLE
@@ -239,6 +241,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         userInterfaceStyle = self.traitCollection.userInterfaceStyle
         setupDarkMode()
+        //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         
 //        let string = "$1,abc234,567.99"

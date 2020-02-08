@@ -70,18 +70,29 @@ class MaintTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
     }
-    
-    func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = false
-         self.navigationController?.navigationBar.tintColor = UIColor.darkGray
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         self.navigationController?.navigationBar.tintColor = UIColor.systemPink
     }
     
-    //    @objc func goBackButtonPressed() {
-    //        navigationController?.popViewController(animated: true)
-    //        //[self dismissViewControllerAnimated:YES completion:nil];
-    //    }
-    
-    
+    func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+         //self.navigationController?.navigationBar.tintColor = UIColor.darkGray
+        
+                    let titleTextColor:UIColor = .systemOrange
+                    let largeTitleTextColor:UIColor = .systemBlue
+                    let navbarBackColor:UIColor = .systemTeal
+        
+                    if #available(iOS 13.0, *) {
+                        let navBarAppearance = UINavigationBarAppearance()
+                        navBarAppearance.configureWithOpaqueBackground()
+                        navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: largeTitleTextColor]
+                        navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+                        navigationController?.navigationBar.standardAppearance = navBarAppearance
+                        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+    }
     
     func loadObjects()
     {

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import Alertift
 
-class MasterViewController: UITableViewController {
+class NotesViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
     private var noteObjects:[NoteModel] = []
@@ -21,6 +21,7 @@ class MasterViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "My Notes"
+        setupDarkMode()
         
         //THE FOLLOWING TWO VARIABLES ARE PASSED FROM THE TAG RECORD FOR ADDNEW
         //TODO: ALEX FIX THIS
@@ -58,26 +59,63 @@ class MasterViewController: UITableViewController {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
- 
-        //ALEX
-//        if let split = splitViewController {
-//            let controllers = split.viewControllers
-//            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-//        }
         
         loadNotesTable()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-//ALEX        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-        
+        setupNavigationBar()
     }
+        
+    func  setupDarkMode() {
+                      //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+                      if (kAppDelegate.isDarkMode == true) {
+                          overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+                    
+                    
+                    self.view.backgroundColor = .secondarySystemBackground
+                      
+                    }
+           
+        
+        func setupNavigationBar() {
+            //Customize the navigation bar
+            //The following 2 lines make the Navigation Bar transparant
+            
+            
+            // SET UINAVIGATIONBAR
+            let coloredAppearance = UINavigationBarAppearance()
+            coloredAppearance.configureWithOpaqueBackground()
+            coloredAppearance.backgroundColor = .systemTeal
+            coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            
+            navigationController?.navigationBar.standardAppearance = coloredAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = coloredAppearance
+            
+//
+//            //METHOD 0
+//            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            navigationController?.navigationBar.shadowImage = UIImage()
+//            navigationController?.navigationBar.tintColor = .label
+//            navigationController?.hidesBarsOnSwipe = false
+            
+            //METHOD 1
+            //                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
+            //                navigationItem.largeTitleDisplayMode = .always
+            
+            //METHOD2
+            //        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+            //            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+            //        }
+        }
+        
     
     func loadNotesTable()
     {
         let query = PFQuery(className:"Notes")
-
+        //TODO: [query whereKeyExists:@"score"];
         //query.whereKey("userEmail", equalTo: userEmail!)
         //query.order(byDescending: "createdAt")
         query.limit = 500
@@ -126,7 +164,7 @@ class MasterViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //ADDED BY ALEX
         if segue.identifier == "showCreateNoteSegue" {
-            let vc = segue.destination as! ReallySimpleNoteCreateChangeViewController
+            let vc = segue.destination as! NoteCreateChangeViewController
             vc.passTagId = currentTagId
             vc.passPhotoRef = currentPhotoRef
         }
@@ -159,12 +197,13 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return objects.count
+        //print(self.noteObjects.count)
         //return ReallySimpleNoteStorage.storage.count()
         return self.noteObjects.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ReallySimpleNoteUITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NoteTableViewCell
         
 //        let cellIdentifier = "Cell"
 //        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AuteurTableViewCell
@@ -177,7 +216,10 @@ class MasterViewController: UITableViewController {
 //        cell.noteDateLabel!.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
 //        }
             
-        cell.noteTitleLabel!.text = object.noteTitle
+        cell.backgroundColor = .systemBackground
+        cell.noteTitleLabel.textColor = .label
+        
+        cell.noteTitleLabel!.text = "JUST TESTING" // object.noteTitle
         cell.noteTextLabel!.text = object.noteText
         cell.noteDateLabel!.text = "ALEX FIX" //ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
         return cell

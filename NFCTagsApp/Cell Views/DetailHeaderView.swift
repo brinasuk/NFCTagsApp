@@ -11,6 +11,7 @@ import UIKit
 class DetailHeaderView: UIView {
 
     @IBOutlet var headerImageView: UIImageView!
+    
     @IBOutlet var titleLabel: UILabel! {
         didSet {
             titleLabel.numberOfLines = 0
@@ -33,6 +34,6 @@ class DetailHeaderView: UIView {
     
     @IBOutlet var ratingImageView: UIImageView!
 
-    
+    //@IBOutlet var backImageView: UIImageView!
 
 }

@@ -437,10 +437,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </imageView>
-                                        <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIb-cF-rmo">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwg-Vf-QlN" userLabel="Title">
                                             <rect key="frame" x="12" y="237" width="394" height="43"/>
                                             <constraints>
@@ -484,19 +480,15 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="GRx-82-h06" secondAttribute="bottom" constant="33" id="8Xd-Z8-p8A"/>
                                         <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" constant="12" id="9fb-Wj-ip6"/>
-                                        <constraint firstItem="VIb-cF-rmo" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" id="AAZ-Qk-gpP"/>
-                                        <constraint firstItem="VIb-cF-rmo" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" id="PfK-5a-7SO"/>
                                         <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="fwg-Vf-QlN" secondAttribute="leading" id="R4v-aI-oVB"/>
                                         <constraint firstAttribute="trailing" secondItem="GRx-82-h06" secondAttribute="trailing" constant="8" id="S5L-Mw-e6L"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" id="UX5-Wd-vgc"/>
                                         <constraint firstAttribute="trailing" secondItem="Dhi-zA-SYj" secondAttribute="trailing" id="VKH-Ls-BTa"/>
                                         <constraint firstAttribute="bottom" secondItem="Dhi-zA-SYj" secondAttribute="bottom" id="WmN-mQ-LDI"/>
                                         <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="-2" id="XTj-UP-4dN"/>
-                                        <constraint firstAttribute="trailing" secondItem="VIb-cF-rmo" secondAttribute="trailing" id="Xbz-jO-EQD"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" id="ZDR-Qe-AEv"/>
                                         <constraint firstItem="ak1-cW-eK8" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" constant="57" id="ZHi-lw-pNC"/>
                                         <constraint firstAttribute="bottom" secondItem="uCM-4H-tnq" secondAttribute="bottom" constant="33" id="eVl-D4-01u"/>
-                                        <constraint firstAttribute="bottom" secondItem="VIb-cF-rmo" secondAttribute="bottom" id="g78-6S-Zdv"/>
                                         <constraint firstAttribute="trailing" secondItem="ak1-cW-eK8" secondAttribute="trailing" constant="8" id="wvg-8v-MFo"/>
                                     </constraints>
                                     <connections>
@@ -1255,7 +1247,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qef-V6-25U" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="8OW-GW-fhj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-137486" y="-55445"/>
+            <point key="canvasLocation" x="-137486.95652173914" y="-55445.089285714283"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="16c-nh-lyT">
@@ -1612,10 +1604,10 @@
             </objects>
             <point key="canvasLocation" x="-144114" y="-55194"/>
         </scene>
-        <!--Really Simple Note Create Change View Controller-->
+        <!--Note Create Change View Controller-->
         <scene sceneID="xxF-mM-NC5">
             <objects>
-                <viewController id="78Y-rN-0Yz" customClass="ReallySimpleNoteCreateChangeViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="78Y-rN-0Yz" customClass="NoteCreateChangeViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAt-P1-msZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1703,13 +1695,13 @@
         <!--Master-->
         <scene sceneID="epC-g2-s11">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" customClass="MasterViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" customClass="NotesViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2mu-kt-DcW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="104" id="3uT-Po-GQs" customClass="ReallySimpleNoteUITableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="104" id="3uT-Po-GQs" customClass="NoteTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3uT-Po-GQs" id="CX1-Bs-iC4">
@@ -1803,9 +1795,9 @@
         <image name="text-input" width="298" height="36.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kUe-KS-Neb"/>
-        <segue reference="PI8-6u-JL5"/>
-        <segue reference="G25-Qc-G81"/>
+        <segue reference="rvD-nZ-11h"/>
+        <segue reference="K8T-2y-s8M"/>
+        <segue reference="JOf-sv-hGR"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

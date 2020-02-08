@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReallySimpleNoteUITableViewCell : UITableViewCell {
+class NoteTableViewCell : UITableViewCell {
     private(set) var noteTitle : String = ""
     private(set) var noteText  : String = ""
     private(set) var noteDate  : String = ""

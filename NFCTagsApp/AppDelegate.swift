@@ -160,16 +160,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //        UINavigationBar.appearance().titleTextAttributes = attrs
         
-        var tabTextColor:UIColor = .systemPink
+        var tabTextColor:UIColor = .label
 
-        tabTextColor = .label
-        //tabTextColor = .systemRed
-        //tabTextColor = .systemFill
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 14.0),
                 NSAttributedString.Key.foregroundColor : tabTextColor,
             ], for: .normal)
+
+        //UINAVIGATIONBAR
+        //DO NOT PUT THE FOLLOWING CODE IN.
+        //IT FORCES A NAV BAR IN EVERY VIEW. YOU DONT WANT THIS IN DETAIL VIEW !!
+        
+//        let coloredAppearance = UINavigationBarAppearance()
+//        coloredAppearance.configureWithOpaqueBackground()
+//        coloredAppearance.backgroundColor = .systemGreen
+//        coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+//
+//        UINavigationBar.appearance().standardAppearance = coloredAppearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
         // SET THE BACK BUTTONS
         let backButtonImage = UIImage(named: "backButton_bold")
@@ -181,7 +191,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        UINavigationBar.appearance().backIndicatorImage = backButtonImage
         //        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
         //        UINavigationBar.appearance().backgroundColor = .white
-        //        UINavigationBar.appearance().tintColor = .darkGray
+        
+        UINavigationBar.appearance().tintColor = .systemPink
         
         return true
     }

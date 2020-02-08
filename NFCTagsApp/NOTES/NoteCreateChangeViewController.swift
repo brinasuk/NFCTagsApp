@@ -1,5 +1,5 @@
 //
-//  ReallySimpleNoteCreateChangeViewController.swift
+//  NoteCreateChangeViewController.swift
 //  rsnt-really-simple-note-taking-ios
 //
 //  Created by Németh László Harri on 2019. 01. 22..
@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class ReallySimpleNoteCreateChangeViewController : UIViewController, UITextViewDelegate {
+class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var noteTitleTextField: UITextField!
     @IBOutlet weak var noteTextTextView: UITextView!

@@ -25,10 +25,10 @@
 		C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableViewController.swift */; };
 		C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF322AB1BA300794637 /* OwnerModel.swift */; };
 		C771009323E0DE7E00805047 /* WriteTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C771009223E0DE7E00805047 /* WriteTagViewController.swift */; };
-		C77930F923A2C36D00D997F2 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930F823A2C36D00D997F2 /* MasterViewController.swift */; };
-		C779310223A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */; };
+		C77930F923A2C36D00D997F2 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930F823A2C36D00D997F2 /* NotesViewController.swift */; };
+		C779310223A2C3EC00D997F2 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930FF23A2C3EC00D997F2 /* NoteTableViewCell.swift */; };
 		C779310323A2C3EC00D997F2 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */; };
-		C779310523A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310423A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift */; };
+		C779310523A2C5D600D997F2 /* NoteCreateChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310423A2C5D600D997F2 /* NoteCreateChangeViewController.swift */; };
 		C779310923A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C779310723A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodeld */; };
 		C779310D23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310B23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift */; };
 		C779310E23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310C23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift */; };
@@ -56,7 +56,7 @@
 		C7AE8099232BEE4B001A13B7 /* auteurs.json in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8098232BEE4B001A13B7 /* auteurs.json */; };
 		C7AFF3312318D7FE00179F06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AFF3302318D7FE00179F06 /* AppDelegate.swift */; };
 		C7B7D05222F0DD0D0069D42D /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C7B7D05122F0DD0D0069D42D /* click.mp3 */; };
-		C7C47A2723E8E9F4000509ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C47A2623E8E9F4000509ED /* Main.storyboard */; };
+		C7C47A2923EE1AF2000509ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C47A2823EE1AF2000509ED /* Main.storyboard */; };
 		C7C4844C2287723C00C6A95B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4844B2287723C00C6A95B /* UIColorExtension.swift */; };
 		C7DA87F32291AC8600457112 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F22291AC8600457112 /* RegisterViewController.swift */; };
 		C7DA87F5229259CE00457112 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA87F4229259CE00457112 /* AppConstant.swift */; };
@@ -98,10 +98,10 @@
 		C76D3EF122AB104400794637 /* MaintTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewController.swift; sourceTree = "<group>"; };
 		C76D3EF322AB1BA300794637 /* OwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModel.swift; sourceTree = "<group>"; };
 		C771009223E0DE7E00805047 /* WriteTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTagViewController.swift; sourceTree = "<group>"; };
-		C77930F823A2C36D00D997F2 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteUITableViewCell.swift; sourceTree = "<group>"; };
+		C77930F823A2C36D00D997F2 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		C77930FF23A2C3EC00D997F2 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
-		C779310423A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteCreateChangeViewController.swift; sourceTree = "<group>"; };
+		C779310423A2C5D600D997F2 /* NoteCreateChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCreateChangeViewController.swift; sourceTree = "<group>"; };
 		C779310823A2C6D700D997F2 /* ReallySimpleNotesData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReallySimpleNotesData.xcdatamodel; sourceTree = "<group>"; };
 		C779310B23A2C71400D997F2 /* ReallySimpleNoteDateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteDateHelper.swift; sourceTree = "<group>"; };
 		C779310C23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallySimpleNoteCoreDataHelper.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		C7AE8098232BEE4B001A13B7 /* auteurs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = auteurs.json; sourceTree = "<group>"; };
 		C7AFF3302318D7FE00179F06 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7B7D05122F0DD0D0069D42D /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
-		C7C47A2623E8E9F4000509ED /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C7C47A2823EE1AF2000509ED /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C7C4844B2287723C00C6A95B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		C7DA87F22291AC8600457112 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C7DA87F4229259CE00457112 /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				C7AFF3302318D7FE00179F06 /* AppDelegate.swift */,
-				C7C47A2623E8E9F4000509ED /* Main.storyboard */,
+				C7C47A2823EE1AF2000509ED /* Main.storyboard */,
 				C7F08AC52309E69800CAC5E4 /* LaunchScreen.storyboard */,
 				C760AEEC23CD4CA300BB0F5A /* Hashids.swift */,
 				C7DA87F4229259CE00457112 /* AppConstant.swift */,
@@ -285,10 +285,10 @@
 				C779311223A2C73800D997F2 /* Note */,
 				C779311523A2C74B00D997F2 /* Storage */,
 				C779310623A2C6D700D997F2 /* CoreDataModel */,
-				C77930F823A2C36D00D997F2 /* MasterViewController.swift */,
+				C77930F823A2C36D00D997F2 /* NotesViewController.swift */,
 				C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */,
-				C779310423A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift */,
-				C77930FF23A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift */,
+				C779310423A2C5D600D997F2 /* NoteCreateChangeViewController.swift */,
+				C77930FF23A2C3EC00D997F2 /* NoteTableViewCell.swift */,
 			);
 			path = NOTES;
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7B7D05222F0DD0D0069D42D /* click.mp3 in Resources */,
-				C7C47A2723E8E9F4000509ED /* Main.storyboard in Resources */,
+				C7C47A2923EE1AF2000509ED /* Main.storyboard in Resources */,
 				C7156781227BD97700D1A55A /* Assets.xcassets in Resources */,
 				C7AE8099232BEE4B001A13B7 /* auteurs.json in Resources */,
 				C7F08AC62309E69800CAC5E4 /* LaunchScreen.storyboard in Resources */,
@@ -520,7 +520,7 @@
 				C7AFF3312318D7FE00179F06 /* AppDelegate.swift in Sources */,
 				C71B63E4229B798A00B6910A /* DetailViewController.swift in Sources */,
 				C79A9410228F268B00A53DDA /* LoginViewController.swift in Sources */,
-				C779310523A2C5D600D997F2 /* ReallySimpleNoteCreateChangeViewController.swift in Sources */,
+				C779310523A2C5D600D997F2 /* NoteCreateChangeViewController.swift in Sources */,
 				C77ED9AF22A4D5A000C06A45 /* SwiftyMapController.swift in Sources */,
 				C705A7AF22D5A04800F513A9 /* CircularProgressBar.swift in Sources */,
 				C79E35FD2311D75800943ECD /* DeeplinkParser.swift in Sources */,
@@ -530,7 +530,7 @@
 				C793547822A0B4A400DD1828 /* RestaurantDetailSeparatorCell.swift in Sources */,
 				C793547A22A0B75300DD1828 /* RestaurantDetailMapCell.swift in Sources */,
 				C7879E872318D8FC00289A8A /* TagListViewController.swift in Sources */,
-				C779310223A2C3EC00D997F2 /* ReallySimpleNoteUITableViewCell.swift in Sources */,
+				C779310223A2C3EC00D997F2 /* NoteTableViewCell.swift in Sources */,
 				C779311423A2C73800D997F2 /* ReallySimpleNote.swift in Sources */,
 				C76D3EEC22AA022000794637 /* RoundedTextField.swift in Sources */,
 				C779310E23A2C71400D997F2 /* ReallySimpleNoteCoreDataHelper.swift in Sources */,
@@ -544,7 +544,7 @@
 				C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */,
 				C7FE48D22296103D0079447C /* NetworkingManager.swift in Sources */,
 				C7AC6F1B228A623900E97DFF /* UIColor+Ext.swift in Sources */,
-				C77930F923A2C36D00D997F2 /* MasterViewController.swift in Sources */,
+				C77930F923A2C36D00D997F2 /* NotesViewController.swift in Sources */,
 				C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */,
 				C73A297F2293479C00554EF1 /* TagModel.swift in Sources */,
 				C771009323E0DE7E00805047 /* WriteTagViewController.swift in Sources */,
