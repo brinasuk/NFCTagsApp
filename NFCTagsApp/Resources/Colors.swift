@@ -165,10 +165,10 @@ let systemBackground = UIColor(hex: "#1c1c1eff ")
 let blue = UIColor(hex: "#BBDEFB")
 let darkBlue = UIColor(hex: "#0D47A1")
 
-private let orange600 = UIColor(red:   0xFB / 0xFF,
-                               green: 0x8C / 0xFF,
-                               blue:  0x00 / 0xFF,
-                               alpha: 1) // #FB8C00
+//private let orange600 = UIColor(red:   0xFB / 0xFF,
+//                               green: 0x8C / 0xFF,
+//                               blue:  0x00 / 0xFF,
+//                               alpha: 1) // #FB8C00
 
 public var newPaleRoseColor: UIColor {
     if #available(iOS 13, *) {
@@ -184,10 +184,34 @@ public var newPaleRoseColor: UIColor {
     }
 }
 
+/*
+ //=======================================//
+ // THIS IS THE VARIABLE TO CHANGE BACKGROUND COLOR!!
+ kAppDelegate.navbarBackColor = .black //iOS13 BUG! CANNOT USE .systemBackground. DOES NOT WORK. GIVES A LIGHT BACKGROUND !!!!
+ //=======================================//
+ 
+ kAppDelegate.textColor = .label
+ kAppDelegate.mainColor = .systemRed
+ kAppDelegate.separatorColor? = .systemRed
+ kAppDelegate.titleTextColor = kAppDelegate.mainColor
+ kAppDelegate.titleLargeTextColor = kAppDelegate.mainColor
+ 
+ 
+ kAppDelegate.navbarBackColor = paleRoseColor //newPaleRoseColor
+ //=======================================//
+ 
+ kAppDelegate.textColor = .white
+ kAppDelegate.mainColor = .blue
+ kAppDelegate.separatorColor? = .red
+ kAppDelegate.titleTextColor = kAppDelegate.mainColor
+ kAppDelegate.titleLargeTextColor = kAppDelegate.mainColor
+ */
+
 public var newSystemBackgroundColor: UIColor {
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
-            if traitCollection.userInterfaceStyle == .dark {
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
                 return .black  //MaterialUI.orange600  //was 300
             } else {
                 return  .yellow //MaterialUI.orange600
@@ -197,6 +221,107 @@ public var newSystemBackgroundColor: UIColor {
         return .white
     }
 }
+
+public var navbarBackColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return .black
+            } else {
+                return  paleRoseColor
+            }
+        }
+    } else {
+        return paleRoseColor
+    }
+}
+//myBackgroundColor
+public var backgroundColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return .secondarySystemBackground
+            } else {
+                return  .white
+            }
+        }
+    } else {
+        return .white
+    }
+}
+public var textColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return .label
+            } else {
+                return  .white
+            }
+        }
+    } else {
+        return .white
+    }
+}
+public var mainColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return .systemRed
+            } else {
+                return  .blue
+            }
+        }
+    } else {
+        return .blue
+    }
+}
+public var separatorColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return .systemRed
+            } else {
+                return  .blue
+            }
+        }
+    } else {
+        return .blue
+    }
+}
+public var titleTextColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return mainColor
+            } else {
+                return  mainColor
+            }
+        }
+    } else {
+        return mainColor
+    }
+}
+public var titleLargeTextColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return mainColor
+            } else {
+                return  mainColor
+            }
+        }
+    } else {
+        return mainColor
+    }
+}
+
 
 extension UIColor {
     public convenience init?(hexValue: String) {

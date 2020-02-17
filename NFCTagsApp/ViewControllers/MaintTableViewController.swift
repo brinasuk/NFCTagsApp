@@ -41,11 +41,6 @@ class MaintTableViewController: UITableViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.4
         
-        //        let backgroundImageName = "art_launch_image"
-        //        backgroundImage.image = UIImage(named: backgroundImageName) // nd-background
-        //        backgroundImage.alpha = 0.4
-        //        backgroundImage.contentMode = .scaleAspectFill
-        
         // Customize the TABLEVIEW
         // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -72,28 +67,40 @@ class MaintTableViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         self.navigationController?.navigationBar.tintColor = UIColor.systemPink
+         //self.navigationController?.navigationBar.tintColor = UIColor.systemPink
     }
     
-    func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = false
-         //self.navigationController?.navigationBar.tintColor = UIColor.darkGray
-        
-                    let titleTextColor:UIColor = .systemOrange
-                    let largeTitleTextColor:UIColor = .systemBlue
-                    let navbarBackColor:UIColor = .systemTeal
-        
-                    if #available(iOS 13.0, *) {
-                        let navBarAppearance = UINavigationBarAppearance()
-                        navBarAppearance.configureWithOpaqueBackground()
-                        navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
-                        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: largeTitleTextColor]
-                        navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-                        navigationController?.navigationBar.standardAppearance = navBarAppearance
-                        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        func setupNavigationBar() {
+            navigationController?.navigationBar.prefersLargeTitles = false
+
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                //navBarAppearance.configureWithDefaultBackground()
+                navBarAppearance.configureWithOpaqueBackground()
+
+                navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                //navBarAppearance.backgroundColor = navbarBackColor
+                navBarAppearance.shadowColor = nil
+                navigationController?.navigationBar.isTranslucent = false
+                navigationController?.navigationBar.standardAppearance = navBarAppearance
+                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+    //            navigationController?.navigationBar.barTintColor = navbarBackColor
+    //            navigationController?.navigationBar.tintColor =  navbarBackColor
+    //            self.navigationController!.navigationBar.titleTextAttributes =
+    //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                } else {
+
+                //METHOD2. NOT iOS13
+                if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                    navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                    }
+                }
         }
-    }
-    
     func loadObjects()
     {
         let query = PFQuery(className: "TagOwnerInfo")

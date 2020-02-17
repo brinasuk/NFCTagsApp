@@ -74,42 +74,43 @@ class NotesViewController: UITableViewController {
                           overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
                     
                     
-                    self.view.backgroundColor = .secondarySystemBackground
+                    self.view.backgroundColor = backgroundColor
                       
                     }
            
         
-        func setupNavigationBar() {
-            //Customize the navigation bar
-            //The following 2 lines make the Navigation Bar transparant
-            
-            
-            // SET UINAVIGATIONBAR
-            let coloredAppearance = UINavigationBarAppearance()
-            coloredAppearance.configureWithOpaqueBackground()
-            coloredAppearance.backgroundColor = .systemTeal
-            coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            
-            navigationController?.navigationBar.standardAppearance = coloredAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = coloredAppearance
-            
-//
-//            //METHOD 0
-//            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//            navigationController?.navigationBar.shadowImage = UIImage()
-//            navigationController?.navigationBar.tintColor = .label
-//            navigationController?.hidesBarsOnSwipe = false
-            
-            //METHOD 1
-            //                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-            //                navigationItem.largeTitleDisplayMode = .always
-            
-            //METHOD2
-            //        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-            //            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-            //        }
-        }
+            func setupNavigationBar() {
+                navigationController?.navigationBar.prefersLargeTitles = true
+
+                if #available(iOS 13.0, *) {
+                    let navBarAppearance = UINavigationBarAppearance()
+                    //navBarAppearance.configureWithDefaultBackground()
+                    navBarAppearance.configureWithOpaqueBackground()
+
+                    navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                    navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                    navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                    //navBarAppearance.backgroundColor = navbarBackColor
+                    navBarAppearance.shadowColor = nil
+                    navigationController?.navigationBar.isTranslucent = false
+                    navigationController?.navigationBar.standardAppearance = navBarAppearance
+                    navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+        //            navigationController?.navigationBar.barTintColor = navbarBackColor
+        //            navigationController?.navigationBar.tintColor =  navbarBackColor
+        //            self.navigationController!.navigationBar.titleTextAttributes =
+        //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                    } else {
+
+                    //METHOD2. NOT iOS13
+                    if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                        navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                        }
+                    }
+            }
+
         
     
     func loadNotesTable()

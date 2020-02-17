@@ -33,12 +33,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     var placeholderImage:UIImage?
     
-    var textColor:UIColor?
-    var textColor2:UIColor?
-    var separatorColor:UIColor?
-    var titleTextColor:UIColor?
-    var titleLargeTextColor:UIColor?
-    var navbarBackColor:UIColor?
+
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -99,14 +94,14 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
              // User Interface is Dark
             //=======================================//
             // THIS IS THE VARIABLE TO CHANGE BACKGROUND COLOR!!
-            navbarBackColor = .black //iOS13 BUG! CANNOT USE .systemBackground. DOES NOT WORK. GIVES A LIGHT BACKGROUND !!!!
+            //kAppDelegate.navbarBackColor = .black //iOS13 BUG! CANNOT USE .systemBackground. DOES NOT WORK. GIVES A LIGHT BACKGROUND !!!!
             //=======================================//
             
-            textColor = .label
-            textColor2 = .systemRed
-            titleTextColor = textColor2
-            titleLargeTextColor = textColor2
-            separatorColor? = .systemRed
+//            kAppDelegate.textColor = .label
+//            kAppDelegate.mainColor = .systemRed
+//            kAppDelegate.separatorColor? = .systemRed
+//            kAppDelegate.titleTextColor = kAppDelegate.mainColor
+//            kAppDelegate.titleLargeTextColor = kAppDelegate.mainColor
             
             //SET THE STATUS VIEW
             statusView.backgroundColor = .systemGray
@@ -114,19 +109,19 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             //SET THE STATUS LABEL
             statusLabel.backgroundColor = .secondarySystemBackground
             statusLabel.textColor = .label
-             ()
+            
          case .light:
              // User Interface is Light
             //=======================================//
             // THIS IS THE VARIABLE TO CHANGE BACKGROUND COLOR!!
-            navbarBackColor = paleRoseColor //newPaleRoseColor
+            //kAppDelegate.navbarBackColor = paleRoseColor //newPaleRoseColor
             //=======================================//
             
-            textColor = .white
-            textColor2 = .blue
-            titleTextColor = textColor2
-            titleLargeTextColor = textColor2
-            separatorColor? = .red
+//            kAppDelegate.textColor = .white
+//            kAppDelegate.mainColor = .blue
+//            kAppDelegate.separatorColor? = .red
+//            kAppDelegate.titleTextColor = kAppDelegate.mainColor
+//            kAppDelegate.titleLargeTextColor = kAppDelegate.mainColor
             
             //SET THE STATUS VIEW
             statusView.backgroundColor = coralColor
@@ -134,13 +129,13 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             //SET THE STATUS LABEL
             statusLabel.backgroundColor = .white
             statusLabel.textColor = royalBlue
-             ()
+            
          case .unspecified:
              //your choice
-             navbarBackColor = paleRoseColor //newPaleRoseColor
+             //navbarBackColor = paleRoseColor //newPaleRoseColor
              ()
          @unknown default:
-             navbarBackColor = paleRoseColor //newPaleRoseColor
+             //navbarBackColor = paleRoseColor //newPaleRoseColor
              ()
              //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
          }
@@ -171,7 +166,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         statusLabel.font.withSize(16.0)
         
         //SET THE SCANBUTTON
-        scanButton.backgroundColor = textColor2
+        scanButton.backgroundColor = mainColor
         scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         scanButton.layer.cornerRadius = scanButton.frame.height/2
         scanButton.layer.masksToBounds = true
@@ -188,8 +183,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             //navBarAppearance.configureWithDefaultBackground()
             navBarAppearance.configureWithOpaqueBackground()
 
-            navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor!]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor!]
+            navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
             navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
 
             //navBarAppearance.backgroundColor = navbarBackColor
@@ -971,12 +966,15 @@ extension TagListViewController: UITableViewDataSource {
         cell.dateAdded.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
         
         //ROMEE DARKMODE
-        cell.backgroundColor = .systemBackground
-        cell.tagTitle.textColor = .label
-        cell.tagSubTitle.textColor = textColor2
-        cell.tagCompany.textColor = textColor2
-        cell.dateAdded.textColor = .secondaryLabel
-        
+        cell.backgroundColor = backgroundColor
+        cell.tagTitle.textColor = textColor
+        cell.tagSubTitle.textColor = mainColor
+        cell.tagCompany.textColor = mainColor
+        if #available(iOS 13.0, *) {
+            cell.dateAdded.textColor = .secondaryLabel}
+        else {
+            cell.dateAdded.textColor = textColor
+        }
 
         let additionalSeparatorThickness = CGFloat(2)
         let additionalSeparator = UIView(frame: CGRect(x: 0,
@@ -984,7 +982,7 @@ extension TagListViewController: UITableViewDataSource {
                                                        width: cell.frame.size.width,
                                                        height: additionalSeparatorThickness))
 
-        additionalSeparator.backgroundColor = .systemRed
+        additionalSeparator.backgroundColor = .systemRed //TODO:FIX
         cell.addSubview(additionalSeparator)
 
         //cell.selectionStyle = UITableViewCell.SelectionStyle.none
