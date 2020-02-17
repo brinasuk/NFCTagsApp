@@ -19,10 +19,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     var userInterfaceStyle: UIUserInterfaceStyle?
     var currentProfile = ProfileType.guest
-    var listBackgroundImage:UIImage?
-    
 
-    
     let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
     private var tagObjects:[TagModel] = []
     //private var dataParse:NSMutableArray = NSMutableArray()
@@ -35,10 +32,13 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     var deleteObjectId:String = ""    //USED BY DELETE
     
     var placeholderImage:UIImage?
-    var navbarBackColor:UIColor?
-    var navbarTextColor:UIColor?
+    
     var textColor:UIColor?
-    var cellBackGroundImageName:String = "list-item-background"
+    var textColor2:UIColor?
+    var separatorColor:UIColor?
+    var titleTextColor:UIColor?
+    var titleLargeTextColor:UIColor?
+    var navbarBackColor:UIColor?
     
     @IBOutlet weak var toolBar: UIToolbar!
     
@@ -49,8 +49,6 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
-    
-
     
     
 //    @IBAction func didPressSwitchProfile(_ sender: Any) {
@@ -77,12 +75,76 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     func  setupDarkMode() {
         //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-        if (kAppDelegate.isDarkMode == true) {
-            overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+        if (kAppDelegate.isDarkMode == true)  {
+            overrideUserInterfaceStyle = .dark
+            print("DARK MODE")
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+            print("LIGHT MODE")
+        }
         
- 
-        //SET UI CONFIG COLORS
-        cellBackGroundImageName = "list-item-background"
+        //let aColor = UIColor(named: "customControlColor")
+        //let themeColor = UIColor(named: "themeColor")
+
+        //view.backgroundColor = newPaleRoseColor //customAccent
+        //view.backgroundColor = paleRoseColor //customAccent
+        //view.backgroundColor = .secondarySystemBackground
+        //view.backgroundColor = .systemBackground
+        //view.backgroundColor = .secondarySystemGroupedBackground
+        
+        //SET THE CELL BACKGROUND
+        switch overrideUserInterfaceStyle {
+         case .dark:
+             // User Interface is Dark
+            //=======================================//
+            // THIS IS THE VARIABLE TO CHANGE BACKGROUND COLOR!!
+            navbarBackColor = .black //iOS13 BUG! CANNOT USE .systemBackground. DOES NOT WORK. GIVES A LIGHT BACKGROUND !!!!
+            //=======================================//
+            
+            textColor = .label
+            textColor2 = .systemRed
+            titleTextColor = textColor2
+            titleLargeTextColor = textColor2
+            separatorColor? = .systemRed
+            
+            //SET THE STATUS VIEW
+            statusView.backgroundColor = .systemGray
+            
+            //SET THE STATUS LABEL
+            statusLabel.backgroundColor = .secondarySystemBackground
+            statusLabel.textColor = .label
+             ()
+         case .light:
+             // User Interface is Light
+            //=======================================//
+            // THIS IS THE VARIABLE TO CHANGE BACKGROUND COLOR!!
+            navbarBackColor = paleRoseColor //newPaleRoseColor
+            //=======================================//
+            
+            textColor = .white
+            textColor2 = .blue
+            titleTextColor = textColor2
+            titleLargeTextColor = textColor2
+            separatorColor? = .red
+            
+            //SET THE STATUS VIEW
+            statusView.backgroundColor = coralColor
+            
+            //SET THE STATUS LABEL
+            statusLabel.backgroundColor = .white
+            statusLabel.textColor = royalBlue
+             ()
+         case .unspecified:
+             //your choice
+             navbarBackColor = paleRoseColor //newPaleRoseColor
+             ()
+         @unknown default:
+             navbarBackColor = paleRoseColor //newPaleRoseColor
+             ()
+             //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
+         }
+        
         
         let backgroundImageName = "art_launch_image"
         let backgroundImage = UIImage(named: backgroundImageName)
@@ -90,147 +152,64 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.8
         self.tableView.backgroundView = imageView
-        
-        
-        //tabTextColor = .label
-        //tabTextColor = .systemRed
-        //tabTextColor = .systemFill
 
-        navbarTextColor = .label
-        textColor = .label
         
-        navbarBackColor = .secondarySystemBackground // paleRoseColor
-        //navbarBackColor = .systemGroupedBackground//alex
-        //navbarBackColor = .systemBlue
-        
-        
-        //toolBar.barTintColor = navbarBackColor
-        //view.backgroundColor = navbarBackColor
+        //SET THE TOOLBAR AT THE BOTTOM OF THE SCREEN THE SAME COLOR AS THE NAVIGATIONBAR
+        toolBar.barTintColor = navbarBackColor
+        view.backgroundColor = navbarBackColor
 
-        statusView.backgroundColor = .systemGray4
+        //SET THE STATUS VIEW
+        //statusView.backgroundColor = .systemGray
         
-        let labelColor1:UIColor = .systemGray6
-        let labelColor2:UIColor = textColor!
-        let labelBorder:UIColor = .systemTeal
-        //tryThisColor = .systemRed
-        statusLabel.backgroundColor = labelColor1
-        statusLabel.textColor = labelColor2
-        statusView.backgroundColor = labelBorder
-        
-        statusLabel.layer.cornerRadius = 5.0
-        statusLabel.layer.masksToBounds = true
+        //SET THE STATUS LABEL
+        //statusLabel.backgroundColor = .secondarySystemBackground
+        //statusLabel.textColor = .label
         //statusLabel.backgroundColor = .white
         //statusLabel.textColor = royalBlue
+        statusLabel.layer.cornerRadius = 5.0
+        statusLabel.layer.masksToBounds = true
         statusLabel.font.withSize(16.0)
         
-        //SET THE SCANBUTTON DEFAULTS
-        scanButton.backgroundColor = .systemBlue
+        //SET THE SCANBUTTON
+        scanButton.backgroundColor = textColor2
         scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         scanButton.layer.cornerRadius = scanButton.frame.height/2
         scanButton.layer.masksToBounds = true
         scanButton.tintColor = textColor
         
-        switch overrideUserInterfaceStyle {
-         case .dark:
-             // User Interface is Dark
-             cellBackGroundImageName = "list-item-background-dark"
-             ()
-         case .light:
-             // User Interface is Light
-             cellBackGroundImageName = "list-item-background"
-             ()
-         case .unspecified:
-             //your choice
-             cellBackGroundImageName = "list-item-background"
-             ()
-         @unknown default:
-             cellBackGroundImageName = "list-item-background"
-             ()
-             //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
-         }
-
-
-        
-        //view.backgroundColor = newPaleRoseColor //customAccent
-        //view.backgroundColor = paleRoseColor //customAccent
-        
-        //view.backgroundColor = .secondarySystemBackground
-        //view.backgroundColor = .systemBackground
-        //view.backgroundColor = .secondarySystemGroupedBackground
-        //let aColor = UIColor(named: "customControlColor")
-        // yourLabel.color = UIColor.secondaryLabel
-        
-        //self.label.textColor = .label
-        
-        //self.view.backgroundColor = .systemBackground
-        //let themeColor = UIColor(named: "themeColor")
- 
       }
     
     
     func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        //            //navigationController?.navigationBar.prefersLargeTitles = true
-        //            navigationController?.navigationBar.prefersLargeTitles = false
-        //            self.navigationController?.navigationBar.tintColor = UIColor.darkGray
 
-                    
-        //            //METHOD 0
-        //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //            navigationController?.navigationBar.shadowImage = UIImage()
-        //            navigationController?.navigationBar.tintColor = .yellow
-        //            navigationController?.hidesBarsOnSwipe = false
-                    
-                    //FROM THE BOOK!
-                    //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-                    //navigationController?.navigationBar.shadowImage = UIImage()
-        //            if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
-        //                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
-        //            }
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            //navBarAppearance.configureWithDefaultBackground()
+            navBarAppearance.configureWithOpaqueBackground()
 
-                    
-                    //Customize the navigation bar
-                    //The following 2 lines make the Navigation Bar transparant
-//                           navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//                            navigationController?.navigationBar.shadowImage = UIImage()
-//                            navigationController?.navigationBar.prefersLargeTitles = true
-//                            navigationController?.hidesBarsOnSwipe = true
-                    
-                    
-                    
-                    //METHOD 1
-                    //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-                    //        navigationItem.largeTitleDisplayMode = .always
-                    
-        //            //METHOD2
-        //            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-        //                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .systemGray, NSAttributedString.Key.font: customFont ]
-        //            }
-                    
-        //            //METHOD3
-        //            let navBarAppearance = UINavigationBarAppearance()
-        //            navBarAppearance.configureWithOpaqueBackground()
-        //            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: .redColor, UIFont(name: "MyFont", size: 42)!]
-        //            navBarAppearance.backgroundColor = .white
-        //            navBarAppearance.shadowColor = nil
-        //            navigationController?.navigationBar.isTranslucent = false
-        //            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-         //self.navigationController?.navigationBar.tintColor = UIColor.darkGray
-        
-                    let titleTextColor:UIColor = .systemOrange
-                    let largeTitleTextColor:UIColor = .systemBlue
-                    let navbarBackColor:UIColor = .systemTeal
-        
-                    if #available(iOS 13.0, *) {
-                        let navBarAppearance = UINavigationBarAppearance()
-                        navBarAppearance.configureWithOpaqueBackground()
-                        navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
-                        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: largeTitleTextColor]
-                        navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-                        navigationController?.navigationBar.standardAppearance = navBarAppearance
-                        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
+            navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor!]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor!]
+            navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+            //navBarAppearance.backgroundColor = navbarBackColor
+            navBarAppearance.shadowColor = nil
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+//            navigationController?.navigationBar.barTintColor = navbarBackColor
+//            navigationController?.navigationBar.tintColor =  navbarBackColor
+//            self.navigationController!.navigationBar.titleTextAttributes =
+//            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+            } else {
+
+            //METHOD2. NOT iOS13
+            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                }
+            }
     }
     
     
@@ -241,6 +220,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         
         userInterfaceStyle = self.traitCollection.userInterfaceStyle
         setupDarkMode()
+        
         //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
@@ -265,12 +245,11 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         KingfisherManager.shared.cache.clearDiskCache()
         
         // Customize the TABLEVIEW
-        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = 92.0 // Use 92.0
+//        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 100.0 // Use 92.0
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
-        
-        
+
         //        moveDirtyFlag = false
         //        buttonLabel = "Edit"
         //        editing = false
@@ -311,19 +290,10 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //TEMP FIX TODO:
-        for view in self.navigationController?.navigationBar.subviews ?? [] {
-             let subviews = view.subviews
-             if subviews.count > 0, let label = subviews[0] as? UILabel {
-                label.textColor = .systemYellow //<replace with your color>
-             }
-        }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-        
         
         setupNavigationBar()
         
@@ -342,8 +312,6 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             loadTagTable() //GET INFO FOR NEW USER
             kAppDelegate.isDatabaseDirty = false
         }
-        
-        
     }
     
 
@@ -956,7 +924,7 @@ extension TagListViewController: UITableViewDataSource {
         rowCount = self.tagObjects.count
         
         if (rowCount > 0) {
-            statusLabel.text = "Tap or swipe left for more options"
+            statusLabel.text = "Tap or swipe left on each row for more options"
         } else {
             statusLabel.text = "Welcome " + kAppDelegate.currentUserName!
         }
@@ -986,6 +954,10 @@ extension TagListViewController: UITableViewDataSource {
         // }
     }
     
+       func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       }
+
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "Cell"
@@ -993,6 +965,35 @@ extension TagListViewController: UITableViewDataSource {
         
         let tag = self.tagObjects[indexPath.row] //The Vige
         
+        cell.tagTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        cell.tagSubTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        cell.tagCompany.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        cell.dateAdded.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        
+        //ROMEE DARKMODE
+        cell.backgroundColor = .systemBackground
+        cell.tagTitle.textColor = .label
+        cell.tagSubTitle.textColor = textColor2
+        cell.tagCompany.textColor = textColor2
+        cell.dateAdded.textColor = .secondaryLabel
+        
+
+        let additionalSeparatorThickness = CGFloat(2)
+        let additionalSeparator = UIView(frame: CGRect(x: 0,
+                                                       y: (cell.frame.size.height - additionalSeparatorThickness) + 4,
+                                                       width: cell.frame.size.width,
+                                                       height: additionalSeparatorThickness))
+
+        additionalSeparator.backgroundColor = .systemRed
+        cell.addSubview(additionalSeparator)
+
+        //cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
+        //THE FOLLOWING MESS UP THE SIZE OF THE CELL !!!
+        //DO NOT PUT THEM BACK !!!!
+        cell.accessoryType = .disclosureIndicator
+//        cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
+
         //TODO: Implement currentLocale = NSLocale.current as NSLocale
         //let date = cellDataParse.object(forKey: "createdAt") as? Date ?? NSDate() as Date
         let date = tag.createdAt
@@ -1096,41 +1097,7 @@ extension TagListViewController: UITableViewDataSource {
         }
         //=================================================
 
-        
-        cell.tagTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
-        cell.tagSubTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        cell.tagCompany.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        cell.dateAdded.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        
-        cell.tagTitle.textColor = .label
-        cell.tagSubTitle.textColor = .tertiaryLabel
-        cell.tagCompany.textColor = .quaternaryLabel
-        cell.dateAdded.textColor = .label
-        
-        cell.backgroundColor = .systemRed
-        
-        
-
-        
-        //cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
-        //THE FOLLOWING MESS UP THE SIZE OF THE CELL !!!
-        //DO NOT PUT THEM BACK !!!!
-        //cell.accessoryType = .detailDisclosureButton
-        //cell.accessoryView = UIImageView(image: UIImage(named: "DisclosureIndicator"))
-//        cell.listItemBackground = UIImageView(image:  "list-background-image-dark")
-        
-        
-        let image = UIImage(named: cellBackGroundImageName)
-        //let listItemBackground = UIImageView(image: image!)
-//        listItemBackground = UIImageView(frame: CGRectMake(0, 0, 100, 100))
-//        listItemBackground.layer.borderWidth=1.0
-//        listItemBackground.layer.masksToBounds = false
-//        listItemBackground.layer.borderColor = UIColor.whiteColor().CGColor
-//        listItemBackground.layer.cornerRadius = 13;
-//        listItemBackground.clipsToBounds = true
-
-        cell.listItemBackground!.image = image
+ 
         
         return cell
     }
@@ -1165,16 +1132,6 @@ extension TagListViewController: UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cell.backgroundColor = UIColor.red
-//        cell.backgroundColor = UIColor(white:1, alpha: 0.5)
-
-    if #available(iOS 13, *) {
-        //cell.backgroundColor = [UIColor systemBackgroundColor];
-    } else {
-        //cell.backgroundColor = [UIColor systemBackgroundColor];
-        }
-    }
 
     
     // Override to support conditional editing of the table view.
@@ -1267,7 +1224,7 @@ extension TagListViewController: UITableViewDataSource {
      
      completionHandler(true)
      })
-     delete.backgroundColor = UIColor.red //arbitrary color
+     delete.backgroundColor = .systemR
      //delete.image = [HCMPlugin bundleImageWithName:@"contactInfoDelete20x20"];
      
      let swipeActionConfig = UISwipeActionsConfiguration(actions: [delete])
@@ -1379,17 +1336,18 @@ extension TagListViewController: UITableViewDataSource {
         }
         
         // Set the icon and background color for the actions
-        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+//        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         //TODO: PUT ALL GRAPHICS BACK  deleteAction.image = UIImage(named: "delete")
+        deleteAction.backgroundColor = .systemRed
         
-        mapAction.backgroundColor = skyBlueColor
+        mapAction.backgroundColor = .systemBlue
         //TODO: ADD NICE IMAGE
         //mapAction.image = UIImage(named: "tick")
         
         //        shareAction.backgroundColor = cactusGreenColor
         //        shareAction.image = UIImage(named: "share")
         
-        websiteAction.backgroundColor = steelBlueColor
+        websiteAction.backgroundColor = .systemTeal
         //TODO: ADD NICE IMAGE
         //websiteAction.image = UIImage(named: "tick")
         

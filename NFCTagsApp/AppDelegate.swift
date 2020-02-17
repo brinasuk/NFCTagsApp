@@ -160,8 +160,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //        UINavigationBar.appearance().titleTextAttributes = attrs
         
-        var tabTextColor:UIColor = .label
-
+        
+        // SET THE TOOLBAR STYLE
+        let tabTextColor:UIColor = .label
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 14.0),
@@ -191,8 +192,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        UINavigationBar.appearance().backIndicatorImage = backButtonImage
         //        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
         //        UINavigationBar.appearance().backgroundColor = .white
-        
-        UINavigationBar.appearance().tintColor = .systemPink
         
         return true
     }

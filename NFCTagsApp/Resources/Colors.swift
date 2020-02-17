@@ -157,6 +157,10 @@ fileprivate enum MaterialUI {
                                    alpha: 1) // #FB8C00
 }
 
+//systemBackground #000000ff  rgba(0.0, 0.0, 0.0, 1.0)
+//systemBackground #1c1c1eff  rgba(28.0, 28.0, 30.0, 1.0)
+
+let systemBackground = UIColor(hex: "#1c1c1eff ")
 
 let blue = UIColor(hex: "#BBDEFB")
 let darkBlue = UIColor(hex: "#0D47A1")
@@ -170,13 +174,27 @@ public var newPaleRoseColor: UIColor {
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             if traitCollection.userInterfaceStyle == .dark {
-                 return darkBlue  //MaterialUI.orange600  //was 300
+                 return dustColor  //MaterialUI.orange600  //was 300
             } else {
                 return  blue //MaterialUI.orange600
             }
         }
     } else {
         return MaterialUI.orange600
+    }
+}
+
+public var newSystemBackgroundColor: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            if traitCollection.userInterfaceStyle == .dark {
+                return .black  //MaterialUI.orange600  //was 300
+            } else {
+                return  .yellow //MaterialUI.orange600
+            }
+        }
+    } else {
+        return .white
     }
 }
 

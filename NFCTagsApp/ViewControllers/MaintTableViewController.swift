@@ -76,7 +76,7 @@ class MaintTableViewController: UITableViewController {
     }
     
     func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
          //self.navigationController?.navigationBar.tintColor = UIColor.darkGray
         
                     let titleTextColor:UIColor = .systemOrange
