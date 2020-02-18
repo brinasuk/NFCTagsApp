@@ -71,6 +71,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
             titleTextField.tag = 1
             titleTextField.becomeFirstResponder()
             titleTextField.delegate = self
+            titleTextField.textColor = mainColor
             
         }
     }
@@ -79,6 +80,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         didSet {
             subTitleTextField.tag = 2
             subTitleTextField.delegate = self
+            subTitleTextField.textColor = mainColor
         }
     }
     
@@ -86,6 +88,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         didSet {
             priceTextField.tag = 3
             priceTextField.delegate = self
+            priceTextField.textColor = mainColor
         }
     }
     
@@ -93,6 +96,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     //        didSet {
     //            companyTextField.tag = 4
     //            companyTextField.delegate = self
+    //              companyTextField.textColor = mainColor
     //        }
     //    }
     
@@ -100,6 +104,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         didSet {
             contactTextField.tag = 4
             contactTextField.delegate = self
+            contactTextField.textColor = mainColor
         }
     }
     
@@ -107,7 +112,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         didSet {
             addressTextField.tag = 5
             addressTextField.delegate = self
-            
+            addressTextField.textColor = mainColor
         }
     }
     
@@ -115,6 +120,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     //        didSet {
     //            emailTextField.tag = 7
     //            emailTextField.delegate = self
+    //            emailTextField.textColor = mainColor
     //        }
     //    }
     
@@ -122,6 +128,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         didSet {
             phoneTextField.tag = 6
             phoneTextField.delegate = self
+            phoneTextField.textColor = mainColor
         }
     }
     
@@ -129,6 +136,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         didSet {
             websiteTextField.tag = 7
             websiteTextField.delegate = self
+            websiteTextField.textColor = mainColor
         }
     }
     
@@ -137,6 +145,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
             descriptionTextView.tag = 8
             descriptionTextView.layer.cornerRadius = 5.0
             descriptionTextView.layer.masksToBounds = true
+            descriptionTextView.textColor = mainColor
         }
     }
     
@@ -144,25 +153,63 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure navigation bar appearance
+        setupDarkMode()
+        //setupNavigationBar()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = mainColor
+        //NOTE THE USE HERE OF navigationItem ann left/rightBarButtonItem
+        navigationItem.leftBarButtonItem?.tintColor = mainColor
+        navigationItem.rightBarButtonItem?.tintColor = mainColor
+        //SET BACKGROUND COLOR BEHIND TABLE
+        self.view.backgroundColor = backgroundColor
+        
+        // Configure table view
+        tableView.separatorStyle = .none
+        
         let progress : Double = 0
         progressBar.isHidden = true
         progressBar.labelSize = 30
         progressBar.safePercent = 100
         progressBar.setProgress(to: progress, withAnimation: true)
         
-        // Configure navigation bar appearance
-        navigationController?.navigationBar.tintColor = .green
-        navigationController?.navigationBar.shadowImage = UIImage()
+
         
-        if let customFont = UIFont(name: "Rubik-Medium", size: 35.0) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont ]
-        }
-        
-        // Configure table view
-        tableView.separatorStyle = .none
         showInfo()
         titleTextField.resignFirstResponder()
     }
+    
+        func setupNavigationBar() {
+            navigationController?.navigationBar.prefersLargeTitles = true
+
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                //navBarAppearance.configureWithDefaultBackground()
+                navBarAppearance.configureWithOpaqueBackground()
+
+                navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                //navBarAppearance.backgroundColor = navbarBackColor
+                navBarAppearance.shadowColor = nil
+                navigationController?.navigationBar.isTranslucent = false
+                navigationController?.navigationBar.standardAppearance = navBarAppearance
+                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+    //            navigationController?.navigationBar.barTintColor = navbarBackColor
+    //            navigationController?.navigationBar.tintColor =  navbarBackColor
+    //            self.navigationController!.navigationBar.titleTextAttributes =
+    //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                } else {
+
+                //METHOD2. NOT iOS13
+                if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                    navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                    }
+                }
+        }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -173,6 +220,12 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         self.view.addGestureRecognizer(tap)
         handleTap()
         
+    }
+    
+    func  setupDarkMode() {
+    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+    if (kAppDelegate.isDarkMode == true) {
+        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -248,7 +301,8 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         //=================================================
         //=================================================
         
-        print(propertyPhotoFileUrl)
+        //print(propertyPhotoFileUrl)
+        
         // METHOD 2: ======================================
         //                let url = URL(string: propertyPhotoFileUrl!)!
         //                let placeholderImageName = kAppDelegate.placeholderName

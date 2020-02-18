@@ -23,8 +23,14 @@ class MaintTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Manage Tags"
         
-        //imageView.kf.indicatorType = .activity
-        
+        setupDarkMode()
+        //navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = mainColor
+        //SET BACKGROUND COLOR BEHIND TABLE
+        self.view.backgroundColor = backgroundColor
+        //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
 
         
         //        moveDirtyFlag = false
@@ -50,7 +56,7 @@ class MaintTableViewController: UITableViewController {
         
         
         self.tableView.backgroundView = imageView
-        self.tableView.backgroundColor = coralColor
+        self.tableView.backgroundColor = backgroundColor // coralColor
         //view.backgroundColor = orange600
         
         
@@ -63,44 +69,32 @@ class MaintTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationBar()
+        //setupNavigationBar()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
          //self.navigationController?.navigationBar.tintColor = UIColor.systemPink
     }
     
-        func setupNavigationBar() {
-            navigationController?.navigationBar.prefersLargeTitles = false
-
-            if #available(iOS 13.0, *) {
-                let navBarAppearance = UINavigationBarAppearance()
-                //navBarAppearance.configureWithDefaultBackground()
-                navBarAppearance.configureWithOpaqueBackground()
-
-                navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
-                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
-                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-
-                //navBarAppearance.backgroundColor = navbarBackColor
-                navBarAppearance.shadowColor = nil
-                navigationController?.navigationBar.isTranslucent = false
-                navigationController?.navigationBar.standardAppearance = navBarAppearance
-                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-
-    //            navigationController?.navigationBar.barTintColor = navbarBackColor
-    //            navigationController?.navigationBar.tintColor =  navbarBackColor
-    //            self.navigationController!.navigationBar.titleTextAttributes =
-    //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
-
-                } else {
-
-                //METHOD2. NOT iOS13
-                if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-                    navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-                    }
-                }
-        }
+    func  setupDarkMode() {
+    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+    if (kAppDelegate.isDarkMode == true) {
+        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+    }
+    
+        func setupNavigationBarX() {
+            //navigationController?.navigationBar.prefersLargeTitles = false
+            //navigationController?.navigationBar.tintColor = mainColor
+            
+            //The following 2 lines make the Navigation Bar transparant
+            //METHOD 0
+            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController?.navigationBar.shadowImage = UIImage()
+//            navigationController?.navigationBar.tintColor = mainColor
+//            navigationController?.hidesBarsOnSwipe = false
+            
+    }
+    
     func loadObjects()
     {
         let query = PFQuery(className: "TagOwnerInfo")
@@ -248,7 +242,7 @@ class MaintTableViewController: UITableViewController {
         
         let owner = ownerObjects[indexPath.row] //The Vige
         
-
+        cell.backgroundColor = .systemBackground
         
         cell.tagNumber.text = owner.ownerNumber
         cell.tagTitle.text = owner.ownerTitle
@@ -287,7 +281,7 @@ class MaintTableViewController: UITableViewController {
         //            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
         //        }
         
-        print(propertyPhotoFileUrl)
+        //print(propertyPhotoFileUrl)
         
         // METHOD 2: ======================================
         if let url = URL(string: propertyPhotoFileUrl ) {
@@ -342,6 +336,8 @@ class MaintTableViewController: UITableViewController {
         cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
         
         cell.accessoryType = .detailDisclosureButton
+        
+        cell.backgroundColor = backgroundColor
         
         return cell
     }

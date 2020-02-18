@@ -10,7 +10,7 @@
 
 import UIKit
 
-
+/*
 // MARK:  - System Colors
 public let infoBlueColor = UIColor(red:47, green:112, blue:225)
 public let successColor = UIColor(red:83, green:215, blue:106)
@@ -35,7 +35,6 @@ public let warmGrayColor = UIColor(red:133, green:117, blue:112)
 public let coolGrayColor = UIColor(red:118, green:122, blue:133)
 public let charcoalColor = UIColor(red:34, green:34, blue:34)
 
-
 // MARK:  Blues
 public let tealColor = UIColor(red:28, green:160, blue:170)
 public let steelBlueColor = UIColor(red:103, green:153, blue:170)
@@ -53,7 +52,6 @@ public let fadedBlueColor = UIColor(red:23, green:137, blue:155)
 public let icebergColor = UIColor(red:200, green:213, blue:219)
 public let waveColor = UIColor(red:102, green:169, blue:251)
 
-
 // MARK: Greens
 public let emeraldColor = UIColor(red:1, green:152, blue:117)
 public let grassColor = UIColor(red:99, green:214, blue:74)
@@ -70,7 +68,6 @@ public let honeydewColor = UIColor(red:216, green:255, blue:231)
 public let limeColor = UIColor(red:56, green:237, blue:56)
 public let cardTableColor = UIColor(red:87, green:121, blue:107)
 
-
 // MARK: Reds
 public let salmonColor = UIColor(red:233, green:87, blue:95)
 public let brickRedColor = UIColor(red:151, green:27, blue:16)
@@ -86,10 +83,6 @@ public let tomatoColor = UIColor(red:255, green:99, blue:71)
 public let pinkLipstickColor = UIColor(red:255, green:105, blue:180)
 public let paleRoseColor = UIColor(red:255, green:228, blue:225)
 public let crimsonColor = UIColor(red:187, green:18, blue:36)
-
-
-
-
 
 // MARK: Purples
 public let eggplantColor = UIColor(red:105, green:5, blue:98)
@@ -145,6 +138,7 @@ public let dustColor = UIColor(red:236, green:214, blue:197)
  public let royalBlue = UIColor(red:83, green:51, blue:237)
 //Example: let myColor = royalBlue
 
+*/
 
 extension UIColor {
     static var customAccent: UIColor { return MaterialUI.orange600 }
@@ -174,7 +168,7 @@ public var newPaleRoseColor: UIColor {
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             if traitCollection.userInterfaceStyle == .dark {
-                 return dustColor  //MaterialUI.orange600  //was 300
+                 return MaterialUI.orange600  //was 300
             } else {
                 return  blue //MaterialUI.orange600
             }
@@ -206,6 +200,10 @@ public var newPaleRoseColor: UIColor {
  kAppDelegate.titleTextColor = kAppDelegate.mainColor
  kAppDelegate.titleLargeTextColor = kAppDelegate.mainColor
  */
+
+public let paleRoseColor = UIColor(red:255, green:228, blue:225)
+public let coralColor = UIColor(red:240, green:128, blue:128)
+public let royalBlue = UIColor(red:83, green:51, blue:237)
 
 public var newSystemBackgroundColor: UIColor {
     if #available(iOS 13, *) {

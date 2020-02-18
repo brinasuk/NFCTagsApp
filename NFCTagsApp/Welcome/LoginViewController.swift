@@ -71,11 +71,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
 //        If you want to use the TintColor as the title Color, the type should be System instead of Custom
         
-        let myColor = royalBlue
+        let myColor = mainColor //royalBlue
         //let emailLoginButton = UIButton(type: .custom)
         // IN IB DEFINE BUTTON AS SYSTEM !!!!
         emailLoginButton.backgroundColor = myColor
-        emailLoginButton.tintColor = .white
+        emailLoginButton.tintColor = textColor
         emailLoginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         emailLoginButton.layer.cornerRadius = emailLoginButton.frame.height/2
         emailLoginButton.layer.masksToBounds = true
@@ -84,7 +84,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //let facebookLoginButton = UIButton(type: .custom)
         // IN IB DEFINE BUTTON AS SYSTEM !!!!
         facebookLoginButton.backgroundColor = myColor
-        facebookLoginButton.tintColor = .white
+        facebookLoginButton.tintColor = textColor
         facebookLoginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         facebookLoginButton.layer.cornerRadius = facebookLoginButton.frame.height/2
         facebookLoginButton.layer.masksToBounds = true
@@ -93,11 +93,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //let emailRegisterButton = UIButton(type: .system)
         // IN IB DEFINE BUTTON AS SYSTEM !!!!
         emailRegisterButton.backgroundColor = .clear
-        //Wont Work emailRegisterButton.tintColor = .white
+        
+        //Wont Work emailRegisterButton.tintColor = textColor
         //Wont Work emailRegisterButton.titleLabel?.textColor = .blue
         //Does Work emailRegisterButton.setTitleColor(UIColor.red, for: .normal)
-        emailRegisterButton.setTitleColor(royalBlue, for: .normal)
+        //emailRegisterButton.setTitleColor(textColor, for: .normal)
+        
         emailRegisterButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        //emailRegisterButton.titleLabel?.tintColor = .systemRed
+        emailRegisterButton.setTitleColor(mainColor, for: .normal)
 //        emailLoginButton.layer.cornerRadius = emailLoginButton.frame.height/2
 //        emailLoginButton.layer.masksToBounds = true
 //        emailLoginButton.clipsToBounds = true
@@ -130,6 +134,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        textFieldEmail.becomeFirstResponder()
         
     }
 

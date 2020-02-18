@@ -41,11 +41,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         textFieldName.autocapitalizationType = .words
         textFieldPassword.autocapitalizationType = .none
         
-        let myColor = royalBlue
+        let myColor = mainColor //royalBlue
         //let emailLoginButton = UIButton(type: .custom)
         // IN IB DEFINE BUTTON AS SYSTEM !!!!
         registerButton.backgroundColor = myColor
-        registerButton.tintColor = .white
+        registerButton.tintColor = textColor
         registerButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         registerButton.layer.cornerRadius = registerButton.frame.height/2
         registerButton.layer.masksToBounds = true

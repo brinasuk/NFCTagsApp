@@ -73,10 +73,22 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         if (kAppDelegate.isDarkMode == true)  {
             overrideUserInterfaceStyle = .dark
             print("DARK MODE")
+            //SET THE STATUS VIEW
+            statusView.backgroundColor = .systemGray
+            
+            //SET THE STATUS LABEL
+            statusLabel.backgroundColor = .secondarySystemBackground
+            statusLabel.textColor = .label
         }
         else {
             overrideUserInterfaceStyle = .light
             print("LIGHT MODE")
+            //SET THE STATUS VIEW
+            statusView.backgroundColor = coralColor
+            
+            //SET THE STATUS LABEL
+            statusLabel.backgroundColor = .white
+            statusLabel.textColor = royalBlue
         }
         
         //let aColor = UIColor(named: "customControlColor")
@@ -89,6 +101,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //view.backgroundColor = .secondarySystemGroupedBackground
         
         //SET THE CELL BACKGROUND
+        /*
         switch overrideUserInterfaceStyle {
          case .dark:
              // User Interface is Dark
@@ -139,7 +152,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
              ()
              //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
          }
-        
+        */
         
         let backgroundImageName = "art_launch_image"
         let backgroundImage = UIImage(named: backgroundImageName)

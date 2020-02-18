@@ -19,6 +19,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Map View"
+        setupDarkMode()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = mainColor
+        //SET BACKGROUND COLOR BEHIND TABLE
+        //self.view.backgroundColor = backgroundColor
         
         // Customize the map view
         mapView.delegate = self
@@ -57,6 +63,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         })
     }
     
+    func  setupDarkMode() {
+    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+    if (kAppDelegate.isDarkMode == true) {
+        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+    }
     
     // MARK: - MKMapViewDelegate methods
     

@@ -10,7 +10,6 @@ import UIKit
 import CoreNFC
 import os
 
-//class WriteTagViewController: UIViewController {
 class WriteTagViewController: UIViewController, UINavigationControllerDelegate, NFCNDEFReaderSessionDelegate {
     
     var readerSession: NFCNDEFReaderSession?
@@ -25,8 +24,19 @@ class WriteTagViewController: UIViewController, UINavigationControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Write Tags"
 
-        // Do any additional setup after loading the view.
+        setupDarkMode()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = mainColor
+        //SET BACKGROUND COLOR BEHIND TABLE
+        self.view.backgroundColor = backgroundColor
+    }
+    
+    func  setupDarkMode() {
+    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+    if (kAppDelegate.isDarkMode == true) {
+        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
     }
     
     @IBAction func writeButtonPressed(_ sender: Any) {

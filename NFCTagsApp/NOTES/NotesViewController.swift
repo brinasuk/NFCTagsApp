@@ -21,7 +21,15 @@ class NotesViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "My Notes"
+
         setupDarkMode()
+        //navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = mainColor
+        //SET BACKGROUND COLOR BEHIND TABLE
+        self.view.backgroundColor = backgroundColor
+        //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         //THE FOLLOWING TWO VARIABLES ARE PASSED FROM THE TAG RECORD FOR ADDNEW
         //TODO: ALEX FIX THIS
@@ -65,35 +73,40 @@ class NotesViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationBar()
+        //setupNavigationBar()
     }
         
     func  setupDarkMode() {
-                      //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-                      if (kAppDelegate.isDarkMode == true) {
-                          overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
-                    
-                    
-                    self.view.backgroundColor = backgroundColor
-                      
-                    }
+    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+    if (kAppDelegate.isDarkMode == true) {
+        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+    }
+
            
         
-            func setupNavigationBar() {
+            func setupNavigationBarX() {
                 navigationController?.navigationBar.prefersLargeTitles = true
-
+                navigationController?.navigationBar.tintColor = mainColor
+                
+                //The following 2 lines make the Navigation Bar transparant
+                //METHOD 0
+                navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                navigationController?.navigationBar.shadowImage = UIImage()
+                navigationController?.navigationBar.tintColor = mainColor
+                navigationController?.hidesBarsOnSwipe = false
+/*
                 if #available(iOS 13.0, *) {
                     let navBarAppearance = UINavigationBarAppearance()
                     //navBarAppearance.configureWithDefaultBackground()
-                    navBarAppearance.configureWithOpaqueBackground()
+                    //navBarAppearance.configureWithOpaqueBackground()
 
                     navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
                     navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
                     navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
 
-                    //navBarAppearance.backgroundColor = navbarBackColor
+                    navBarAppearance.backgroundColor = navbarBackColor
                     navBarAppearance.shadowColor = nil
-                    navigationController?.navigationBar.isTranslucent = false
+                    navigationController?.navigationBar.isTranslucent = true
                     navigationController?.navigationBar.standardAppearance = navBarAppearance
                     navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
 
@@ -109,6 +122,8 @@ class NotesViewController: UITableViewController {
                         navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
                         }
                     }
+ */
+                
             }
 
         
@@ -217,8 +232,8 @@ class NotesViewController: UITableViewController {
 //        cell.noteDateLabel!.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
 //        }
             
-        cell.backgroundColor = .systemBackground
-        cell.noteTitleLabel.textColor = .label
+        cell.backgroundColor = backgroundColor
+        cell.noteTitleLabel.textColor = textColor
         
         cell.noteTitleLabel!.text = "JUST TESTING" // object.noteTitle
         cell.noteTextLabel!.text = object.noteText
