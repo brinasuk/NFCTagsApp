@@ -31,25 +31,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-//        if #available(iOS 13.0, *) {
-//            let backImage = UIImage(systemName: "clear")!
-//            let dmBackImage = backImage.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
-//            headerView.backImageView.image = dmBackImage
-//        } else {
-//            headerView.backImageView.image = UIImage(named: "Close-Button")
-//        }
-
+        setupDarkMode()
 
         headerView.ratingImageView.isUserInteractionEnabled = true
-//        headerView.backImageView.isUserInteractionEnabled = true
+
         
         headerView.ratingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
         
-//        headerView.backImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backButtonTapped)))
-        
-
+        navigationItem.largeTitleDisplayMode = .never
         
         // Set the table view's delegate and data source
         tableView.delegate = self
@@ -66,78 +55,41 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.tintColor = mainColor
+        //hideNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupDarkMode()
-        setupNavigationBar()
-        
-        navigationItem.largeTitleDisplayMode = .never
-        if #available(iOS 13, *) {
-            navigationController?.navigationBar.tintColor = .systemRed}
-        else {
-            navigationController?.navigationBar.tintColor = .red
-        }
-        
-        
-        //CRITICAL STEP, ESPECIALLY AFTER COMING HERE FROM ANOTHER VIEW!! iOS13
-        //hideNavigationBar()
-
+        hideNavigationBar()
     }
     
-    func hideNavigationBar () {
+    func hideNavigationBar() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//         navigationController?.navigationBar.shadowImage = UIImage()
-         //navigationController?.navigationBar.prefersLargeTitles = true
-         //navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+            navigationController?.navigationBar.tintColor = mainColor
         
         
-        
-        navigationController?.hidesBarsOnSwipe = false
         //NB: THIS LINE UNHIDES THE NAVIGATION BAR
         //YOU ABSOLUTELY WANT THE BACK BUTTON. JUST MAKE EVERYTHING ELSE TRANSPARENT
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        // ADD THIS
+        navigationController?.navigationBar.backgroundColor = .clear
 
         let transparentAppearance = UINavigationBarAppearance()
             transparentAppearance.configureWithTransparentBackground()
-
         navigationController?.navigationBar.scrollEdgeAppearance = transparentAppearance
         navigationController?.navigationBar.standardAppearance = transparentAppearance
-
     }
     
        func  setupDarkMode() {
            //TODO: TAKE THIS OUT OF FINAL VERSION !!!
            if (kAppDelegate.isDarkMode == true) {
                overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
-           
-
-    
          }
        
-    
-    func setupNavigationBar() {
-        //Customize the navigation bar
-        //The following 2 lines make the Navigation Bar transparant
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        //METHOD 0
-//    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//
-//        navigationController?.hidesBarsOnSwipe = false
-        
-//        if #available(iOS 13, *) {
-//            navigationItem.leftBarButtonItem?.tintColor = .systemPink}
-//        else {
-//            navigationItem.leftBarButtonItem?.tintColor = .systemPink
-//        }
-    }
-    
     func showInfo() {
         // DISPLAY DATABASE VALUES
         headerView.titleLabel.text = tag.tagTitle
@@ -162,7 +114,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         else {
             propertyPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
         }
-        
         
         //"https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg"
         
