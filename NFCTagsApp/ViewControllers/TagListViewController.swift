@@ -243,7 +243,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
         print("App Display Name - \(applicationName)")
         
-        self.title = applicationName 
+        self.title = applicationName
         
         // SEE IF YOU HAVE A USER ALREADY LOGGED IN
         

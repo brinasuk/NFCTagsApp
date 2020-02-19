@@ -21,6 +21,14 @@ class NoteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        setupDarkMode()
+        //navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = mainColor
+        //SET BACKGROUND COLOR BEHIND TABLE
+        self.view.backgroundColor = backgroundColor
+        
         configureView()
         print (currentNoteObjectId)
     }
@@ -35,104 +43,43 @@ class NoteDetailViewController: UIViewController {
         
     }
         
-                  func  setupDarkMode() {
-                      //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-                      if (kAppDelegate.isDarkMode == true) {
-                          overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
-                    
-                    
-                    self.view.backgroundColor = .secondarySystemBackground
-                      
-               
-                      //SET UI CONFIG COLORS
-           //           cellBackGroundImageName = "list-item-background"
-           //
-           //           let backgroundImageName = "art_launch_image"
-           //           let backgroundImage = UIImage(named: backgroundImageName)
-           //           let imageView = UIImageView(image: backgroundImage)
-           //           imageView.contentMode = .scaleAspectFill
-           //           imageView.alpha = 0.8
-           //           self.tableView.backgroundView = imageView
-                      
-                      
-                      //tabTextColor = .label
-                      //tabTextColor = .systemRed
-                      //tabTextColor = .systemFill
+                     func setupNavigationBar() {
+//                          navigationController?.navigationBar.prefersLargeTitles = Never
 
-           //           navbarTextColor = .label
-           //           textColor = .label
-           //
-           //           navbarBackColor = .secondarySystemBackground // paleRoseColor
-           //           //navbarBackColor = .systemGroupedBackground//alex
-           //           //navbarBackColor = .systemBlue
-           //
-           //
-           //           //toolBar.barTintColor = navbarBackColor
-           //           //view.backgroundColor = navbarBackColor
-           //
-           //           statusView.backgroundColor = .systemGray4
-           //
-           //           let labelColor1:UIColor = .systemGray6
-           //           let labelColor2:UIColor = textColor!
-           //           let labelBorder:UIColor = .systemTeal
-           //           //tryThisColor = .systemRed
-           //           statusLabel.backgroundColor = labelColor1
-           //           statusLabel.textColor = labelColor2
-           //           statusView.backgroundColor = labelBorder
-           //
-           //           statusLabel.layer.cornerRadius = 5.0
-           //           statusLabel.layer.masksToBounds = true
-           //           //statusLabel.backgroundColor = .white
-           //           //statusLabel.textColor = royalBlue
-           //           statusLabel.font.withSize(16.0)
-           //
-           //           //SET THE SCANBUTTON DEFAULTS
-           //           scanButton.backgroundColor = .systemBlue
-           //           scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-           //           scanButton.layer.cornerRadius = scanButton.frame.height/2
-           //           scanButton.layer.masksToBounds = true
-           //           scanButton.tintColor = textColor
-           //
-           //           switch overrideUserInterfaceStyle {
-           //            case .dark:
-           //                // User Interface is Dark
-           //                cellBackGroundImageName = "list-item-background-dark"
-           //                ()
-           //            case .light:
-           //                // User Interface is Light
-           //                cellBackGroundImageName = "list-item-background"
-           //                ()
-           //            case .unspecified:
-           //                //your choice
-           //                cellBackGroundImageName = "list-item-background"
-           //                ()
-           //            @unknown default:
-           //                cellBackGroundImageName = "list-item-background"
-           //                ()
-           //                //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
-           //            }
-               
-                    }
-           
-        
-        func setupNavigationBar() {
-            //Customize the navigation bar
-            //The following 2 lines make the Navigation Bar transparant
-            //METHOD 0
-            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController?.navigationBar.shadowImage = UIImage()
-            navigationController?.navigationBar.tintColor = .label
-            navigationController?.hidesBarsOnSwipe = false
-            
-            //METHOD 1
-            //                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold) ]
-            //                navigationItem.largeTitleDisplayMode = .always
-            
-            //METHOD2
-            //        if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-            //            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-            //        }
-        }
+                          if #available(iOS 13.0, *) {
+                              let navBarAppearance = UINavigationBarAppearance()
+                              //navBarAppearance.configureWithDefaultBackground()
+                              navBarAppearance.configureWithOpaqueBackground()
+
+                              navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                              navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                              navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                              //navBarAppearance.backgroundColor = navbarBackColor
+                              navBarAppearance.shadowColor = nil
+                              navigationController?.navigationBar.isTranslucent = false
+                              navigationController?.navigationBar.standardAppearance = navBarAppearance
+                              navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+                  //            navigationController?.navigationBar.barTintColor = navbarBackColor
+                  //            navigationController?.navigationBar.tintColor =  navbarBackColor
+                  //            self.navigationController!.navigationBar.titleTextAttributes =
+                  //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                              } else {
+
+                              //METHOD2. NOT iOS13
+                              if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                                  navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                                  }
+                              }
+                      }
+                  
+           func  setupDarkMode() {
+           //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+           if (kAppDelegate.isDarkMode == true) {
+               overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+           }
     
     var detailItem: NoteModel? {
         didSet {
@@ -149,7 +96,20 @@ class NoteDetailViewController: UIViewController {
                let textView = noteTextTextView {
                 topicLabel.text = detail.noteTitle
                 dateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: detail.noteTimeStamp))
+                textView.textColor = mainColor
                 textView.text = detail.noteText
+                
+                //ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
+                 //TODO: Implement currentLocale = NSLocale.current as NSLocale
+                 //let date = cellDataParse.object(forKey: "createdAt") as? Date ?? NSDate() as Date
+                 //let date = noteDate
+                let date = detail.createdAt
+                 let format = DateFormatter()
+                 format.dateFormat = "EEE, MMM d, h:mm a"
+                 //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+                 let formattedDate = format.string(from: date)
+
+                dateLabel.text = "Date: " + formattedDate
             }
         }
     }

@@ -81,59 +81,13 @@ class NotesViewController: UITableViewController {
     if (kAppDelegate.isDarkMode == true) {
         overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
     }
-
-           
-        
-            func setupNavigationBarX() {
-                navigationController?.navigationBar.prefersLargeTitles = true
-                navigationController?.navigationBar.tintColor = mainColor
-                
-                //The following 2 lines make the Navigation Bar transparant
-                //METHOD 0
-                navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-                navigationController?.navigationBar.shadowImage = UIImage()
-                navigationController?.navigationBar.tintColor = mainColor
-                navigationController?.hidesBarsOnSwipe = false
-/*
-                if #available(iOS 13.0, *) {
-                    let navBarAppearance = UINavigationBarAppearance()
-                    //navBarAppearance.configureWithDefaultBackground()
-                    //navBarAppearance.configureWithOpaqueBackground()
-
-                    navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
-                    navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
-                    navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-
-                    navBarAppearance.backgroundColor = navbarBackColor
-                    navBarAppearance.shadowColor = nil
-                    navigationController?.navigationBar.isTranslucent = true
-                    navigationController?.navigationBar.standardAppearance = navBarAppearance
-                    navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-
-        //            navigationController?.navigationBar.barTintColor = navbarBackColor
-        //            navigationController?.navigationBar.tintColor =  navbarBackColor
-        //            self.navigationController!.navigationBar.titleTextAttributes =
-        //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
-
-                    } else {
-
-                    //METHOD2. NOT iOS13
-                    if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-                        navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-                        }
-                    }
- */
-                
-            }
-
-        
     
     func loadNotesTable()
     {
         let query = PFQuery(className:"Notes")
         //TODO: [query whereKeyExists:@"score"];
         //query.whereKey("userEmail", equalTo: userEmail!)
-        //query.order(byDescending: "createdAt")
+        query.order(byDescending: "updatedAt")
         query.limit = 500
         noteObjects = []  //or removeAll
         var rowCount = 0
@@ -197,6 +151,7 @@ class NotesViewController: UITableViewController {
 //                controller.navigationItem.leftItemsSupplementBackButton = true
                 
                 let note:NoteModel = noteObjects[indexPath.row]
+                //let alex:Date = note.createdAt
                 
                 let destinationController = segue.destination as! NoteDetailViewController
                 destinationController.detailItem = note //object
@@ -231,13 +186,34 @@ class NotesViewController: UITableViewController {
 //        cell.noteTextLabel!.text = object.noteText
 //        cell.noteDateLabel!.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
 //        }
-            
+        
+        cell.noteTitleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        cell.noteTextLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        cell.noteDateLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        
         cell.backgroundColor = backgroundColor
         cell.noteTitleLabel.textColor = textColor
+        cell.noteTextLabel.textColor = mainColor
+        if #available(iOS 13.0, *) {
+            cell.noteDateLabel.textColor = .secondaryLabel}
+        else {
+            cell.noteDateLabel.textColor = textColor
+        }
         
-        cell.noteTitleLabel!.text = "JUST TESTING" // object.noteTitle
+        cell.noteTitleLabel!.text = object.noteTitle
         cell.noteTextLabel!.text = object.noteText
-        cell.noteDateLabel!.text = "ALEX FIX" //ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
+        
+        
+        //ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
+        //TODO: Implement currentLocale = NSLocale.current as NSLocale
+        //let date = cellDataParse.object(forKey: "createdAt") as? Date ?? NSDate() as Date
+        let date = object.createdAt
+        let format = DateFormatter()
+        format.dateFormat = "EEE, MMM d, h:mm a"
+        //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+        let formattedDate = format.string(from: date)
+
+        cell.noteDateLabel!.text = "Date: " + formattedDate
         return cell
     }
 
@@ -279,7 +255,8 @@ class NotesViewController: UITableViewController {
         //tableView.deselectRow(at: indexPath, animated: true)
         
         //self.currentRow = indexPath.row
-        performSegue(withIdentifier: "showDetail", sender: self)
+        performSegue(withIdentifier: "showDetail", sender: self)//showCreateNoteSegue
+//        performSegue(withIdentifier: "showCreateNoteSegue", sender: self)//showCreateNoteSegue
     }
     
     func removeNote(objectId: String) {

@@ -25,7 +25,7 @@ import CoreData  //TODO: ALEX TAKE OUT
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var isDarkMode:Bool? = false
+    var isDarkMode:Bool? = true
     
     var window: UIWindow?
     
@@ -188,6 +188,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let backButtonImage = UIImage(named: "backButton_bold")
         UINavigationBar.appearance().backIndicatorImage = backButtonImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        UINavigationBar.appearance().backgroundColor = .white
+        
         
         //        // SET THE BACKBUTTON STYLE
         //        let backButtonImage = UIImage(named: "backButtonNew")

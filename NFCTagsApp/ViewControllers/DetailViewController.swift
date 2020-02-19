@@ -72,6 +72,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupDarkMode()
+        setupNavigationBar()
+        
         navigationItem.largeTitleDisplayMode = .never
         if #available(iOS 13, *) {
             navigationController?.navigationBar.tintColor = .systemRed}
@@ -81,7 +83,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         //CRITICAL STEP, ESPECIALLY AFTER COMING HERE FROM ANOTHER VIEW!! iOS13
-        hideNavigationBar()
+        //hideNavigationBar()
 
     }
     
@@ -117,9 +119,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
          }
        
     
-    func setupNavigationBarX() {
+    func setupNavigationBar() {
         //Customize the navigation bar
         //The following 2 lines make the Navigation Bar transparant
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
         //METHOD 0
 //    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        navigationController?.navigationBar.shadowImage = UIImage()

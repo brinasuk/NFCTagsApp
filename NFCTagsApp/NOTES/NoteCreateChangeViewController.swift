@@ -26,14 +26,35 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDarkMode()
+        setupNavigationBar()
+        //navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = mainColor
+        //SET BACKGROUND COLOR BEHIND TABLE
+        self.view.backgroundColor = backgroundColor
+        
         // set text view delegate so that we can react on text change
         noteTextTextView.delegate = self
         
         // check if we are in create mode or in change mode
         if let changingReallySimpleNote = self.changingReallySimpleNote {
             // CHANGE MODE
+            self.title = "Edit Note"
+            
             // in change mode: initialize for fields with data coming from note to be changed
-            noteDateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+//            noteDateLabel.text = "ALEX FIX22"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+            
+            //ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
+            //TODO: Implement currentLocale = NSLocale.current as NSLocale
+            //let date = cellDataParse.object(forKey: "createdAt") as? Date ?? NSDate() as Date
+            let date = changingReallySimpleNote.createdAt
+            let format = DateFormatter()
+            format.dateFormat = "EEE, MMM d, h:mm a"
+            //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+            let formattedDate = format.string(from: date)
+            noteDateLabel.text = formattedDate
+            
             noteTextTextView.text = changingReallySimpleNote.noteText
             noteTitleTextField.text = changingReallySimpleNote.noteTitle
             // enable done button by default
@@ -41,12 +62,24 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
         } else {
             // INSERT MODE
             // in create mode: set initial time stamp label
+            self.title = "New Note"
             
             noteTextTextView.text = ""
             noteTitleTextField.text = ""
             
-            noteDateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+//            noteDateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+//            let date = changingReallySimpleNote.createdAt
+            
+            
+            let date = Date()
+            let format = DateFormatter()
+            format.dateFormat = "EEE, MMM d, h:mm a"
+            //@"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+            let formattedDate = format.string(from: date)
+            noteDateLabel.text = formattedDate
         }
+        
+
         
         // initialize text view UI - border width, radius and color
         noteTextTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
@@ -58,6 +91,46 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
+    
+           func  setupDarkMode() {
+           //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+           if (kAppDelegate.isDarkMode == true) {
+               overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+           }
+
+
+        func setupNavigationBar() {
+            //navigationController?.navigationBar.prefersLargeTitles = false
+            navigationItem.largeTitleDisplayMode = .never
+
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                //navBarAppearance.configureWithDefaultBackground()
+                navBarAppearance.configureWithOpaqueBackground()
+
+                navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                //navBarAppearance.backgroundColor = navbarBackColor
+                navBarAppearance.shadowColor = nil
+                navigationController?.navigationBar.isTranslucent = false
+                navigationController?.navigationBar.standardAppearance = navBarAppearance
+                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+    //            navigationController?.navigationBar.barTintColor = navbarBackColor
+    //            navigationController?.navigationBar.tintColor =  navbarBackColor
+    //            self.navigationController!.navigationBar.titleTextAttributes =
+    //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                } else {
+
+                //METHOD2. NOT iOS13
+                if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                    navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                    }
+                }
+        }
 
     func setChangingReallySimpleNote(changingReallySimpleNote : NoteModel) {
         self.changingReallySimpleNote = changingReallySimpleNote
@@ -177,9 +250,6 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
 //                withIdentifier: "backToMasterView",
 //                sender: self)
             //dismiss(animated: true, completion: nil)
-            
-            
-            
         }
     }
 
