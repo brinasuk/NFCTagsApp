@@ -1516,10 +1516,10 @@
             </objects>
             <point key="canvasLocation" x="-141095" y="-54678"/>
         </scene>
-        <!--Detail-->
+        <!--Note Detail View Controller-->
         <scene sceneID="l1r-sV-iRL">
             <objects>
-                <viewController title="Detail" id="6hS-nT-d6I" customClass="NoteDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Detail" id="6hS-nT-d6I" userLabel="Note Detail View Controller" customClass="NoteDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cA2-mB-bSQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1545,7 +1545,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lo2-XN-VAj">
-                                <rect key="frame" x="20" y="800" width="374" height="42"/>
+                                <rect key="frame" x="119" y="800" width="176" height="42"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="✎ Edit">
@@ -1561,8 +1561,8 @@
                             <constraint firstItem="4ls-a3-Mne" firstAttribute="top" secondItem="68X-z1-YRr" secondAttribute="bottom" constant="8" id="6Wk-dM-QRZ"/>
                             <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="hpn-eh-wwL" secondAttribute="trailing" constant="16" id="Aif-fG-55o"/>
                             <constraint firstItem="hpn-eh-wwL" firstAttribute="top" secondItem="4ls-a3-Mne" secondAttribute="bottom" constant="20.5" id="Eow-PZ-j1m"/>
-                            <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="Lo2-XN-VAj" secondAttribute="trailing" constant="20" id="GAb-8d-9s2"/>
-                            <constraint firstItem="Lo2-XN-VAj" firstAttribute="leading" secondItem="3Ku-VE-UA0" secondAttribute="leading" constant="20" id="OLw-B5-0YS"/>
+                            <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="Lo2-XN-VAj" secondAttribute="trailing" constant="119" id="GAb-8d-9s2"/>
+                            <constraint firstItem="Lo2-XN-VAj" firstAttribute="leading" secondItem="3Ku-VE-UA0" secondAttribute="leading" constant="119" id="OLw-B5-0YS"/>
                             <constraint firstItem="68X-z1-YRr" firstAttribute="top" secondItem="3Ku-VE-UA0" secondAttribute="top" constant="20" id="Pux-Ez-kN6"/>
                             <constraint firstItem="Lo2-XN-VAj" firstAttribute="top" secondItem="hpn-eh-wwL" secondAttribute="bottom" constant="8" id="fDc-0O-fZO"/>
                             <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="4ls-a3-Mne" secondAttribute="trailing" constant="16" id="hTu-QP-oag"/>
@@ -1577,6 +1577,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Note Details" id="rMV-Ph-k1U"/>
                     <connections>
+                        <outlet property="editButton" destination="Lo2-XN-VAj" id="FYT-5h-dfh"/>
                         <outlet property="noteDate" destination="4ls-a3-Mne" id="9Vh-XT-Po4"/>
                         <outlet property="noteTextTextView" destination="hpn-eh-wwL" id="a4z-VI-M2e"/>
                         <outlet property="noteTitleLabel" destination="68X-z1-YRr" id="ndh-fb-ipV"/>
@@ -1623,8 +1624,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duq-NG-eWd">
+                                <rect key="frame" x="16" y="190" width="382" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIi-PZ-8HP">
-                                <rect key="frame" x="16" y="800" width="382" height="42"/>
+                                <rect key="frame" x="131" y="800" width="152" height="42"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="✓ Save">
@@ -1634,12 +1641,6 @@
                                     <action selector="doneButtonClicked:forEvent:" destination="78Y-rN-0Yz" eventType="touchUpInside" id="LLN-56-wo7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duq-NG-eWd">
-                                <rect key="frame" x="16" y="190" width="382" height="26.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1650,7 +1651,7 @@
                             <constraint firstItem="f1i-gc-juY" firstAttribute="top" secondItem="duq-NG-eWd" secondAttribute="bottom" constant="8.5" id="Ewa-gX-WNf"/>
                             <constraint firstItem="GoK-Jm-rUX" firstAttribute="top" secondItem="1U0-vI-59j" secondAttribute="top" constant="16" id="GvV-uE-a5S"/>
                             <constraint firstItem="1U0-vI-59j" firstAttribute="trailing" secondItem="GoK-Jm-rUX" secondAttribute="trailing" constant="216" id="LXz-fc-rw7"/>
-                            <constraint firstItem="FIi-PZ-8HP" firstAttribute="leading" secondItem="1U0-vI-59j" secondAttribute="leading" constant="16" id="LYU-Vy-i4d"/>
+                            <constraint firstItem="FIi-PZ-8HP" firstAttribute="leading" secondItem="1U0-vI-59j" secondAttribute="leading" constant="131" id="LYU-Vy-i4d"/>
                             <constraint firstItem="5fg-T5-YCq" firstAttribute="top" secondItem="GoK-Jm-rUX" secondAttribute="bottom" constant="8" id="QQ3-uK-HPi"/>
                             <constraint firstItem="f1i-gc-juY" firstAttribute="leading" secondItem="1U0-vI-59j" secondAttribute="leading" constant="16" id="USJ-fs-O2Z"/>
                             <constraint firstItem="GoK-Jm-rUX" firstAttribute="leading" secondItem="1U0-vI-59j" secondAttribute="leading" constant="16" id="aA4-e4-eLk"/>
@@ -1660,7 +1661,7 @@
                             <constraint firstItem="1U0-vI-59j" firstAttribute="trailing" secondItem="5fg-T5-YCq" secondAttribute="trailing" constant="16" id="qU2-vq-Gor"/>
                             <constraint firstItem="PLs-zw-J1g" firstAttribute="top" secondItem="1U0-vI-59j" secondAttribute="top" constant="16" id="sjN-wv-sKM"/>
                             <constraint firstItem="PLs-zw-J1g" firstAttribute="leading" secondItem="1U0-vI-59j" secondAttribute="leading" constant="150" id="uDE-pi-6NY"/>
-                            <constraint firstItem="1U0-vI-59j" firstAttribute="trailing" secondItem="FIi-PZ-8HP" secondAttribute="trailing" constant="16" id="uPj-7D-2Zt"/>
+                            <constraint firstItem="1U0-vI-59j" firstAttribute="trailing" secondItem="FIi-PZ-8HP" secondAttribute="trailing" constant="131" id="uPj-7D-2Zt"/>
                             <constraint firstItem="FIi-PZ-8HP" firstAttribute="top" secondItem="f1i-gc-juY" secondAttribute="bottom" constant="8" id="w1B-HC-4dG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1U0-vI-59j"/>
@@ -1671,6 +1672,7 @@
                         <outlet property="noteDoneButton" destination="FIi-PZ-8HP" id="59Y-7r-yaC"/>
                         <outlet property="noteTextTextView" destination="f1i-gc-juY" id="rI0-IK-T1B"/>
                         <outlet property="noteTitleTextField" destination="5fg-T5-YCq" id="yHh-Pc-OYD"/>
+                        <outlet property="saveButton" destination="FIi-PZ-8HP" id="MYh-qG-lny"/>
                         <segue destination="bKW-la-60Q" kind="unwind" identifier="unwindtoMaster" unwindAction="unwindToMasterWithSegue:" id="Pvf-9R-tUz"/>
                     </connections>
                 </viewController>
@@ -1679,51 +1681,64 @@
             </objects>
             <point key="canvasLocation" x="-143346.37681159421" y="-55195.3125"/>
         </scene>
-        <!--Master-->
+        <!--Notes View Controller-->
         <scene sceneID="epC-g2-s11">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" customClass="NotesViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2mu-kt-DcW">
+                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" userLabel="Notes View Controller" customClass="NotesViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2mu-kt-DcW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="104" id="3uT-Po-GQs" customClass="NoteTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="104"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="120" id="3uT-Po-GQs" customClass="NoteTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3uT-Po-GQs" id="CX1-Bs-iC4">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cSV-tb-YsT">
-                                            <rect key="frame" x="16" y="16" width="382" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cSV-tb-YsT">
+                                            <rect key="frame" x="20" y="4" width="374" height="24"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="374" id="Bfd-WS-pQm"/>
+                                                <constraint firstAttribute="height" constant="24" id="Mty-qy-yeW"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIe-aq-RIz">
-                                            <rect key="frame" x="16" y="44.5" width="382" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIe-aq-RIz">
+                                            <rect key="frame" x="20" y="31" width="374" height="18"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="374" id="rUh-hb-Et5"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="u4b-py-Slh"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrP-dj-4wN">
-                                            <rect key="frame" x="16" y="69.5" width="382" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrP-dj-4wN">
+                                            <rect key="frame" x="20" y="51" width="374" height="54"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="374" id="DvG-Jo-ogq"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="LIe-aq-RIz" secondAttribute="trailing" constant="16" id="3Pc-GB-9hM"/>
-                                        <constraint firstItem="LIe-aq-RIz" firstAttribute="leading" secondItem="CX1-Bs-iC4" secondAttribute="leading" constant="16" id="8NW-73-rTH"/>
-                                        <constraint firstAttribute="trailing" secondItem="cSV-tb-YsT" secondAttribute="trailing" constant="16" id="AYV-Q4-aT2"/>
-                                        <constraint firstItem="cSV-tb-YsT" firstAttribute="top" secondItem="CX1-Bs-iC4" secondAttribute="top" constant="16" id="Cqa-kh-fPV"/>
-                                        <constraint firstAttribute="trailing" secondItem="LrP-dj-4wN" secondAttribute="trailing" constant="16" id="KGl-Ag-qZM"/>
-                                        <constraint firstItem="cSV-tb-YsT" firstAttribute="leading" secondItem="CX1-Bs-iC4" secondAttribute="leading" constant="16" id="Usk-yj-cxg"/>
-                                        <constraint firstItem="LrP-dj-4wN" firstAttribute="top" secondItem="LIe-aq-RIz" secondAttribute="bottom" constant="8" id="XcS-ri-mDL"/>
-                                        <constraint firstItem="LIe-aq-RIz" firstAttribute="top" secondItem="cSV-tb-YsT" secondAttribute="bottom" constant="7.5" id="jWu-Om-DZU"/>
-                                        <constraint firstItem="LrP-dj-4wN" firstAttribute="leading" secondItem="CX1-Bs-iC4" secondAttribute="leading" constant="16" id="sHN-NA-qlY"/>
+                                        <constraint firstItem="LrP-dj-4wN" firstAttribute="top" secondItem="LIe-aq-RIz" secondAttribute="bottom" constant="2" id="8b4-Qk-w2p"/>
+                                        <constraint firstItem="LrP-dj-4wN" firstAttribute="leading" secondItem="CX1-Bs-iC4" secondAttribute="leadingMargin" id="9LG-7E-9TX"/>
+                                        <constraint firstItem="LrP-dj-4wN" firstAttribute="leading" secondItem="cSV-tb-YsT" secondAttribute="leading" id="XTD-dK-xQj"/>
+                                        <constraint firstItem="LIe-aq-RIz" firstAttribute="top" secondItem="cSV-tb-YsT" secondAttribute="bottom" constant="3" id="aeQ-Vi-sW9"/>
+                                        <constraint firstItem="LIe-aq-RIz" firstAttribute="leading" secondItem="LrP-dj-4wN" secondAttribute="leading" id="dJu-bP-9xd"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="LrP-dj-4wN" secondAttribute="bottom" constant="4" id="krS-BN-q4I"/>
+                                        <constraint firstItem="cSV-tb-YsT" firstAttribute="top" secondItem="CX1-Bs-iC4" secondAttribute="top" constant="4" id="mI5-bu-G7n"/>
+                                        <constraint firstItem="LIe-aq-RIz" firstAttribute="trailing" secondItem="LrP-dj-4wN" secondAttribute="trailing" id="qXo-z1-B9D"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1748,7 +1763,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nI-yZ-der" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-144757" y="-56059"/>
+            <point key="canvasLocation" x="-144757.97101449277" y="-56059.151785714283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BdD-JB-Mxw">
@@ -1781,7 +1796,7 @@
         <image name="text-input" width="298" height="36.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rvD-nZ-11h"/>
+        <segue reference="kUe-KS-Neb"/>
         <segue reference="PI8-6u-JL5"/>
         <segue reference="gfT-in-4Ae"/>
     </inferredMetricsTieBreakers>

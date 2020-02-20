@@ -10,6 +10,7 @@ import UIKit
 
 class NoteDetailViewController: UIViewController {
 
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var noteTitleLabel: UILabel!
     @IBOutlet weak var noteTextTextView: UITextView!
     @IBOutlet weak var noteDate: UILabel!
@@ -20,7 +21,6 @@ class NoteDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         setupDarkMode()
         //navigationController?.navigationBar.prefersLargeTitles = false
@@ -28,9 +28,25 @@ class NoteDetailViewController: UIViewController {
         navigationController?.navigationBar.tintColor = mainColor
         //SET BACKGROUND COLOR BEHIND TABLE
         self.view.backgroundColor = backgroundColor
+
+        //SET THE EDITBUTTON
+        editButton.backgroundColor = mainColor
+        editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        editButton.layer.cornerRadius = editButton.frame.height/2
+        editButton.layer.masksToBounds = true
+        if (kAppDelegate.isDarkMode == true)  {
+            //editButton.tintColor = textColor
+            editButton.setTitleColor(textColor, for: .normal)
+        } else {
+            //editButton.tintColor = .systemYellow
+            editButton.setTitleColor(.white, for: .normal)
+        }
+
+        
+
         
         configureView()
-        print (currentNoteObjectId)
+        //print (currentNoteObjectId)
     }
     
     override func viewWillAppear(_ animated: Bool) {

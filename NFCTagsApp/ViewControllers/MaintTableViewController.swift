@@ -73,7 +73,7 @@ class MaintTableViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         //self.navigationController?.navigationBar.tintColor = UIColor.systemPink
+         //self.navigationController?.navigationBar//.tintColor = UIColor.systemPink
     }
     
     func  setupDarkMode() {
@@ -241,8 +241,6 @@ class MaintTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MaintTableViewCell", for: indexPath) as! MaintTableViewCell
         
         let owner = ownerObjects[indexPath.row] //The Vige
-        
-        cell.backgroundColor = .systemBackground
         
         cell.tagNumber.text = owner.ownerNumber
         cell.tagTitle.text = owner.ownerTitle

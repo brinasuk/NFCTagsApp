@@ -11,6 +11,8 @@ import Parse
 
 class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
     
+    @IBOutlet weak var saveButton: UIButton!
+    
     @IBOutlet weak var noteTitleTextField: UITextField!
     @IBOutlet weak var noteTextTextView: UITextView!
     @IBOutlet weak var noteDoneButton: UIButton!
@@ -28,6 +30,21 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
         
         setupDarkMode()
         setupNavigationBar()
+        
+        //SET THE SAVEBUTTON
+        saveButton.backgroundColor = mainColor
+        saveButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        saveButton.layer.cornerRadius = saveButton.frame.height/2
+        saveButton.layer.masksToBounds = true
+        if (kAppDelegate.isDarkMode == true)  {
+            //editButton.tintColor = textColor
+            saveButton.setTitleColor(textColor, for: .normal)
+        } else {
+            //editButton.tintColor = .systemYellow
+            saveButton.setTitleColor(.white, for: .normal)
+        }
+        
+
         //navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = mainColor

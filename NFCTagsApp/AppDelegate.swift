@@ -25,7 +25,7 @@ import CoreData  //TODO: ALEX TAKE OUT
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var isDarkMode:Bool? = true
+    var isDarkMode:Bool? = false
     
     var window: UIWindow?
     
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        
+
         
         // SETTINGS FOR EACH APP. art/re/wine/disp ETC
         

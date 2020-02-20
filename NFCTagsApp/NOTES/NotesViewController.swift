@@ -20,6 +20,15 @@ class NotesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.contentInset = UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0)
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 120
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        tableView.backgroundColor = backgroundColor
+
+        
         self.title = "My Notes"
 
         setupDarkMode()
@@ -161,6 +170,9 @@ class NotesViewController: UITableViewController {
     }
 
     // MARK: - Table View
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -187,18 +199,25 @@ class NotesViewController: UITableViewController {
 //        cell.noteDateLabel!.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
 //        }
         
-        cell.noteTitleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
-        cell.noteTextLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        cell.noteDateLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        
+        cell.selectionStyle = .none  //CRITICAL. DONT SHOW A GREY BACKGROUND WHEN SELECTED
         cell.backgroundColor = backgroundColor
         cell.noteTitleLabel.textColor = textColor
         cell.noteTextLabel.textColor = mainColor
-        if #available(iOS 13.0, *) {
+        if (kAppDelegate.isDarkMode == true)  {
             cell.noteDateLabel.textColor = .secondaryLabel}
         else {
             cell.noteDateLabel.textColor = textColor
         }
+
+        /*
+        HelveticaNeue-Bold,HelveticaNeue-CondensedBlack,HelveticaNeue-Medium,HelveticaNeue,HelveticaNeue-Light,HelveticaNeue-CondensedBold,HelveticaNeue-LightItalic,HelveticaNeue-UltraLightItalic,HelveticaNeue-UltraLight,HelveticaNeue-BoldItalic,HelveticaNeue-Italic
+        */
+ 
+        cell.noteTitleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        cell.noteDateLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+        cell.noteTextLabel.font = UIFont(name: "HelveticaNeue-Light", size: 16)
+        
+
         
         cell.noteTitleLabel!.text = object.noteTitle
         cell.noteTextLabel!.text = object.noteText
@@ -256,7 +275,6 @@ class NotesViewController: UITableViewController {
         
         //self.currentRow = indexPath.row
         performSegue(withIdentifier: "showDetail", sender: self)//showCreateNoteSegue
-//        performSegue(withIdentifier: "showCreateNoteSegue", sender: self)//showCreateNoteSegue
     }
     
     func removeNote(objectId: String) {

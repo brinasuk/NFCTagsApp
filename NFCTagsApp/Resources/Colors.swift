@@ -11,6 +11,10 @@
 import UIKit
 
 /*
+HelveticaNeue-Bold,HelveticaNeue-CondensedBlack,HelveticaNeue-Medium,HelveticaNeue,HelveticaNeue-Light,HelveticaNeue-CondensedBold,HelveticaNeue-LightItalic,HelveticaNeue-UltraLightItalic,HelveticaNeue-UltraLight,HelveticaNeue-BoldItalic,HelveticaNeue-Italic
+*/
+
+/*
 // MARK:  - System Colors
 public let infoBlueColor = UIColor(red:47, green:112, blue:225)
 public let successColor = UIColor(red:83, green:215, blue:106)
@@ -256,7 +260,7 @@ public var textColor: UIColor {
             if (kAppDelegate.isDarkMode == true)  {
                 return .label
             } else {
-                return  .white
+                return  .darkText
             }
         }
     } else {

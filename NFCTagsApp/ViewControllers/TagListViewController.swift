@@ -79,6 +79,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             print("LIGHT MODE")
         }
         
+        if traitCollection.userInterfaceStyle == .light {
+            print("Light mode")
+        } else {
+            print("Dark mode")
+        }
+        
         //let aColor = UIColor(named: "customControlColor")
         //let themeColor = UIColor(named: "themeColor")
 
@@ -170,10 +176,13 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         scanButton.layer.cornerRadius = scanButton.frame.height/2
         scanButton.layer.masksToBounds = true
-        scanButton.tintColor = textColor
-        
-      }
-    
+        if (kAppDelegate.isDarkMode == true)  {
+            scanButton.tintColor = textColor
+        } else {
+            scanButton.tintColor = .white
+        }
+    }
+
     
     func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -970,7 +979,7 @@ extension TagListViewController: UITableViewDataSource {
         cell.tagTitle.textColor = textColor
         cell.tagSubTitle.textColor = mainColor
         cell.tagCompany.textColor = mainColor
-        if #available(iOS 13.0, *) {
+        if (kAppDelegate.isDarkMode == true)  {
             cell.dateAdded.textColor = .secondaryLabel}
         else {
             cell.dateAdded.textColor = textColor
