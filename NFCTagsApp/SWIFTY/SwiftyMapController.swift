@@ -4,11 +4,7 @@ import UIKit
 import MapKit
 
 class SwiftyMapController: UIViewController {
-    
 
-//    @IBAction func backButtonPressed(_ sender: Any) {
-//    }
-    
     @IBOutlet weak var mapView: MKMapView!
     
 //    var backButt = UIButton()
@@ -20,6 +16,7 @@ class SwiftyMapController: UIViewController {
     //var allTagObjects:[TagModel]
     //var allTagObjects = TagModel()
     //var dataParse:NSMutableArray = []// = NSMutableArray()
+    
     var tag = TagModel()
     
     

@@ -20,6 +20,11 @@ class NotesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "My Notes"
+
+        setupDarkMode()
+        setupNavigationBar()
+        
         tableView.contentInset = UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0)
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -27,18 +32,15 @@ class NotesViewController: UITableViewController {
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.backgroundColor = backgroundColor
-
         
-        self.title = "My Notes"
-
-        setupDarkMode()
-        //navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.tintColor = mainColor
         //SET BACKGROUND COLOR BEHIND TABLE
         self.view.backgroundColor = backgroundColor
         //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+//    //navigationController?.navigationBar.prefersLargeTitles = false
+//        navigationItem.largeTitleDisplayMode = .never
+//        navigationController?.navigationBar.tintColor = mainColor
+
         
         //THE FOLLOWING TWO VARIABLES ARE PASSED FROM THE TAG RECORD FOR ADDNEW
         //TODO: ALEX FIX THIS
@@ -91,6 +93,38 @@ class NotesViewController: UITableViewController {
         overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
     }
     
+        func setupNavigationBar() {
+            navigationController?.navigationBar.prefersLargeTitles = false
+
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                //navBarAppearance.configureWithDefaultBackground()
+                navBarAppearance.configureWithOpaqueBackground()
+
+                navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                //navBarAppearance.backgroundColor = navbarBackColor
+                navBarAppearance.shadowColor = nil
+                navigationController?.navigationBar.isTranslucent = false
+                navigationController?.navigationBar.standardAppearance = navBarAppearance
+                navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+    //            navigationController?.navigationBar.barTintColor = navbarBackColor
+    //            navigationController?.navigationBar.tintColor =  navbarBackColor
+    //            self.navigationController!.navigationBar.titleTextAttributes =
+    //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                } else {
+
+                //METHOD2. NOT iOS13
+                if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                    navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                    }
+                }
+        }
+    
     func loadNotesTable()
     {
         let query = PFQuery(className:"Notes")
@@ -111,7 +145,7 @@ class NotesViewController: UITableViewController {
                 print(error.localizedDescription)
             } else if let objects = objects {
                 // The find succeeded.
-                print("Successfully retrieved \(objects.count) NOTE objects.")
+//                print("Successfully retrieved \(objects.count) NOTE objects.")
                 UIViewController.removeSpinner(spinner: sv)
                 for object in objects {
                     

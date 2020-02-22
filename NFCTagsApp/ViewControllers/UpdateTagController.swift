@@ -761,7 +761,7 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
         let sv = UIViewController.displaySpinner(onView: self.view)
         
         let photoName:String? = createPhotoName("Tag", withID: owner.ownerObjectId, withNumber: 1) ?? ""
-        print (photoName!)
+        //print (photoName!)
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append((resizedImage.jpegData(compressionQuality: 1.0)!), withName: "Photo", fileName: photoName!, mimeType: "image/jpeg")

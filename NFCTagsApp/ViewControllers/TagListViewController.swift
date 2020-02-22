@@ -768,7 +768,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                 print(error.localizedDescription)
             } else if let objects = objects {
                 // The find succeeded.
-                print("Successfully retrieved \(objects.count) TAG objects.")
+//                print("Successfully retrieved \(objects.count) TAG objects.")
                 // Do something with the found objects
                 
                 for object in objects {

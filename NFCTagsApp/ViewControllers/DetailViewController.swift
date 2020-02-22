@@ -27,6 +27,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: DetailHeaderView!
 
+    @IBOutlet weak var noteButton: UIBarButtonItem!
+
     var ratingKeep = ""
     
     override func viewDidLoad() {
@@ -126,7 +128,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //                headerView.headerImageView.image = resizedImage(at: url, for: CGSize(width: 375,height: 358))
         //=================================================
         
-        print(propertyPhotoFileUrl)
+        //print(propertyPhotoFileUrl)
+        
         // METHOD 2: ======================================
         //        let url = URL(string: propertyPhotoFileUrl!)!
         //        let placeholderImageName = kAppDelegate.placeholderName
@@ -181,9 +184,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         performSegue(withIdentifier: "ShowReview", sender: self)
     }
     
-//        @objc private func backButtonTapped(_ recognizer: UITapGestureRecognizer) {
-//            navigationController?.popViewController(animated: true)
-//        }
+    // MARK: - Action Buttons Pressed
+    
+    @IBAction func noteButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "NOTESEGUE", sender: self)
+    }
     
     @IBAction func mapButtonPressed(_ sender: Any) {
         /* DOES NOT WORK - DELETE
@@ -198,7 +203,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         */
         
-        performSegue(withIdentifier: "SwiftyMapBtn", sender: self)
+        performSegue(withIdentifier: "SwiftyMap", sender: self)
     }
     
     
@@ -367,14 +372,19 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             destinationController.tag = tag
         }
             
+//        else if segue.identifier == "SwiftyMap" {
+//            let destinationController = segue.destination as! SwiftyMapController
+//            destinationController.tag = tag
+//        }
+            
         else if segue.identifier == "SwiftyMap" {
             let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = tag
         }
-            
-        else if segue.identifier == "SwiftyMapBtn" {
-            let destinationController = segue.destination as! SwiftyMapController
-            destinationController.tag = tag
+        
+        else if segue.identifier == "NOTESEGUE" {
+//            let destinationController = segue.destination as! SwiftyMapController
+//            destinationController.tag = tag
         }
     }
     

@@ -394,6 +394,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aov-en-PeE"/>
                     </view>
+                    <navigationItem key="navigationItem" id="gQw-j3-I3G"/>
                     <connections>
                         <outlet property="mapView" destination="Rgb-jG-hSD" id="49g-7j-xk6"/>
                     </connections>
@@ -609,7 +610,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="mapView" destination="HCq-GC-mWF" id="BZs-Md-6q3"/>
-                                            <segue destination="DRy-jI-0HB" kind="show" identifier="SwiftyMap" id="G25-Qc-G81"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -637,10 +637,14 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dKh-jm-fzC"/>
+                                    <barButtonItem title="Note" id="tsi-rb-WsM">
+                                        <connections>
+                                            <action selector="noteButtonPressed:" destination="VaW-2d-StK" id="Djz-M1-AMr"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Map" id="yop-iW-1L1" userLabel="Map">
                                         <connections>
                                             <action selector="mapButtonPressed:" destination="VaW-2d-StK" id="GQl-xg-nML"/>
-                                            <segue destination="DRy-jI-0HB" kind="show" identifier="SwiftyMapBtn" id="JOf-sv-hGR"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Website" id="exn-kd-ait">
@@ -664,12 +668,15 @@
                     </view>
                     <connections>
                         <outlet property="headerView" destination="tb4-Qn-VVC" id="FzD-wq-Ihv"/>
+                        <outlet property="noteButton" destination="tsi-rb-WsM" id="XRM-Yk-UiU"/>
                         <outlet property="tableView" destination="Gdl-CJ-31a" id="gey-XM-zi1"/>
+                        <segue destination="lma-49-zhp" kind="show" identifier="NOTESEGUE" id="UMl-ub-I6l"/>
+                        <segue destination="DRy-jI-0HB" kind="show" identifier="SwiftyMap" id="Xrc-Gp-axU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SJN-uw-6Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138997.10144927536" y="-55456.47321428571"/>
+            <point key="canvasLocation" x="-138894" y="-55445"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Dar-QN-VJP">
@@ -1763,7 +1770,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nI-yZ-der" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-144757.97101449277" y="-56059.151785714283"/>
+            <point key="canvasLocation" x="-141616" y="-55472"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BdD-JB-Mxw">
@@ -1796,9 +1803,10 @@
         <image name="text-input" width="298" height="36.5"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="UMl-ub-I6l"/>
         <segue reference="kUe-KS-Neb"/>
         <segue reference="PI8-6u-JL5"/>
-        <segue reference="gfT-in-4Ae"/>
+        <segue reference="Xrc-Gp-axU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
