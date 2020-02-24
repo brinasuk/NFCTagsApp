@@ -42,11 +42,8 @@ class NoteDetailViewController: UIViewController {
             editButton.setTitleColor(.white, for: .normal)
         }
 
-        
-
-        
         configureView()
-        //print (currentNoteObjectId)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,9 +106,10 @@ class NoteDetailViewController: UIViewController {
         if let detail = detailItem {
             if let topicLabel = noteTitleLabel,
                let dateLabel = noteDate,
+                
                let textView = noteTextTextView {
                 topicLabel.text = detail.noteTitle
-                dateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: detail.noteTimeStamp))
+//                dateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: detail.noteTimeStamp))
                 textView.textColor = mainColor
                 textView.text = detail.noteText
                 
@@ -126,6 +124,8 @@ class NoteDetailViewController: UIViewController {
                  let formattedDate = format.string(from: date)
 
                 dateLabel.text = "Date: " + formattedDate
+                
+
             }
         }
     }
@@ -134,10 +134,7 @@ class NoteDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showChangeNoteSegue" {
             let changeNoteViewController = segue.destination as! NoteCreateChangeViewController
-            
-            //ADDED BY ALEX
-            changeNoteViewController.passNoteObjectId = currentNoteObjectId
-            
+
             if let detail = detailItem {
                 changeNoteViewController.setChangingReallySimpleNote(
                     changingReallySimpleNote: detail)

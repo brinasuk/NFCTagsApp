@@ -12,15 +12,29 @@ import Alertift
 
 class NotesViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
-    private var noteObjects:[NoteModel] = []
+    //THE FOLLOWING 4 VARIABLES PASSED FROM DETAILVIEWCONTROLLER
     var currentTagId:String = ""
     var currentPhotoRef:String = ""
+    var currentNoteOwner:String = ""
+    var currentNoteTagTitle:String = ""
+    
+    var detailViewController: DetailViewController? = nil
+    private var noteObjects:[NoteModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "My Notes"
+        //THE FOLLOWING TWO VARIABLES ARE PASSED FROM THE TAG RECORD FOR ADDNEW
+        //TODO: ALEX FIX THIS
+//        currentTagId = "g0p978oKXB"
+//        currentPhotoRef = "wsBAstguyt"
+        
+        print("currentTagId: \(currentTagId)")
+        print("currentPhotoRef: \(currentPhotoRef)")
+        print("currentNoteOwner: \(currentNoteOwner)")
+        print("currentNoteTagTitle: \(currentNoteTagTitle)")
+        
+        self.title = currentNoteTagTitle
 
         setupDarkMode()
         setupNavigationBar()
@@ -42,34 +56,31 @@ class NotesViewController: UITableViewController {
 //        navigationController?.navigationBar.tintColor = mainColor
 
         
-        //THE FOLLOWING TWO VARIABLES ARE PASSED FROM THE TAG RECORD FOR ADDNEW
-        //TODO: ALEX FIX THIS
-        currentTagId = "g0p978oKXB"
-        currentPhotoRef = "wsBAstguyt"
-        
-        // Core data initialization
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            // create alert
-            let alert = UIAlertController(
-                title: "Could not get app delegate",
-                message: "Could not get app delegate, unexpected error occurred. Try again later.",
-                preferredStyle: .alert)
-            
-            // add OK action
-            alert.addAction(UIAlertAction(title: "OK",
-                                          style: .default))
-            // show alert
-            self.present(alert, animated: true)
 
-            return
-        }
         
-        // As we know that container is set up in the AppDelegates so we need to refer that container.
-        // We need to create a context from this container
-        let managedContext = appDelegate.persistentContainer.viewContext
+//        // Core data initialization
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            // create alert
+//            let alert = UIAlertController(
+//                title: "Could not get app delegate",
+//                message: "Could not get app delegate, unexpected error occurred. Try again later.",
+//                preferredStyle: .alert)
+//
+//            // add OK action
+//            alert.addAction(UIAlertAction(title: "OK",
+//                                          style: .default))
+//            // show alert
+//            self.present(alert, animated: true)
+//
+//            return
+//        }
         
-        // set context in the storage
-        ReallySimpleNoteStorage.storage.setManagedContext(managedObjectContext: managedContext)
+//        // As we know that container is set up in the AppDelegates so we need to refer that container.
+//        // We need to create a context from this container
+//        let managedContext = appDelegate.persistentContainer.viewContext
+//
+//        // set context in the storage
+//        ReallySimpleNoteStorage.storage.setManagedContext(managedObjectContext: managedContext)
         
 
         
@@ -128,8 +139,9 @@ class NotesViewController: UITableViewController {
     func loadNotesTable()
     {
         let query = PFQuery(className:"Notes")
-        //TODO: [query whereKeyExists:@"score"];
-        //query.whereKey("userEmail", equalTo: userEmail!)
+
+        query.whereKey("noteTagId", equalTo: currentTagId)
+
         query.order(byDescending: "updatedAt")
         query.limit = 500
         noteObjects = []  //or removeAll
@@ -156,7 +168,10 @@ class NotesViewController: UITableViewController {
                     let noteTagId:String? = object["noteTagId"] as? String ?? ""
                     let notePhotoRef:String? = object["notePhotoRef"] as? String ?? ""
                     
-                    let newObject = NoteModel(createdAt: createdAt,noteObjectId: noteObjectId, noteTitle: noteTitle!, noteText: noteText!, noteTagId: noteTagId!, notePhotoRef: notePhotoRef!)
+                    let noteOwner:String? = object["noteOwner"] as? String ?? ""
+                    let noteTagTitle:String? = object["noteTagTitle"] as? String ?? ""
+                    
+                    let newObject = NoteModel(createdAt: createdAt,noteObjectId: noteObjectId, noteTitle: noteTitle!, noteText: noteText!, noteTagId: noteTagId!, notePhotoRef: notePhotoRef!, noteOwner: noteOwner!, noteTagTitle: noteTagTitle!)
 
                     self.noteObjects.append(newObject)
                     rowCount = rowCount + 1
@@ -180,6 +195,9 @@ class NotesViewController: UITableViewController {
             let vc = segue.destination as! NoteCreateChangeViewController
             vc.passTagId = currentTagId
             vc.passPhotoRef = currentPhotoRef
+            vc.passNoteOwner = currentNoteOwner
+            vc.passNoteTagTitle = currentNoteTagTitle
+
         }
         
         if segue.identifier == "showDetail" {
@@ -222,16 +240,7 @@ class NotesViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NoteTableViewCell
         
-//        let cellIdentifier = "Cell"
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AuteurTableViewCell
-        
         let object = self.noteObjects[indexPath.row]
-        
-//        if let object = ReallySimpleNoteStorage.storage.readNote(at: indexPath.row) {
-//        cell.noteTitleLabel!.text = object.noteTitle
-//        cell.noteTextLabel!.text = object.noteText
-//        cell.noteDateLabel!.text = ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
-//        }
         
         cell.selectionStyle = .none  //CRITICAL. DONT SHOW A GREY BACKGROUND WHEN SELECTED
         cell.backgroundColor = backgroundColor
@@ -250,8 +259,6 @@ class NotesViewController: UITableViewController {
         cell.noteTitleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
         cell.noteDateLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         cell.noteTextLabel.font = UIFont(name: "HelveticaNeue-Light", size: 16)
-        
-
         
         cell.noteTitleLabel!.text = object.noteTitle
         cell.noteTextLabel!.text = object.noteText
@@ -314,7 +321,6 @@ class NotesViewController: UITableViewController {
     func removeNote(objectId: String) {
         //print("DELETE2 + \(self.deleteObjectId)")
         let query = PFQuery(className: "Notes")
-        
         let sv = UIViewController.displaySpinner(onView: self.view)
         
         query.getObjectInBackground(withId: objectId) { (object: PFObject?, error: Error?) in
@@ -344,7 +350,7 @@ class NotesViewController: UITableViewController {
     }
     
 @IBAction func unwindToMaster(segue:UIStoryboardSegue) {
-    print("BACK HERE")
+    //print("BACK HERE")
     loadNotesTable()
     }
     

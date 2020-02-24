@@ -11,6 +11,9 @@ import UIKit
 import Foundation
 import Parse
 
+//noteOwner
+//noteTagTitle
+
 class NoteModel {
     var createdAt: Date
     var noteObjectId: String
@@ -18,13 +21,17 @@ class NoteModel {
     var noteText: String
     var noteTagId: String
     var notePhotoRef: String
+    var noteOwner: String
+    var noteTagTitle: String
     
     init (createdAt:Date,
           noteObjectId:String,
           noteTitle:String,
           noteText:String,
           noteTagId:String,
-          notePhotoRef:String
+          notePhotoRef:String,
+          noteOwner:String,
+          noteTagTitle:String
         )
     {
         self.createdAt = createdAt;
@@ -33,6 +40,8 @@ class NoteModel {
         self.noteText = noteText;
         self.noteTagId = noteTagId;
         self.notePhotoRef = notePhotoRef;
+        self.noteOwner = noteOwner;
+        self.noteTagTitle = noteTagTitle
     }
 
     convenience init() {
@@ -41,7 +50,9 @@ class NoteModel {
                    noteTitle: "",
                    noteText: "",
                    noteTagId: "",
-                   notePhotoRef: ""
+                   notePhotoRef: "",
+                   noteOwner: "",
+                   noteTagTitle: ""
         )
     }
 }

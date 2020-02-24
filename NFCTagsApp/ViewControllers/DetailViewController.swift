@@ -383,8 +383,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         else if segue.identifier == "NOTESEGUE" {
-//            let destinationController = segue.destination as! SwiftyMapController
-//            destinationController.tag = tag
+            let destinationController = segue.destination as! NotesViewController
+
+            //PASS THE FOLLOWING 4 VARIABLES TO THE NOTES VIEWCONTROLLER
+            destinationController.currentTagId = tag.tagObjectId
+            destinationController.currentPhotoRef = tag.tagPhotoRef
+            destinationController.currentNoteOwner = kAppDelegate.currentUserEmail!
+            destinationController.currentNoteTagTitle = tag.tagTitle
         }
     }
     

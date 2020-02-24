@@ -22,11 +22,17 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
     var passPhotoRef:String = ""
     var passNoteObjectId:String = ""
     
+    //currentNoteObjectIdX
+    var passNoteOwner:String = ""
+    var passNoteTagTitle:String = ""
+    
     private let noteCreationTimeStamp : Int64 = Date().toSeconds()
     private(set) var changingReallySimpleNote : NoteModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //print("PASSNOTETAGTITLE: \(passNoteTagTitle)")
         
         setupDarkMode()
         setupNavigationBar()
@@ -83,6 +89,8 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
             
             noteTextTextView.text = ""
             noteTitleTextField.text = ""
+            
+            
             
 //            noteDateLabel.text = "ALEX FIX"//ReallySimpleNoteDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
 //            let date = changingReallySimpleNote.createdAt
@@ -203,7 +211,9 @@ class NoteCreateChangeViewController : UIViewController, UITextViewDelegate {
         note["noteText"] = noteText
         note["noteTagId"] = passTagId
         note["notePhotoRef"] = passPhotoRef
-            
+        note["noteOwner"] = passNoteOwner
+        note["noteTagTitle"] = passNoteTagTitle
+           
         note.saveInBackground { (succeeded, error)  in
             if (succeeded) {
                 // The object has been saved.

@@ -119,11 +119,6 @@
                                             <segue destination="Wbr-7r-70g" kind="show" id="Pcm-5D-WrO"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Notes" id="0SF-pR-E8I">
-                                        <connections>
-                                            <segue destination="lma-49-zhp" kind="show" id="3Hc-AF-05g"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem title="Write" id="600-mF-fdO">
                                         <connections>
                                             <segue destination="Ec2-Ba-JUa" kind="show" id="Smo-fG-TNJ"/>
@@ -301,6 +296,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RS-bj-rsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4ls-a3-Mne">
+                    <rect key="frame" x="0.0" y="0.0" width="382" height="21.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </objects>
             <point key="canvasLocation" x="-139856.52173913043" y="-55456.47321428571"/>
         </scene>
@@ -637,7 +639,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dKh-jm-fzC"/>
-                                    <barButtonItem title="Note" id="tsi-rb-WsM">
+                                    <barButtonItem title="Notes" id="tsi-rb-WsM">
                                         <connections>
                                             <action selector="noteButtonPressed:" destination="VaW-2d-StK" id="Djz-M1-AMr"/>
                                         </connections>
@@ -1538,19 +1540,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Note Text" translatesAutoresizingMaskIntoConstraints="NO" id="hpn-eh-wwL" userLabel="Note Text View">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" text="Note Text" translatesAutoresizingMaskIntoConstraints="NO" id="hpn-eh-wwL" userLabel="Note Text View">
                                 <rect key="frame" x="16" y="187" width="382" height="605"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ls-a3-Mne">
-                                <rect key="frame" x="16" y="145" width="382" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lo2-XN-VAj">
                                 <rect key="frame" x="119" y="800" width="176" height="42"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1565,17 +1561,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4ls-a3-Mne" firstAttribute="top" secondItem="68X-z1-YRr" secondAttribute="bottom" constant="8" id="6Wk-dM-QRZ"/>
                             <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="hpn-eh-wwL" secondAttribute="trailing" constant="16" id="Aif-fG-55o"/>
-                            <constraint firstItem="hpn-eh-wwL" firstAttribute="top" secondItem="4ls-a3-Mne" secondAttribute="bottom" constant="20.5" id="Eow-PZ-j1m"/>
                             <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="Lo2-XN-VAj" secondAttribute="trailing" constant="119" id="GAb-8d-9s2"/>
                             <constraint firstItem="Lo2-XN-VAj" firstAttribute="leading" secondItem="3Ku-VE-UA0" secondAttribute="leading" constant="119" id="OLw-B5-0YS"/>
                             <constraint firstItem="68X-z1-YRr" firstAttribute="top" secondItem="3Ku-VE-UA0" secondAttribute="top" constant="20" id="Pux-Ez-kN6"/>
                             <constraint firstItem="Lo2-XN-VAj" firstAttribute="top" secondItem="hpn-eh-wwL" secondAttribute="bottom" constant="8" id="fDc-0O-fZO"/>
-                            <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="4ls-a3-Mne" secondAttribute="trailing" constant="16" id="hTu-QP-oag"/>
                             <constraint firstItem="hpn-eh-wwL" firstAttribute="leading" secondItem="3Ku-VE-UA0" secondAttribute="leading" constant="16" id="i3C-Hl-Asd"/>
                             <constraint firstItem="68X-z1-YRr" firstAttribute="leading" secondItem="3Ku-VE-UA0" secondAttribute="leading" constant="20" id="uHf-bM-OFK"/>
-                            <constraint firstItem="4ls-a3-Mne" firstAttribute="leading" secondItem="3Ku-VE-UA0" secondAttribute="leading" constant="16" id="vTw-Fn-D2I"/>
                             <constraint firstItem="3Ku-VE-UA0" firstAttribute="trailing" secondItem="68X-z1-YRr" secondAttribute="trailing" constant="20" id="wJA-JU-kje"/>
                             <constraint firstItem="3Ku-VE-UA0" firstAttribute="bottom" secondItem="Lo2-XN-VAj" secondAttribute="bottom" constant="20" id="wJb-qj-FB5"/>
                         </constraints>
@@ -1803,10 +1795,9 @@
         <image name="text-input" width="298" height="36.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UMl-ub-I6l"/>
-        <segue reference="kUe-KS-Neb"/>
+        <segue reference="rvD-nZ-11h"/>
         <segue reference="PI8-6u-JL5"/>
-        <segue reference="Xrc-Gp-axU"/>
+        <segue reference="gfT-in-4Ae"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
