@@ -119,11 +119,6 @@
                                             <segue destination="Wbr-7r-70g" kind="show" id="Pcm-5D-WrO"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Write" id="600-mF-fdO">
-                                        <connections>
-                                            <segue destination="Ec2-Ba-JUa" kind="show" id="Smo-fG-TNJ"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dOu-OD-kDJ"/>
                                     <barButtonItem title="Sign In" id="ZMh-lA-YMT">
                                         <connections>

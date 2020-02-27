@@ -324,7 +324,6 @@ public var titleLargeTextColor: UIColor {
     }
 }
 
-
 extension UIColor {
     public convenience init?(hexValue: String) {
         let r, g, b, a: CGFloat

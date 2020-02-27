@@ -26,14 +26,14 @@ class WriteTagViewController: UIViewController, UINavigationControllerDelegate, 
         super.viewDidLoad()
         self.title = "Write Tags"
 
-        setupDarkMode()
+        //setupDarkMode()
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = mainColor
         //SET BACKGROUND COLOR BEHIND TABLE
         self.view.backgroundColor = backgroundColor
     }
     
-    func  setupDarkMode() {
+    func  setupDarkMod() {
     //TODO: TAKE THIS OUT OF FINAL VERSION !!!
     if (kAppDelegate.isDarkMode == true) {
         overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}

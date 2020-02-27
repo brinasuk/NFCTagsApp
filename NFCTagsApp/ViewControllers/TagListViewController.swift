@@ -1,3 +1,4 @@
+
 import UIKit
 import Foundation
 import CoreNFC
@@ -56,96 +57,165 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //        ShortcutParser.shared.registerShortcuts(for: profileType)
 //    }
     
+
+        // MARK: - PROGRAM LIFECYCLE
+        
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            
+            userInterfaceStyle = self.traitCollection.userInterfaceStyle
+            kAppDelegate.isDarkMode = isDarkMode()
+            print(kAppDelegate.isDarkMode as Any)
+            
+            setupDarkModeX()
+            //setupDarkMode()
+            //XsetupDarkMode()
+
+            
+            //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
+            self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+            
+            
+    //        let string = "$1,abc234,567.99"
+    //        let result = string.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
+    //        print (result)
+            
+            //configureFor(profileType: currentProfile)
+
+            
+            let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
+            print("App Display Name - \(applicationName)")
+            
+            self.title = applicationName
+            
+            // SEE IF YOU HAVE A USER ALREADY LOGGED IN
+            
+            
+            //CRITICAL:  CLEAS CACHE!!
+            KingfisherManager.shared.cache.clearMemoryCache()
+            KingfisherManager.shared.cache.clearDiskCache()
+            
+            // Customize the TABLEVIEW
+    //        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
+            tableView.rowHeight = 100.0 // Use 92.0
+            tableView.cellLayoutMarginsFollowReadableWidth = true
+            
+
+            //        moveDirtyFlag = false
+            //        buttonLabel = "Edit"
+            //        editing = false
+            //        showNavigationButtons()
+            //
+            //        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didChangePreferredContentSize(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
+
+            // THIS IS CRITICAL HERE. IF USER NOT LOGGED IN THEN FORCE A LOGIN
+            // FOR SOME REASON DOES NOT WORK IN FORM_WILLLOAD ????
+            let currentUser = PFUser.current()
+            if currentUser == nil {
+                showLoginScreen()
+            }
+            
+            //FORCE A RELOAD OF THE DATA
+            kAppDelegate.isDatabaseDirty = true
+            
+            //WATCH OUT FOR UNIVERSAL LINKS FROM SCANNED TAGS
+            NotificationCenter.default.addObserver(self, selector: #selector(handleDeepLink), name: Notification.Name("DEEPLINKFOUND"), object: nil)
+        }
+        
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         //update user interface
-        setupDarkMode()
+        //setupDarkModeX()
+        //setupDarkMode()
+        //XsetupDarkMode()
     }
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         // Trait collection will change. Use this one so you know what the state is changing to.
         userInterfaceStyle = newCollection.userInterfaceStyle
-        
+        setupDarkModeX()
+        //setupDarkMode()
+        //XsetupDarkMode()
     }
     
-    func  setupDarkMode() {
-        //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-        if (kAppDelegate.isDarkMode == true)  {
-            overrideUserInterfaceStyle = .dark
-            print("DARK MODE")
-        }
-        else {
-            overrideUserInterfaceStyle = .light
-            print("LIGHT MODE")
-        }
-        
-        if traitCollection.userInterfaceStyle == .light {
-            print("Light mode")
+    func isDarkMode () -> Bool {
+        var ans:Bool = false
+        if #available(iOS 13.0, *) {
+            //switch overrideUserInterfaceStyle {
+            switch UIScreen.main.traitCollection.userInterfaceStyle {
+            case .dark:
+                ans = true
+            case .unspecified:
+                ans = false
+            case .light:
+                ans = false
+            @unknown default:
+                ans = false
+            }
         } else {
-            print("Dark mode")
+            ans = false
         }
-        
-        //let aColor = UIColor(named: "customControlColor")
-        //let themeColor = UIColor(named: "themeColor")
+        //FORCE DARK MODE BY SETTING ANS = TRUE
+        //TODO: IN A RELEASE PRODUCT TAKE OUT ANS = TRUE
+        //ans = true
 
-        //view.backgroundColor = newPaleRoseColor //customAccent
-        //view.backgroundColor = paleRoseColor //customAccent
-        //view.backgroundColor = .secondarySystemBackground
-        //view.backgroundColor = .systemBackground
-        //view.backgroundColor = .secondarySystemGroupedBackground
+        return ans
+    }
+    
+//    func  XsetupDarkMode() {
+//    if (kAppDelegate.isDarkMode == true)
+//    {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
+//    } else {
+//        kAppDelegate.isDarkMode = false  // Fallback on earlier versions
+//        }
+//    }
+    
+    func setupDarkModeX() {
+               
+        if (kAppDelegate.isDarkMode == true)
+        {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
+        } else {
+            kAppDelegate.isDarkMode = false  // Fallback on earlier versions
+            }
         
-        //SET THE CELL BACKGROUND
-        switch overrideUserInterfaceStyle {
-         case .dark:
-             // User Interface is Dark
-            //=======================================//
-            // THIS IS THE VARIABLE TO CHANGE BACKGROUND COLOR!!
-            //kAppDelegate.navbarBackColor = .black //iOS13 BUG! CANNOT USE .systemBackground. DOES NOT WORK. GIVES A LIGHT BACKGROUND !!!!
-            //=======================================//
-            
-//            kAppDelegate.textColor = .label
-//            kAppDelegate.mainColor = .systemRed
-//            kAppDelegate.separatorColor? = .systemRed
-//            kAppDelegate.titleTextColor = kAppDelegate.mainColor
-//            kAppDelegate.titleLargeTextColor = kAppDelegate.mainColor
-            
-            //SET THE STATUS VIEW
-            statusView.backgroundColor = .systemGray
-            
-            //SET THE STATUS LABEL
-            statusLabel.backgroundColor = .secondarySystemBackground
-            statusLabel.textColor = .label
-            
-         case .light:
-             // User Interface is Light
-            //=======================================//
-            // THIS IS THE VARIABLE TO CHANGE BACKGROUND COLOR!!
-            //kAppDelegate.navbarBackColor = paleRoseColor //newPaleRoseColor
-            //=======================================//
-            
-//            kAppDelegate.textColor = .white
-//            kAppDelegate.mainColor = .blue
-//            kAppDelegate.separatorColor? = .red
-//            kAppDelegate.titleTextColor = kAppDelegate.mainColor
-//            kAppDelegate.titleLargeTextColor = kAppDelegate.mainColor
-            
-            //SET THE STATUS VIEW
-            statusView.backgroundColor = coralColor
-            
-            //SET THE STATUS LABEL
-            statusLabel.backgroundColor = .white
-            statusLabel.textColor = royalBlue
-            
-         case .unspecified:
-             //your choice
-             //navbarBackColor = paleRoseColor //newPaleRoseColor
-             ()
-         @unknown default:
-             //navbarBackColor = paleRoseColor //newPaleRoseColor
-             ()
-             //Switch covers known cases, but 'UIUserInterfaceStyle' may have additional unknown values, possibly added in future versions
-         }
+        if (kAppDelegate.isDarkMode == true)  {
+                   //SET THE STATUS VIEW
+                   statusView.backgroundColor = .systemGray
+                   //SET THE STATUS LABEL
+                   statusLabel.backgroundColor = .secondarySystemBackground
+                   statusLabel.textColor = .label
+               } else {
+                   //SET THE STATUS VIEW
+                   statusView.backgroundColor = coralColor
+                   //SET THE STATUS LABEL
+                   statusLabel.backgroundColor = .white
+                   statusLabel.textColor = royalBlue
+               }
         
+               //SET THE STATUS LABEL
+               //statusLabel.backgroundColor = .secondarySystemBackground
+               //statusLabel.textColor = .label
+               //statusLabel.backgroundColor = .white
+               //statusLabel.textColor = royalBlue
+               statusLabel.layer.cornerRadius = 5.0
+               statusLabel.layer.masksToBounds = true
+               statusLabel.font.withSize(16.0)
+               
+               //SET THE SCANBUTTON
+               scanButton.backgroundColor = mainColor
+               scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+               scanButton.layer.cornerRadius = scanButton.frame.height/2
+               scanButton.layer.masksToBounds = true
+               if (kAppDelegate.isDarkMode == true)  {
+                   scanButton.tintColor = textColor
+               } else {
+                   scanButton.tintColor = .white
+               }
+               
+               toolBar.barTintColor = navbarBackColor
+               view.backgroundColor = navbarBackColor
         
         let backgroundImageName = "art_launch_image"
         let backgroundImage = UIImage(named: backgroundImageName)
@@ -153,130 +223,13 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.8
         self.tableView.backgroundView = imageView
-
-        
-        //SET THE TOOLBAR AT THE BOTTOM OF THE SCREEN THE SAME COLOR AS THE NAVIGATIONBAR
-        toolBar.barTintColor = navbarBackColor
-        view.backgroundColor = navbarBackColor
-
-        //SET THE STATUS VIEW
-        //statusView.backgroundColor = .systemGray
-        
-        //SET THE STATUS LABEL
-        //statusLabel.backgroundColor = .secondarySystemBackground
-        //statusLabel.textColor = .label
-        //statusLabel.backgroundColor = .white
-        //statusLabel.textColor = royalBlue
-        statusLabel.layer.cornerRadius = 5.0
-        statusLabel.layer.masksToBounds = true
-        statusLabel.font.withSize(16.0)
-        
-        //SET THE SCANBUTTON
-        scanButton.backgroundColor = mainColor
-        scanButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        scanButton.layer.cornerRadius = scanButton.frame.height/2
-        scanButton.layer.masksToBounds = true
-        if (kAppDelegate.isDarkMode == true)  {
-            scanButton.tintColor = textColor
-        } else {
-            scanButton.tintColor = .white
-        }
-    }
-
-    
-    func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            //navBarAppearance.configureWithDefaultBackground()
-            navBarAppearance.configureWithOpaqueBackground()
-
-            navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
-            navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-
-            //navBarAppearance.backgroundColor = navbarBackColor
-            navBarAppearance.shadowColor = nil
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-
-//            navigationController?.navigationBar.barTintColor = navbarBackColor
-//            navigationController?.navigationBar.tintColor =  navbarBackColor
-//            self.navigationController!.navigationBar.titleTextAttributes =
-//            [NSAttributedString.Key.backgroundColor: navbarBackColor]
-
-            } else {
-
-            //METHOD2. NOT iOS13
-            if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-                navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-                }
-            }
+        //alex2
     }
     
     
-    // MARK: - PROGRAM LIFECYCLE
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        userInterfaceStyle = self.traitCollection.userInterfaceStyle
-        setupDarkMode()
-        
-        //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        
-        
-//        let string = "$1,abc234,567.99"
-//        let result = string.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
-//        print (result)
-        
-        //configureFor(profileType: currentProfile)
-
-        
-        let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
-        print("App Display Name - \(applicationName)")
-        
-        self.title = applicationName
-        
-        // SEE IF YOU HAVE A USER ALREADY LOGGED IN
-        
-        
-        //CRITICAL:  CLEAS CACHE!!
-        KingfisherManager.shared.cache.clearMemoryCache()
-        KingfisherManager.shared.cache.clearDiskCache()
-        
-        // Customize the TABLEVIEW
-//        // NOT NECESSARY AFTER iOS 11  tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = 100.0 // Use 92.0
-        tableView.cellLayoutMarginsFollowReadableWidth = true
-        
-
-        //        moveDirtyFlag = false
-        //        buttonLabel = "Edit"
-        //        editing = false
-        //        showNavigationButtons()
-        //
-        //        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didChangePreferredContentSize(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
-
-        // THIS IS CRITICAL HERE. IF USER NOT LOGGED IN THEN FORCE A LOGIN
-        // FOR SOME REASON DOES NOT WORK IN FORM_WILLLOAD ????
-        let currentUser = PFUser.current()
-        if currentUser == nil {
-            showLoginScreen()
-        }
-        
-        //FORCE A RELOAD OF THE DATA
-        kAppDelegate.isDatabaseDirty = true
-        
-        //WATCH OUT FOR UNIVERSAL LINKS FROM SCANNED TAGS
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDeepLink), name: Notification.Name("DEEPLINKFOUND"), object: nil)
-    }
     
-  
-    
+
     
     //OK! DEEP LINK FOUND. GO AHEAD AND SHOW IT!
     @objc func handleDeepLink() {
@@ -323,6 +276,39 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //    @IBAction func tryButtonPressed(_ sender: Any) {
 //                        self.performSegue(withIdentifier: "TryButton", sender: self)
 //    }
+    
+    
+          func setupNavigationBar() {
+              navigationController?.navigationBar.prefersLargeTitles = true
+
+              if #available(iOS 13.0, *) {
+                  let navBarAppearance = UINavigationBarAppearance()
+                  //navBarAppearance.configureWithDefaultBackground()
+                  navBarAppearance.configureWithOpaqueBackground()
+
+                  navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                  navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                  navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                  //navBarAppearance.backgroundColor = navbarBackColor
+                  navBarAppearance.shadowColor = nil
+                  navigationController?.navigationBar.isTranslucent = false
+                  navigationController?.navigationBar.standardAppearance = navBarAppearance
+                  navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+      //            navigationController?.navigationBar.barTintColor = navbarBackColor
+      //            navigationController?.navigationBar.tintColor =  navbarBackColor
+      //            self.navigationController!.navigationBar.titleTextAttributes =
+      //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                  } else {
+
+                  //METHOD2. NOT iOS13
+                  if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                      navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                      }
+                  }
+          }
     
     // MARK: - ACTION BUTTONS PRESSED
     @IBAction func scanButtonPressed(_ sender: Any) {
@@ -975,8 +961,8 @@ extension TagListViewController: UITableViewDataSource {
         cell.dateAdded.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
         
         //ROMEE DARKMODE
-        cell.backgroundColor = backgroundColor
-        cell.tagTitle.textColor = textColor
+        cell.backgroundColor = navbarBackColor //backgroundColor
+        cell.tagTitle.textColor = .label //textColor
         cell.tagSubTitle.textColor = mainColor
         cell.tagCompany.textColor = mainColor
         if (kAppDelegate.isDarkMode == true)  {

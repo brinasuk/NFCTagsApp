@@ -15,7 +15,7 @@ import SafariServices
 import Parse
 import AVFoundation
 //import THNotesTextView
-import SFSymbol
+//import SFSymbol
 
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
@@ -80,18 +80,22 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         // ADD THIS
         navigationController?.navigationBar.backgroundColor = .clear
 
+        if #available(iOS 13.0, *) {
         let transparentAppearance = UINavigationBarAppearance()
             transparentAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.scrollEdgeAppearance = transparentAppearance
         navigationController?.navigationBar.standardAppearance = transparentAppearance
+        }
     }
     
-       func  setupDarkMode() {
-           //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-           if (kAppDelegate.isDarkMode == true) {
-               overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
-         }
-       
+    func  setupDarkMode() {
+    if (kAppDelegate.isDarkMode == true)
+    {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
+    } else {
+        kAppDelegate.isDarkMode = false  // Fallback on earlier versions
+        }
+    }
+    
     func showInfo() {
         // DISPLAY DATABASE VALUES
         headerView.titleLabel.text = tag.tagTitle
