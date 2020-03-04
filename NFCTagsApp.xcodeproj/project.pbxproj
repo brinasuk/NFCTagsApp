@@ -24,7 +24,6 @@
 		C76D3EF022AB103500794637 /* MaintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */; };
 		C76D3EF222AB104400794637 /* MaintTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF122AB104400794637 /* MaintTableViewController.swift */; };
 		C76D3EF422AB1BA300794637 /* OwnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3EF322AB1BA300794637 /* OwnerModel.swift */; };
-		C771009323E0DE7E00805047 /* WriteTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C771009223E0DE7E00805047 /* WriteTagViewController.swift */; };
 		C77930F923A2C36D00D997F2 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930F823A2C36D00D997F2 /* NotesViewController.swift */; };
 		C779310223A2C3EC00D997F2 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77930FF23A2C3EC00D997F2 /* NoteTableViewCell.swift */; };
 		C779310323A2C3EC00D997F2 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */; };
@@ -93,7 +92,6 @@
 		C76D3EEF22AB103500794637 /* MaintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewCell.swift; sourceTree = "<group>"; };
 		C76D3EF122AB104400794637 /* MaintTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintTableViewController.swift; sourceTree = "<group>"; };
 		C76D3EF322AB1BA300794637 /* OwnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerModel.swift; sourceTree = "<group>"; };
-		C771009223E0DE7E00805047 /* WriteTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTagViewController.swift; sourceTree = "<group>"; };
 		C77930F823A2C36D00D997F2 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		C77930FF23A2C3EC00D997F2 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		C779310023A2C3EC00D997F2 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				C76D3EF122AB104400794637 /* MaintTableViewController.swift */,
 				C78159DD22CAC54700625046 /* UpdateTagController.swift */,
 				C705A7AC22D4107300F513A9 /* ReviewViewController.swift */,
-				C771009223E0DE7E00805047 /* WriteTagViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -499,7 +496,6 @@
 				C77930F923A2C36D00D997F2 /* NotesViewController.swift in Sources */,
 				C77ED9B022A4D5A000C06A45 /* Artwork.swift in Sources */,
 				C73A297F2293479C00554EF1 /* TagModel.swift in Sources */,
-				C771009323E0DE7E00805047 /* WriteTagViewController.swift in Sources */,
 				C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */,
 				C7DA87F32291AC8600457112 /* RegisterViewController.swift in Sources */,
 			);
@@ -570,7 +566,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -625,7 +621,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -645,7 +641,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QT5MQ7KPJH;
 				INFOPLIST_FILE = NFCTagsApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -668,7 +664,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QT5MQ7KPJH;
 				INFOPLIST_FILE = NFCTagsApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

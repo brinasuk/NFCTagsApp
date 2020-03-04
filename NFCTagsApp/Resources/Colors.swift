@@ -324,6 +324,36 @@ public var titleLargeTextColor: UIColor {
     }
 }
 
+public var secondaryLabel: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return .secondaryLabel
+            } else {
+                return  .darkGray
+            }
+        }
+    } else {
+        return mainColor
+    }
+}
+
+public var secondarySystemBackground: UIColor {
+    if #available(iOS 13, *) {
+        return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            //if traitCollection.userInterfaceStyle == .dark {
+            if (kAppDelegate.isDarkMode == true)  {
+                return .secondarySystemBackground
+            } else {
+                return  .lightText
+            }
+        }
+    } else {
+        return mainColor
+    }
+}
+
 extension UIColor {
     public convenience init?(hexValue: String) {
         let r, g, b, a: CGFloat

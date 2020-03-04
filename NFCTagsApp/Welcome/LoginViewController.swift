@@ -186,14 +186,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        //TODO: Swifty ProgressHUD.show("Signing in...", interaction: false)
         let sv = UIViewController.displaySpinner(onView: self.view)
         PFUser.logInWithUsername(inBackground: email ?? "", password: password ?? "") { (user, error) in
             UIViewController.removeSpinner(spinner: sv)
             if user != nil {
                 //_useObjectId = user.objectId;
                 //NSLog(@"USEROBJECTID: %@",_useObjectId);
-                self.userLogged(in: user)
+                self.loginUser(in: user) //1
                 self.displayErrorMessage (message: "LOGIN SUCCESS")
             } else {
 //                ProgressHUD.showError((error as NSError?)?.userInfo["error"])
@@ -287,6 +286,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //if we have an error display it and abort
             if let error = error {
                 print(error.localizedDescription)
+                self.displayErrorMessage(message: "FAILED TO LOG IN WITH FACEBOOK")
                 return
             }
             //make sure we have a result, otherwise abort
@@ -296,6 +296,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //if cancelled nothing todo
             if result.isCancelled {
                 print("CANCELLED")
+                self.displayErrorMessage(message: "FACEBOOK CANCEL")
                 return
                 
             }
@@ -308,6 +309,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     //if we have an error display it and abort
                     if let error = error {
                         print(error.localizedDescription)
+                        self.displayErrorMessage(message: "FACEBOOK Login Failed")
                         return
                     }
                     //parse the fields out of the result
@@ -329,14 +331,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print("LastName -> \(fb_lastName)")
                         print("FirstName -> \(fb_firstName)")
                         print("Name -> \(fb_name)")
+                        print("Email -> \(fb_email)")
                         
                         // Create a dictionary with the user's Facebook data
                         var facebookId = fb_id
                         facebookId = fb_id.trimmingCharacters(in: CharacterSet.whitespaces)
-//                        let name = fb_lastName
-//                        let email = fb_email
-//                        let firstName = fb_firstName
-//                        let lastName = fb_lastName
                         
                         //IMPORTANT TO SAVE THESE VALUES FROM FB FOR USE LATER
                         self.fbResultsDict = [AnyHashable : Any]()
@@ -349,8 +348,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         //LOGOUT. ONLY ONE USER CAN BE LOGGED IN TO FACEBOOK
                         self.logoutFacebook()
                         
-                        // LOOK FOR THE facebookId in the PFUser TABLE
-                        self.lookupUser(facebookId)
+                        // LOOK FOR THIS EMAIL in the PFUser TABLE
+                        self.lookupUser(fb_email)
                     }
 
                 }
@@ -425,20 +424,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //      USE addNewUser88 TO CREATE A NEW ENTRY AND THEN SIGN IN
     // EITHER WAY EXIT OUT OF HERE WHEN YOU ARE DONE
     
-    func lookupUser(_ usingFacebookId: String?) {
-        let facebookId = usingFacebookId
-        //print(facebookId as Any)
-        // IF YOU DON'T HAVE A FACEBOOK ID THEN BAIL OUT. THIS SHOULD BE UNLIKELY
-        if (facebookId?.count ?? 0) == 0 {
-            displayErrorMessage(message: "Cannot find Facebook ID")
-            navigationController?.popViewController(animated: true)
-            return
-        }
-        
-        //SEE IF A FACEBOOK ENTRY ALREADY EXISTS IN THR USER TABLE !!
+    
+    func lookupUser(_ useLogin: String?) {
+        let login = useLogin
+        //SEE IF AN ENTRY ALREADY EXISTS IN THR USER TABLE !!
         let query = PFQuery(className: "_User")
-        query.whereKey("facebookId", equalTo: facebookId!)
-        //ProgressHUD.show("", interaction: false)
+        query.whereKey("email", equalTo: login!)
     
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if let object = object {
@@ -446,7 +437,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("FOUND - USER CURRENTLY EXISTS")
                 let email = object["email"] as? String
                 let password = object["accountpassword"] as? String
-                self.existingFacebookUserLogin99(email, withPassword: password)
+                //self.existingFacebookUserLogin99(email, withPassword: password)
+                PFUser.logInWithUsername(inBackground: email ?? "", password: password ?? "") { (user, error) in
+                    if user != nil {
+                        self.loginUser(in: user) //2
+                    } else {
+                        self.displayErrorMessage(message: "Login Failed")
+                    }
+                }
             } else {
                 print("New Facebook User")
                 self.addNewUser88()
@@ -462,21 +460,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func existingFacebookUserLogin99(_ useLogin: String?, withPassword usePassword: String?) {
-
-        let email = useLogin
-        let password = usePassword
-        //TODO: HUD PUT BACK  ProgressHUD.show("Signing in...", interaction: false)
-        PFUser.logInWithUsername(inBackground: email ?? "", password: password ?? "") { (user, error) in
-            if user != nil {
-                self.userLogged(in: user)
-            } else {
-                self.displayErrorMessage(message: "Login Failed")
-                //self.goBackButtonPressed()
-            }
-        };
-        
-    }
+//    func existingFacebookUserLogin99(_ useLogin: String?, withPassword usePassword: String?) {
+//
+//        let email = useLogin
+//        let password = usePassword
+//        //TODO: HUD PUT BACK  ProgressHUD.show("Signing in...", interaction: false)
+//        PFUser.logInWithUsername(inBackground: email ?? "", password: password ?? "") { (user, error) in
+//            if user != nil {
+//                self.loginUser(in: user) //2
+//            } else {
+//                self.displayErrorMessage(message: "Login Failed")
+//                //self.goBackButtonPressed()
+//            }
+//        };
+//
+//    }
 
     
     func addNewUser88() {
@@ -520,14 +518,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 //self.goBackButtonPressed()
             } else {
                 print("User Registered successfully")
-                self.userLogged(in: user)
+                self.loginUser(in: user)  //3
             }
         }
     }
     
     // MARK: - Helper methods
     //TODO: FIX THIS
-    func userLogged(in user: PFUser?) {
+    func loginUser(in user: PFUser?) {
         if (user?[PF_USER_FULLNAME]) != nil {
             //TODO: SWIFTY ProgressHUD.showSuccess("Welcome \(fullname)!")
         }
@@ -536,7 +534,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         kAppDelegate.currentUserEmail = user?[PF_USER_EMAIL] as? String
         kAppDelegate.currentUserName = user?[PF_USER_FULLNAME] as? String
-//        kAppDelegate.currentUserFacebookId = user?[PF_USER_FACEBOOKID] as? String
+        print(kAppDelegate.currentUserName ?? "")
+        
         kAppDelegate.currentUserRole = user?[PF_USER_USERROLE] as? String
         //kAppDelegate.currentUserObjectId = user?[PF_USER_AGENTOBJECTID] as? String
         kAppDelegate.currentUserObjectId = user?.objectId

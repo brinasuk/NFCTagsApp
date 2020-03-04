@@ -223,9 +223,11 @@ class UpdateTagController: UITableViewController, UITextFieldDelegate, CropViewC
     }
     
     func  setupDarkMode() {
-    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-    if (kAppDelegate.isDarkMode == true) {
-        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+        if  (kAppDelegate.isDarkMode == true)
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
+        } else
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .light}
+        }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {

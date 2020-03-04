@@ -77,10 +77,18 @@ class MaintTableViewController: UITableViewController {
     }
     
     func  setupDarkMode() {
-    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
-    if (kAppDelegate.isDarkMode == true) {
-        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+        if  (kAppDelegate.isDarkMode == true)
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
+        } else
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .light}
+        }
     }
+    
+//    func  setupDarkMode() {
+//    //TODO: TAKE THIS OUT OF FINAL VERSION !!!
+//    if (kAppDelegate.isDarkMode == true) {
+//        overrideUserInterfaceStyle = .dark} else {overrideUserInterfaceStyle = .light}
+//    }
     
         func setupNavigationBarX() {
             //navigationController?.navigationBar.prefersLargeTitles = false

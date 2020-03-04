@@ -97,20 +97,28 @@ class NotesViewController: UITableViewController {
         super.viewWillAppear(animated)
         //setupNavigationBar()
     }
-        
+    
     func  setupDarkMode() {
-    if (kAppDelegate.isDarkMode == true) {
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .dark
-        } else {
-            // Fallback on earlier versions
-        }} else {if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-    } else {
-        // Fallback on earlier versions
-        kAppDelegate.isDarkMode = false
-        }}
+        if  (kAppDelegate.isDarkMode == true)
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
+        } else
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .light}
+        }
     }
+        
+//    func  setupDarkMode() {
+//    if (kAppDelegate.isDarkMode == true) {
+//        if #available(iOS 13.0, *) {
+//            overrideUserInterfaceStyle = .dark
+//        } else {
+//            // Fallback on earlier versions
+//        }} else {if #available(iOS 13.0, *) {
+//        overrideUserInterfaceStyle = .light
+//    } else {
+//        // Fallback on earlier versions
+//        kAppDelegate.isDarkMode = false
+//        }}
+//    }
     
         func setupNavigationBar() {
             navigationController?.navigationBar.prefersLargeTitles = false
@@ -254,11 +262,9 @@ class NotesViewController: UITableViewController {
         cell.backgroundColor = backgroundColor
         cell.noteTitleLabel.textColor = textColor
         cell.noteTextLabel.textColor = mainColor
-        if (kAppDelegate.isDarkMode == true)  {
-            cell.noteDateLabel.textColor = .secondaryLabel}
-        else {
-            cell.noteDateLabel.textColor = textColor
-        }
+
+        cell.noteDateLabel.textColor = secondaryLabel
+
 
         /*
         HelveticaNeue-Bold,HelveticaNeue-CondensedBlack,HelveticaNeue-Medium,HelveticaNeue,HelveticaNeue-Light,HelveticaNeue-CondensedBold,HelveticaNeue-LightItalic,HelveticaNeue-UltraLightItalic,HelveticaNeue-UltraLight,HelveticaNeue-BoldItalic,HelveticaNeue-Italic

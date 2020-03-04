@@ -164,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // SET THE TOOLBAR STYLE
-        let tabTextColor:UIColor = .label
+        let tabTextColor:UIColor = textColor
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 14.0),
@@ -447,20 +447,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         // ADDED FOR FACEBOOK! SEPT 2019. CRITICAL. DO NOT REMOVE!!
-        let appId: String = Settings.appID
+        let appId: String = Settings.appID ?? ""// default value
         if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host ==  "authorize" {
             return ApplicationDelegate.shared.application(app, open: url, options: options)
         }
         
         //let payloadText = String(data: record.payload, encoding: .utf8),
-        let sku = url.path.split(separator: "/").last
+        //let sku = url.path.split(separator: "/").last
+        let urlString: String = url.absoluteString
         
         print("ONE")
         print("OPENURL: \(url.path)")
         print("URL: \(url)")
-        print("2SKU: \(String(describing: sku))")
+        print("2urlString: \(String(describing: urlString))")
         //sendEmail(title: "OPENURL", message: url.path)
-        currentDeeplink = String(sku ?? "")
+        //currentDeeplink = String(sku ?? "")
+        currentDeeplink = urlString
         //Posting a notification2
         NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
         //Deeplinker.handleDeeplink(url: url)
@@ -504,12 +506,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Send the message to `MessagesTableViewController` for processing.
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             if let url = userActivity.webpageURL {
+                // THIS WORKS ON JOSH iPHONE!
                 print("CONTINUE ACTIVITY: \(url.path)")
-                let sku = url.path.split(separator: "/").last
+                //let sku = url.path.split(separator: "?").last
+                //print("SKU: \(sku.string)")
+                let urlString: String = url.absoluteString
+//                print("urlString: \(urlString)")
+//                // OR
+//                var urlString2: String = url.relativeString
+//                print("SKU2: \(urlString2)")
+//                // OR
+//                var urlString3: String = url.relativePath
+//                print("SKU3: \(urlString3)")
+//                // OR
+//                var urlString4: String = url.path
+//                print("SKU4: \(urlString4)")
+                
                 print("TWO")
                 print("URL: \(url)")
-                print("3SKU: \(String(describing: sku))")
-                currentDeeplink = String(sku ?? "")
+                print("3URLSTRING: \(String(describing: urlString))")
+                //currentDeeplink = String(sku ?? "")
+                currentDeeplink = urlString
                 NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
                 
                 //sendEmail(title: "CONTINUE ACTIVITY", message: url.path)
@@ -547,7 +564,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("4SKU: \(sku)")
         print("PAYLOADTEXT: \(payloadText)")
         //sendEmail(title: "PAYLOADTEXT", message: payloadText)
-        currentDeeplink  = String(sku)
+        currentDeeplink  = String(payloadText)
         NotificationCenter.default.post(name:  NSNotification.Name("DEEPLINKFOUND"), object: nil)
         
         //     // Send the message to `MessagesTableViewController` for processing.

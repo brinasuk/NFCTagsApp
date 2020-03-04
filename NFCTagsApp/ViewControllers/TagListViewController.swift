@@ -65,8 +65,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             
             
             userInterfaceStyle = self.traitCollection.userInterfaceStyle
-            kAppDelegate.isDarkMode = isDarkMode()
-            print(kAppDelegate.isDarkMode as Any)
+
             
             setupDarkModeX()
             //setupDarkMode()
@@ -127,7 +126,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         //update user interface
-        //setupDarkModeX()
+        setupDarkModeX()
         //setupDarkMode()
         //XsetupDarkMode()
     }
@@ -140,7 +139,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         //XsetupDarkMode()
     }
     
-    func isDarkMode () -> Bool {
+    func isUsingDarkMode () -> Bool {
         var ans:Bool = false
         if #available(iOS 13.0, *) {
             //switch overrideUserInterfaceStyle {
@@ -173,19 +172,21 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //    }
     
     func setupDarkModeX() {
+        kAppDelegate.isDarkMode = isUsingDarkMode()
+        print(kAppDelegate.isDarkMode as Any)
                
         if (kAppDelegate.isDarkMode == true)
-        {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
-        } else {
-            kAppDelegate.isDarkMode = false  // Fallback on earlier versions
-            }
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
+        } else
+            {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .light}
+        }
         
         if (kAppDelegate.isDarkMode == true)  {
                    //SET THE STATUS VIEW
                    statusView.backgroundColor = .systemGray
                    //SET THE STATUS LABEL
-                   statusLabel.backgroundColor = .secondarySystemBackground
-                   statusLabel.textColor = .label
+                   statusLabel.backgroundColor = secondarySystemBackground
+                   statusLabel.textColor = textColor
                } else {
                    //SET THE STATUS VIEW
                    statusView.backgroundColor = coralColor
@@ -251,7 +252,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-        
+        setupDarkModeX()
         setupNavigationBar()
         
         
@@ -962,14 +963,12 @@ extension TagListViewController: UITableViewDataSource {
         
         //ROMEE DARKMODE
         cell.backgroundColor = navbarBackColor //backgroundColor
-        cell.tagTitle.textColor = .label //textColor
+        cell.tagTitle.textColor = textColor
         cell.tagSubTitle.textColor = mainColor
         cell.tagCompany.textColor = mainColor
-        if (kAppDelegate.isDarkMode == true)  {
-            cell.dateAdded.textColor = .secondaryLabel}
-        else {
-            cell.dateAdded.textColor = textColor
-        }
+
+        cell.dateAdded.textColor = secondaryLabel
+
 
         let additionalSeparatorThickness = CGFloat(2)
         let additionalSeparator = UIView(frame: CGRect(x: 0,
