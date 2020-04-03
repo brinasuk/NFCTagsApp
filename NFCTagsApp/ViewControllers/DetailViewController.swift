@@ -14,9 +14,6 @@ import MessageUI
 import SafariServices
 import Parse
 import AVFoundation
-//import THNotesTextView
-//import SFSymbol
-
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
@@ -36,8 +33,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         setupDarkMode()
 
         headerView.ratingImageView.isUserInteractionEnabled = true
-
-        
         headerView.ratingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
         
         navigationItem.largeTitleDisplayMode = .never

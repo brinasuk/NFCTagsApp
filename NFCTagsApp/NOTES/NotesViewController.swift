@@ -105,21 +105,7 @@ class NotesViewController: UITableViewController {
             {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .light}
         }
     }
-        
-//    func  setupDarkMode() {
-//    if (kAppDelegate.isDarkMode == true) {
-//        if #available(iOS 13.0, *) {
-//            overrideUserInterfaceStyle = .dark
-//        } else {
-//            // Fallback on earlier versions
-//        }} else {if #available(iOS 13.0, *) {
-//        overrideUserInterfaceStyle = .light
-//    } else {
-//        // Fallback on earlier versions
-//        kAppDelegate.isDarkMode = false
-//        }}
-//    }
-    
+
         func setupNavigationBar() {
             navigationController?.navigationBar.prefersLargeTitles = false
 
