@@ -695,8 +695,27 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         cart["userName"] = self.kAppDelegate.currentUserName
         cart["userEmail"] = self.kAppDelegate.currentUserEmail
+        
+        cart["tagPrice"] = tag.tagPrice
+        
+        //CONVERT PRICE STRING TO NUMERIC
+        let result = tag.tagPrice.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
+        let price = (result as NSString).floatValue
+
+//        //RESTRICT TO 2 DEC PLACES
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        let formattedAmount = formatter.string(from: price as NSNumber)!
+        print((formattedAmount as NSString).floatValue)
+//        let doubleStr = String(format: "%.2f", price) // "3.14"
+        cart["price"] = (formattedAmount as NSString).floatValue
+        
         cart["quantity"] = 1
         //TODO: FINISH ADD ALL ITEMS
+
+
+        
         
         /*
         tag["ownerName"] = ownerName

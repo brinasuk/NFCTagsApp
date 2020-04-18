@@ -12,21 +12,30 @@ final class CartFooterCell: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        payButton.layer.masksToBounds = false
-        payButton.layer.cornerRadius = 6
+        //payButton.layer.masksToBounds = false
+        //payButton.layer.cornerRadius = 6
+        
+        payButton.backgroundColor = .systemBlue
+        payButton.tintColor = textColor
+        payButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        payButton.layer.cornerRadius = payButton.frame.height/2
+        payButton.layer.masksToBounds = true
+        payButton.clipsToBounds = true
 
         //self.contentView.drawTopBorderWithColor(color: UIColor.brown, height: 0.5)
     }
+    
+    
 //TODO: ALEX PUT BACK
-//    func configureWithCart(cart: Cart) {
-//        // Assign the labels.
-//        if (cart.productCount() > 1) {
-//            totalItemsLabel.text = "\(cart.productCount()) " + NSLocalizedString("items", comment: "")
-//        } else {
-//            totalItemsLabel.text = NSLocalizedString("item_one", comment: "")
-//        }
-//        totalPriceLabel.text = formatPrice(value:cart.totalAmount())
-//    }
+    func configureWithCart(cart: Cart) {
+        // Assign the labels.
+        if (cart.productCount() > 1) {
+            totalItemsLabel.text = "\(cart.productCount()) " + NSLocalizedString("items", comment: "")
+        } else {
+            totalItemsLabel.text = NSLocalizedString("item_one", comment: "")
+        }
+        totalPriceLabel.text = formatPrice(value:cart.totalAmount())
+    }
 
 }
 

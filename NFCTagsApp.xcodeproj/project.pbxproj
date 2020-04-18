@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C2495C26E340BFB23619C2D4 /* Pods_NFCTagsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C632356F46DC1F9AC71060 /* Pods_NFCTagsApp.framework */; };
+		C7007892244B7C0900318EDF /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7007891244B7C0900318EDF /* Cart.swift */; };
 		C705A7AD22D4107300F513A9 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C705A7AC22D4107300F513A9 /* ReviewViewController.swift */; };
 		C705A7AF22D5A04800F513A9 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C705A7AE22D5A04800F513A9 /* CircularProgressBar.swift */; };
 		C7156781227BD97700D1A55A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7156780227BD97700D1A55A /* Assets.xcassets */; };
@@ -94,6 +95,7 @@
 		26C632356F46DC1F9AC71060 /* Pods_NFCTagsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NFCTagsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31EA2D2F492D42D3A2CA07D3 /* Pods-NFCTagsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFCTagsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		60CBDED3B607477E45F7A41D /* Pods-NFCTagsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFCTagsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-NFCTagsApp/Pods-NFCTagsApp.release.xcconfig"; sourceTree = "<group>"; };
+		C7007891244B7C0900318EDF /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		C705A7AC22D4107300F513A9 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		C705A7AE22D5A04800F513A9 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NFCTagsApp.entitlements; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			children = (
 				C753A191244A6DFB000E9718 /* CartViewController.swift */,
 				C753A17124481787000E9718 /* CheckoutViewController.swift */,
+				C7007891244B7C0900318EDF /* Cart.swift */,
 				C753A17624481787000E9718 /* Views */,
 				C753A17D24481787000E9718 /* Utility */,
 			);
@@ -654,6 +657,7 @@
 				C73594E0244AA7A2004F1D16 /* CartModel.swift in Sources */,
 				C793547C22A0DCC800DD1828 /* MapViewController.swift in Sources */,
 				C7C621732437BC4600861272 /* NewBeaconViewController.swift in Sources */,
+				C7007892244B7C0900318EDF /* Cart.swift in Sources */,
 				C7C621922437F93200861272 /* PropertyModel.swift in Sources */,
 				C753A18624481787000E9718 /* CartFooterCell.swift in Sources */,
 				C73650FA22831BC20025154F /* Colors.swift in Sources */,

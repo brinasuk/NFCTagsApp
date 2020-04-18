@@ -119,6 +119,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             kAppDelegate.isDatabaseDirty = true
             
             //WATCH OUT FOR UNIVERSAL LINKS FROM SCANNED TAGS
+            //IF DEEPLINK FOUND THEN PROCESS handleDeepLink
             NotificationCenter.default.addObserver(self, selector: #selector(handleDeepLink), name: Notification.Name("DEEPLINKFOUND"), object: nil)
         }
         
@@ -232,7 +233,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
 
     
-    //OK! DEEP LINK FOUND. GO AHEAD AND SHOW IT!
+    //OK! DEEPLINK FOUND. GO AHEAD AND SHOW IT!
     @objc func handleDeepLink() {
         var deepLink:String? = kAppDelegate.currentDeeplink ?? ""
         if deepLink == nil {deepLink = ""}  //JUST IN CASE

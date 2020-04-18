@@ -30,6 +30,8 @@ class CartModel {
     var userName: String
     var userEmail: String
     var rating: String
+    var tagPrice: String
+    var price: Float
     var quantity: Int
     
     init (createdAt:Date,
@@ -38,16 +40,20 @@ class CartModel {
           userName:String,
           userEmail:String,
           rating:String,
+          tagPrice:String,
+          price:Float,
           quantity:Int
         )
     {
-        self.createdAt = createdAt;
-        self.tagObjectId = tagObjectId;
-        self.tagTitle = tagTitle;
-        self.userName = userName;
-        self.userEmail = userEmail;
-        self.userEmail = userEmail;
+        self.createdAt = createdAt
+        self.tagObjectId = tagObjectId
+        self.tagTitle = tagTitle
+        self.userName = userName
+        self.userEmail = userEmail
+        self.userEmail = userEmail
         self.rating = rating
+        self.tagPrice = tagPrice
+        self.price = price
         self.quantity = quantity
     }
 
@@ -58,6 +64,8 @@ class CartModel {
                    userName: "",
                    userEmail: "",
                    rating: "",
+                   tagPrice: "",
+                   price: 0.0,
                    quantity: 1
         )
     }
