@@ -312,6 +312,12 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
           }
     
     // MARK: - ACTION BUTTONS PRESSED
+    
+    
+    @IBAction func cartButtonPressed(_ sender: Any) {
+        print("CART BUTTON")
+        performSegue(withIdentifier: "CARTSEGUE", sender: self)
+    }
     @IBAction func scanButtonPressed(_ sender: Any) {
         scanResults = ""
         let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
@@ -948,7 +954,7 @@ extension TagListViewController: UITableViewDataSource {
        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
        }
 
-    
+    //ROMEE2
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "Cell"
@@ -1165,12 +1171,16 @@ extension TagListViewController: UITableViewDataSource {
         }
         
         if segue.identifier == "SwiftyMap2" {
-            
             print (currentRow)
             let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = self.tagObjects[currentRow]
-            
         }
+        
+//        if segue.identifier == "CARTSEGUE" {
+//            print (currentRow)
+//            let destinationController = segue.destination as! CartViewController
+//            //destinationController.tag = self.tagObjects[currentRow]
+//        }
     }
     
     

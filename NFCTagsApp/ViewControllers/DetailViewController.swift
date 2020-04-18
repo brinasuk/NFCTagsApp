@@ -14,6 +14,7 @@ import MessageUI
 import SafariServices
 import Parse
 import AVFoundation
+import Alertift
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
@@ -184,6 +185,71 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // MARK: - Action Buttons Pressed
+    
+    @IBAction func cartButtonPressed(_ sender: Any) {
+        
+        let tagTitle = tag.tagTitle
+
+                let sv = UIViewController.displaySpinner(onView: self.view)
+                //WE DO HAVE A TAG. SEE IF YOU CAN FIND IT IN THE DATABASE
+                let query = PFQuery(className: "Cart")
+                query.whereKey("tagObjectId", equalTo: self.tag.tagObjectId)
+                query.whereKey("userEmail", equalTo: kAppDelegate.currentUserEmail!)
+                query.order(byDescending: "updatedDate")
+        
+                //ROMEE3
+                query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
+                    if let error = error {
+                        // NO MATCH FOUND
+                        UIViewController.removeSpinner(spinner: sv)
+                        
+                        let message = "Add '" + tagTitle + "' to Cart?"
+                        print("NO MATCH FOUND")
+                        Alertift.alert(title: "Shopping Cart",message: message)
+                            .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+                                self.addToCart()
+                                
+                            }
+                            .action(.cancel("No")) { (_, _, _) in
+                                //DO NOTHING
+                            }
+                            .show()
+
+                    } else if let object = object {
+                        UIViewController.removeSpinner(spinner: sv)
+                        
+                        //var cartObjectId = object["ObjectId"] as String
+                        let message = "Remove '" + tagTitle + "' from Cart?"
+                        let cartObjectId = object.objectId
+                        print(cartObjectId ?? "NoWAYS")
+                        Alertift.alert(title: "Shopping Cart",message: message)
+                            .action(.default("Yes"), isPreferred: true) { (_, _, _) in
+
+                                
+                                                object.deleteInBackground {
+                                                    (success: Bool, error: Error?) in
+                                                    if (success) {
+                                                        UIViewController.removeSpinner(spinner: sv)
+                                                        print("The object has been deleted.")
+                                                        self.displayMessage(message: "Successfully Removed")
+                                                    } else {
+                                                        UIViewController.removeSpinner(spinner: sv)
+                                                        print ("There was a problem, check error.description")
+                                                        self.displayErrorMessage(message: "Cannot delete Info")
+                                                    }
+                                                }
+                                
+                            }
+                            .action(.cancel("No")) { (_, _, _) in
+                                //DO NOTHING
+                            }
+                            .show()
+
+                    }
+                }
+        
+
+    }
     
     @IBAction func noteButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "NOTESEGUE", sender: self)
@@ -390,6 +456,16 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             destinationController.currentNoteOwner = kAppDelegate.currentUserEmail!
             destinationController.currentNoteTagTitle = tag.tagTitle
         }
+        
+//        else if segue.identifier == "CARTSEGUE" {
+//            let destinationController = segue.destination as! NotesViewController
+//
+//            //PASS THE FOLLOWING 4 VARIABLES TO THE NOTES VIEWCONTROLLER
+//            destinationController.currentTagId = tag.tagObjectId
+//            destinationController.currentPhotoRef = tag.tagPhotoRef
+//            destinationController.currentNoteOwner = kAppDelegate.currentUserEmail!
+//            destinationController.currentNoteTagTitle = tag.tagTitle
+//        }
     }
     
     @IBAction func close(segue: UIStoryboardSegue) {
@@ -587,6 +663,88 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+
+    
+/*
+    func findInCart(useTagObjectId:String) {
+                let sv = UIViewController.displaySpinner(onView: self.view)
+                
+                //WE DO HAVE A TAG. SEE IF YOU CAN FIND IT IN THE DATABASE
+                let query = PFQuery(className: "Cart")
+                query.whereKey("tagObjectId", equalTo: useTagObjectId )
+                //TODO: PUT BACK query.whereKey("ownerId", equalTo: tag )
+                query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
+                    UIViewController.removeSpinner(spinner: sv)
+                    if error != nil {
+                        // NO MATCH FOUND
+                        print("NO MATCH FOUND")
+
+                    } else {
+                        print("FOUND")
+                    }
+    }
+    */
+    
+    func addToCart () {
+        // ADD TO CART TABLE
+        let cart = PFObject(className:"Cart")
+        let sv = UIViewController.displaySpinner(onView: self.view)
+        //let ownerEmail = object["ownerEmail"] as? String ?? ""
+        let tagTitle = tag.tagTitle
+        
+        cart["tagTitle"] = tagTitle
+        cart["tagObjectId"] = tag.tagObjectId
+        
+        cart["userName"] = self.kAppDelegate.currentUserName
+        cart["userEmail"] = self.kAppDelegate.currentUserEmail
+        //TODO: FINISH ADD ALL ITEMS
+        
+        /*
+        tag["ownerName"] = ownerName
+        tag["ownerEmail"] = ownerEmail
+        tag["ownerPhone"] = ownerPhone
+        tag["appCode"] = ownerAppCode
+        tag["sequence"] = NSNumber(value: 1000) //TODO: ALEX STILL NEED TO FIX THIS
+        
+        tag["userName"] = self.kAppDelegate.currentUserName
+        tag["userEmail"] = self.kAppDelegate.currentUserEmail
+        
+        tag["tagPhotoRef"] = ownerObjectId  /// ownerPhotoRef is NO LONGER USED!
+        tag["tagId"] = ownerId
+        tag["tagTitle"] = ownerTitle
+        tag["tagSubTitle"] = ownerSubTitle
+        tag["tagCompany"] = ownerCompany
+        tag["tagUrl"] = ownerUrl
+        
+        tag["tagInfo"] = ownerInfo
+        
+        tag["tagAddress"] = ownerAddress
+        tag["tagAddress2"] = ownerAddress2
+        tag["tagCity"] = ownerCity
+        tag["tagState"] = ownerState
+        tag["tagZip"] = ownerZip
+        tag["tagCountry"] = ownerCountry
+        
+        tag["tagAddrFull"] = ownerAddrFull
+        tag["tagPrice"] = ownerPrice
+ */
+
+        cart.saveInBackground {
+            (success: Bool, error: Error?) in
+            if (success) {
+                // The object has been saved.
+                UIViewController.removeSpinner(spinner: sv)
+                self.displayMessage(message: "Successfully Added")
+            } else {
+                // There was a problem, check error.description
+                UIViewController.removeSpinner(spinner: sv)
+                self.displayErrorMessage(message: "Unable to add to Cart!")
+            }
+    }
+}
+
+}
+    
     
     
     
@@ -611,7 +769,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 //            print(error.localizedDescription)
 //        }
 //    }
-}
+
 
 /*
  var usePhotoLink = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)

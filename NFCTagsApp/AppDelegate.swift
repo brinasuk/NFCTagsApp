@@ -23,7 +23,7 @@ import CoreData  //TODO: ALEX TAKE OUT
 //fileprivate let pusherSecretKey = "paste you pisher key here"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var isDarkMode:Bool? = false
     

@@ -210,6 +210,7 @@ public let coralColor = UIColor(red:240, green:128, blue:128)
 public let royalBlue = UIColor(red:83, green:51, blue:237)
 
 public var newSystemBackgroundColor: UIColor {
+    //newSystemBackgroundColor = .black or .yellow
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -225,6 +226,7 @@ public var newSystemBackgroundColor: UIColor {
 }
 
 public var navbarBackColor: UIColor {
+    //navbarBackColor = .black or paleRoseColor
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -240,6 +242,7 @@ public var navbarBackColor: UIColor {
 }
 //myBackgroundColor
 public var backgroundColor: UIColor {
+    //backgroundColor = .secondarySystemBackground or .white
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -254,6 +257,7 @@ public var backgroundColor: UIColor {
     }
 }
 public var textColor: UIColor {
+    //textColor = .label or .darkText
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -268,6 +272,7 @@ public var textColor: UIColor {
     }
 }
 public var mainColor: UIColor {
+    //mainColor = .systemRed or .blue
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -282,6 +287,7 @@ public var mainColor: UIColor {
     }
 }
 public var separatorColor: UIColor {
+    //separatorColor = .systemRed or .blue
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -296,6 +302,7 @@ public var separatorColor: UIColor {
     }
 }
 public var titleTextColor: UIColor {
+    //titleTextColor = mainColor
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -310,6 +317,7 @@ public var titleTextColor: UIColor {
     }
 }
 public var titleLargeTextColor: UIColor {
+    //titleLargeTextColor = mainColor
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -325,6 +333,7 @@ public var titleLargeTextColor: UIColor {
 }
 
 public var secondaryLabel: UIColor {
+    //secondaryLabel = .secondaryLabel or .darkGray
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -340,6 +349,7 @@ public var secondaryLabel: UIColor {
 }
 
 public var secondarySystemBackground: UIColor {
+    //secondarySystemBackground = .secondarySystemBackground or .lightText
     if #available(iOS 13, *) {
         return UIColor { (traitCollection: UITraitCollection) -> UIColor in
             //if traitCollection.userInterfaceStyle == .dark {
@@ -353,6 +363,17 @@ public var secondarySystemBackground: UIColor {
         return mainColor
     }
 }
+
+//newSystemBackgroundColor = .black or .yellow
+//navbarBackColor = .black or paleRoseColor
+//backgroundColor = .secondarySystemBackground or .white
+//textColor = .label or .darkText
+//mainColor = .systemRed or .blue
+//separatorColor = .systemRed or .blue
+//titleTextColor = mainColor
+//titleLargeTextColor = mainColor
+//secondaryLabel = .secondaryLabel or .darkGray
+//secondarySystemBackground = .secondarySystemBackground or .lightText
 
 extension UIColor {
     public convenience init?(hexValue: String) {
@@ -377,7 +398,6 @@ extension UIColor {
                 }
             }
         }
-
         return nil
     }
 }
