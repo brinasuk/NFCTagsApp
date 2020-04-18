@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -613,7 +613,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dKh-jm-fzC"/>
-                                    <barButtonItem title="Cart" id="YiF-Vg-P9l"/>
+                                    <barButtonItem title="Cart" id="YiF-Vg-P9l">
+                                        <connections>
+                                            <action selector="cartButtonPressed:" destination="VaW-2d-StK" id="jdY-qK-XfG"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="nHu-v7-J9r"/>
                                     <barButtonItem title="Notes" id="tsi-rb-WsM">
                                         <connections>
@@ -1761,22 +1765,6 @@
             </objects>
             <point key="canvasLocation" x="-144868" y="-55193"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="gdz-fh-clS">
-            <objects>
-                <viewController id="gyS-Iw-tFh" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1wB-So-b8l">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="vUl-BP-ooE"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="NvG-1f-1rQ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="igC-tr-Rx4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-140713" y="-56119"/>
-        </scene>
         <!--Checkout View Controller-->
         <scene sceneID="7bh-y9-ixB">
             <objects>
@@ -1891,7 +1879,7 @@
         <!--Cart-->
         <scene sceneID="Wvv-ee-a45">
             <objects>
-                <viewController storyboardIdentifier="CartViewController" title="Cart" hidesBottomBarWhenPushed="YES" id="Too-NX-v38" customClass="CartViewController" customModule="Universal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CartViewController" title="Cart" hidesBottomBarWhenPushed="YES" id="Too-NX-v38" customClass="CartViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RZj-ET-Ue9"/>
                         <viewControllerLayoutGuide type="bottom" id="VZF-ng-Z5S"/>
@@ -1905,7 +1893,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.71764705880000002" green="0.70196078429999997" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartItemCell" rowHeight="81" id="t2D-lb-oL3" customClass="CartItemCell" customModule="Universal" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartItemCell" rowHeight="81" id="t2D-lb-oL3" customClass="CartItemCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t2D-lb-oL3" id="K8w-zP-nvu">
@@ -1997,7 +1985,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGF-6T-zLv" customClass="CartFooterCell" customModule="Universal" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGF-6T-zLv" customClass="CartFooterCell" customModule="NFCTagsApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="748" width="414" height="114"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKI-rF-kPc">
@@ -2098,7 +2086,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kUe-KS-Neb"/>
         <segue reference="PI8-6u-JL5"/>
-        <segue reference="gfT-in-4Ae"/>
+        <segue reference="Xrc-Gp-axU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

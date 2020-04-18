@@ -13,15 +13,15 @@ final class CartItemCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
 
-    @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
 
-    @IBOutlet private weak var quantityLabel: UILabel!
+    @IBOutlet weak var quantityLabel: UILabel!
 
-    @IBOutlet private weak var quantityStepper: UIStepper!
+    @IBOutlet weak var quantityStepper: UIStepper!
 
-    @IBOutlet private weak var availabilityLabel: UILabel!
+    @IBOutlet weak var availabilityLabel: UILabel!
 
-    @IBOutlet private weak var productImageView: UIImageView!
+    @IBOutlet weak var productImageView: UIImageView!
 
     // MARK: IBActions
 

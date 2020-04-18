@@ -195,9 +195,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 let query = PFQuery(className: "Cart")
                 query.whereKey("tagObjectId", equalTo: self.tag.tagObjectId)
                 query.whereKey("userEmail", equalTo: kAppDelegate.currentUserEmail!)
-                query.order(byDescending: "updatedDate")
-        
-                //ROMEE3
+
                 query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                     if let error = error {
                         // NO MATCH FOUND
@@ -697,6 +695,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         cart["userName"] = self.kAppDelegate.currentUserName
         cart["userEmail"] = self.kAppDelegate.currentUserEmail
+        cart["quantity"] = 1
         //TODO: FINISH ADD ALL ITEMS
         
         /*

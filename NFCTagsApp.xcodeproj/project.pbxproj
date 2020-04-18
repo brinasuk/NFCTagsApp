@@ -16,6 +16,7 @@
 		C71B63E4229B798A00B6910A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E3229B798A00B6910A /* DetailViewController.swift */; };
 		C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */; };
 		C71B63E8229CE87000B6910A /* RestaurantDetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */; };
+		C73594E0244AA7A2004F1D16 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73594DF244AA7A2004F1D16 /* CartModel.swift */; };
 		C73650FA22831BC20025154F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73650F822831BC10025154F /* Colors.swift */; };
 		C73A297F2293479C00554EF1 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A297E2293479C00554EF1 /* TagModel.swift */; };
 		C74C541322CFCACF0071F3F1 /* MiscRoutines.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C541222CFCACF0071F3F1 /* MiscRoutines.swift */; };
@@ -114,6 +115,7 @@
 		C71B63E3229B798A00B6910A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailIconTextCell.swift; sourceTree = "<group>"; };
 		C71B63E7229CE87000B6910A /* RestaurantDetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTextCell.swift; sourceTree = "<group>"; };
+		C73594DF244AA7A2004F1D16 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		C73650F822831BC10025154F /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C73A297E2293479C00554EF1 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		C74C541222CFCACF0071F3F1 /* MiscRoutines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscRoutines.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				C76D3EF322AB1BA300794637 /* OwnerModel.swift */,
 				C7DB26102400ADB200DB64B2 /* NoteModel.swift */,
 				C7C621912437F93200861272 /* PropertyModel.swift */,
+				C73594DF244AA7A2004F1D16 /* CartModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				C74C541322CFCACF0071F3F1 /* MiscRoutines.swift in Sources */,
 				C7DB26112400ADB200DB64B2 /* NoteModel.swift in Sources */,
 				C779310323A2C3EC00D997F2 /* NoteDetailViewController.swift in Sources */,
+				C73594E0244AA7A2004F1D16 /* CartModel.swift in Sources */,
 				C793547C22A0DCC800DD1828 /* MapViewController.swift in Sources */,
 				C7C621732437BC4600861272 /* NewBeaconViewController.swift in Sources */,
 				C7C621922437F93200861272 /* PropertyModel.swift in Sources */,
