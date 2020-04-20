@@ -17,6 +17,7 @@ target 'NFCTagsApp' do
    # OLD pod 'FacebookLogin'
    
    pod 'Parse'
+   pod 'PKHUD'
    
    pod 'FacebookSDK'
    pod 'FacebookSDK/LoginKit'

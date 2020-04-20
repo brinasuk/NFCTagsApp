@@ -1,5 +1,10 @@
-import UIKit
+
 import Parse
+import UIKit
+import Kingfisher
+import Alertift
+import Alamofire
+import AlamofireImage
 
 final class CartItemCell: UITableViewCell {
 
@@ -22,6 +27,27 @@ final class CartItemCell: UITableViewCell {
     @IBOutlet weak var availabilityLabel: UILabel!
 
     @IBOutlet weak var productImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        // Resize the stepper.
+        quantityStepper.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+
+        // Draw a border layer at the top.
+        //self.drawTopBorderWithColor(color: UIColor.brown, height: 0.5)
+        
+        nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        priceLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        quantityLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        availabilityLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        
+        //ROMEE6 DARKMODE
+        
+        nameLabel.textColor = secondaryLabel
+        priceLabel.textColor = mainColor
+        quantityLabel.textColor = mainColor
+        availabilityLabel.textColor = secondaryLabel
+        quantityStepper.tintColor = mainColor
+    }
 
     // MARK: IBActions
 
@@ -32,7 +58,8 @@ final class CartItemCell: UITableViewCell {
         quantityLabel.text = NSLocalizedString("quantity", comment: "") + ": \(value)"
         
         let objectId:String = Cart.sharedInstance.findObjectIdInCart(item: cartItem)
-        let scores = ["OBJECTID": objectId]
+        let scores = ["OBJECTID": objectId, "STEPPERVALUE": "\(value)"]
+        //let scores = ["Bob": 5, "Alice": 3, "Arthur": 42]
 
         NotificationCenter.default.post(name: NSNotification.Name("STEPPERVALUECHANGED"), object: self, userInfo: (scores as [AnyHashable : Any]))
         
@@ -79,13 +106,7 @@ final class CartItemCell: UITableViewCell {
 //        }
 //    }
     
-    override func awakeFromNib() {
-        // Resize the stepper.
-        quantityStepper.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
 
-        // Draw a border layer at the top.
-        //self.drawTopBorderWithColor(color: UIColor.brown, height: 0.5)
-    }
 
 
     
@@ -99,10 +120,15 @@ final class CartItemCell: UITableViewCell {
     
     func configureWithCartItem(cartItem: CartModel) {
         self.cartItem = cartItem
+        var placeholderImage:UIImage?
+        
+        //Romee5
         
         // Assign the labels.
         nameLabel.text = cartItem.tagTitle
-        priceLabel.text = formatPrice(value: cartItem.price)
+        let q:Float = Float(cartItem.quantity)
+        let totalPrice = (cartItem.price * q)
+        priceLabel.text = formatPrice(value: totalPrice)
                 
         //        availabilityLabel.text = (cartItem.variation != nil) ? getVariationDescription(variation: cartItem.variation!) : cartItem.product.categories?.first?.name
         
@@ -120,77 +146,82 @@ final class CartItemCell: UITableViewCell {
 //        }
 
                 
-                //==== IMAGE CODE ======================================
-                //        let cloudinaryAction = "Tag"
-                //        let usePhotoRef:String? = owner.ownerObjectId
-                //        let photoNumber = 1
-                //        let propertyPhotoFileUrl:String? = createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
+        //==== IMAGE CODE ======================================
+        //let cloudinaryAction = "Tag"
+        //let usePhotoRef:String? = cartItem.tagObjectId
+        //let photoNumber = 1
+//                        let propertyPhotoFileUrl:String? = createNewPhotoURL(cloudinaryAction, withID: usePhotoRef, withNumber: photoNumber) ?? ""
                 
                 
-        //
-        //        var propertyPhotoFileUrl:String = ""
-        //            propertyPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", cart.tagObjectId, 1)
+        let photoRef:String = cartItem.tagPhotoRef
+        var propertyPhotoFileUrl:String = ""
+        if (photoRef.isEmpty) {
+            propertyPhotoFileUrl = ""
+        } else {
+            propertyPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", cartItem.tagPhotoRef, 1)
+            //print("CARTPHOTO: \(propertyPhotoFileUrl)")
+        }
 
-                //cell.productImageView.layer.cornerRadius
-                //cell.productImageView.frame.size.width
-                //cell.productImageView.layer.masksToBounds = true
-                //cell.productImageView.clipsToBounds = true
+                //productImageView.layer.cornerRadius
+                //productImageView.frame.size.width
+                productImageView.layer.masksToBounds = true
+                productImageView.clipsToBounds = true
                 
-                //cell.productImageView.kf.indicatorType = .activity
+                productImageView.kf.indicatorType = .activity
                 
-                // METHOD 1: ======================================
-                //        cell.tagImageView?.image = placeholderImage
-                //        if let url = URL(string: propertyPhotoFileUrl! ) {
-                //            cell.tagImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
-                //        }
-                
-                //print(propertyPhotoFileUrl)
+//                // METHOD 1: ======================================
+//                        productImageView.image = placeholderImage
+//                        if let url = URL(string: propertyPhotoFileUrl ) {
+//                            productImageView.image = resizedImage(at: url, for: CGSize(width: 88,height: 88))
+//                        }
+//
+//                print(propertyPhotoFileUrl)
                 
                 // METHOD 2: ======================================
-        //        if let url = URL(string: propertyPhotoFileUrl ) {
-        //            //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
-        //            // Round corner
-        //            //let processor = RoundCornerImageProcessor(cornerRadius: 20)
-        //
-        //            /*
-        //             // Downsampling
-        //             let processor = DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))
-        //
-        //             // Cropping
-        //             let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
-        //
-        //             // Blur
-        //             let processor = BlurImageProcessor(blurRadius: 5.0)
-        //
-        //             // Overlay with a color & fraction
-        //             let processor = OverlayImageProcessor(overlay: .red, fraction: 0.7)
-        //
-        //             // Tint with a color
-        //             let processor = TintImageProcessor(tint: .blue)
-        //
-        //             // Adjust color
-        //             let processor = ColorControlsProcessor(brightness: 1.0, contrast: 0.7, saturation: 1.1, inputEV: 0.7)
-        //
-        //             // Black & White
-        //             let processor = BlackWhiteProcessor()
-        //
-        //             // Blend (iOS)
-        //             let processor = BlendImageProcessor(blendMode: .darken, alpha: 1.0, backgroundColor: .lightGray)
-        //
-        //             // Compositing
-        //             let processor = CompositingImageProcessor(compositingOperation: .darken, alpha: 1.0, backgroundColor: .lightGray)
-        //
-        //             // Use the process in view extension methods.
-        //             imageView.kf.setImage(with: url, options: [.processor(processor)])
-        //             */
-        //            //TODO: FIX SIZE
-        //            let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
-        //            let placeholderImage = UIImage(named: "icons8-camera-1")
-        //            cell.productImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
-        //        }
-        //
-        //        //=================================================
-                //        cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
+                if let url = URL(string: propertyPhotoFileUrl ) {
+                    //            cell.tagImageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+                    // Round corner
+                    //let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        
+                    /*
+                     // Downsampling
+                     let processor = DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))
+        
+                     // Cropping
+                     let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
+        
+                     // Blur
+                     let processor = BlurImageProcessor(blurRadius: 5.0)
+        
+                     // Overlay with a color & fraction
+                     let processor = OverlayImageProcessor(overlay: .red, fraction: 0.7)
+        
+                     // Tint with a color
+                     let processor = TintImageProcessor(tint: .blue)
+        
+                     // Adjust color
+                     let processor = ColorControlsProcessor(brightness: 1.0, contrast: 0.7, saturation: 1.1, inputEV: 0.7)
+        
+                     // Black & White
+                     let processor = BlackWhiteProcessor()
+        
+                     // Blend (iOS)
+                     let processor = BlendImageProcessor(blendMode: .darken, alpha: 1.0, backgroundColor: .lightGray)
+        
+                     // Compositing
+                     let processor = CompositingImageProcessor(compositingOperation: .darken, alpha: 1.0, backgroundColor: .lightGray)
+        
+                     // Use the process in view extension methods.
+                     imageView.kf.setImage(with: url, options: [.processor(processor)])
+                     */
+                    //TODO: FIX SIZE
+                    let processor = CroppingImageProcessor(size: CGSize(width: 100, height: 100), anchor: CGPoint(x: 0.5, y: 0.5))
+                    let placeholderImage = UIImage(named: "icons8-camera-1")
+                    productImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
+                }
+        
+                //=================================================
+                        productImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
  
     }
 }

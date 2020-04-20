@@ -31,11 +31,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     var rowCount:Int = 0
     
     var deleteObjectId:String = ""    //USED BY DELETE
-    
     var placeholderImage:UIImage?
-    
 
-    
     @IBOutlet weak var toolBar: UIToolbar!
     
     @IBOutlet weak var tableView: UITableView!
@@ -159,7 +156,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         }
         //FORCE DARK MODE BY SETTING ANS = TRUE
         //TODO: IN A RELEASE PRODUCT TAKE OUT ANS = TRUE
-        //ans = true
+        ans = false
 
         return ans
     }
@@ -315,10 +312,15 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     // MARK: - ACTION BUTTONS PRESSED
     
     
-    @IBAction func cartButtonPressed(_ sender: Any) {
-        print("CART BUTTON")
-        performSegue(withIdentifier: "CARTSEGUE", sender: self)
+    @IBAction func shoppingCartButtonPressed(_ sender: Any) {
+        print("SHOPPINGCARTSEGUE BUTTON")
+        performSegue(withIdentifier: "SHOPPINGCARTSEGUE", sender: self)
     }
+    
+//    @IBAction func cartButtonPressed(_ sender: Any) {
+//        print("SHOPPINGCARTSEGUE BUTTON")
+//        performSegue(withIdentifier: "SHOPPINGCARTSEGUE", sender: self)
+//    }
     @IBAction func scanButtonPressed(_ sender: Any) {
         scanResults = ""
         let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
@@ -973,7 +975,6 @@ extension TagListViewController: UITableViewDataSource {
         cell.tagTitle.textColor = textColor
         cell.tagSubTitle.textColor = mainColor
         cell.tagCompany.textColor = mainColor
-
         cell.dateAdded.textColor = secondaryLabel
 
 

@@ -26,33 +26,39 @@ import Parse
 class CartModel {
     var createdAt: Date
     var tagObjectId: String
+    var tagPhotoRef: String
     var tagTitle: String
     var userName: String
     var userEmail: String
     var rating: String
     var tagPrice: String
+    var paidUp: String
     var price: Float
     var quantity: Int
     
     init (createdAt:Date,
           tagObjectId:String,
+          tagPhotoRef:String,
           tagTitle:String,
           userName:String,
           userEmail:String,
           rating:String,
           tagPrice:String,
+          paidUp:String,
           price:Float,
           quantity:Int
         )
     {
         self.createdAt = createdAt
         self.tagObjectId = tagObjectId
+        self.tagPhotoRef = tagPhotoRef
         self.tagTitle = tagTitle
         self.userName = userName
         self.userEmail = userEmail
         self.userEmail = userEmail
         self.rating = rating
         self.tagPrice = tagPrice
+        self.paidUp = paidUp
         self.price = price
         self.quantity = quantity
     }
@@ -60,11 +66,13 @@ class CartModel {
     convenience init() {
         self.init (createdAt: Date(),
                    tagObjectId: "",
+                   tagPhotoRef: "",
                    tagTitle: "",
                    userName: "",
                    userEmail: "",
                    rating: "",
                    tagPrice: "",
+                   paidUp: "",
                    price: 0.0,
                    quantity: 1
         )

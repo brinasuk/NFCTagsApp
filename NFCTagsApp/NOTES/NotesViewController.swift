@@ -55,37 +55,7 @@ class NotesViewController: UITableViewController {
 //        navigationItem.largeTitleDisplayMode = .never
 //        navigationController?.navigationBar.tintColor = mainColor
 
-        
 
-        
-//        // Core data initialization
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            // create alert
-//            let alert = UIAlertController(
-//                title: "Could not get app delegate",
-//                message: "Could not get app delegate, unexpected error occurred. Try again later.",
-//                preferredStyle: .alert)
-//
-//            // add OK action
-//            alert.addAction(UIAlertAction(title: "OK",
-//                                          style: .default))
-//            // show alert
-//            self.present(alert, animated: true)
-//
-//            return
-//        }
-        
-//        // As we know that container is set up in the AppDelegates so we need to refer that container.
-//        // We need to create a context from this container
-//        let managedContext = appDelegate.persistentContainer.viewContext
-//
-//        // set context in the storage
-//        ReallySimpleNoteStorage.storage.setManagedContext(managedObjectContext: managedContext)
-        
-
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        //navigationItem.leftBarButtonItem = editButtonItem
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton

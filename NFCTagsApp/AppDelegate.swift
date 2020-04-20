@@ -25,7 +25,7 @@ import CoreData  //TODO: ALEX TAKE OUT
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var isDarkMode:Bool? = false
+    var isDarkMode:Bool? = false //NOW SET IN isUsingDarkMode
     
     var window: UIWindow?
     

@@ -15,6 +15,7 @@ import SafariServices
 import Parse
 import AVFoundation
 import Alertift
+import PKHUD
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
@@ -116,6 +117,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         else {
             propertyPhotoFileUrl = String(format: "%@%@-%@-%ld.jpg", SERVERFILENAME, "Tag", tag.tagPhotoRef, 1)
         }
+        //print(propertyPhotoFileUrl)
         
         //"https://photos.homecards.com/rebeacons/Tag-bEGrwzfWdV-1.jpg"
         
@@ -168,7 +170,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             switch result {
             case .success(let value):
                 //self.imageToUpload = (self.photoImageView.image ?? UIImage())! //or UIImage(
-                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                print("Task successful for: \(value.source.url?.absoluteString ?? "")")
             case .failure(let error):
                 //self.imageToUpload = nil
                 print("Job failed: \(error.localizedDescription)")
@@ -190,23 +192,25 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         let tagTitle = tag.tagTitle
 
-                let sv = UIViewController.displaySpinner(onView: self.view)
+                //let sv = UIViewController.displaySpinner(onView: self.view)
+                HUD.show(.progress)
                 //WE DO HAVE A TAG. SEE IF YOU CAN FIND IT IN THE DATABASE
                 let query = PFQuery(className: "Cart")
                 query.whereKey("tagObjectId", equalTo: self.tag.tagObjectId)
                 query.whereKey("userEmail", equalTo: kAppDelegate.currentUserEmail!)
+                query.whereKey("paidUp", equalTo: "N")
 
                 query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                     if let error = error {
                         // NO MATCH FOUND
-                        UIViewController.removeSpinner(spinner: sv)
+                        //UIViewController.removeSpinner(spinner: sv)
+                        HUD.hide()
                         
                         let message = "Add '" + tagTitle + "' to Cart?"
-                        print("NO MATCH FOUND")
+                        //print("NO MATCH FOUND")
                         Alertift.alert(title: "Shopping Cart",message: message)
                             .action(.default("Yes"), isPreferred: true) { (_, _, _) in
                                 self.addToCart()
-                                
                             }
                             .action(.cancel("No")) { (_, _, _) in
                                 //DO NOTHING
@@ -214,39 +218,37 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                             .show()
 
                     } else if let object = object {
-                        UIViewController.removeSpinner(spinner: sv)
-                        
+                        //UIViewController.removeSpinner(spinner: sv)
+                        HUD.hide()
                         //var cartObjectId = object["ObjectId"] as String
                         let message = "Remove '" + tagTitle + "' from Cart?"
                         let cartObjectId = object.objectId
-                        print(cartObjectId ?? "NoWAYS")
+                        //print(cartObjectId ?? "NoWAYS")
                         Alertift.alert(title: "Shopping Cart",message: message)
                             .action(.default("Yes"), isPreferred: true) { (_, _, _) in
-
-                                
-                                                object.deleteInBackground {
-                                                    (success: Bool, error: Error?) in
-                                                    if (success) {
-                                                        UIViewController.removeSpinner(spinner: sv)
-                                                        print("The object has been deleted.")
-                                                        self.displayMessage(message: "Successfully Removed")
-                                                    } else {
-                                                        UIViewController.removeSpinner(spinner: sv)
-                                                        print ("There was a problem, check error.description")
-                                                        self.displayErrorMessage(message: "Cannot delete Info")
-                                                    }
-                                                }
+                                object.deleteInBackground {
+                                    (success: Bool, error: Error?) in
+                                    if (success) {
+                                        //UIViewController.removeSpinner(spinner: sv)
+                                        HUD.hide()
+                                        //print("The object has been deleted.")
+                                        self.displayMessage(message: "Successfully Removed")
+                                    } else {
+                                        //UIViewController.removeSpinner(spinner: sv)
+                                    //print ("There was a problem, check error.description")
+                                        HUD.show(.error)
+                                        HUD.hide(afterDelay: 2.0)
+                                        self.displayErrorMessage(message: "Cannot delete Info")
+                                    }
+                                }
                                 
                             }
                             .action(.cancel("No")) { (_, _, _) in
                                 //DO NOTHING
                             }
                             .show()
-
                     }
                 }
-        
-
     }
     
     @IBAction func noteButtonPressed(_ sender: Any) {
@@ -661,61 +663,49 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-
-    
-/*
-    func findInCart(useTagObjectId:String) {
-                let sv = UIViewController.displaySpinner(onView: self.view)
-                
-                //WE DO HAVE A TAG. SEE IF YOU CAN FIND IT IN THE DATABASE
-                let query = PFQuery(className: "Cart")
-                query.whereKey("tagObjectId", equalTo: useTagObjectId )
-                //TODO: PUT BACK query.whereKey("ownerId", equalTo: tag )
-                query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
-                    UIViewController.removeSpinner(spinner: sv)
-                    if error != nil {
-                        // NO MATCH FOUND
-                        print("NO MATCH FOUND")
-
-                    } else {
-                        print("FOUND")
-                    }
-    }
-    */
-    
     func addToCart () {
         // ADD TO CART TABLE
         let cart = PFObject(className:"Cart")
-        let sv = UIViewController.displaySpinner(onView: self.view)
-        //let ownerEmail = object["ownerEmail"] as? String ?? ""
+        
+        //CONVERT PRICE STRING TO NUMERIC
+        let result = tag.tagPrice.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
+        let intPrice = (result as NSString).intValue
+        
+        if (intPrice == 0) {
+            displayMessage(message: "PRICE is missing. Cannot add to Cart")
+            return
+        }
+        
+        
+        //let sv = UIViewController.displaySpinner(onView: self.view)
+        HUD.show(.progress)
         let tagTitle = tag.tagTitle
         
         cart["tagTitle"] = tagTitle
         cart["tagObjectId"] = tag.tagObjectId
+        cart["tagPhotoRef"] = tag.tagPhotoRef
         
         cart["userName"] = self.kAppDelegate.currentUserName
         cart["userEmail"] = self.kAppDelegate.currentUserEmail
         
         cart["tagPrice"] = tag.tagPrice
         
-        //CONVERT PRICE STRING TO NUMERIC
-        let result = tag.tagPrice.replacingOccurrences( of:"[^.0-9]", with: "", options: .regularExpression)
+        //RESTRICT TO 2 DEC PLACES
         let price = (result as NSString).floatValue
-
-//        //RESTRICT TO 2 DEC PLACES
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
         let formattedAmount = formatter.string(from: price as NSNumber)!
         print((formattedAmount as NSString).floatValue)
 //        let doubleStr = String(format: "%.2f", price) // "3.14"
+        
+        
         cart["price"] = (formattedAmount as NSString).floatValue
         
         cart["quantity"] = 1
-        //TODO: FINISH ADD ALL ITEMS
-
-
+        cart["paidUp"] = "N"
         
+        //TODO: FINISH ADD ALL ITEMS
         
         /*
         tag["ownerName"] = ownerName
@@ -751,11 +741,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             (success: Bool, error: Error?) in
             if (success) {
                 // The object has been saved.
-                UIViewController.removeSpinner(spinner: sv)
+                //UIViewController.removeSpinner(spinner: sv)
+                HUD.hide()
                 self.displayMessage(message: "Successfully Added")
             } else {
                 // There was a problem, check error.description
-                UIViewController.removeSpinner(spinner: sv)
+                //UIViewController.removeSpinner(spinner: sv)
+                HUD.show(.error)
+                HUD.hide(afterDelay: 2.0)
                 self.displayErrorMessage(message: "Unable to add to Cart!")
             }
     }
