@@ -31,6 +31,7 @@ class DetailHeaderView: UIView {
     
     //@IBOutlet var heartImageView: UIImageView!
 
+    @IBOutlet var cartImageView:UIImageView!
     
     @IBOutlet var ratingImageView: UIImageView!
 

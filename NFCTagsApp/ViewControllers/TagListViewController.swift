@@ -39,6 +39,8 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     @IBOutlet weak var btnMaintenance: UIBarButtonItem!
     @IBOutlet weak var btnSignIn: UIBarButtonItem!
     
+    @IBOutlet weak var btnCart: UIBarButtonItem!
+    @IBOutlet weak var btnStyle: UIBarButtonItem!
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
@@ -60,13 +62,32 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         override func viewDidLoad() {
             super.viewDidLoad()
             
+            let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
+            print("App Display Name - \(applicationName)")
+            
+            self.title = applicationName
+            
+            if #available(iOS 13.0, *) {
+                btnStyle.title = "Style"
+                btnStyle.isEnabled = true
+            } else {
+                btnStyle.title = ""
+                btnStyle.isEnabled = false
+            }
+            
+            if (kAppDelegate.hasShoppingCart == true) {
+                btnCart.title = "Cart"
+                btnCart.isEnabled = true
+            } else {
+                btnCart.title = ""
+                btnCart.isEnabled = false
+            }
+
             
             userInterfaceStyle = self.traitCollection.userInterfaceStyle
 
             
             setupDarkModeX()
-            //setupDarkMode()
-            //XsetupDarkMode()
 
             
             //HIDE EMPTY CELLS WHEM YOU HAVE TOO FEW TO FILL THE TABLE
@@ -80,13 +101,7 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             //configureFor(profileType: currentProfile)
 
             
-            let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
-            print("App Display Name - \(applicationName)")
-            
-            self.title = applicationName
-            
-            // SEE IF YOU HAVE A USER ALREADY LOGGED IN
-            
+
             
             //CRITICAL:  CLEAS CACHE!!
             KingfisherManager.shared.cache.clearMemoryCache()
@@ -139,39 +154,44 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     func isUsingDarkMode () -> Bool {
         var ans:Bool = false
-        if #available(iOS 13.0, *) {
-            //switch overrideUserInterfaceStyle {
-            switch UIScreen.main.traitCollection.userInterfaceStyle {
-            case .dark:
-                ans = true
-            case .unspecified:
-                ans = false
-            case .light:
-                ans = false
-            @unknown default:
-                ans = false
-            }
-        } else {
-            ans = false
-        }
-        //FORCE DARK MODE BY SETTING ANS = TRUE
-        //TODO: IN A RELEASE PRODUCT TAKE OUT ANS = TRUE
-        ans = false
+         
+         //REMOVED APRIL2010. STYLE BUTTON ADDED BELOW
+         /*
+         if #available(iOS 13.0, *) {
+             //switch overrideUserInterfaceStyle {
+             switch UIScreen.main.traitCollection.userInterfaceStyle {
+             case .dark:
+                 ans = true
+             case .unspecified:
+                 ans = false
+             case .light:
+                 ans = false
+             @unknown default:
+                 ans = false
+             }
+         } else {
+             ans = false
+         }
+          */
+         
 
-        return ans
+         if #available(iOS 13.0, *) {
+                 ans = UserDefaults.standard.bool(forKey: "isUsingDarkMode")
+                 //print ("VALUE: \(ans)")
+             } else {
+                 ans = false
+             }
+         
+         //FORCE DARK MODE BY SETTING ANS = TRUE
+         //TODO: IN A RELEASE PRODUCT TAKE OUT ANS = TRUE
+         //ans = true
+
+         return ans
     }
-    
-//    func  XsetupDarkMode() {
-//    if (kAppDelegate.isDarkMode == true)
-//    {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
-//    } else {
-//        kAppDelegate.isDarkMode = false  // Fallback on earlier versions
-//        }
-//    }
     
     func setupDarkModeX() {
         kAppDelegate.isDarkMode = isUsingDarkMode()
-        print(kAppDelegate.isDarkMode as Any)
+        //print(kAppDelegate.isDarkMode as Any)
                
         if (kAppDelegate.isDarkMode == true)
             {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .dark}
@@ -179,7 +199,14 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
             {if #available(iOS 13.0, *) {overrideUserInterfaceStyle = .light}
         }
         
+        //THE FOLLOWING LINE IS CRITICAL TO SHOW THE BACKARROW WHEN CHOOSING SHOP AS FIRST OPTION FROM MENU!!
+        navigationController?.navigationBar.tintColor =  mainColor
+        
         if (kAppDelegate.isDarkMode == true)  {
+            
+
+            
+            
                    //SET THE STATUS VIEW
                    statusView.backgroundColor = .systemGray
                    //SET THE STATUS LABEL
@@ -222,12 +249,43 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.8
         self.tableView.backgroundView = imageView
-        //alex2
+        
+        setupNavigationBar()
     }
     
-    
-    
-    
+
+     
+                      func setupNavigationBar() {
+                          navigationController?.navigationBar.prefersLargeTitles = true
+
+                          if #available(iOS 13.0, *) {
+                              let navBarAppearance = UINavigationBarAppearance()
+                              //navBarAppearance.configureWithDefaultBackground()
+                              navBarAppearance.configureWithOpaqueBackground()
+
+                              navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
+                              navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
+                              navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
+
+                              //navBarAppearance.backgroundColor = navbarBackColor
+                              navBarAppearance.shadowColor = nil
+                              navigationController?.navigationBar.isTranslucent = false
+                              navigationController?.navigationBar.standardAppearance = navBarAppearance
+                              navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+                              navigationController?.navigationBar.barTintColor = navbarBackColor
+                  //            navigationController?.navigationBar.tintColor =  navbarBackColor
+                  //            self.navigationController!.navigationBar.titleTextAttributes =
+                  //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
+
+                              } else {
+
+                              //METHOD2. NOT iOS13
+                              if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
+                                  navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
+                                  }
+                              }
+                      }
 
     
     //OK! DEEPLINK FOUND. GO AHEAD AND SHOW IT!
@@ -276,51 +334,28 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
 //                        self.performSegue(withIdentifier: "TryButton", sender: self)
 //    }
     
-    
-          func setupNavigationBar() {
-              navigationController?.navigationBar.prefersLargeTitles = true
 
-              if #available(iOS 13.0, *) {
-                  let navBarAppearance = UINavigationBarAppearance()
-                  //navBarAppearance.configureWithDefaultBackground()
-                  navBarAppearance.configureWithOpaqueBackground()
-
-                  navBarAppearance.titleTextAttributes = [.foregroundColor: titleTextColor]
-                  navBarAppearance.largeTitleTextAttributes = [.foregroundColor: titleLargeTextColor]
-                  navBarAppearance.backgroundColor = navbarBackColor //<insert your color here>
-
-                  //navBarAppearance.backgroundColor = navbarBackColor
-                  navBarAppearance.shadowColor = nil
-                  navigationController?.navigationBar.isTranslucent = false
-                  navigationController?.navigationBar.standardAppearance = navBarAppearance
-                  navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-
-      //            navigationController?.navigationBar.barTintColor = navbarBackColor
-      //            navigationController?.navigationBar.tintColor =  navbarBackColor
-      //            self.navigationController!.navigationBar.titleTextAttributes =
-      //            [NSAttributedString.Key.backgroundColor: navbarBackColor]
-
-                  } else {
-
-                  //METHOD2. NOT iOS13
-                  if let customFont = UIFont(name: "Rubik-Medium", size: 34.0) {
-                      navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor .darkText, NSAttributedString.Key.font: customFont ]
-                      }
-                  }
-          }
     
     // MARK: - ACTION BUTTONS PRESSED
     
     
-    @IBAction func shoppingCartButtonPressed(_ sender: Any) {
+    @IBAction func cartButtonPressed(_ sender: Any) {
         print("SHOPPINGCARTSEGUE BUTTON")
         performSegue(withIdentifier: "SHOPPINGCARTSEGUE", sender: self)
     }
+
+    @IBAction func styleButtonPressed(_ sender: Any) {
+        if (kAppDelegate.isDarkMode == true) {
+            kAppDelegate.isDarkMode = false
+            UserDefaults.standard.set(false, forKey: "isUsingDarkMode")
+        } else {
+            kAppDelegate.isDarkMode = true
+            UserDefaults.standard.set(true, forKey: "isUsingDarkMode")
+        }
+        setupDarkModeX()
+    }
     
-//    @IBAction func cartButtonPressed(_ sender: Any) {
-//        print("SHOPPINGCARTSEGUE BUTTON")
-//        performSegue(withIdentifier: "SHOPPINGCARTSEGUE", sender: self)
-//    }
+
     @IBAction func scanButtonPressed(_ sender: Any) {
         scanResults = ""
         let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)

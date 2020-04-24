@@ -27,16 +27,18 @@ import CoreData  //TODO: ALEX TAKE OUT
 
     var isDarkMode:Bool? = false //NOW SET IN isUsingDarkMode
     
+    var hasShoppingCart:Bool? = true
+    
     var window: UIWindow?
     
     var appCode:NSString? = ""  //OR "art" OR "disp" or "re" or "show"
 
-    //var placeholderName:NSString? = ""
+    // APPLICATION WIDE SETTINGS.
     var tagOrBeacon:Bool? = false  //NO = NFC TAG, YES = BEACON
     var sendEmailFlag:Bool? = false  // SEND OWNER LEAD EMAIL NOTIFICATIONS
     var isDatabaseDirty:Bool? = false
     
-    // NEED THE FOLLOWING WHEN YOU SIGN-IN or SIGN_UP
+    // The following are used for SIGN-IN or SIGN_UP
     var currentUserName:String? = ""
     var currentUserEmail:String? = ""
     //var currentUserIsAgent:Bool? = false
@@ -92,13 +94,7 @@ import CoreData  //TODO: ALEX TAKE OUT
 //        }
 //        Session.shared.authentication = Authentication.apiKey(myApiKey)
         //============================================================//
-        
-        
-        
-        
 
-        
-        
         /*
          // PROGRAMMING Settings.bundle
          However, it is important to understand that until the user actually changes the value of the setting nothing is actually set. If you check for the setting in your application it will actually return nil unless you set a default value. To do that add the following to the applicationDidFinishLaunching (or didFinishLaunchingWithOptions) method:

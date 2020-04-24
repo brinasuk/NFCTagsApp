@@ -15,6 +15,8 @@
 		C705A7AF22D5A04800F513A9 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C705A7AE22D5A04800F513A9 /* CircularProgressBar.swift */; };
 		C7156781227BD97700D1A55A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7156780227BD97700D1A55A /* Assets.xcassets */; };
 		C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715678E227BDA0900D1A55A /* AuteurTableViewCell.swift */; };
+		C715B7942451373B009DD38F /* cart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C715B7922451373B009DD38F /* cart@2x.png */; };
+		C715B7952451373B009DD38F /* cart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C715B7932451373B009DD38F /* cart@3x.png */; };
 		C71B63D8229AFDD200B6910A /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63D7229AFDD200B6910A /* DetailHeaderView.swift */; };
 		C71B63E4229B798A00B6910A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E3229B798A00B6910A /* DetailViewController.swift */; };
 		C71B63E6229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B63E5229CDF6B00B6910A /* RestaurantDetailIconTextCell.swift */; };
@@ -107,6 +109,8 @@
 		C7156780227BD97700D1A55A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7156785227BD97700D1A55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C715678F227BDA0900D1A55A /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = Base.lproj/AuteurTableViewCell.swift; sourceTree = "<group>"; };
+		C715B7922451373B009DD38F /* cart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cart@2x.png"; sourceTree = "<group>"; };
+		C715B7932451373B009DD38F /* cart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cart@3x.png"; sourceTree = "<group>"; };
 		C71B63CD229AEDD600B6910A /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		C71B63CE229AEDD600B6910A /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
 		C71B63CF229AEDD600B6910A /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
@@ -257,7 +261,6 @@
 				C7156785227BD97700D1A55A /* Info.plist */,
 				C7007895244D0CDE00318EDF /* Localizable.strings */,
 				C7B7D05122F0DD0D0069D42D /* click.mp3 */,
-				C753A16E244816F0000E9718 /* ShoppingCart */,
 				C753A16F24481787000E9718 /* WooCommerce */,
 				C7C621632437BBD800861272 /* NewBeacon */,
 				C7156796227BDA0900D1A55A /* ViewControllers */,
@@ -343,13 +346,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		C753A16E244816F0000E9718 /* ShoppingCart */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ShoppingCart;
-			sourceTree = "<group>";
-		};
 		C753A16F24481787000E9718 /* WooCommerce */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +353,8 @@
 				C753A17124481787000E9718 /* CheckoutViewController.swift */,
 				C7007891244B7C0900318EDF /* Cart.swift */,
 				C7007893244CBC9500318EDF /* order_confirmation.png */,
+				C715B7922451373B009DD38F /* cart@2x.png */,
+				C715B7932451373B009DD38F /* cart@3x.png */,
 				C753A17624481787000E9718 /* Views */,
 				C753A17D24481787000E9718 /* Utility */,
 			);
@@ -560,12 +558,14 @@
 				C7C621882437BCAC00861272 /* subaru-4.jpg in Resources */,
 				C7C47A2923EE1AF2000509ED /* Main.storyboard in Resources */,
 				C7C6218B2437BCAC00861272 /* subaru-3.jpg in Resources */,
+				C715B7942451373B009DD38F /* cart@2x.png in Resources */,
 				C7C6216D2437BC1B00861272 /* content-3.png in Resources */,
 				C7C6218F2437BCAC00861272 /* subaru-9.jpg in Resources */,
 				C7007896244D0CDE00318EDF /* Localizable.strings in Resources */,
 				C7C6216F2437BC1B00861272 /* content-2.png in Resources */,
 				C7C621872437BCAC00861272 /* subaru-5.jpg in Resources */,
 				C7156781227BD97700D1A55A /* Assets.xcassets in Resources */,
+				C715B7952451373B009DD38F /* cart@3x.png in Resources */,
 				C7C6216A2437BC1B00861272 /* content-1.png in Resources */,
 				C7C6216E2437BC1B00861272 /* content-3@2x.png in Resources */,
 				C7C6218E2437BCAC00861272 /* subaru-1.jpg in Resources */,

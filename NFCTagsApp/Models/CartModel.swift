@@ -17,6 +17,26 @@ import Parse
  cart["userName"] = self.kAppDelegate.currentUserName
  cart["userEmail"] = self.kAppDelegate.currentUserEmail
  cart["quantity"] = 1
+ 
+ tagId
+ tagObjectId
+ userEmail
+ userName
+ tagTitle
+ tagUrl
+ tagInfo
+ tagSubTitle
+ tagCompany
+ tagPhotoRef
+ 
+ ownerName
+ ownerEmail
+ ownerPhone
+ 
+ tagPrice
+ quantity
+ rating
+ appCode
  */
 
 

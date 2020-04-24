@@ -130,22 +130,22 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="sOV-Rc-2en"/>
                                 </constraints>
                                 <items>
+                                    <barButtonItem title="Style" id="YY6-fD-eYV" userLabel="Style">
+                                        <connections>
+                                            <action selector="styleButtonPressed:" destination="kBe-lp-QEI" id="h95-7L-O06"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Quq-5E-FaO"/>
                                     <barButtonItem title="Manage Tags" id="lnr-g4-LfB">
                                         <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <segue destination="Wbr-7r-70g" kind="show" id="Pcm-5D-WrO"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Quq-5E-FaO"/>
-                                    <barButtonItem title="Shop" id="tuZ-o9-Gjh">
-                                        <connections>
-                                            <action selector="shoppingCartButtonPressed:" destination="kBe-lp-QEI" id="KA2-4I-p0B"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dOu-OD-kDJ"/>
-                                    <barButtonItem title="New Beacon" id="HcB-pC-mSP">
+                                    <barButtonItem title="Cart" id="tuZ-o9-Gjh">
                                         <connections>
-                                            <segue destination="DkZ-uW-Pf2" kind="show" identifier="NEWBEACONSEGUE" id="wba-dr-RtJ"/>
+                                            <action selector="cartButtonPressed:" destination="kBe-lp-QEI" id="DgS-eL-Clr"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="4g4-KK-Oq2"/>
@@ -309,8 +309,10 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="wV9-lI-8KD"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnCart" destination="tuZ-o9-Gjh" id="1oR-Ze-byw"/>
                         <outlet property="btnMaintenance" destination="lnr-g4-LfB" id="GxA-wa-mQy"/>
                         <outlet property="btnSignIn" destination="ZMh-lA-YMT" id="dFc-c9-fvh"/>
+                        <outlet property="btnStyle" destination="YY6-fD-eYV" id="sn3-qe-jy9"/>
                         <outlet property="scanButton" destination="qOt-cs-Fq6" id="0Et-qC-NSr"/>
                         <outlet property="statusLabel" destination="z97-T2-V6R" id="Hw1-3a-Z3J"/>
                         <outlet property="statusView" destination="vdp-0l-fIo" id="VOj-Sb-myt"/>
@@ -409,9 +411,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCM-4H-tnq" userLabel="Subtitle">
-                                            <rect key="frame" x="12" y="278" width="330" height="39"/>
+                                            <rect key="frame" x="12" y="278" width="402" height="39"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="330" id="5nq-OL-NgO"/>
+                                                <constraint firstAttribute="width" constant="402" id="5nq-OL-NgO"/>
                                                 <constraint firstAttribute="height" constant="39" id="Imv-rt-t8r"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="24"/>
@@ -428,31 +430,43 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shopping Cart" translatesAutoresizingMaskIntoConstraints="NO" id="QXF-Qd-BSK">
+                                            <rect key="frame" x="340" y="298" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="64" id="2Dc-aA-0I4"/>
+                                                <constraint firstAttribute="height" constant="64" id="B63-Cd-nG3"/>
+                                            </constraints>
+                                        </imageView>
                                         <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRx-82-h06" userLabel="ratingImageView">
-                                            <rect key="frame" x="364" y="275" width="42" height="42"/>
+                                            <rect key="frame" x="12" y="187" width="42" height="42"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="42" id="bNk-Vw-a7u"/>
-                                                <constraint firstAttribute="width" constant="42" id="mad-0l-iDn"/>
+                                                <constraint firstAttribute="width" constant="42" id="iZz-3P-SdW"/>
+                                                <constraint firstAttribute="height" constant="42" id="uFx-3t-ChR"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="GRx-82-h06" secondAttribute="bottom" constant="33" id="8Xd-Z8-p8A"/>
+                                        <constraint firstItem="GRx-82-h06" firstAttribute="leading" secondItem="fwg-Vf-QlN" secondAttribute="leading" id="9an-1g-Sq1"/>
                                         <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" constant="12" id="9fb-Wj-ip6"/>
+                                        <constraint firstAttribute="bottom" secondItem="QXF-Qd-BSK" secondAttribute="bottom" constant="-12" id="DGP-V2-JpF"/>
+                                        <constraint firstItem="QXF-Qd-BSK" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="18" id="F0E-aR-8o5"/>
                                         <constraint firstItem="uCM-4H-tnq" firstAttribute="leading" secondItem="fwg-Vf-QlN" secondAttribute="leading" id="R4v-aI-oVB"/>
-                                        <constraint firstAttribute="trailing" secondItem="GRx-82-h06" secondAttribute="trailing" constant="8" id="S5L-Mw-e6L"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="leading" secondItem="tb4-Qn-VVC" secondAttribute="leading" id="UX5-Wd-vgc"/>
                                         <constraint firstAttribute="trailing" secondItem="Dhi-zA-SYj" secondAttribute="trailing" id="VKH-Ls-BTa"/>
                                         <constraint firstAttribute="bottom" secondItem="Dhi-zA-SYj" secondAttribute="bottom" id="WmN-mQ-LDI"/>
+                                        <constraint firstItem="fwg-Vf-QlN" firstAttribute="top" secondItem="GRx-82-h06" secondAttribute="bottom" constant="8" id="Wu2-Ag-7On"/>
                                         <constraint firstItem="uCM-4H-tnq" firstAttribute="top" secondItem="fwg-Vf-QlN" secondAttribute="bottom" constant="-2" id="XTj-UP-4dN"/>
                                         <constraint firstItem="Dhi-zA-SYj" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" id="ZDR-Qe-AEv"/>
                                         <constraint firstItem="ak1-cW-eK8" firstAttribute="top" secondItem="tb4-Qn-VVC" secondAttribute="top" constant="57" id="ZHi-lw-pNC"/>
+                                        <constraint firstAttribute="trailing" secondItem="QXF-Qd-BSK" secondAttribute="trailing" constant="10" id="cq4-w4-wu6"/>
                                         <constraint firstAttribute="bottom" secondItem="uCM-4H-tnq" secondAttribute="bottom" constant="33" id="eVl-D4-01u"/>
+                                        <constraint firstItem="QXF-Qd-BSK" firstAttribute="leading" secondItem="uCM-4H-tnq" secondAttribute="trailing" constant="-74" id="krj-al-BfR"/>
                                         <constraint firstAttribute="trailing" secondItem="ak1-cW-eK8" secondAttribute="trailing" constant="8" id="wvg-8v-MFo"/>
                                     </constraints>
                                     <connections>
+                                        <outlet property="cartImageView" destination="QXF-Qd-BSK" id="qh0-Rx-N1F"/>
                                         <outlet property="headerImageView" destination="Dhi-zA-SYj" id="1KC-5D-8UK"/>
                                         <outlet property="priceLabel" destination="ak1-cW-eK8" id="mi9-N6-3Nv"/>
                                         <outlet property="ratingImageView" destination="GRx-82-h06" id="zUc-Zx-zpu"/>
@@ -602,36 +616,33 @@
                                     <constraint firstAttribute="width" constant="414" id="LAW-qj-3YQ"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Rate It" id="niR-4j-hBe">
+                                    <barButtonItem title="Website" id="exn-kd-ait">
                                         <connections>
-                                            <segue destination="Aa3-XZ-WUI" kind="presentation" identifier="ShowReview" id="aKx-pt-45z"/>
+                                            <action selector="websiteButtonPressed:" destination="VaW-2d-StK" id="Eih-qQ-smw"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Contact Us" id="leo-su-qoA">
-                                        <connections>
-                                            <action selector="contactUsButtonPressed:" destination="VaW-2d-StK" id="BjR-rW-zP3"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="dKh-jm-fzC"/>
-                                    <barButtonItem title="Cart" id="YiF-Vg-P9l">
-                                        <connections>
-                                            <action selector="cartButtonPressed:" destination="VaW-2d-StK" id="jdY-qK-XfG"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="nHu-v7-J9r"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Tpm-qd-5im"/>
                                     <barButtonItem title="Notes" id="tsi-rb-WsM">
                                         <connections>
                                             <action selector="noteButtonPressed:" destination="VaW-2d-StK" id="Djz-M1-AMr"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="nHu-v7-J9r"/>
+                                    <barButtonItem title="Rate It" id="niR-4j-hBe">
+                                        <connections>
+                                            <segue destination="Aa3-XZ-WUI" kind="presentation" identifier="ShowReview" id="aKx-pt-45z"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="RLd-bY-gej"/>
+                                    <barButtonItem title="Contact Us" id="leo-su-qoA">
+                                        <connections>
+                                            <action selector="contactUsButtonPressed:" destination="VaW-2d-StK" id="BjR-rW-zP3"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kLL-OM-TsT"/>
                                     <barButtonItem title="Map" id="yop-iW-1L1" userLabel="Map">
                                         <connections>
                                             <action selector="mapButtonPressed:" destination="VaW-2d-StK" id="GQl-xg-nML"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Website" id="exn-kd-ait">
-                                        <connections>
-                                            <action selector="websiteButtonPressed:" destination="VaW-2d-StK" id="Eih-qQ-smw"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -662,7 +673,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SJN-uw-6Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138894" y="-55445"/>
+            <point key="canvasLocation" x="-138894.20289855075" y="-55445.089285714283"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Dar-QN-VJP">
@@ -717,7 +728,6 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double Tap photo to change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ9-nU-ZsJ">
                                                     <rect key="frame" x="0.0" y="12" width="375" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xxl-5z-lMh">
@@ -1146,7 +1156,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aon-qK-IZv">
-                                <rect key="frame" x="84" y="191" width="246" height="460"/>
+                                <rect key="frame" x="52.5" y="191" width="309" height="460"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pj8-l8-MYB">
                                         <rect key="frame" x="0.0" y="0.0" width="232" height="82"/>
@@ -1180,10 +1190,10 @@
                                             <segue destination="8OW-GW-fhj" kind="unwind" identifier="rate2" unwindAction="rateRestaurantWithSegue:" id="51t-qd-GTs"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-rj-tjo">
-                                        <rect key="frame" x="0.0" y="378" width="204" height="82"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-rj-tjo" userLabel="No Rating">
+                                        <rect key="frame" x="0.0" y="378" width="309" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
-                                        <state key="normal" title="None" image="norating_blue"/>
+                                        <state key="normal" title="No Rating" image="norating_blue"/>
                                         <connections>
                                             <segue destination="8OW-GW-fhj" kind="unwind" identifier="none" unwindAction="rateRestaurantWithSegue:" id="CMD-HO-Npr"/>
                                         </connections>
@@ -2056,6 +2066,7 @@
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
+        <image name="Shopping Cart" width="64" height="64"/>
         <image name="art_launch_image" width="1125" height="2429"/>
         <image name="close" width="16" height="16"/>
         <image name="cross" width="33" height="32"/>

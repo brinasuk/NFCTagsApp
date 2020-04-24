@@ -33,9 +33,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDarkMode()
+        
+        if (kAppDelegate.hasShoppingCart == true) {
+            headerView.cartImageView.isHidden = false
+        headerView.cartImageView.isUserInteractionEnabled = true
+        headerView.cartImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cartImageTapped)))
 
         headerView.ratingImageView.isUserInteractionEnabled = true
         headerView.ratingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
+        } else {
+            headerView.cartImageView.isHidden = true
+        }
         
         navigationItem.largeTitleDisplayMode = .never
         
@@ -179,16 +187,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //=================================================
     }
     
-    
-    
     @objc private func imageTapped(_ recognizer: UITapGestureRecognizer) {
         //print("image tapped")
         performSegue(withIdentifier: "ShowReview", sender: self)
     }
     
-    // MARK: - Action Buttons Pressed
+    @objc private func cartImageTapped(_ recognizer: UITapGestureRecognizer) {
+        //print("cart image tapped")
+        processCart()
+    }
     
-    @IBAction func cartButtonPressed(_ sender: Any) {
+    func processCart() {
         
         let tagTitle = tag.tagTitle
 
@@ -250,6 +259,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                     }
                 }
     }
+    
+    // MARK: - Action Buttons Pressed
     
     @IBAction func noteButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "NOTESEGUE", sender: self)

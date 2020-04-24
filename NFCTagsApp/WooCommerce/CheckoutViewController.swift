@@ -95,7 +95,7 @@ final class CheckoutViewController: UIViewController, WKUIDelegate, WKNavigation
                 navigationController?.navigationBar.standardAppearance = navBarAppearance
                 navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
 
-    //            navigationController?.navigationBar.barTintColor = navbarBackColor
+                navigationController?.navigationBar.barTintColor = navbarBackColor
     //            navigationController?.navigationBar.tintColor =  navbarBackColor
     //            self.navigationController!.navigationBar.titleTextAttributes =
     //            [NSAttributedString.Key.backgroundColor: navbarBackColor]

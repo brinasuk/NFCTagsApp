@@ -462,6 +462,7 @@ private var numberOfItems:Int = 0
 //                        continue
 //                    }
                     object["paidUp"] = "Y"
+                    object["datePaid"] = Date()
                     saveAllOfMe.append(object)
                 }
                     PFObject.saveAll(inBackground: saveAllOfMe as? [PFObject], block: { success, error in
