@@ -19,7 +19,20 @@ class ReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backgroundImageName = "art_launch_image"
+        var backgroundImageName:String = ""
+        switch kAppDelegate.appCode {
+        case "art":
+            backgroundImageName = "art_launch_image"
+        case "wine":
+            backgroundImageName = "wine_launch_image"
+        case "show":
+            backgroundImageName = "show_launch_image"
+        case .none:
+            backgroundImageName = "show_launch_image"
+        case .some(_):
+            backgroundImageName = "show_launch_image"
+        }
+        
         backgroundImageView.image = UIImage(named: backgroundImageName)
         
         // Applying the blur effect

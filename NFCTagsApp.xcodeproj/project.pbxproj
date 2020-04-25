@@ -105,7 +105,7 @@
 		C705A7AC22D4107300F513A9 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		C705A7AE22D5A04800F513A9 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NFCTagsApp.entitlements; sourceTree = "<group>"; };
-		C7156776227BD97700D1A55A /* NFCTagsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NFCTagsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7156776227BD97700D1A55A /* NoTouchTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoTouchTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7156780227BD97700D1A55A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7156785227BD97700D1A55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C715678F227BDA0900D1A55A /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = Base.lproj/AuteurTableViewCell.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		C7156777227BD97700D1A55A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C7156776227BD97700D1A55A /* NFCTagsApp.app */,
+				C7156776227BD97700D1A55A /* NoTouchTags.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 			);
 			name = NFCTagsApp;
 			productName = NFCTagsApp;
-			productReference = C7156776227BD97700D1A55A /* NFCTagsApp.app */;
+			productReference = C7156776227BD97700D1A55A /* NoTouchTags.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -830,9 +830,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.artworks4me;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "ArtWorks4Me Dev";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.notouchtags;
+				PRODUCT_NAME = NoTouchTags;
+				PROVISIONING_PROFILE_SPECIFIER = "NoTouchTags Developer";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -844,7 +844,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NFCTagsApp/NFCTagsApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QT5MQ7KPJH;
 				INFOPLIST_FILE = NFCTagsApp/Info.plist;
@@ -853,9 +853,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.artworks4me;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "ArtWorks4Me App Store";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hillsidesoftware.notouchtags;
+				PRODUCT_NAME = NoTouchTags;
+				PROVISIONING_PROFILE_SPECIFIER = "NoTouchTags Developer";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -401,17 +401,19 @@ class NewBeaconViewController: UIViewController, MHYahooParallaxViewDatasource, 
         query.getObjectInBackground(withId: beaconObjectID) { (object: PFObject?, error: Error?) in
             if let error = error {
                 
-
+                print (error)
             } else {
                 
                 //USE  let alex = object["ownerPhone"] as? String ?? “” and avoid NIL testing !!!!!
                 
-                var sponsorName = object?.value(forKeyPath: "ownerPointer.sponsorName") as? String
-                var useBeaconName = object?.value(forKey: "beaconName") as? String
-                var address = object?.value(forKeyPath: "propertyPointer.address")
-                print("SponsorName: \(sponsorName)")
-                print("useBeaconName: \(useBeaconName)")
-                print("address: \(address)")
+// PUT BACK FOLLOWING 3 LINES
+//                var sponsorName = object?.value(forKeyPath: "ownerPointer.sponsorName") as? String
+//                var useBeaconName = object?.value(forKey: "beaconName") as? String
+//                var address = object?.value(forKeyPath: "propertyPointer.address")
+                
+                //print("SponsorName: \(sponsorName)")
+                //print("useBeaconName: \(useBeaconName)")
+                //print("address: \(address)")
             
                 
                 
@@ -481,7 +483,7 @@ class NewBeaconViewController: UIViewController, MHYahooParallaxViewDatasource, 
                 */
             }
         }
-        
+
 }
 
 

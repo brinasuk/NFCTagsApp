@@ -243,7 +243,20 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
                toolBar.barTintColor = navbarBackColor
                view.backgroundColor = navbarBackColor
         
-        let backgroundImageName = "art_launch_image"
+        var backgroundImageName:String = ""
+        switch kAppDelegate.appCode {
+        case "art":
+            backgroundImageName = "art_launch_image"
+        case "wine":
+            backgroundImageName = "wine_launch_image"
+        case "show":
+            backgroundImageName = "show_launch_image"
+        case .none:
+            backgroundImageName = "show_launch_image"
+        case .some(_):
+            backgroundImageName = "show_launch_image"
+        }
+        
         let backgroundImage = UIImage(named: backgroundImageName)
         let imageView = UIImageView(image: backgroundImage)
         imageView.contentMode = .scaleAspectFill

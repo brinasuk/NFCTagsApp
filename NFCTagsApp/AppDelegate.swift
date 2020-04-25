@@ -68,7 +68,8 @@ import CoreData  //TODO: ALEX TAKE OUT
          * SHOWROOM = show;
          */
         
-        appCode = "art"
+        appCode = "show"
+        
         // YOU GET THE APPNAME LATER FROM THE INI BUNDLE
 //        let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
 //        print("App Display Name - \(applicationName)")
