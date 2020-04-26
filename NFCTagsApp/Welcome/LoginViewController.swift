@@ -34,6 +34,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var emailRegisterButton: UIButton!
     @IBOutlet private weak var userWelcomeLabel: UILabel!
+    @IBOutlet weak var appleLoginButton: UIButton!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private var textFieldEmail: UITextField!
     @IBOutlet private var textFieldPassword: UITextField!
@@ -89,6 +90,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         facebookLoginButton.layer.cornerRadius = facebookLoginButton.frame.height/2
         facebookLoginButton.layer.masksToBounds = true
         facebookLoginButton.clipsToBounds = true
+        
+        //appleLoginButton
+        //let appleLoginButton = UIButton(type: .custom)
+        // IN IB DEFINE BUTTON AS SYSTEM !!!!
+        appleLoginButton.backgroundColor = myColor
+        appleLoginButton.tintColor = textColor
+        appleLoginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        appleLoginButton.layer.cornerRadius = appleLoginButton.frame.height/2
+        appleLoginButton.layer.masksToBounds = true
+        appleLoginButton.clipsToBounds = true
+        
+        appleLoginButton.isHidden = true //TODO: ALEX PUT BACK
+        
         
         //let emailRegisterButton = UIButton(type: .system)
         // IN IB DEFINE BUTTON AS SYSTEM !!!!
@@ -286,6 +300,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //Some other options: "user_about_me", "user_birthday", "user_hometown", "user_likes", "user_interests", "user_photos", "friends_photos", "friends_hometown", "friends_location", "friends_education_history"
 
 
+    @IBAction func actionLoginApple(_ sender: Any) {
+    }
     @IBAction func actionLoginFacebook(_ sender: Any) {
         bounce(facebookLoginButton)
         print("FACEBOOK START")

@@ -22,7 +22,7 @@
         <!--Tag Detail View Controller-->
         <scene sceneID="10j-YC-YVX">
             <objects>
-                <viewController id="s1z-4U-Z2O" userLabel="Tag Detail View Controller" customClass="AuteurDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="s1z-4U-Z2O" userLabel="Tag Detail View Controller" customClass="AuteurDetailViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="npj-K4-QMF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="200" id="eEM-jn-uev" customClass="FilmTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="200" id="eEM-jn-uev" customClass="FilmTableViewCell" customModule="NoTouchTags" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eEM-jn-uev" id="IIf-wR-pgd">
@@ -101,7 +101,7 @@
         <!--New Beacon View Controller-->
         <scene sceneID="s3f-An-hni">
             <objects>
-                <viewController id="DkZ-uW-Pf2" customClass="NewBeaconViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DkZ-uW-Pf2" customClass="NewBeaconViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Heg-WY-iPK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,7 +117,7 @@
         <!--TagList View Controller-->
         <scene sceneID="pzp-0r-KW7">
             <objects>
-                <viewController title="Auteurs2" id="kBe-lp-QEI" userLabel="TagList View Controller" customClass="TagListViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Auteurs2" id="kBe-lp-QEI" userLabel="TagList View Controller" customClass="TagListViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n9x-yh-yJL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,7 +187,7 @@
                                 <rect key="frame" x="0.0" y="120" width="414" height="641"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="92" id="FQo-bs-q9Y" userLabel="Cell" customClass="AuteurTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="92" id="FQo-bs-q9Y" userLabel="Cell" customClass="AuteurTableViewCell" customModule="NoTouchTags" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FQo-bs-q9Y" id="Ztw-yb-0S2" customClass="TableViewCell">
@@ -354,7 +354,7 @@
         <!--Swifty Map Controller-->
         <scene sceneID="rdz-gI-gar">
             <objects>
-                <viewController id="DRy-jI-0HB" customClass="SwiftyMapController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DRy-jI-0HB" customClass="SwiftyMapController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i71-7V-iRM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,7 +384,7 @@
         <!--Detail View Controller-->
         <scene sceneID="2lW-ff-SRb">
             <objects>
-                <viewController id="VaW-2d-StK" customClass="DetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VaW-2d-StK" customClass="DetailViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nYF-QD-CJ3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -392,7 +392,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gdl-CJ-31a">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="tb4-Qn-VVC" userLabel="Header View" customClass="DetailHeaderView" customModule="NFCTagsApp" customModuleProvider="target">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="tb4-Qn-VVC" userLabel="Header View" customClass="DetailHeaderView" customModule="NoTouchTags" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -421,7 +421,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak1-cW-eK8" userLabel="Price">
-                                            <rect key="frame" x="353.5" y="57" width="52.5" height="60"/>
+                                            <rect key="frame" x="358" y="57" width="48" height="60"/>
                                             <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="2sG-7A-g1o"/>
@@ -475,7 +475,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailIconTextCell" id="Ych-6h-1lb" customClass="RestaurantDetailIconTextCell" customModule="NFCTagsApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailIconTextCell" id="Ych-6h-1lb" customClass="RestaurantDetailIconTextCell" customModule="NoTouchTags" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="378" width="414" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ych-6h-1lb" id="4I0-fg-Avw">
@@ -513,15 +513,15 @@
                                             <outlet property="shortTextLabel" destination="9Rd-kk-A1H" id="aOs-ec-cST"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailTextCell" id="Mfd-wD-WGD" customClass="RestaurantDetailTextCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="424" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailTextCell" id="Mfd-wD-WGD" customClass="RestaurantDetailTextCell" customModule="NoTouchTags" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="424" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mfd-wD-WGD" id="4xq-sR-4e7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWc-jm-muB">
-                                                    <rect key="frame" x="23" y="11" width="367" height="18.5"/>
+                                                    <rect key="frame" x="23" y="11" width="367" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik Light" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -538,8 +538,8 @@
                                             <outlet property="descriptionLabel" destination="oWc-jm-muB" id="MXK-ht-4Lk"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailSeparatorCell" id="HMH-HU-XkY" userLabel="RestaurantDetailSeparatorCell" customClass="RestaurantDetailSeparatorCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="467.5" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailSeparatorCell" id="HMH-HU-XkY" userLabel="RestaurantDetailSeparatorCell" customClass="RestaurantDetailSeparatorCell" customModule="NoTouchTags" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="467" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HMH-HU-XkY" id="SGy-Wb-zou">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -575,8 +575,8 @@
                                             <outlet property="titleLabel" destination="ZXH-5i-UvG" id="eFh-H5-S2N"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailMapCell" rowHeight="215" id="n0G-uF-cqG" userLabel="RestaurantDetailMapCell" customClass="RestaurantDetailMapCell" customModule="NFCTagsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="511.5" width="414" height="215"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailMapCell" rowHeight="215" id="n0G-uF-cqG" userLabel="RestaurantDetailMapCell" customClass="RestaurantDetailMapCell" customModule="NoTouchTags" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="511" width="414" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n0G-uF-cqG" id="IAc-hX-I11">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="215"/>
@@ -678,7 +678,7 @@
         <!--Map View Controller-->
         <scene sceneID="Dar-QN-VJP">
             <objects>
-                <viewController id="YYa-Dn-t4f" customClass="MapViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YYa-Dn-t4f" customClass="MapViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sVW-dt-91r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -733,7 +733,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xxl-5z-lMh">
                                                     <rect key="frame" x="0.0" y="11" width="375" height="240"/>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDE-Wh-hyJ" customClass="CircularProgressBar" customModule="NFCTagsApp" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDE-Wh-hyJ" customClass="CircularProgressBar" customModule="NoTouchTags" customModuleProvider="target">
                                                     <rect key="frame" x="112.5" y="45" width="150" height="150"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -770,7 +770,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Title" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-zG-tCo" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Title" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-zG-tCo" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="tintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -804,7 +804,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Subtitle" placeholder="Subtitle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3E5-pP-v46" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Subtitle" placeholder="Subtitle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3E5-pP-v46" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -837,7 +837,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Price" placeholder="Price" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-m3-yyf" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Price" placeholder="Price" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-m3-yyf" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -870,7 +870,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Contact" placeholder="Contact Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-rn-fDe" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Contact" placeholder="Contact Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-rn-fDe" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -903,7 +903,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Phone" placeholder="Phone" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ssc-U7-jQs" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Phone" placeholder="Phone" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ssc-U7-jQs" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -936,7 +936,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Website" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5UH-o4-y68" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Website" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5UH-o4-y68" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -969,7 +969,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Address" placeholder="Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AfZ-2f-jpY" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Address" placeholder="Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AfZ-2f-jpY" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1140,7 +1140,7 @@
         <!--Review View Controller-->
         <scene sceneID="kMn-fH-49J">
             <objects>
-                <viewController id="Aa3-XZ-WUI" customClass="ReviewViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Aa3-XZ-WUI" customClass="ReviewViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MlC-2M-OM5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1232,7 +1232,7 @@
         <!--Login View Controller-->
         <scene sceneID="16c-nh-lyT">
             <objects>
-                <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="bji-6S-h7v" customClass="LoginViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="bji-6S-h7v" customClass="LoginViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TRd-Y4-kez"/>
                         <viewControllerLayoutGuide type="bottom" id="AgX-Rz-vuF"/>
@@ -1244,47 +1244,6 @@
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="Be5-cO-LE4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3F-ce-JUu">
-                                <rect key="frame" x="68" y="357" width="279" height="44"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="mwd-u9-PkR"/>
-                                </constraints>
-                                <state key="normal" title="Sign In">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="actionLoginEmail:" destination="bji-6S-h7v" eventType="touchUpInside" id="KSl-oD-wBB"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iosapptemplates.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1g-Cy-bbD">
-                                <rect key="frame" x="16" y="124" width="382" height="42"/>
-                                <color key="tintColor" red="0.1215686275" green="0.29411764709999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="Qbf-gv-ZgI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="26"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ds4-hk-k8x" userLabel="LoginFormContainerView">
-                                <rect key="frame" x="91" y="547" width="334" height="148"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="148" id="6GB-4O-TnD"/>
-                                    <constraint firstAttribute="width" constant="295" id="v2Z-Ro-gVE"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJn-aO-rvE">
-                                <rect key="frame" x="16" y="627" width="382" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="New? Tap to Create Account">
-                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="actionRegisterEmail:" destination="bji-6S-h7v" eventType="touchUpInside" id="ckp-EP-waK"/>
-                                    <segue destination="lwy-OP-2Bg" kind="show" id="L7I-8S-zWu"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Digital Smart Flyers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LD-RT-hrx">
                                 <rect key="frame" x="68" y="59" width="279" height="42"/>
                                 <color key="tintColor" red="0.1215686275" green="0.29411764709999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1295,80 +1254,147 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="laW-1O-UIy">
-                                <rect key="frame" x="70" y="260" width="274" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iosapptemplates.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1g-Cy-bbD">
+                                <rect key="frame" x="16" y="124" width="382" height="42"/>
+                                <color key="tintColor" red="0.1215686275" green="0.29411764709999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="HQu-rC-zpn"/>
+                                    <constraint firstAttribute="height" constant="42" id="Qbf-gv-ZgI"/>
                                 </constraints>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
-                                <connections>
-                                    <outlet property="delegate" destination="bji-6S-h7v" id="gtg-Vz-SG4"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="HT2-FF-TEJ">
-                                <rect key="frame" x="68" y="200" width="276" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="26"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mua-hG-UVm" userLabel="Stack View2">
+                                <rect key="frame" x="70" y="391" width="280" height="162"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3F-ce-JUu" userLabel="Email Signin Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="K0P-E6-3X9"/>
+                                            <constraint firstAttribute="width" constant="280" id="LLW-i4-fjm"/>
+                                        </constraints>
+                                        <state key="normal" title="Email Sign In">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionLoginEmail:" destination="bji-6S-h7v" eventType="touchUpInside" id="KSl-oD-wBB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFh-d8-9Fb" userLabel="Facebook Login Button">
+                                        <rect key="frame" x="0.0" y="59" width="280" height="44"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="R6F-eG-7Aq"/>
+                                            <constraint firstAttribute="width" constant="280" id="syK-dY-C9o"/>
+                                        </constraints>
+                                        <state key="normal" title="Sign In with Facebook">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionLoginFacebook:" destination="bji-6S-h7v" eventType="touchUpInside" id="UaN-rv-RiP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dw8-tw-yVb" userLabel="Apple Signin Button">
+                                        <rect key="frame" x="0.0" y="118" width="280" height="44"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="6Io-In-Lte"/>
+                                            <constraint firstAttribute="height" constant="44" id="79b-dw-yoC"/>
+                                            <constraint firstAttribute="width" constant="280" id="NLO-1v-aoe"/>
+                                        </constraints>
+                                        <state key="normal" title="Sign In with Apple">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionLoginApple:" destination="bji-6S-h7v" eventType="touchUpInside" id="ER7-RZ-lSx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="bUI-Dt-LUR"/>
+                                    <constraint firstAttribute="width" constant="280" id="5Hm-6S-elM"/>
+                                    <constraint firstAttribute="height" constant="162" id="u0J-Nl-ptp"/>
                                 </constraints>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
-                                <connections>
-                                    <outlet property="delegate" destination="bji-6S-h7v" id="Yok-lS-py9"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFh-d8-9Fb" userLabel="Facebook Login Button">
-                                <rect key="frame" x="70" y="419" width="277" height="44"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="QAq-Ou-a63" userLabel="Stack View1">
+                                <rect key="frame" x="67" y="210" width="280" height="118"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="HT2-FF-TEJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="T3g-uz-iGr"/>
+                                            <constraint firstAttribute="height" constant="44" id="h85-Eu-Rc1"/>
+                                        </constraints>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="bji-6S-h7v" id="Yok-lS-py9"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="text-input" translatesAutoresizingMaskIntoConstraints="NO" id="laW-1O-UIy">
+                                        <rect key="frame" x="0.0" y="74" width="280" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="6Eg-OS-1zr"/>
+                                            <constraint firstAttribute="height" constant="44" id="b8L-9l-JfY"/>
+                                        </constraints>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="bji-6S-h7v" id="gtg-Vz-SG4"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="vTR-hZ-uTh"/>
+                                    <constraint firstAttribute="height" constant="118" id="O3I-ge-Vrm"/>
+                                    <constraint firstAttribute="width" constant="280" id="bRV-th-fTD"/>
                                 </constraints>
-                                <state key="normal" title="Sign In with Facebook">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJn-aO-rvE">
+                                <rect key="frame" x="16" y="583" width="382" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="382" id="3aX-54-xZL"/>
+                                    <constraint firstAttribute="height" constant="30" id="IoD-O3-zd7"/>
+                                </constraints>
+                                <state key="normal" title="New? Tap to Create Account">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="actionLoginFacebook:" destination="bji-6S-h7v" eventType="touchUpInside" id="UaN-rv-RiP"/>
+                                    <action selector="actionRegisterEmail:" destination="bji-6S-h7v" eventType="touchUpInside" id="ckp-EP-waK"/>
+                                    <segue destination="lwy-OP-2Bg" kind="show" id="L7I-8S-zWu"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="X1g-Cy-bbD" firstAttribute="top" secondItem="2LD-RT-hrx" secondAttribute="bottom" constant="23" id="2Na-ye-q1H"/>
-                            <constraint firstItem="ds4-hk-k8x" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" constant="40" id="2dc-G8-G6e"/>
-                            <constraint firstItem="laW-1O-UIy" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" constant="70" id="2tC-Ga-ijT"/>
-                            <constraint firstItem="lFh-d8-9Fb" firstAttribute="top" secondItem="M3F-ce-JUu" secondAttribute="bottom" constant="18" id="6XR-wO-mP3"/>
+                            <constraint firstItem="KJn-aO-rvE" firstAttribute="top" secondItem="mua-hG-UVm" secondAttribute="bottom" constant="30" id="367-qk-nVA"/>
                             <constraint firstItem="2LD-RT-hrx" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" constant="68" id="72Y-iI-glA"/>
-                            <constraint firstItem="laW-1O-UIy" firstAttribute="top" secondItem="HT2-FF-TEJ" secondAttribute="bottom" constant="30" id="A5B-Dm-nag"/>
-                            <constraint firstItem="laW-1O-UIy" firstAttribute="centerX" secondItem="M3F-ce-JUu" secondAttribute="centerX" id="C7d-4p-XIF"/>
-                            <constraint firstItem="AgX-Rz-vuF" firstAttribute="top" secondItem="KJn-aO-rvE" secondAttribute="bottom" constant="205" id="Hsn-t9-Fxe"/>
-                            <constraint firstItem="Rpz-4X-xw2" firstAttribute="trailing" secondItem="ds4-hk-k8x" secondAttribute="trailing" constant="40" id="Hu6-ci-4ZU"/>
+                            <constraint firstItem="QAq-Ou-a63" firstAttribute="top" secondItem="X1g-Cy-bbD" secondAttribute="bottom" constant="44" id="MSX-Hu-tRv"/>
+                            <constraint firstItem="mua-hG-UVm" firstAttribute="top" secondItem="QAq-Ou-a63" secondAttribute="bottom" constant="63" id="P4Y-fC-XEc"/>
                             <constraint firstItem="Be5-cO-LE4" firstAttribute="trailing" secondItem="Rpz-4X-xw2" secondAttribute="trailing" id="POD-PU-20f"/>
                             <constraint firstItem="Be5-cO-LE4" firstAttribute="top" secondItem="XyS-xP-W2j" secondAttribute="top" id="RnD-UL-imA"/>
+                            <constraint firstItem="Rpz-4X-xw2" firstAttribute="trailing" secondItem="KJn-aO-rvE" secondAttribute="trailing" constant="16" id="TMu-TH-EvU"/>
                             <constraint firstItem="2LD-RT-hrx" firstAttribute="centerX" secondItem="Be5-cO-LE4" secondAttribute="centerX" id="TtQ-aZ-2YS"/>
-                            <constraint firstItem="2LD-RT-hrx" firstAttribute="leading" secondItem="HT2-FF-TEJ" secondAttribute="leading" id="UDu-gu-vRn"/>
-                            <constraint firstItem="laW-1O-UIy" firstAttribute="leading" secondItem="lFh-d8-9Fb" secondAttribute="leading" id="US3-aI-LuA"/>
-                            <constraint firstItem="M3F-ce-JUu" firstAttribute="trailing" secondItem="lFh-d8-9Fb" secondAttribute="trailing" id="V8y-3i-5gA"/>
+                            <constraint firstItem="Rpz-4X-xw2" firstAttribute="trailing" secondItem="mua-hG-UVm" secondAttribute="trailing" constant="64" id="VWI-4B-SOn"/>
                             <constraint firstItem="2LD-RT-hrx" firstAttribute="centerX" secondItem="X1g-Cy-bbD" secondAttribute="centerX" id="WZj-pW-PIs"/>
-                            <constraint firstItem="ds4-hk-k8x" firstAttribute="top" secondItem="lFh-d8-9Fb" secondAttribute="bottom" constant="84" id="Xoh-bM-Bhj"/>
-                            <constraint firstItem="HT2-FF-TEJ" firstAttribute="trailing" secondItem="laW-1O-UIy" secondAttribute="trailing" id="Yh1-rw-use"/>
+                            <constraint firstItem="mua-hG-UVm" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" constant="70" id="Yxl-dE-ewb"/>
                             <constraint firstItem="Be5-cO-LE4" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" id="bm0-wo-vBi"/>
-                            <constraint firstItem="X1g-Cy-bbD" firstAttribute="leading" secondItem="KJn-aO-rvE" secondAttribute="leading" id="c0c-sN-WF3"/>
-                            <constraint firstItem="M3F-ce-JUu" firstAttribute="top" secondItem="laW-1O-UIy" secondAttribute="bottom" constant="67" id="gsI-3C-sIV"/>
-                            <constraint firstItem="2LD-RT-hrx" firstAttribute="trailing" secondItem="M3F-ce-JUu" secondAttribute="trailing" id="jZw-cg-H2y"/>
-                            <constraint firstItem="HT2-FF-TEJ" firstAttribute="top" secondItem="X1g-Cy-bbD" secondAttribute="bottom" constant="34" id="jkR-Cc-rIa"/>
-                            <constraint firstItem="HT2-FF-TEJ" firstAttribute="leading" secondItem="M3F-ce-JUu" secondAttribute="leading" id="opN-jK-iza"/>
+                            <constraint firstItem="QAq-Ou-a63" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" constant="67" id="dYY-fi-lo4"/>
+                            <constraint firstItem="KJn-aO-rvE" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" constant="16" id="eqV-yb-mz7"/>
+                            <constraint firstItem="Rpz-4X-xw2" firstAttribute="trailing" secondItem="QAq-Ou-a63" secondAttribute="trailing" constant="67" id="gT9-pC-RQH"/>
                             <constraint firstItem="2LD-RT-hrx" firstAttribute="top" secondItem="TRd-Y4-kez" secondAttribute="bottom" constant="15" id="ovx-T9-zrb"/>
-                            <constraint firstItem="X1g-Cy-bbD" firstAttribute="trailing" secondItem="KJn-aO-rvE" secondAttribute="trailing" id="rm4-50-ygu"/>
                             <constraint firstItem="X1g-Cy-bbD" firstAttribute="leading" secondItem="Rpz-4X-xw2" secondAttribute="leading" constant="16" id="u1J-9F-lhe"/>
                             <constraint firstAttribute="bottom" secondItem="Be5-cO-LE4" secondAttribute="bottom" id="xNJ-qX-PVL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rpz-4X-xw2"/>
                     </view>
                     <connections>
+                        <outlet property="appleLoginButton" destination="Dw8-tw-yVb" id="5x1-q3-rgF"/>
                         <outlet property="backgroundImage" destination="Be5-cO-LE4" id="I8X-HB-CR5"/>
                         <outlet property="emailLoginButton" destination="M3F-ce-JUu" id="0At-M8-LGR"/>
                         <outlet property="emailRegisterButton" destination="KJn-aO-rvE" id="E9a-Lr-hon"/>
@@ -1388,7 +1414,7 @@
         <!--Register View Controller-->
         <scene sceneID="0Nc-2A-JRn">
             <objects>
-                <viewController id="lwy-OP-2Bg" customClass="RegisterViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lwy-OP-2Bg" customClass="RegisterViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H13-LE-Z5q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1522,7 +1548,7 @@
         <!--Note Detail View Controller-->
         <scene sceneID="l1r-sV-iRL">
             <objects>
-                <viewController title="Detail" id="6hS-nT-d6I" userLabel="Note Detail View Controller" customClass="NoteDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Detail" id="6hS-nT-d6I" userLabel="Note Detail View Controller" customClass="NoteDetailViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cA2-mB-bSQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1583,7 +1609,7 @@
         <!--Note Create Change View Controller-->
         <scene sceneID="xxF-mM-NC5">
             <objects>
-                <viewController id="78Y-rN-0Yz" customClass="NoteCreateChangeViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="78Y-rN-0Yz" customClass="NoteCreateChangeViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAt-P1-msZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1677,13 +1703,13 @@
         <!--Notes View Controller-->
         <scene sceneID="epC-g2-s11">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" userLabel="Notes View Controller" customClass="NotesViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" userLabel="Notes View Controller" customClass="NotesViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2mu-kt-DcW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="120" id="3uT-Po-GQs" customClass="NoteTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="120" id="3uT-Po-GQs" customClass="NoteTableViewCell" customModule="NoTouchTags" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3uT-Po-GQs" id="CX1-Bs-iC4">
@@ -1778,7 +1804,7 @@
         <!--Checkout View Controller-->
         <scene sceneID="7bh-y9-ixB">
             <objects>
-                <viewController id="5Jw-VF-O9j" customClass="CheckoutViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5Jw-VF-O9j" customClass="CheckoutViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5O3-hV-1ZR"/>
                         <viewControllerLayoutGuide type="bottom" id="bbu-eM-Z86"/>
@@ -1851,7 +1877,7 @@
         <!--Cart-->
         <scene sceneID="Wvv-ee-a45">
             <objects>
-                <viewController storyboardIdentifier="CartViewController" title="Cart" hidesBottomBarWhenPushed="YES" id="Too-NX-v38" customClass="CartViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CartViewController" title="Cart" hidesBottomBarWhenPushed="YES" id="Too-NX-v38" customClass="CartViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RZj-ET-Ue9"/>
                         <viewControllerLayoutGuide type="bottom" id="VZF-ng-Z5S"/>
@@ -1865,7 +1891,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.71764705880000002" green="0.70196078429999997" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartItemCell" rowHeight="81" id="t2D-lb-oL3" customClass="CartItemCell" customModule="NFCTagsApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartItemCell" rowHeight="81" id="t2D-lb-oL3" customClass="CartItemCell" customModule="NoTouchTags" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t2D-lb-oL3" id="K8w-zP-nvu">
@@ -1957,7 +1983,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGF-6T-zLv" customClass="CartFooterCell" customModule="NFCTagsApp" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGF-6T-zLv" customClass="CartFooterCell" customModule="NoTouchTags" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="748" width="414" height="114"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKI-rF-kPc">
