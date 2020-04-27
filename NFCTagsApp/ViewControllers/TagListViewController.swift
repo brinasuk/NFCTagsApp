@@ -351,6 +351,11 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     // MARK: - ACTION BUTTONS PRESSED
     
+    @IBAction func btnManageTagsPressed(_ sender: Any) {
+        //MANAGETAGSSEGUE
+        print("MANAGETAGSSEGUE")
+        performSegue(withIdentifier: "MANAGETAGSSEGUE", sender: self)
+    }
     
     @IBAction func cartButtonPressed(_ sender: Any) {
         print("SHOPPINGCARTSEGUE BUTTON")
@@ -1068,6 +1073,10 @@ extension TagListViewController: UITableViewDataSource {
             cell.tagCompany.text = tag.tagCompany + ", " + tag.beaconDymo
             cell.dateAdded.text = "Date Added: " + formattedDate
         }
+        //show
+        if (tag.appCode == "show"){
+            cell.tagImageView.contentMode = .scaleAspectFill
+        }
 
         // SHOW PHOTO
         var tagPhotoFileUrl:String = ""
@@ -1138,7 +1147,7 @@ extension TagListViewController: UITableViewDataSource {
             let placeholderImage = UIImage(named: "icons8-camera-1")
             cell.tagImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [.processor(processor)])
             
-            //cell.tagImageView.contentMode = .scaleAspectFit //APRIL 2018 WAS FILL
+//            cell.tagImageView.contentMode = .scaleAspectFill //APRIL 2018 WAS FILL
             
 
             
@@ -1212,7 +1221,8 @@ extension TagListViewController: UITableViewDataSource {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //print(segue.identifier!)
+        print(segue.identifier!)
+        print("HERE")
         if segue.identifier == "TagDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! DetailViewController
@@ -1221,16 +1231,22 @@ extension TagListViewController: UITableViewDataSource {
         }
         
         if segue.identifier == "SwiftyMap2" {
-            print (currentRow)
+            print(segue.identifier!)
             let destinationController = segue.destination as! SwiftyMapController
             destinationController.tag = self.tagObjects[currentRow]
         }
         
-//        if segue.identifier == "CARTSEGUE" {
-//            print (currentRow)
-//            let destinationController = segue.destination as! CartViewController
-//            //destinationController.tag = self.tagObjects[currentRow]
-//        }
+        if segue.identifier == "SHOPPINGCARTSEGUE" {
+            
+            let destinationController = segue.destination as! CartViewController
+            //destinationController.tag = self.tagObjects[currentRow]
+            print(destinationController)
+        }
+        
+        if segue.identifier == "MANAGETAGSSEGUE" {
+//            let destinationController = segue.destination as! MaintTableViewController
+//            print(destinationController)
+        }
     }
     
     

@@ -13,6 +13,7 @@
 		C7007896244D0CDE00318EDF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C7007895244D0CDE00318EDF /* Localizable.strings */; };
 		C705A7AD22D4107300F513A9 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C705A7AC22D4107300F513A9 /* ReviewViewController.swift */; };
 		C705A7AF22D5A04800F513A9 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C705A7AE22D5A04800F513A9 /* CircularProgressBar.swift */; };
+		C710B90B24565A0900E27237 /* AlexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710B90A24565A0900E27237 /* AlexViewController.swift */; };
 		C7156781227BD97700D1A55A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7156780227BD97700D1A55A /* Assets.xcassets */; };
 		C715679A227BDA0900D1A55A /* AuteurTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715678E227BDA0900D1A55A /* AuteurTableViewCell.swift */; };
 		C715B7942451373B009DD38F /* cart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C715B7922451373B009DD38F /* cart@2x.png */; };
@@ -83,6 +84,7 @@
 		C705A7AC22D4107300F513A9 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		C705A7AE22D5A04800F513A9 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		C70EE6232280B6CB0087C333 /* NFCTagsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NFCTagsApp.entitlements; sourceTree = "<group>"; };
+		C710B90A24565A0900E27237 /* AlexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlexViewController.swift; sourceTree = "<group>"; };
 		C7156776227BD97700D1A55A /* NoTouchTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoTouchTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7156780227BD97700D1A55A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7156785227BD97700D1A55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -217,7 +219,6 @@
 				C7156785227BD97700D1A55A /* Info.plist */,
 				C7007895244D0CDE00318EDF /* Localizable.strings */,
 				C7B7D05122F0DD0D0069D42D /* click.mp3 */,
-				C753A16F24481787000E9718 /* WooCommerce */,
 				C7156796227BDA0900D1A55A /* ViewControllers */,
 				C715678B227BDA0900D1A55A /* Cell Views */,
 				C7156794227BDA0900D1A55A /* Resources */,
@@ -225,7 +226,7 @@
 				C77930F723A2C31700D997F2 /* NOTES */,
 				C71B63CC229AECAD00B6910A /* Fonts */,
 				C7AC6F15228A623900E97DFF /* Extensions */,
-				C77ED9AB22A4D5A000C06A45 /* SWIFTY */,
+				C753A16F24481787000E9718 /* ECommerce */,
 				C78DD766227E030300F107F6 /* Welcome */,
 				C7156791227BDA0900D1A55A /* Models */,
 			);
@@ -279,7 +280,9 @@
 				C793547B22A0DCC800DD1828 /* MapViewController.swift */,
 				C76D3EF122AB104400794637 /* MaintTableViewController.swift */,
 				C78159DD22CAC54700625046 /* UpdateTagController.swift */,
+				C77ED9AB22A4D5A000C06A45 /* SWIFTY */,
 				C705A7AC22D4107300F513A9 /* ReviewViewController.swift */,
+				C710B90A24565A0900E27237 /* AlexViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -301,7 +304,7 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		C753A16F24481787000E9718 /* WooCommerce */ = {
+		C753A16F24481787000E9718 /* ECommerce */ = {
 			isa = PBXGroup;
 			children = (
 				C753A191244A6DFB000E9718 /* CartViewController.swift */,
@@ -313,7 +316,7 @@
 				C753A17624481787000E9718 /* Views */,
 				C753A17D24481787000E9718 /* Utility */,
 			);
-			path = WooCommerce;
+			path = ECommerce;
 			sourceTree = "<group>";
 		};
 		C753A17624481787000E9718 /* Views */ = {
@@ -563,6 +566,7 @@
 				C793547C22A0DCC800DD1828 /* MapViewController.swift in Sources */,
 				C7007892244B7C0900318EDF /* Cart.swift in Sources */,
 				C7C621922437F93200861272 /* PropertyModel.swift in Sources */,
+				C710B90B24565A0900E27237 /* AlexViewController.swift in Sources */,
 				C753A18624481787000E9718 /* CartFooterCell.swift in Sources */,
 				C73650FA22831BC20025154F /* Colors.swift in Sources */,
 				C79E35FA2311D75800943ECD /* DeepLinkManager.swift in Sources */,

@@ -161,7 +161,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        textFieldEmail.becomeFirstResponder()
+        //NO. BUTTONS GET HIDDEN BEHIND KEYBOARD  textFieldEmail.becomeFirstResponder()
         
     }
 
