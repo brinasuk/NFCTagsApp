@@ -4,8 +4,8 @@ import Foundation
 import CoreNFC
 import VYNFCKit
 import Parse
-import Alamofire
-import AlamofireImage
+//import Alamofire
+//import AlamofireImage
 import SafariServices
 import Alertift
 import Kingfisher
@@ -351,11 +351,6 @@ class TagListViewController:UIViewController,SFSafariViewControllerDelegate, NFC
     
     // MARK: - ACTION BUTTONS PRESSED
     
-    @IBAction func btnManageTagsPressed(_ sender: Any) {
-        //MANAGETAGSSEGUE
-        print("MANAGETAGSSEGUE")
-        performSegue(withIdentifier: "MANAGETAGSSEGUE", sender: self)
-    }
     
     @IBAction func cartButtonPressed(_ sender: Any) {
         print("SHOPPINGCARTSEGUE BUTTON")
@@ -1221,7 +1216,7 @@ extension TagListViewController: UITableViewDataSource {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier!)
+        //print(segue.identifier!)
         print("HERE")
         if segue.identifier == "TagDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -1243,16 +1238,8 @@ extension TagListViewController: UITableViewDataSource {
             print(destinationController)
         }
         
-        if segue.identifier == "MANAGETAGSSEGUE" {
-//            let destinationController = segue.destination as! MaintTableViewController
-//            print(destinationController)
-        }
     }
     
-    
-    
-    
-
     
     /*
      //TODO: DON'T WORRY. DELETE CODE HANDLED ELSEWHERE

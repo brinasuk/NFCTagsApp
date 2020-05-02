@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P8y-or-HUI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +22,7 @@
         <!--Tag Detail View Controller-->
         <scene sceneID="10j-YC-YVX">
             <objects>
-                <viewController id="s1z-4U-Z2O" userLabel="Tag Detail View Controller" customClass="AuteurDetailViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="s1z-4U-Z2O" userLabel="Tag Detail View Controller" customClass="AuteurDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="npj-K4-QMF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="200" id="eEM-jn-uev" customClass="FilmTableViewCell" customModule="NoTouchTags" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="200" id="eEM-jn-uev" customClass="FilmTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eEM-jn-uev" id="IIf-wR-pgd">
@@ -100,7 +101,7 @@
         <!--New Beacon View Controller-->
         <scene sceneID="s3f-An-hni">
             <objects>
-                <viewController id="DkZ-uW-Pf2" customClass="NewBeaconViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DkZ-uW-Pf2" customClass="NewBeaconViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Heg-WY-iPK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,7 +117,7 @@
         <!--TagList View Controller-->
         <scene sceneID="pzp-0r-KW7">
             <objects>
-                <viewController title="Auteurs2" id="kBe-lp-QEI" userLabel="TagList View Controller" customClass="TagListViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Auteurs2" id="kBe-lp-QEI" userLabel="TagList View Controller" customClass="TagListViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n9x-yh-yJL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,6 +140,7 @@
                                         <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <action selector="btnManageTagsPressed:" destination="kBe-lp-QEI" id="hvN-Ay-3PN"/>
+                                            <segue destination="Wbr-7r-70g" kind="show" id="T25-U6-jA5"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dOu-OD-kDJ"/>
@@ -186,7 +188,7 @@
                                 <rect key="frame" x="0.0" y="120" width="328" height="641"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="92" id="FQo-bs-q9Y" userLabel="Cell" customClass="AuteurTableViewCell" customModule="NoTouchTags" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="92" id="FQo-bs-q9Y" userLabel="Cell" customClass="AuteurTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="328" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FQo-bs-q9Y" id="Ztw-yb-0S2" customClass="TableViewCell">
@@ -319,7 +321,6 @@
                         <outlet property="toolBar" destination="uAT-WE-aQz" id="rmK-0N-Gbn"/>
                         <segue destination="DRy-jI-0HB" kind="show" identifier="SwiftyMap2" id="gfT-in-4Ae"/>
                         <segue destination="Too-NX-v38" kind="show" identifier="SHOPPINGCARTSEGUE" id="6Gb-y5-vhP"/>
-                        <segue destination="Wbr-7r-70g" kind="show" identifier="MANAGETAGSSEGUE" id="7YW-MB-UQs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RS-bj-rsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,7 +355,7 @@
         <!--Swifty Map Controller-->
         <scene sceneID="rdz-gI-gar">
             <objects>
-                <viewController id="DRy-jI-0HB" customClass="SwiftyMapController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DRy-jI-0HB" customClass="SwiftyMapController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i71-7V-iRM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,7 +385,7 @@
         <!--Detail View Controller-->
         <scene sceneID="2lW-ff-SRb">
             <objects>
-                <viewController id="VaW-2d-StK" customClass="DetailViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VaW-2d-StK" customClass="DetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nYF-QD-CJ3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -392,7 +393,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gdl-CJ-31a">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="tb4-Qn-VVC" userLabel="Header View" customClass="DetailHeaderView" customModule="NoTouchTags" customModuleProvider="target">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="tb4-Qn-VVC" userLabel="Header View" customClass="DetailHeaderView" customModule="NFCTagsApp" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -475,7 +476,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailIconTextCell" id="Ych-6h-1lb" customClass="RestaurantDetailIconTextCell" customModule="NoTouchTags" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailIconTextCell" id="Ych-6h-1lb" customClass="RestaurantDetailIconTextCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="378" width="414" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ych-6h-1lb" id="4I0-fg-Avw">
@@ -513,7 +514,7 @@
                                             <outlet property="shortTextLabel" destination="9Rd-kk-A1H" id="aOs-ec-cST"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailTextCell" id="Mfd-wD-WGD" customClass="RestaurantDetailTextCell" customModule="NoTouchTags" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailTextCell" id="Mfd-wD-WGD" customClass="RestaurantDetailTextCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="424" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mfd-wD-WGD" id="4xq-sR-4e7">
@@ -538,7 +539,7 @@
                                             <outlet property="descriptionLabel" destination="oWc-jm-muB" id="MXK-ht-4Lk"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailSeparatorCell" id="HMH-HU-XkY" userLabel="RestaurantDetailSeparatorCell" customClass="RestaurantDetailSeparatorCell" customModule="NoTouchTags" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailSeparatorCell" id="HMH-HU-XkY" userLabel="RestaurantDetailSeparatorCell" customClass="RestaurantDetailSeparatorCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="467.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HMH-HU-XkY" id="SGy-Wb-zou">
@@ -575,7 +576,7 @@
                                             <outlet property="titleLabel" destination="ZXH-5i-UvG" id="eFh-H5-S2N"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailMapCell" rowHeight="215" id="n0G-uF-cqG" userLabel="RestaurantDetailMapCell" customClass="RestaurantDetailMapCell" customModule="NoTouchTags" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailMapCell" rowHeight="215" id="n0G-uF-cqG" userLabel="RestaurantDetailMapCell" customClass="RestaurantDetailMapCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="511.5" width="414" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n0G-uF-cqG" id="IAc-hX-I11">
@@ -678,7 +679,7 @@
         <!--Map View Controller-->
         <scene sceneID="Dar-QN-VJP">
             <objects>
-                <viewController id="YYa-Dn-t4f" customClass="MapViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YYa-Dn-t4f" customClass="MapViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sVW-dt-91r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -733,7 +734,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xxl-5z-lMh">
                                                     <rect key="frame" x="0.0" y="11" width="375" height="240"/>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDE-Wh-hyJ" customClass="CircularProgressBar" customModule="NoTouchTags" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDE-Wh-hyJ" customClass="CircularProgressBar" customModule="NFCTagsApp" customModuleProvider="target">
                                                     <rect key="frame" x="112.5" y="45" width="150" height="150"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -770,7 +771,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Title" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-zG-tCo" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Title" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-zG-tCo" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="tintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -804,7 +805,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Subtitle" placeholder="Subtitle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3E5-pP-v46" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Subtitle" placeholder="Subtitle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3E5-pP-v46" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -837,7 +838,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Price" placeholder="Price" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-m3-yyf" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Price" placeholder="Price" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-m3-yyf" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -870,7 +871,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Contact" placeholder="Contact Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-rn-fDe" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Contact" placeholder="Contact Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-rn-fDe" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -903,7 +904,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Phone" placeholder="Phone" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ssc-U7-jQs" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Phone" placeholder="Phone" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ssc-U7-jQs" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -936,7 +937,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Website" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5UH-o4-y68" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Website" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5UH-o4-y68" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -969,7 +970,7 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Address" placeholder="Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AfZ-2f-jpY" customClass="RoundedTextField" customModule="NoTouchTags" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Address" placeholder="Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AfZ-2f-jpY" customClass="RoundedTextField" customModule="NFCTagsApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="23" width="331" height="37"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1141,7 +1142,7 @@
         <!--Review View Controller-->
         <scene sceneID="kMn-fH-49J">
             <objects>
-                <viewController id="Aa3-XZ-WUI" customClass="ReviewViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Aa3-XZ-WUI" customClass="ReviewViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MlC-2M-OM5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1157,10 +1158,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aon-qK-IZv">
-                                <rect key="frame" x="52.5" y="191" width="309" height="460"/>
+                                <rect key="frame" x="54" y="191" width="306" height="460"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pj8-l8-MYB">
-                                        <rect key="frame" x="0.0" y="0.0" width="232" height="82"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="228" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Love it" image="rate5"/>
                                         <connections>
@@ -1168,7 +1169,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnm-Ug-nFv">
-                                        <rect key="frame" x="0.0" y="92" width="181" height="83"/>
+                                        <rect key="frame" x="0.0" y="92" width="183" height="83"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Cool" image="rate4"/>
                                         <connections>
@@ -1176,7 +1177,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxK-xm-k3Y" userLabel="Smile">
-                                        <rect key="frame" x="0.0" y="185" width="206" height="86"/>
+                                        <rect key="frame" x="0.0" y="185" width="203" height="86"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Smile" image="rate3"/>
                                         <connections>
@@ -1184,7 +1185,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JF-Ow-3aP">
-                                        <rect key="frame" x="0.0" y="281" width="246" height="87"/>
+                                        <rect key="frame" x="0.0" y="281" width="254" height="87"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="No Way" image="rate2"/>
                                         <connections>
@@ -1192,7 +1193,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-rj-tjo" userLabel="No Rating">
-                                        <rect key="frame" x="0.0" y="378" width="309" height="82"/>
+                                        <rect key="frame" x="0.0" y="378" width="306" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="No Rating" image="norating_blue"/>
                                         <connections>
@@ -1233,7 +1234,7 @@
         <!--Login View Controller-->
         <scene sceneID="16c-nh-lyT">
             <objects>
-                <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="bji-6S-h7v" customClass="LoginViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="bji-6S-h7v" customClass="LoginViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TRd-Y4-kez"/>
                         <viewControllerLayoutGuide type="bottom" id="AgX-Rz-vuF"/>
@@ -1415,7 +1416,7 @@
         <!--Register View Controller-->
         <scene sceneID="0Nc-2A-JRn">
             <objects>
-                <viewController id="lwy-OP-2Bg" customClass="RegisterViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lwy-OP-2Bg" customClass="RegisterViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H13-LE-Z5q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1549,7 +1550,7 @@
         <!--Note Detail View Controller-->
         <scene sceneID="l1r-sV-iRL">
             <objects>
-                <viewController title="Detail" id="6hS-nT-d6I" userLabel="Note Detail View Controller" customClass="NoteDetailViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Detail" id="6hS-nT-d6I" userLabel="Note Detail View Controller" customClass="NoteDetailViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cA2-mB-bSQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1610,7 +1611,7 @@
         <!--Note Create Change View Controller-->
         <scene sceneID="xxF-mM-NC5">
             <objects>
-                <viewController id="78Y-rN-0Yz" customClass="NoteCreateChangeViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="78Y-rN-0Yz" customClass="NoteCreateChangeViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAt-P1-msZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1704,13 +1705,13 @@
         <!--Notes View Controller-->
         <scene sceneID="epC-g2-s11">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" userLabel="Notes View Controller" customClass="NotesViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="lma-49-zhp" userLabel="Notes View Controller" customClass="NotesViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2mu-kt-DcW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="120" id="3uT-Po-GQs" customClass="NoteTableViewCell" customModule="NoTouchTags" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="120" id="3uT-Po-GQs" customClass="NoteTableViewCell" customModule="NFCTagsApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3uT-Po-GQs" id="CX1-Bs-iC4">
@@ -1805,7 +1806,7 @@
         <!--Checkout View Controller-->
         <scene sceneID="7bh-y9-ixB">
             <objects>
-                <viewController id="5Jw-VF-O9j" customClass="CheckoutViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5Jw-VF-O9j" customClass="CheckoutViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5O3-hV-1ZR"/>
                         <viewControllerLayoutGuide type="bottom" id="bbu-eM-Z86"/>
@@ -1894,7 +1895,7 @@
         <!--Cart-->
         <scene sceneID="Wvv-ee-a45">
             <objects>
-                <viewController storyboardIdentifier="CartViewController" title="Cart" hidesBottomBarWhenPushed="YES" id="Too-NX-v38" customClass="CartViewController" customModule="NoTouchTags" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CartViewController" title="Cart" hidesBottomBarWhenPushed="YES" id="Too-NX-v38" customClass="CartViewController" customModule="NFCTagsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RZj-ET-Ue9"/>
                         <viewControllerLayoutGuide type="bottom" id="VZF-ng-Z5S"/>
@@ -1908,7 +1909,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.71764705880000002" green="0.70196078429999997" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartItemCell" rowHeight="81" id="t2D-lb-oL3" customClass="CartItemCell" customModule="NoTouchTags" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartItemCell" rowHeight="81" id="t2D-lb-oL3" customClass="CartItemCell" customModule="NFCTagsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t2D-lb-oL3" id="K8w-zP-nvu">
@@ -2000,7 +2001,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGF-6T-zLv" customClass="CartFooterCell" customModule="NoTouchTags" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGF-6T-zLv" customClass="CartFooterCell" customModule="NFCTagsApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="748" width="414" height="114"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKI-rF-kPc">

@@ -67,20 +67,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.isTranslucent = false
         
-        var backgroundImageName:String = ""
-        switch kAppDelegate.appCode {
-        case "art":
-            backgroundImageName = "art_launch_image"
-        case "wine":
-            backgroundImageName = "wine_launch_image"
-        case "show":
-            backgroundImageName = "show_launch_image"
-        case .none:
-            backgroundImageName = "show_launch_image"
-        case .some(_):
-            backgroundImageName = "show_launch_image"
-        }
-        
+        let backgroundImageName = "art_launch_image"
         backgroundImage.image = UIImage(named: backgroundImageName) // nd-background
         backgroundImage.alpha = 0.4
         backgroundImage.contentMode = .scaleAspectFill

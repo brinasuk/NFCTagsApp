@@ -3,8 +3,8 @@ import Parse
 import UIKit
 import Kingfisher
 import Alertift
-import Alamofire
-import AlamofireImage
+//import Alamofire
+//import AlamofireImage
 
 final class CartItemCell: UITableViewCell {
 

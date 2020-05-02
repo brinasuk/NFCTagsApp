@@ -31,7 +31,7 @@ import CoreData  //TODO: ALEX TAKE OUT
     
     var window: UIWindow?
     
-    var appCode:NSString? = ""  //OR "art" OR "disp" or "re" or "show"
+    var appCode:NSString? = "show"  //OR "art" OR "disp" or "re" or "show"
 
     // APPLICATION WIDE SETTINGS.
     var tagOrBeacon:Bool? = false  //NO = NFC TAG, YES = BEACON
@@ -67,8 +67,7 @@ import CoreData  //TODO: ALEX TAKE OUT
          * OPEN HOUSES = re; com.hillsidesoftware.besthome4me
          * SHOWROOM = show;
          */
-        
-        appCode = "show"
+
         
         // YOU GET THE APPNAME LATER FROM THE INI BUNDLE
 //        let applicationName:String = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!

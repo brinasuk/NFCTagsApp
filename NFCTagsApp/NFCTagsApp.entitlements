@@ -5,11 +5,12 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:artworks4me.com</string>
-		<string>applinks:notouchtags.com</string>
+        <string>applinks:notouchtags.com</string>
 	</array>
 	<key>com.apple.developer.nfc.readersession.formats</key>
 	<array>
 		<string>TAG</string>
+        <string>NDEF</string>
 	</array>
 </dict>
 </plist>

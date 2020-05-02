@@ -42,12 +42,15 @@ target 'NFCTagsApp' do
 
   #pod 'TwitterKit'
   #pod 'TwitterCore'
+
+   pod 'Kingfisher'
+  # - Alamofire (4.8.2)
+  # - AlamofireImage (3.5.2):
+  pod 'Alamofire', '4.8.2'
+  pod 'AlamofireImage', '3.5.2'
   
    pod 'CropViewController'
    pod 'VYNFCKit'
-   pod 'Kingfisher'
-   pod 'Alamofire'
-   pod 'AlamofireImage'
    pod 'Alertift'
    pod 'SFSymbol'
    #pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'

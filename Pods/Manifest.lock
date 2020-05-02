@@ -51,8 +51,8 @@ PODS:
   - VYNFCKit (0.3.2)
 
 DEPENDENCIES:
-  - Alamofire
-  - AlamofireImage
+  - Alamofire (= 4.8.2)
+  - AlamofireImage (= 3.5.2)
   - Alertift
   - CropViewController
   - FacebookSDK
@@ -106,6 +106,6 @@ SPEC CHECKSUMS:
   SFSymbol: 1ca569c1fbe7becf174c16cc1495de93e7d66686
   VYNFCKit: 86a9b711fd1f34f6f7128a2a883cd58dbd781b9d
 
-PODFILE CHECKSUM: 156967ab27a22d97c27dbd66b3f1b6d3209e685d
+PODFILE CHECKSUM: a2c6c2c3968b3566a57c7c10e1d54ed298b114e2
 
 COCOAPODS: 1.8.4
