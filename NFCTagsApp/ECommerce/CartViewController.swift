@@ -395,7 +395,7 @@ private var numberOfItems:Int = 0
 
         
             func configureWithCart() {
-                let totalCartItemsCount = ownerObjects.count
+                var totalCartItemsCount = 0
                 var totalCartPrice:Float = 0.0
                 var totalPrice:Float = 0.0
                 var q:Float = 0
@@ -403,6 +403,7 @@ private var numberOfItems:Int = 0
                 for i in 0..<ownerObjects.count {
                     let cartItem = ownerObjects[i]
                     q = Float(cartItem.quantity)
+                    totalCartItemsCount = totalCartItemsCount + Int(q)
                     totalPrice = (cartItem.price * q)
                     totalCartPrice = totalCartPrice + totalPrice
                 }

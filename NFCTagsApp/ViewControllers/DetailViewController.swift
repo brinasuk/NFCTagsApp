@@ -161,7 +161,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         let placeholderImage = UIImage(named: "icons8-camera-1")
         //TODO: Fix SIZE Width and Height. Plug in correct values
-        let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 375, height: 200), mode: .aspectFit)
+        let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 414, height: 375), mode: .aspectFill) //WAS ASPECTFIT. USE ASPECTFILL
+        
+//                let processor = ResizingImageProcessor.init(referenceSize: CGSize(width: 414, height: 200), mode: .aspectFill) //WAS ASPECTFIT
         
         headerView.headerImageView.kf.indicatorType = .activity
         headerView.headerImageView.kf.setImage(
